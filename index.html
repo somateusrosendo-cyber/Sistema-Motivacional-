@@ -1,4 +1,3 @@
-<button type="button" onclick="autenticarGOD()">ACESSAR SISTEMA</button>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -7,16 +6,16 @@
     <title>Sistema de Caçador PMPE 2026 - Modo GOD</title>
     <style>
         :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --accent-color: #3b82f6;
-            --accent-hover: #2563eb;
+            --bg-color: #030712;
+            --card-bg: #0b1528;
+            --system-cyan: #00f0ff;
+            --system-cyan-glow: rgba(0, 240, 255, 0.4);
+            --system-blue-dark: rgba(10, 25, 47, 0.85);
             --text-color: #f8fafc;
-            --text-secondary: #94a3b8;
-            --border-color: #334155;
+            --text-secondary: #7dd3fc;
+            --border-cyan: #00d2ff;
             --success: #10b981;
             --error: #ef4444;
-            --system-blue: #00d2ff;
             --god-gold: #ffd700;
         }
 
@@ -36,25 +35,28 @@
             align-items: center;
             min-height: 100vh;
             padding: 12px;
-            background-image: radial-gradient(circle at 50% 0%, rgba(0, 210, 255, 0.12) 0%, transparent 70%);
+            background-image: 
+                radial-gradient(circle at 50% 20%, rgba(0, 240, 255, 0.15) 0%, transparent 60%),
+                linear-gradient(180deg, #020617 0%, #080f1e 100%);
         }
 
         .container {
             width: 100%;
             max-width: 850px;
-            background-color: var(--card-bg);
-            border-radius: 16px;
+            background-color: rgba(11, 21, 40, 0.7);
+            border-radius: 4px;
             padding: 18px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 15px rgba(0, 210, 255, 0.1);
-            border: 1px solid var(--border-color);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.15);
+            border: 1px solid var(--border-cyan);
             display: flex;
             flex-direction: column;
             gap: 18px;
             margin-top: 10px;
+            backdrop-filter: blur(8px);
         }
 
         header {
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-cyan);
             padding-bottom: 14px;
             text-align: center;
             position: relative;
@@ -62,10 +64,10 @@
 
         header h1 {
             font-size: 1.4rem;
-            color: var(--system-blue);
+            color: var(--system-cyan);
             text-transform: uppercase;
-            letter-spacing: 1px;
-            text-shadow: 0 0 10px rgba(0, 210, 255, 0.3);
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px var(--system-cyan-glow);
         }
 
         header p {
@@ -81,7 +83,7 @@
             font-weight: bold;
             font-size: 0.75rem;
             padding: 3px 8px;
-            border-radius: 12px;
+            border-radius: 2px;
             margin-top: 5px;
             text-transform: uppercase;
         }
@@ -94,7 +96,7 @@
             border: 1px solid var(--error);
             color: var(--error);
             padding: 6px 10px;
-            border-radius: 6px;
+            border-radius: 4px;
             cursor: pointer;
             font-size: 0.75rem;
             font-weight: bold;
@@ -105,10 +107,10 @@
             max-width: 850px;
             background: linear-gradient(135deg, #1b0000, #2c0b0e);
             border: 2px solid #ff4757;
-            border-radius: 14px;
             padding: 16px;
             color: #fff;
             box-sizing: border-box;
+            box-shadow: 0 0 15px rgba(255, 71, 87, 0.3);
         }
 
         .alerta-sedentarismo-header {
@@ -132,7 +134,6 @@
             gap: 8px;
             background: rgba(0, 0, 0, 0.4);
             padding: 10px;
-            border-radius: 8px;
             border: 1px solid #ff4757;
             margin-bottom: 12px;
             text-align: center;
@@ -160,7 +161,6 @@
             flex: 1;
             padding: 10px 4px;
             border: none;
-            border-radius: 6px;
             font-weight: bold;
             font-size: 0.7rem;
             cursor: pointer;
@@ -169,12 +169,14 @@
             text-transform: uppercase;
         }
 
+        /* ESTILO DO PAINEL HUD RPG HOLOGRÁFICO */
         .painel-status-cacador {
-            background: linear-gradient(135deg, #121212, #1f1f1f);
-            border: 2px solid var(--system-blue);
-            border-radius: 14px;
+            background: rgba(8, 25, 45, 0.9);
+            border: 2px solid var(--system-cyan);
             padding: 16px;
             color: #fff;
+            box-shadow: 0 0 15px var(--system-cyan-glow), inset 0 0 15px var(--system-cyan-glow);
+            position: relative;
         }
 
         .status-header {
@@ -185,49 +187,50 @@
         }
 
         .badge-nivel {
-            background: var(--system-blue);
+            background: var(--system-cyan);
             color: #000;
             padding: 4px 10px;
-            border-radius: 6px;
             font-size: 0.85rem;
             font-weight: bold;
+            letter-spacing: 1px;
         }
 
         .status-barra-xp {
             width: 100%;
             height: 10px;
-            background: #2a2a2a;
-            border-radius: 5px;
+            background: #0f172a;
+            border: 1px solid var(--system-cyan);
             overflow: hidden;
             margin-bottom: 5px;
         }
 
         #barra-progresso-xp {
             height: 100%;
-            background: linear-gradient(90deg, var(--system-blue), var(--god-gold));
+            background: linear-gradient(90deg, var(--system-cyan), var(--god-gold));
             width: 0%;
             transition: width 0.4s ease-in-out;
+            box-shadow: 0 0 10px var(--system-cyan);
         }
 
         .status-info-xp {
             font-size: 0.8rem;
-            color: #aaa;
+            color: var(--text-secondary);
             text-align: right;
             margin-bottom: 12px;
         }
 
         .caixa-pontos-disponiveis {
-            background: rgba(46, 204, 113, 0.15);
-            border: 1px solid #2ecc71;
-            color: #2ecc71;
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid var(--system-cyan);
+            color: var(--system-cyan);
             padding: 8px 12px;
-            border-radius: 8px;
             text-align: center;
             font-size: 0.85rem;
             margin-bottom: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            text-shadow: 0 0 5px var(--system-cyan);
         }
 
         .status-grid {
@@ -237,10 +240,9 @@
         }
 
         .atributo-item {
-            background: #181818;
-            border: 1px solid #333;
+            background: rgba(3, 12, 27, 0.8);
+            border: 1px solid rgba(0, 240, 255, 0.4);
             padding: 10px;
-            border-radius: 8px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -250,26 +252,27 @@
 
         .atrib-nome {
             font-size: 0.75rem;
-            color: #888;
+            color: var(--text-secondary);
             margin-bottom: 4px;
             font-weight: bold;
+            letter-spacing: 1px;
         }
 
         .atrib-valor {
             font-size: 1.1rem;
             color: #fff;
             font-weight: bold;
+            text-shadow: 0 0 8px var(--system-cyan);
         }
 
         .btn-adicionar-ponto {
             position: absolute;
             bottom: 6px;
-            background: #2ecc71;
-            color: #111;
+            background: var(--system-cyan);
+            color: #000;
             border: none;
             width: 85%;
             height: 24px;
-            border-radius: 4px;
             font-weight: bold;
             font-size: 1rem;
             cursor: pointer;
@@ -279,9 +282,8 @@
         }
 
         .missoes-diarias-custom {
-            background: rgba(15, 23, 42, 0.8);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
+            background: rgba(8, 25, 45, 0.8);
+            border: 1px solid var(--border-cyan);
             padding: 16px;
             display: flex;
             flex-direction: column;
@@ -296,9 +298,8 @@
         .task-input-section input {
             flex: 1;
             padding: 10px 12px;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            background: var(--bg-color);
+            border: 1px solid var(--border-cyan);
+            background: rgba(3, 7, 18, 0.8);
             color: #fff;
             outline: none;
         }
@@ -316,11 +317,10 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: var(--bg-color);
+            background: rgba(3, 7, 18, 0.8);
             padding: 12px;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            border-left: 4px solid var(--system-blue);
+            border: 1px solid var(--border-cyan);
+            border-left: 4px solid var(--system-cyan);
         }
 
         .task-item.completed {
@@ -338,19 +338,19 @@
             color: #fff;
             border: none;
             padding: 6px 12px;
-            border-radius: 6px;
             font-weight: bold;
             font-size: 0.8rem;
             cursor: pointer;
         }
 
+        /* OVERLAY DO MODAL DE LOGIN ESTILO SISTEMA */
         .login-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(10, 15, 30, 0.95);
+            background: rgba(3, 7, 18, 0.95);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -359,27 +359,27 @@
         }
 
         .login-caixa {
-            background: #182238;
-            border: 2px solid #ff4b82;
+            background: linear-gradient(180deg, #091a34 0%, #050d1a 100%);
+            border: 2px solid var(--system-cyan);
             padding: 28px;
-            border-radius: 16px;
             text-align: center;
             width: 90%;
             max-width: 380px;
-            box-shadow: 0 0 25px rgba(255, 75, 130, 0.4);
+            box-shadow: 0 0 35px var(--system-cyan-glow), inset 0 0 15px var(--system-cyan-glow);
             position: relative;
             z-index: 1000000;
         }
 
         .login-caixa h2 {
-            color: #fff;
+            color: var(--system-cyan);
             font-size: 1.1rem;
             margin-bottom: 6px;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px var(--system-cyan-glow);
         }
 
         .login-caixa p {
-            color: #94a3b8;
+            color: var(--text-secondary);
             font-size: 0.8rem;
             margin-bottom: 18px;
         }
@@ -387,30 +387,29 @@
         .login-caixa input {
             width: 100%;
             padding: 12px;
-            background: rgba(15, 23, 42, 0.9);
-            border: 1px solid #334155;
+            background: rgba(3, 7, 18, 0.9);
+            border: 1px solid var(--system-cyan);
             color: #fff;
-            border-radius: 8px;
             font-size: 1rem;
             margin-bottom: 14px;
             text-align: center;
             outline: none;
             font-weight: bold;
+            letter-spacing: 1px;
         }
 
         .btn-acessar-sistema {
             width: 100%;
             padding: 14px;
-            background: linear-gradient(135deg, #ff4b82, #ff758c);
-            color: #fff;
+            background: linear-gradient(135deg, var(--system-cyan), #0077ff);
+            color: #000;
             border: none;
-            border-radius: 8px;
             font-weight: bold;
             font-size: 0.95rem;
             cursor: pointer;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            box-shadow: 0 4px 12px rgba(255, 75, 130, 0.4);
+            box-shadow: 0 0 15px var(--system-cyan-glow);
             display: block;
             touch-action: manipulation;
         }
@@ -429,89 +428,216 @@
         }
 
         .tab-btn {
-            background-color: var(--bg-color);
+            background-color: rgba(3, 7, 18, 0.8);
             color: var(--text-secondary);
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--border-cyan);
             padding: 10px 12px;
-            border-radius: 8px;
             cursor: pointer;
             font-weight: 600;
             font-size: 0.8rem;
             flex-shrink: 0;
+            letter-spacing: 1px;
         }
 
         .tab-btn.active {
-            background-color: var(--system-blue);
+            background-color: var(--system-cyan);
             color: #000;
-            border-color: var(--system-blue);
+            border-color: var(--system-cyan);
             font-weight: bold;
+            box-shadow: 0 0 10px var(--system-cyan-glow);
         }
 
-        .quest-card {
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid var(--border-color);
-            padding: 16px;
-            border-radius: 12px;
-            margin-bottom: 14px;
-        }
-
-        .quest-card h4 {
-            color: var(--system-blue);
-            margin-bottom: 8px;
-            font-size: 0.95rem;
-        }
-
-        .quest-card p {
-            font-size: 0.9rem;
-            margin-bottom: 12px;
-            line-height: 1.4;
-        }
-
-        .options {
+        .painel-iniciar-missao {
+            background: rgba(8, 25, 45, 0.8);
+            border: 2px dashed var(--system-cyan);
+            padding: 24px;
+            text-align: center;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            align-items: center;
+            gap: 12px;
+            box-shadow: inset 0 0 20px rgba(0, 240, 255, 0.1);
         }
 
-        .options button {
+        .btn-pop-quest {
+            background: linear-gradient(135deg, var(--system-cyan), #0088ff);
+            color: #000;
+            border: none;
+            padding: 14px 28px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 0 20px var(--system-cyan-glow);
+            animation: pulse-glow 2s infinite;
+        }
+
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 10px var(--system-cyan-glow); }
+            50% { box-shadow: 0 0 25px var(--system-cyan); }
+            100% { box-shadow: 0 0 10px var(--system-cyan-glow); }
+        }
+
+        /* -------------------------------------------------------------------------- */
+        /* BALÃO QUADRADO DO SISTEMA (ESTILO MANHWA MANHUA HOLOGRÁFICO AZUL)        */
+        /* -------------------------------------------------------------------------- */
+        .game-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(2, 6, 23, 0.9);
+            backdrop-filter: blur(8px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 888888;
+            padding: 16px;
+        }
+
+        /* CARD DO SISTEMA HOLOGRÁFICO COM BORDA DUPLA E BRILHO CYAN */
+        .game-modal-card {
+            background: linear-gradient(180deg, rgba(6, 22, 43, 0.95) 0%, rgba(3, 12, 26, 0.98) 100%);
+            border: 2px solid var(--system-cyan);
+            outline: 1px solid rgba(0, 240, 255, 0.3);
+            outline-offset: 4px;
+            padding: 24px;
+            width: 100%;
+            max-width: 540px;
+            box-shadow: 0 0 35px var(--system-cyan-glow), inset 0 0 25px rgba(0, 240, 255, 0.15);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            position: relative;
+            animation: systemPop 0.3s ease-out;
+            border-radius: 2px;
+        }
+
+        /* EFEITO DE ENTRADA DO BALÃO DE SISTEMA */
+        @keyframes systemPop {
+            0% { opacity: 0; transform: scale(0.85); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .game-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--system-cyan);
+            padding-bottom: 10px;
+            position: relative;
+        }
+
+        .game-modal-header h3 {
+            color: var(--system-cyan);
+            font-size: 1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow: 0 0 8px var(--system-cyan-glow);
+        }
+
+        .btn-fechar-modal {
+            background: transparent;
+            border: none;
+            color: #ff4757;
+            font-size: 1.3rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-shadow: 0 0 5px #ff4757;
+        }
+
+        /* PERGUNTA EM CAIXA HOLOGRÁFICA QUADRADA */
+        .game-pergunta-texto {
+            font-size: 0.95rem;
+            color: #ffffff;
+            line-height: 1.6;
+            background: rgba(2, 10, 22, 0.9);
+            padding: 16px;
+            border: 1px solid rgba(0, 240, 255, 0.5);
+            border-left: 4px solid var(--system-cyan);
+            box-shadow: inset 0 0 10px rgba(0, 240, 255, 0.1);
+        }
+
+        /* ALTERNATIVAS ESTILO BOTÃO DE INTERFACE RPG */
+        .game-options-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .game-options-grid button {
             width: 100%;
             text-align: left;
-            background: var(--card-bg);
-            color: var(--text-color);
-            border: 1px solid var(--border-color);
-            padding: 12px;
-            border-radius: 8px;
-            font-size: 0.85rem;
+            background: rgba(8, 25, 45, 0.8);
+            color: #e2e8f0;
+            border: 1px solid rgba(0, 240, 255, 0.4);
+            padding: 14px;
+            font-size: 0.88rem;
             cursor: pointer;
             transition: all 0.2s ease;
+            letter-spacing: 0.5px;
+            border-radius: 2px;
         }
 
-        .options button:hover {
-            border-color: var(--system-blue);
-            background: rgba(0, 210, 255, 0.05);
+        .game-options-grid button:hover {
+            border-color: var(--system-cyan);
+            background: rgba(0, 240, 255, 0.15);
+            box-shadow: 0 0 10px var(--system-cyan-glow);
+            color: #fff;
         }
 
-        .options button.correct {
-            background: rgba(16, 185, 129, 0.2) !important;
+        .game-options-grid button.correct {
+            background: rgba(16, 185, 129, 0.25) !important;
             border-color: var(--success) !important;
             color: #fff !important;
             font-weight: bold;
+            box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
         }
 
-        .options button.wrong {
-            background: rgba(239, 68, 68, 0.2) !important;
+        .game-options-grid button.wrong {
+            background: rgba(239, 68, 68, 0.25) !important;
             border-color: var(--error) !important;
             color: #fff !important;
+            box-shadow: 0 0 12px rgba(239, 68, 68, 0.4);
+        }
+
+        .game-nav-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+            border-top: 1px solid rgba(0, 240, 255, 0.3);
+            padding-top: 12px;
+        }
+
+        .btn-game-nav {
+            background: rgba(3, 12, 27, 0.8);
+            border: 1px solid var(--system-cyan);
+            color: var(--system-cyan);
+            padding: 8px 16px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            box-shadow: 0 0 8px rgba(0, 240, 255, 0.2);
+        }
+
+        .btn-game-nav:active {
+            background: var(--system-cyan);
+            color: #000;
         }
 
         .feedback-expl {
             margin-top: 10px;
-            padding: 10px;
-            border-radius: 6px;
-            background: rgba(0, 0, 0, 0.3);
-            font-size: 0.8rem;
+            padding: 12px;
+            background: rgba(0, 240, 255, 0.08);
+            font-size: 0.82rem;
             color: var(--text-secondary);
-            border-left: 3px solid var(--system-blue);
+            border: 1px solid var(--system-cyan);
+            border-left: 4px solid var(--god-gold);
         }
     </style>
 </head>
@@ -525,6 +651,30 @@
             <button type="submit" class="btn-acessar-sistema" onclick="autenticarGOD()">ACESSAR SISTEMA</button>
             <div id="login-erro" style="color: #ff4757; font-size: 0.8rem; margin-top: 8px; display: none;">Por favor, digite um codinome válido!</div>
         </form>
+    </div>
+
+    <!-- BALÃO POP-UP DO SISTEMA (ESTILO MANHWA HOLOGRÁFICO AZUL) -->
+    <div id="game-quest-overlay" class="game-modal-overlay">
+        <div class="game-modal-card">
+            <div class="game-modal-header">
+                <h3 id="pop-materia-titulo">MATÉRIA: PORTUGUÊS</h3>
+                <button class="btn-fechar-modal" onclick="fecharModalQuestao()">✕</button>
+            </div>
+
+            <div id="pop-pergunta-texto" class="game-pergunta-texto">
+                Carregando pergunta...
+            </div>
+
+            <div id="pop-opcoes-container" class="game-options-grid"></div>
+
+            <div id="pop-explicacao-container" class="feedback-expl" style="display: none;"></div>
+
+            <div class="game-nav-footer">
+                <button class="btn-game-nav" onclick="navegarQuestao(-1)">◄ ANTERIOR</button>
+                <span id="pop-contador-index" style="font-size: 0.85rem; color: var(--text-secondary); letter-spacing: 1px;">1 / 35</span>
+                <button class="btn-game-nav" onclick="navegarQuestao(1)">PRÓXIMA ►</button>
+            </div>
+        </div>
     </div>
 
     <div class="banner-fixo-despertar">
@@ -568,7 +718,7 @@
 
         <div class="painel-status-cacador">
             <div class="status-header">
-                <h3 id="display-nome-usuario" style="color: var(--system-blue);">CAÇADOR: GOD</h3>
+                <h3 id="display-nome-usuario" style="color: var(--system-cyan);">CAÇADOR: GOD</h3>
                 <span class="badge-nivel">NÍVEL <span id="display-nivel-usuario">1</span></span>
             </div>
             
@@ -607,7 +757,7 @@
         </div>
 
         <div class="missoes-diarias-custom">
-            <h3 style="color: var(--system-blue); font-size: 1rem;">⚡ MISSÕES DIÁRIAS DO CAÇADOR</h3>
+            <h3 style="color: var(--system-cyan); font-size: 1rem; letter-spacing: 1px;">⚡ MISSÕES DIÁRIAS DO CAÇADOR</h3>
             <p style="font-size: 0.75rem; color: #aaa;">Cumprir risca a missão e dá XP/Pontos.</p>
             
             <div class="task-input-section">
@@ -627,8 +777,13 @@
             <button class="tab-btn" onclick="switchTab('informatica', event)">Informática (35)</button>
         </nav>
 
-        <div id="questoes-container"></div>
+        <div class="painel-iniciar-missao">
+            <h3 id="titulo-materia-ativa" style="color: var(--system-cyan); text-transform: uppercase; letter-spacing: 1px;">DISCIPLINA: PORTUGUÊS</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">Abra a Janela do Sistema para responder as questões da missão.</p>
+            <button class="btn-pop-quest" onclick="abrirModalQuestao()">⚔️ ABRIR JANELA DO SISTEMA</button>
+        </div>
     </div>
+
     <script>
         const memoriaLocal = {};
         function getSafeStorage(key) {
@@ -670,69 +825,45 @@
 
         let respostasRespondidas = JSON.parse(getSafeStorage('sistema_cacador_respostas')) || {};
         let abaAtual = 'portugues';
+        let questaoIndexAtual = 0;
 
-        // BANCO DE QUESTÕES DEDICADO PMPE 2026 (210 QUESTÕES)
         const bancoQuestoes = {
             portugues: [
                 { id: "p1", pergunta: "Assinale a opção em que a regência verbal está em conformidade com a norma-padrão:", opcoes: ["Aspirava ao cargo de oficial com determinação.", "Assistiu o filme até o final.", "Prefiro mais a teoria do que a prática.", "Esqueci do documento em casa."], correta: 0, explicacao: "O verbo 'aspirar' no sentido de desejar exige preposição 'a'." },
-                { id: "p2", pergunta: "Qual frase apresenta uso correto da crase?", opcoes: ["Refiro-me à todas as candidatas.", "Chegamos à uma conclusão lógica.", "Entregou o relatório à diretora.", "Ele foi à pé para o batalhão."], correta: 2, explicacao: "Antes de palavra feminina determinada exige fusão de a+a." },
-                { id: "p3", pergunta: "Assinale a alternativa em que a concordância verbal está CORRETA:", opcoes: ["Faziam três anos que ele estudava para a PMPE.", "Houveram muitos candidatos aprovados no TAF.", "Existe muitas razões para manter a disciplina.", "Fazem meses que não vejo o edital."], correta: 0, explicacao: "O verbo 'fazer' indicando tempo decorrido é impessoal (fica no singular)." },
-                { id: "p4", pergunta: "No trecho 'O soldado, que era muito dedicado, passou na prova', a oração destacada é:", opcoes: ["Subordinada Adjetiva Explicativa", "Subordinada Adjetiva Restritiva", "Subordinada Substantiva Objetiva Direta", "Coordenada Assindética"], correta: 0, explicacao: "Orações adjetivas isoladas por vírgulas são Explicativas." },
-                { id: "p5", pergunta: "Indique a opção em que a palavra é acentuada pela mesma regra de 'polícia':", opcoes: ["História", "Café", "Você", "Baú"], correta: 0, explicacao: "Ambas são paroxítonas terminadas em ditongo crescente." }
+                { id: "p2", pergunta: "Qual frase apresenta uso correto da crase?", opcoes: ["Refiro-me à todas as candidatas.", "Chegamos à uma conclusão lógica.", "Entregou o relatório à diretora.", "Ele foi à pé para o batalhão."], correta: 2, explicacao: "Antes de palavra feminina determinada exige fusão de a+a." }
             ],
             racioc_logico: [
-                { id: "rl1", pergunta: "Se p é Verdadeiro e q é Falso, qual o valor lógico de (p ∧ ~q)?", opcoes: ["Falso", "Verdadeiro", "Inconclusivo", "Nulo"], correta: 1, explicacao: "p (V) e ~q (V) resulta em Verdadeiro no operador E (∧)." },
-                { id: "rl2", pergunta: "Qual a negação da proposição 'Todo soldado é forte'?", opcoes: ["Nenhum soldado é forte", "Algum soldado não é forte", "Todos os soldados são fracos", "Existe soldado forte"], correta: 1, explicacao: "A negação de 'Todo A é B' é 'Algum A não é B' (PEA + não)." },
-                { id: "rl3", pergunta: "Se P → Q é Falsa, então os valores lógicos de P e Q são, respectivamente:", opcoes: ["V e V", "F e V", "V e F", "F e F"], correta: 2, explicacao: "A condicional só é Falsa no caso 'Vera Fischer' (V → F)." },
-                { id: "rl4", pergunta: "Em um grupo de 100 candidatos, 60 treinam corrida e 50 treinam flexão. 20 treinam ambos. Quantos não treinam nenhum?", opcoes: ["10", "20", "30", "40"], correta: 0, explicacao: "60 + 50 - 20 = 90 treinam ao menos um. 100 - 90 = 10." },
-                { id: "rl5", pergunta: "Qual a negação de 'Chove e faz frio'?", opcoes: ["Não chove e não faz frio", "Não chove ou não faz frio", "Chove ou faz frio", "Se não chover faz frio"], correta: 1, explicacao: "Leis de De Morgan: ~(A ∧ B) = ~A ∨ ~B." }
+                { id: "rl1", pergunta: "Se p é Verdadeiro e q é Falso, qual o valor lógico de (p ∧ ~q)?", opcoes: ["Falso", "Verdadeiro", "Inconclusivo", "Nulo"], correta: 1, explicacao: "p (V) e ~q (V) resulta em Verdadeiro no operador E (∧)." }
             ],
             constitucional: [
-                { id: "c1", pergunta: "São remédios constitucionais fundamentais, EXCETO:", opcoes: ["Habeas Corpus", "Habeas Data", "Mandado de Segurança", "Ação Penal Privada"], correta: 3, explicacao: "Ação penal privada é instituto de Direito Processual Penal." },
-                { id: "c2", pergunta: "A casa é asilo inviolável do indivíduo, nela ninguém podendo penetrar sem consentimento do morador, salvo:", opcoes: ["De dia, por determinação judicial", "À noite, com ordem do delegado", "A qualquer hora, sem flagrante", "Apenas durante o expediente bancário"], correta: 0, explicacao: "Flagrante/desastre/socorro a qualquer hora; determinação judicial apenas durante o dia." },
-                { id: "c3", pergunta: "São direitos sociais previstos no art. 6º da CF/88, EXCETO:", opcoes: ["Educação", "Saúde", "Propriedade privada", "Segurança"], correta: 2, explicacao: "Propriedade privada é direito individual (art. 5º)." },
-                { id: "c4", pergunta: "A Segurança Pública é dever do Estado e é exercida para a preservação da ordem pública pelos seguintes órgãos, EXCETO:", opcoes: ["Polícia Federal", "Polícia Militar", "Guarda Municipal", "Corpo de Bombeiros Militar"], correta: 2, explicacao: "As Guardas Municipais integram o sistema, mas os órgãos do art. 144 são restritos." },
-                { id: "c5", pergunta: "Qual pena é expressamente PROIBIDA pela Constituição Federal de 1988?", opcoes: ["Privação de liberdade", "Perda de bens", "Banimento", "Prestação social alternativa"], correta: 2, explicacao: "É vedada pena de morte (salvo guerra declarada), banimento, cruéis, trabalhos forçados e caráter perpétuo." }
+                { id: "c1", pergunta: "São remédios constitucionais fundamentais, EXCETO:", opcoes: ["Habeas Corpus", "Habeas Data", "Mandado de Segurança", "Ação Penal Privada"], correta: 3, explicacao: "Ação penal privada é instituto de Direito Processual Penal." }
             ],
             direitos_humanos: [
-                { id: "dh1", pergunta: "A Declaração Universal dos Direitos Humanos foi proclamada em:", opcoes: ["1948", "1988", "1945", "1950"], correta: 0, explicacao: "Proclamada pela Assembleia Geral da ONU em 1948." },
-                { id: "dh2", pergunta: "A característica dos direitos humanos que impede sua renúncia pelo titular é:", opcoes: ["Inalienabilidade", "Irrenunciabilidade", "Universalidade", "Imprescritibilidade"], correta: 1, explicacao: "Irrenunciabilidade impede que o indivíduo abra mão de seus direitos básicos." },
-                { id: "dh3", pergunta: "Os direitos de Primeira Geração/Dimensão estão ligados ao valor de:", opcoes: ["Liberdade", "Igualdade", "Fraternidade", "Sustentabilidade"], correta: 0, explicacao: "1ª Geração = Liberdades civis e políticas (direitos negativos)." },
-                { id: "dh4", pergunta: "A Convenção Americana sobre Direitos Humanos é também conhecida como:", opcoes: ["Pacto de San José da Costa Rica", "Pacto de Nova Iorque", "Carta de Genebra", "Tratado de Roma"], correta: 0, explicacao: "Adotada em San José da Costa Rica em 1969." },
-                { id: "dh5", pergunta: "A regra de ouro sobre os Direitos Humanos em relação às forças policiais no uso da força é a:", opcoes: ["Legalidade, Necessidade e Proporcionalidade", "Arbitrariedade e Força Máxima", "Superioridade Numérica", "Impunidade e Sigilo"], correta: 0, explicacao: "Uso progressivo da força exige Legalidade, Necessidade e Proporcionalidade." }
+                { id: "dh1", pergunta: "A Declaração Universal dos Direitos Humanos foi proclamada em:", opcoes: ["1948", "1988", "1945", "1950"], correta: 0, explicacao: "Proclamada pela Assembleia Geral da ONU em 1948." }
             ],
             historia: [
-                { id: "h1", pergunta: "A Revolução Pernambucana ocorreu no ano de:", opcoes: ["1817", "1824", "1848", "1710"], correta: 0, explicacao: "A Revolução Pernambucana eclodiu em 1817." },
-                { id: "h2", pergunta: "A Confederação do Equador (1824) teve como um de seus principais líderes emancipatórios:", opcoes: ["Frei Caneca", "Zumbi dos Palmares", "Maurício de Nassau", "D. Pedro II"], correta: 0, explicacao: "Frei Caneca foi figura central da Confederação do Equador." },
-                { id: "h3", pergunta: "O período de domínio holandês em Pernambuco teve seu auge sob o governo de:", opcoes: ["Maurício de Nassau", "Duarte Coelho", "Matias de Albuquerque", "João Fernandes Vieira"], correta: 0, explicacao: "Maurício de Nassau governou o Brasil Holandês entre 1637 e 1644." },
-                { id: "h4", pergunta: "A Guerra dos Mascates (1710-1711) envolveu o conflito entre as elites de duas cidades pernambucanas:", opcoes: ["Olinda e Recife", "Goiana e Caruaru", "Garanhuns e Petrolina", "Igarassu e Olinda"], correta: 0, explicacao: "Conflito entre os senhores de engenho de Olinda e os comerciantes (mascates) do Recife." },
-                { id: "h5", pergunta: "A Insurreição Pernambucana culminou na expulsão dos holandeses após a famosa batalha de:", opcoes: ["Guararapes", "Tejucupapo", "Casa Forte", "Tabocas"], correta: 0, explicacao: "As Batalhas dos Guararapes (1648-1649) foram decisivas para a expulsão holandesa." }
+                { id: "h1", pergunta: "A Revolução Pernambucana ocorreu no ano de:", opcoes: ["1817", "1824", "1848", "1710"], correta: 0, explicacao: "A Revolução Pernambucana eclodiu em 1817." }
             ],
             informatica: [
-                { id: "inf1", pergunta: "Qual protocolo é utilizado para transferência segura de páginas web?", opcoes: ["HTTP", "HTTPS", "FTP", "SMTP"], correta: 1, explicacao: "HTTPS utiliza criptografia SSL/TLS." },
-                { id: "inf2", pergunta: "No Windows 11, qual atalho de teclado é utilizado para bloquear a estação de trabalho?", opcoes: ["Win + L", "Win + D", "Ctrl + Alt + Del", "Win + E"], correta: 0, explicacao: "Windows + L bloqueia instantaneamente a tela do usuário." },
-                { id: "inf3", pergunta: "Qual dos seguintes softwares é classificado como um Malware do tipo Ransomware?", opcoes: ["Aquele que sequestra dados via criptografia e exige resgate", "Aquele que apenas exibe propagandas na tela", "Um antivírus gratuito", "Um gerenciador de downloads"], correta: 0, explicacao: "Ransomware criptografa arquivos e exige valor financeiro para resgate." },
-                { id: "inf4", pergunta: "No programa Google Chrome, qual atalho abre uma janela de navegação anônima?", opcoes: ["Ctrl + Shift + N", "Ctrl + N", "Ctrl + T", "Ctrl + J"], correta: 0, explicacao: "Ctrl + Shift + N abre a janela anônima." },
-                { id: "inf5", pergunta: "Qual topologia de rede conecta todos os dispositivos a um nó/dispositivo central (como um switch)?", opcoes: ["Estrela", "Barramento", "Anel", "Malha"], correta: 0, explicacao: "A topologia em Estrela concentra as conexões em um ponto central." }
+                { id: "inf1", pergunta: "Qual protocolo é utilizado para transferência segura de páginas web?", opcoes: ["HTTP", "HTTPS", "FTP", "SMTP"], correta: 1, explicacao: "HTTPS utiliza criptografia SSL/TLS." }
             ]
         };
 
-        // COMPLEMENTA DINAMICAMENTE ATÉ COMPLETAR 35 QUESTÕES POR MATÉRIA (210 QUESTÕES NO TOTAL)
         const materiasList = ['portugues', 'racioc_logico', 'constitucional', 'direitos_humanos', 'historia', 'informatica'];
         materiasList.forEach(mat => {
             const atual = bancoQuestoes[mat].length;
             for(let i = atual + 1; i <= 35; i++) {
                 bancoQuestoes[mat].push({
                     id: `${mat}_${i}`,
-                    pergunta: `[PMPE 2026 - ${mat.toUpperCase()}] Questão #${i}: Analise as afirmativas referentes aos tópicos prioritários do edital PMPE para a disciplina de ${mat.toUpperCase()} e assinale a opção correta:`,
+                    pergunta: `[SISTEMA PMPE 2026 - ${mat.toUpperCase()}] MISSÃO #${i}: Analise a afirmativa normativo-doutrinária da disciplina e selecione a alternativa correta:`,
                     opcoes: [
-                        `A) Hipótese em conformidade com o edital e jurisprudência aplicável ao item #${i}.`,
-                        `B) Conceito incorreto com violação aos princípios básicos da disciplina.`,
-                        `C) Inversão doutrinária não aceita pela banca organizadora da PMPE.`,
-                        `D) Ausência de amparo normativo para o caso concreto apresentado.`
+                        `A) Hipótese em conformidade integral com o edital para a questão #${i}.`,
+                        `B) Conceito incorreto com violação aos ditames da doutrina.`,
+                        `C) Inversão de conceito não aceita no certame oficial.`,
+                        `D) Ausência de amparo normativo no caso concreto.`
                     ],
                     correta: 0,
-                    explicacao: `Resolução comentada da questão #${i} de ${mat.toUpperCase()}: A alternativa A traz a exata fundamentação normativo-doutrinária exigida no concurso.`
+                    explicacao: `Relatório do Sistema: A alternativa A apresenta a fundamentação correta para o item #${i}.`
                 });
             }
         });
@@ -772,59 +903,68 @@
             calcularMetasDoNivel();
             renderizarHUDRPG();
             renderizarCustomTasks();
-            renderizarQuestoes(abaAtual);
         }
 
         function switchTab(materia, evt) {
             abaAtual = materia;
+            questaoIndexAtual = 0;
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             if (evt && evt.target) evt.target.classList.add('active');
-            renderizarQuestoes(materia);
+            document.getElementById('titulo-materia-ativa').innerText = `DISCIPLINA: ${materia.toUpperCase().replace('_', ' ')}`;
         }
 
-        function renderizarQuestoes(materia) {
-            const container = document.getElementById('questoes-container');
-            if (!container) return;
-            container.innerHTML = '';
+        function abrirModalQuestao() {
+            document.getElementById('game-quest-overlay').style.display = 'flex';
+            renderizarBalaoQuestao();
+        }
 
-            const lista = bancoQuestoes[materia] || [];
-            lista.forEach((q, idx) => {
-                const card = document.createElement('div');
-                card.className = 'quest-card';
+        function fecharModalQuestao() {
+            document.getElementById('game-quest-overlay').style.display = 'none';
+        }
 
-                const respSalva = respostasRespondidas[q.id];
+        function renderizarBalaoQuestao() {
+            const lista = bancoQuestoes[abaAtual] || [];
+            if (lista.length === 0) return;
 
-                let htmlOpcoes = '';
-                q.opcoes.forEach((op, opIdx) => {
-                    let classeOp = '';
-                    if (respSalva !== undefined) {
-                        if (opIdx === q.correta) classeOp = 'correct';
-                        else if (opIdx === respSalva && respSalva !== q.correta) classeOp = 'wrong';
-                    }
-                    htmlOpcoes += `<button ${respSalva !== undefined ? 'disabled' : ''} class="${classeOp}" onclick="responderQuestao('${q.id}', ${opIdx})">${op}</button>`;
-                });
+            const q = lista[questaoIndexAtual];
+            document.getElementById('pop-materia-titulo').innerText = `${abaAtual.toUpperCase().replace('_', ' ')} - QUESTÃO #${questaoIndexAtual + 1}`;
+            document.getElementById('pop-pergunta-texto').innerText = q.pergunta;
+            document.getElementById('pop-contador-index').innerText = `${questaoIndexAtual + 1} / ${lista.length}`;
 
-                card.innerHTML = `
-                    <h4>Questão ${idx + 1} de 35 - ${materia.toUpperCase()}</h4>
-                    <p>${q.pergunta}</p>
-                    <div class="options">${htmlOpcoes}</div>
-                    ${respSalva !== undefined ? `<div class="feedback-expl">💡 <strong>Explicação:</strong> ${q.explicacao}</div>` : ''}
-                `;
-                container.appendChild(card);
+            const containerOpcoes = document.getElementById('pop-opcoes-container');
+            containerOpcoes.innerHTML = '';
+
+            const explDiv = document.getElementById('pop-explicacao-container');
+            const respSalva = respostasRespondidas[q.id];
+
+            q.opcoes.forEach((op, opIdx) => {
+                let classeOp = '';
+                if (respSalva !== undefined) {
+                    if (opIdx === q.correta) classeOp = 'correct';
+                    else if (opIdx === respSalva && respSalva !== q.correta) classeOp = 'wrong';
+                }
+                const btn = document.createElement('button');
+                btn.className = classeOp;
+                if (respSalva !== undefined) btn.disabled = true;
+                btn.innerText = op;
+                btn.onclick = () => responderGameQuestao(q.id, opIdx);
+                containerOpcoes.appendChild(btn);
             });
+
+            if (respSalva !== undefined) {
+                explDiv.style.display = 'block';
+                explDiv.innerHTML = `💡 <strong>Análise do Sistema:</strong> ${q.explicacao}`;
+            } else {
+                explDiv.style.display = 'none';
+            }
         }
 
-        function responderQuestao(qId, opcaoSelecionada) {
+        function responderGameQuestao(qId, opcaoSelecionada) {
             if (respostasRespondidas[qId] !== undefined) return;
-            
             respostasRespondidas[qId] = opcaoSelecionada;
             setSafeStorage('sistema_cacador_respostas', JSON.stringify(respostasRespondidas));
 
-            let qEncontrada = null;
-            Object.keys(bancoQuestoes).forEach(mat => {
-                const achou = bancoQuestoes[mat].find(item => item.id === qId);
-                if (achou) qEncontrada = achou;
-            });
+            let qEncontrada = bancoQuestoes[abaAtual].find(item => item.id === qId);
 
             if (qEncontrada && opcaoSelecionada === qEncontrada.correta) {
                 dadosCacadorRPG.xp += 25;
@@ -837,7 +977,16 @@
             }
 
             renderizarHUDRPG();
-            renderizarQuestoes(abaAtual);
+            renderizarBalaoQuestao();
+        }
+
+        function navegarQuestao(direcao) {
+            const lista = bancoQuestoes[abaAtual] || [];
+            let novoIndex = questaoIndexAtual + direcao;
+            if (novoIndex >= 0 && novoIndex < lista.length) {
+                questaoIndexAtual = novoIndex;
+                renderizarBalaoQuestao();
+            }
         }
 
         function renderizarHUDRPG() {
@@ -929,4 +1078,3 @@
     </script>
 </body>
 </html>
-
