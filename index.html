@@ -1,386 +1,540 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="dark">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>SISTEMA DO CAÇADOR - PMPE 2026 & Solo Leveling</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        hunter: {
-                            blue: '#00d2ff',
-                            purple: '#9d4edd',
-                            darkBg: '#060810',
-                            panelBg: 'rgba(15, 23, 42, 0.85)',
-                            systemGold: '#ffd700',
-                            systemRed: '#ff2a6d'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        mono: ['Fira Code', 'monospace']
-                    },
-                    boxShadow: {
-                        'neon-blue': '0 0 15px rgba(0, 210, 255, 0.5), 0 0 30px rgba(0, 210, 255, 0.2)',
-                        'neon-purple': '0 0 15px rgba(157, 78, 221, 0.5), 0 0 30px rgba(157, 78, 221, 0.2)',
-                        'neon-red': '0 0 15px rgba(255, 42, 109, 0.5), 0 0 30px rgba(255, 42, 109, 0.2)'
-                    }
-                }
-            }
-        }
-    </script>
+    <title>SISTEMA DO CAÇADOR - PMPE 2026</title>
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&family=Fira+Code:wght@500;700&display=swap" rel="stylesheet">
     <!-- Canvas Confetti -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
     <style>
-        body {
-            background-color: #060810;
-            background-image: 
-                radial-gradient(at 0% 0%, rgba(0, 210, 255, 0.12) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(157, 78, 221, 0.12) 0px, transparent 50%);
-            background-attachment: fixed;
-            color: #e2e8f0;
-            font-family: 'Inter', sans-serif;
-            user-select: none;
+        :root {
+            --bg-dark: #040814;
+            --system-cyan: #00f0ff;
+            --system-cyan-glow: rgba(0, 240, 255, 0.4);
+            --system-blue-card: rgba(8, 22, 44, 0.9);
+            --system-red: #ff2a6d;
+            --system-red-glow: rgba(255, 42, 109, 0.4);
+            --god-gold: #ffd700;
+            --text-main: #f8fafc;
+            --text-sub: #7dd3fc;
         }
 
-        .system-scanlines::before {
-            content: " ";
-            display: block;
-            position: absolute;
-            top: 0; left: 0; bottom: 0; right: 0;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-image: 
+                radial-gradient(circle at 50% 10%, rgba(0, 240, 255, 0.15) 0%, transparent 60%),
+                linear-gradient(180deg, #02050e 0%, #081024 100%);
+            background-attachment: fixed;
+            overflow-x: hidden;
+        }
+
+        /* EFEITO VISUAL DE SCANLINES HOLOGRÁFICAS */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
             background-size: 100% 4px;
-            z-index: 10;
+            z-index: 999;
             pointer-events: none;
-            opacity: 0.3;
+            opacity: 0.25;
         }
 
-        .system-border {
-            border: 1px solid rgba(0, 210, 255, 0.4);
-            box-shadow: inset 0 0 15px rgba(0, 210, 255, 0.15), 0 0 15px rgba(0, 210, 255, 0.2);
-            backdrop-filter: blur(12px);
+        /* ESTILO DA JANELA DE SISTEMA MANHWA (CANTOS CIBERNÉTICOS CHANFRADOS) */
+        .system-window {
+            background: var(--system-blue-card);
+            border: 2px solid var(--system-cyan);
+            box-shadow: 0 0 20px var(--system-cyan-glow), inset 0 0 15px rgba(0, 240, 255, 0.15);
+            padding: 20px;
+            position: relative;
+            backdrop-filter: blur(10px);
+            clip-path: polygon(
+                0 15px, 15px 0, 
+                calc(100% - 15px) 0, 100% 15px, 
+                100% calc(100% - 15px), calc(100% - 15px) 100%, 
+                15px 100%, 0 calc(100% - 15px)
+            );
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
-        .system-border-red {
-            border: 1px solid rgba(255, 42, 109, 0.5);
-            box-shadow: inset 0 0 15px rgba(255, 42, 109, 0.15), 0 0 15px rgba(255, 42, 109, 0.2);
-            backdrop-filter: blur(12px);
+        .system-window-red {
+            background: rgba(26, 8, 16, 0.9);
+            border: 2px solid var(--system-red);
+            box-shadow: 0 0 20px var(--system-red-glow), inset 0 0 15px rgba(255, 42, 109, 0.15);
+            clip-path: polygon(
+                0 15px, 15px 0, 
+                calc(100% - 15px) 0, 100% 15px, 
+                100% calc(100% - 15px), calc(100% - 15px) 100%, 
+                15px 100%, 0 calc(100% - 15px)
+            );
         }
 
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #090a0f;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #00d2ff;
-            border-radius: 3px;
+        .window-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--system-cyan);
+            padding-bottom: 10px;
+            margin-bottom: 16px;
         }
 
-        @keyframes pulseGlow {
-            0%, 100% { opacity: 0.9; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.01); }
-        }
-        .animate-system-pulse {
-            animation: pulseGlow 4s infinite ease-in-out;
+        .window-title {
+            font-family: monospace;
+            font-size: 0.95rem;
+            color: var(--system-cyan);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow: 0 0 8px var(--system-cyan-glow);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .modal-active {
-            display: flex !important;
-            animation: fadeIn 0.2s ease-out;
+        /* HEADER PRINCIPAL */
+        header {
+            width: 100%;
+            max-width: 1000px;
+            margin-bottom: 20px;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
+
+        /* GRID DAS 3 JANELAS DO PROCESSO */
+        .desktop-grid {
+            width: 100%;
+            max-width: 1000px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+
+        /* BARRA DE EXPERIÊNCIA */
+        .xp-bar-outer {
+            width: 100%;
+            height: 12px;
+            background: #060d1a;
+            border: 1px solid var(--system-cyan);
+            margin: 8px 0;
+            padding: 1px;
+        }
+
+        .xp-bar-inner {
+            height: 100%;
+            background: linear-gradient(90deg, var(--system-cyan), #9d4edd);
+            box-shadow: 0 0 10px var(--system-cyan);
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+
+        /* ATRIBUTOS RPG */
+        .attrib-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .attrib-card {
+            background: rgba(3, 10, 22, 0.9);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            padding-bottom: 34px;
+        }
+
+        .btn-add-stat {
+            position: absolute;
+            bottom: 4px;
+            width: 90%;
+            background: var(--system-cyan);
+            color: #000;
+            border: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            cursor: pointer;
+            padding: 2px 0;
+        }
+
+        /* MISSÕES TAF FÍSICAS */
+        .taf-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 8px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--system-red);
+            padding: 10px;
+            text-align: center;
+            margin-bottom: 12px;
+            font-family: monospace;
+        }
+
+        .btn-taf {
+            width: 100%;
+            padding: 10px;
+            background: rgba(255, 42, 109, 0.2);
+            border: 1px solid var(--system-red);
+            color: #fff;
+            font-weight: bold;
+            font-size: 0.75rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+            transition: all 0.2s;
+        }
+
+        .btn-taf:hover {
+            background: var(--system-red);
+            box-shadow: 0 0 15px var(--system-red-glow);
+        }
+
+        /* LISTA DE MISSÕES CUSTOMIZADAS */
+        .task-input-box {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+
+        .task-input-box input {
+            flex: 1;
+            background: rgba(2, 6, 16, 0.9);
+            border: 1px solid var(--system-cyan);
+            color: #fff;
+            padding: 8px 12px;
+            font-size: 0.85rem;
+            outline: none;
+        }
+
+        .task-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .task-item {
+            background: rgba(2, 6, 16, 0.8);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            border-left: 4px solid var(--system-cyan);
+            padding: 8px 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+        }
+
+        .task-item.completed {
+            border-left-color: #10b981;
+            opacity: 0.6;
+            text-decoration: line-through;
+        }
+
+        /* NAVEGAÇÃO DE DISCIPLINA & QUESTÕES */
+        .section-questoes {
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 6px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+        }
+
+        .tab-btn {
+            background: rgba(2, 6, 16, 0.9);
+            border: 1px solid var(--system-cyan);
+            color: var(--text-sub);
+            padding: 10px 16px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            cursor: pointer;
+            white-space: nowrap;
+            letter-spacing: 1px;
+        }
+
+        .tab-btn.active {
+            background: var(--system-cyan);
+            color: #000;
+            box-shadow: 0 0 12px var(--system-cyan-glow);
+        }
+
+        .btn-abrir-pop {
+            background: linear-gradient(135deg, var(--system-cyan), #0077ff);
+            color: #000;
+            border: none;
+            padding: 14px 28px;
+            font-weight: 900;
+            font-size: 0.95rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 0 20px var(--system-cyan-glow);
+        }
+
+        /* POP-UP DE QUESTÃO DO JOGO */
+        .game-modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(2, 5, 14, 0.92);
+            backdrop-filter: blur(8px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 99999;
+            padding: 16px;
+        }
+
+        .game-modal-card {
+            background: linear-gradient(180deg, #07152b 0%, #030a16 100%);
+            border: 2px solid var(--system-cyan);
+            padding: 24px;
+            width: 100%;
+            max-width: 550px;
+            box-shadow: 0 0 35px var(--system-cyan-glow);
+            clip-path: polygon(0 15px, 15px 0, calc(100% - 15px) 0, 100% 15px, 100% calc(100% - 15px), calc(100% - 15px) 100%, 15px 100%, 0 calc(100% - 15px));
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .game-options-grid button {
+            width: 100%;
+            text-align: left;
+            background: rgba(4, 14, 30, 0.9);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            color: #fff;
+            padding: 12px;
+            font-size: 0.88rem;
+            margin-top: 8px;
+            cursor: pointer;
+        }
+
+        .game-options-grid button.correct {
+            background: rgba(16, 185, 129, 0.3) !important;
+            border-color: #10b981 !important;
+        }
+
+        .game-options-grid button.wrong {
+            background: rgba(239, 68, 68, 0.3) !important;
+            border-color: #ef4444 !important;
+        }
+
+        /* OVERLAY DE LOGIN */
+        .login-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(2, 5, 14, 0.96);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 999999;
+        }
+
+        .login-caixa {
+            background: #07152b;
+            border: 2px solid var(--system-cyan);
+            padding: 30px;
+            text-align: center;
+            width: 90%;
+            max-width: 380px;
+            box-shadow: 0 0 30px var(--system-cyan-glow);
+            clip-path: polygon(0 15px, 15px 0, calc(100% - 15px) 0, 100% 15px, 100% calc(100% - 15px), calc(100% - 15px) 100%, 15px 100%, 0 calc(100% - 15px));
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between overflow-x-hidden system-scanlines p-3 sm:p-6">
+<body>
 
     <!-- MODAL DE LOGIN GOD -->
-    <div id="modal-login" class="fixed inset-0 bg-slate-950/95 backdrop-blur-md z-50 flex items-center justify-center p-4">
-        <form class="system-border bg-slate-950/90 max-w-sm w-full p-6 rounded-xl text-center shadow-neon-blue" onsubmit="event.preventDefault(); autenticarGOD();">
-            <div class="w-12 h-12 rounded-lg bg-cyan-500/20 text-cyan-400 border border-cyan-500/40 flex items-center justify-center mx-auto mb-3 text-2xl shadow-neon-blue">
-                <i class="fa-solid fa-bolt animate-pulse"></i>
-            </div>
-            <h2 class="text-base font-mono font-bold text-cyan-400 tracking-widest uppercase mb-1">[IDENTIFICAÇÃO DO CAÇADOR]</h2>
-            <p class="text-xs font-mono text-slate-400 mb-4">Insira seu codinome para sincronizar a interface mística:</p>
-            
-            <input type="text" id="input-login" value="GOD" placeholder="Digite seu codinome..." class="w-full bg-slate-900 border border-cyan-500/40 rounded px-3 py-2 text-center text-cyan-300 font-mono font-bold text-sm mb-4 outline-none focus:border-cyan-400">
-            
-            <button type="submit" onclick="autenticarGOD()" class="w-full py-3 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-mono font-extrabold text-xs tracking-wider uppercase rounded shadow-neon-blue transition">
-                CONECTAR AO SISTEMA
-            </button>
-            <div id="login-erro" class="text-red-400 font-mono text-xs mt-2 hidden">Por favor, insira um codinome válido!</div>
+    <div id="modal-login" class="login-overlay">
+        <form class="login-caixa" onsubmit="event.preventDefault(); autenticarGOD();">
+            <h2 style="color: var(--system-cyan); letter-spacing: 2px; font-family: monospace; margin-bottom: 8px;">⚡ IDENTIFICAÇÃO DO CAÇADOR</h2>
+            <p style="color: var(--text-sub); font-size: 0.8rem; margin-bottom: 16px;">Insira seu codinome para sincronizar o sistema:</p>
+            <input type="text" id="input-login" value="GOD" style="width: 100%; padding: 12px; background: #030a16; border: 1px solid var(--system-cyan); color: #fff; text-align: center; font-weight: bold; margin-bottom: 14px; outline: none;">
+            <button type="submit" onclick="autenticarGOD()" style="width: 100%; padding: 12px; background: var(--system-cyan); color: #000; border: none; font-weight: bold; cursor: pointer; text-transform: uppercase;">ACESSAR SISTEMA</button>
+            <div id="login-erro" style="color: #ff4757; font-size: 0.8rem; margin-top: 8px; display: none;">Codinome inválido!</div>
         </form>
     </div>
 
-    <!-- BALÃO POP-UP DE QUESTÃO DO JOGO (MODAL MÍSTICO HOLOGRÁFICO) -->
-    <div id="game-quest-overlay" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md z-50 hidden items-center justify-center p-4">
-        <div class="system-border bg-slate-950/95 max-w-xl w-full p-6 rounded-xl relative shadow-neon-blue flex flex-col gap-4">
-            <div class="flex justify-between items-center border-b border-cyan-500/30 pb-3">
-                <h3 id="pop-materia-titulo" class="text-sm font-mono font-bold text-cyan-400 tracking-wider uppercase">PORTUGUÊS - QUESTÃO #1</h3>
-                <button onclick="fecharModalQuestao()" class="text-red-400 hover:text-red-300 text-lg font-bold px-2">✕</button>
+    <!-- JANELA POP-UP MÍSTICA DE QUESTÕES DO JOGO -->
+    <div id="game-quest-overlay" class="game-modal-overlay">
+        <div class="game-modal-card">
+            <div class="window-header">
+                <h3 id="pop-materia-titulo" class="window-title">PORTUGUÊS - QUESTÃO #1</h3>
+                <button onclick="fecharModalQuestao()" style="background: none; border: none; color: #ff4757; font-size: 1.3rem; font-weight: bold; cursor: pointer;">✕</button>
             </div>
 
-            <div id="pop-pergunta-texto" class="bg-slate-900/90 border border-cyan-500/30 border-l-4 border-l-cyan-400 p-4 rounded text-sm text-slate-200 leading-relaxed font-sans">
+            <div id="pop-pergunta-texto" style="background: rgba(2, 6, 16, 0.9); border: 1px solid rgba(0, 240, 255, 0.4); border-left: 4px solid var(--system-cyan); padding: 14px; font-size: 0.95rem; line-height: 1.5;">
                 Carregando pergunta...
             </div>
 
-            <div id="pop-opcoes-container" class="space-y-2 font-sans text-xs"></div>
+            <div id="pop-opcoes-container" class="game-options-grid"></div>
 
-            <div id="pop-explicacao-container" class="bg-cyan-950/40 border border-cyan-500/30 border-l-4 border-l-yellow-400 p-3 rounded text-xs text-slate-300 font-mono hidden"></div>
+            <div id="pop-explicacao-container" style="display: none; background: rgba(0, 240, 255, 0.08); border: 1px solid var(--system-cyan); border-left: 4px solid var(--god-gold); padding: 10px; font-size: 0.82rem; color: var(--text-sub);"></div>
 
-            <div class="flex justify-between items-center border-t border-cyan-500/30 pt-3">
-                <button onclick="navegarQuestao(-1)" class="px-3 py-1.5 bg-slate-900 border border-cyan-500/40 text-cyan-300 font-mono text-xs font-bold rounded hover:bg-slate-800 transition">
-                    ◄ ANTERIOR
-                </button>
-                <span id="pop-contador-index" class="text-xs font-mono text-slate-400">1 / 35</span>
-                <button onclick="navegarQuestao(1)" class="px-3 py-1.5 bg-slate-900 border border-cyan-500/40 text-cyan-300 font-mono text-xs font-bold rounded hover:bg-slate-800 transition">
-                    PRÓXIMA ►
-                </button>
+            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(0, 240, 255, 0.3); padding-top: 12px;">
+                <button onclick="navegarQuestao(-1)" style="background: rgba(2, 6, 16, 0.8); border: 1px solid var(--system-cyan); color: var(--system-cyan); padding: 6px 14px; font-weight: bold; cursor: pointer;">◄ ANTERIOR</button>
+                <span id="pop-contador-index" style="font-size: 0.85rem; color: var(--text-sub); font-family: monospace;">1 / 35</span>
+                <button onclick="navegarQuestao(1)" style="background: rgba(2, 6, 16, 0.8); border: 1px solid var(--system-cyan); color: var(--system-cyan); padding: 6px 14px; font-weight: bold; cursor: pointer;">PRÓXIMA ►</button>
             </div>
         </div>
     </div>
 
-    <!-- HEADER / TOP NAV -->
-    <header class="max-w-6xl w-full mx-auto p-4 system-border bg-slate-950/80 rounded-xl mb-6">
-        <div class="flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-lg bg-gradient-to-tr from-cyan-500 to-purple-600 flex items-center justify-center text-slate-950 font-black shadow-neon-blue">
-                    <i class="fa-solid fa-bolt text-xl animate-pulse"></i>
-                </div>
-                <div>
-                    <h1 class="text-xs font-mono tracking-widest text-cyan-400 font-semibold">[SISTEMA DO CAÇADOR]</h1>
-                    <p class="text-sm font-bold text-slate-100 tracking-wider uppercase">PAINEL PMPE 2026 & SOLO LEVELING</p>
-                </div>
+    <!-- HEADER DA PÁGINA -->
+    <header class="system-window">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+                <h1 style="color: var(--system-cyan); font-family: monospace; font-size: 1.2rem; letter-spacing: 2px;">[SISTEMA DO CAÇADOR]</h1>
+                <p style="color: var(--text-sub); font-size: 0.85rem;">PAINEL PMPE 2026 & SOLO LEVELING</p>
             </div>
-
-            <div class="flex items-center gap-4 font-mono">
-                <button onclick="fazerLogout()" class="px-3 py-1 bg-red-950/80 hover:bg-red-900 text-red-400 border border-red-500/40 text-xs font-bold rounded transition">
-                    SAIR
-                </button>
-            </div>
+            <button onclick="fazerLogout()" style="background: rgba(255, 42, 109, 0.2); border: 1px solid var(--system-red); color: var(--system-red); padding: 6px 12px; font-weight: bold; font-size: 0.75rem; cursor: pointer;">SAIR</button>
         </div>
     </header>
 
-    <!-- ÁREA PRINCIPAL: AS 3 JANELAS DO PRIMEIRO PROCESSO -->
-    <main class="max-w-6xl w-full mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+    <!-- AS 3 JANELAS DO NOSSO PRIMEIRO PROCESSO -->
+    <main class="desktop-grid">
 
         <!-- JANELA 1: STATUS DO CAÇADOR (HUD RPG) -->
-        <section class="system-border bg-slate-950/80 rounded-xl p-5 relative overflow-hidden animate-system-pulse">
-            <div class="flex justify-between items-center border-b border-cyan-500/30 pb-3 mb-4">
-                <div class="flex items-center gap-2">
-                    <i class="fa-solid fa-shield-halved text-cyan-400"></i>
-                    <h2 class="text-xs font-mono font-bold text-cyan-400 tracking-wider uppercase">PAINEL DE STATUS</h2>
-                </div>
-                <span class="px-2 py-0.5 bg-cyan-500 text-slate-950 font-mono font-bold text-xs rounded shadow-neon-blue">
-                    LVL <span id="display-nivel-usuario">1</span>
-                </span>
+        <div class="system-window">
+            <div class="window-header">
+                <span class="window-title"><i class="fa-solid fa-user-ninja"></i> JANELA DE STATUS</span>
+                <span style="background: var(--system-cyan); color: #000; padding: 2px 8px; font-size: 0.8rem; font-weight: bold; font-family: monospace;">LVL <span id="display-nivel-usuario">1</span></span>
             </div>
 
-            <h3 id="display-nome-usuario" class="text-base font-black text-white uppercase tracking-wide mb-3">CAÇADOR: GOD</h3>
+            <h3 id="display-nome-usuario" style="color: #fff; font-size: 1rem; margin-bottom: 6px;">CAÇADOR: GOD</h3>
 
-            <!-- XP Bar -->
-            <div class="mb-4">
-                <div class="flex justify-between text-xs font-mono mb-1">
-                    <span class="text-slate-400">EXPERIÊNCIA (XP)</span>
-                    <span class="text-cyan-400 font-bold"><span id="display-xp-usuario">0</span> / <span id="display-xp-proximo">200</span></span>
-                </div>
-                <div class="w-full h-3 bg-slate-900 rounded-full overflow-hidden border border-cyan-500/30 p-0.5">
-                    <div id="barra-progresso-xp" class="h-full bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full transition-all duration-500 shadow-neon-blue" style="width: 0%"></div>
-                </div>
+            <div class="xp-bar-outer">
+                <div id="barra-progresso-xp" class="xp-bar-inner"></div>
+            </div>
+            <div style="font-size: 0.78rem; color: var(--text-sub); text-align: right; font-family: monospace; margin-bottom: 10px;">
+                XP: <span id="display-xp-usuario">0</span> / <span id="display-xp-proximo">200</span>
             </div>
 
-            <!-- Available Points Bar -->
-            <div class="p-2.5 mb-4 bg-emerald-950/40 border border-emerald-500/40 rounded-lg flex justify-between items-center text-xs font-mono">
-                <span class="text-emerald-300">PONTOS DISPONÍVEIS: <strong id="display-pontos-disponiveis" class="text-yellow-400 font-bold text-sm">5</strong></span>
-                <button onclick="distribuirAtributosModal()" class="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold rounded shadow transition">
-                    DISTRIBUIR
-                </button>
+            <div style="background: rgba(0, 240, 255, 0.1); border: 1px solid var(--system-cyan); padding: 8px; font-size: 0.8rem; font-family: monospace; display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <span>PONTOS DISPONÍVEIS:</span>
+                <strong id="display-pontos-disponiveis" style="color: var(--god-gold); font-size: 0.95rem;">5</strong>
             </div>
 
-            <!-- Attributes Grid -->
-            <div class="grid grid-cols-2 gap-2 font-mono text-xs">
-                <div class="bg-slate-900/80 p-3 rounded border border-slate-800 flex flex-col items-center relative pb-8">
-                    <span class="text-slate-400 flex items-center gap-1 text-[11px]"><i class="fa-solid fa-dumbbell text-red-400"></i> FORÇA</span>
-                    <span id="atrib-forca" class="text-cyan-300 font-bold text-base mt-1">10</span>
-                    <button onclick="adicionarPontoManual('forca')" class="absolute bottom-1 w-11/12 py-0.5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded">+</button>
+            <div class="attrib-grid">
+                <div class="attrib-card">
+                    <span style="font-size: 0.7rem; color: var(--text-sub); font-weight: bold;"><i class="fa-solid fa-dumbbell" style="color: #ff4757;"></i> FORÇA</span>
+                    <span id="atrib-forca" style="font-size: 1.1rem; color: #fff; font-weight: bold; margin-top: 2px;">10</span>
+                    <button class="btn-add-stat" onclick="adicionarPontoManual('forca')">+</button>
                 </div>
-                <div class="bg-slate-900/80 p-3 rounded border border-slate-800 flex flex-col items-center relative pb-8">
-                    <span class="text-slate-400 flex items-center gap-1 text-[11px]"><i class="fa-solid fa-bolt-lightning text-yellow-400"></i> VELOCIDADE</span>
-                    <span id="atrib-velocidade" class="text-cyan-300 font-bold text-base mt-1">10</span>
-                    <button onclick="adicionarPontoManual('velocidade')" class="absolute bottom-1 w-11/12 py-0.5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded">+</button>
+                <div class="attrib-card">
+                    <span style="font-size: 0.7rem; color: var(--text-sub); font-weight: bold;"><i class="fa-solid fa-bolt" style="color: #ffd700;"></i> VELOCIDADE</span>
+                    <span id="atrib-velocidade" style="font-size: 1.1rem; color: #fff; font-weight: bold; margin-top: 2px;">10</span>
+                    <button class="btn-add-stat" onclick="adicionarPontoManual('velocidade')">+</button>
                 </div>
-                <div class="bg-slate-900/80 p-3 rounded border border-slate-800 flex flex-col items-center relative pb-8">
-                    <span class="text-slate-400 flex items-center gap-1 text-[11px]"><i class="fa-solid fa-brain text-purple-400"></i> MANA</span>
-                    <span id="atrib-mana" class="text-cyan-300 font-bold text-base mt-1">10</span>
-                    <button onclick="adicionarPontoManual('mana')" class="absolute bottom-1 w-11/12 py-0.5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded">+</button>
+                <div class="attrib-card">
+                    <span style="font-size: 0.7rem; color: var(--text-sub); font-weight: bold;"><i class="fa-solid fa-brain" style="color: #9d4edd;"></i> MANA</span>
+                    <span id="atrib-mana" style="font-size: 1.1rem; color: #fff; font-weight: bold; margin-top: 2px;">10</span>
+                    <button class="btn-add-stat" onclick="adicionarPontoManual('mana')">+</button>
                 </div>
-                <div class="bg-slate-900/80 p-3 rounded border border-slate-800 flex flex-col items-center relative pb-8">
-                    <span class="text-slate-400 flex items-center gap-1 text-[11px]"><i class="fa-solid fa-fire text-amber-500"></i> AURA</span>
-                    <span id="atrib-aura" class="text-cyan-300 font-bold text-base mt-1">10</span>
-                    <button onclick="adicionarPontoManual('aura')" class="absolute bottom-1 w-11/12 py-0.5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded">+</button>
+                <div class="attrib-card">
+                    <span style="font-size: 0.7rem; color: var(--text-sub); font-weight: bold;"><i class="fa-solid fa-fire" style="color: #ff758c;"></i> AURA</span>
+                    <span id="atrib-aura" style="font-size: 1.1rem; color: #fff; font-weight: bold; margin-top: 2px;">10</span>
+                    <button class="btn-add-stat" onclick="adicionarPontoManual('aura')">+</button>
                 </div>
             </div>
-        </section>
+        </div>
 
         <!-- JANELA 2: MISSÕES FÍSICAS DIÁRIAS (TAF) -->
-        <section class="system-border-red bg-slate-950/80 rounded-xl p-5 relative overflow-hidden">
-            <div class="flex justify-between items-center border-b border-red-500/30 pb-3 mb-4">
-                <div class="flex items-center gap-2">
-                    <i class="fa-solid fa-person-running text-red-500"></i>
-                    <h2 class="text-xs font-mono font-bold text-red-400 tracking-wider uppercase">MISSÕES FÍSICAS (TAF)</h2>
-                </div>
-                <span class="px-2 py-0.5 bg-red-950 text-red-400 border border-red-500/40 font-mono font-bold text-[10px] rounded">
-                    OBRIGATÓRIO
-                </span>
+        <div class="system-window system-window-red">
+            <div class="window-header" style="border-bottom-color: var(--system-red);">
+                <span class="window-title" style="color: var(--system-red);"><i class="fa-solid fa-person-running"></i> MISSÕES FÍSICAS (TAF)</span>
             </div>
+            <p style="font-size: 0.78rem; color: #ddd; margin-bottom: 10px;">Cumpra suas metas hoje e ganhe bônus de XP e Pontos!</p>
 
-            <p class="text-xs font-mono text-slate-300 mb-3">Cumpra suas metas hoje e receba bônus de XP e Pontos!</p>
-
-            <div class="grid grid-cols-3 gap-2 text-center bg-slate-900/80 p-3 rounded border border-red-500/30 mb-4 font-mono">
+            <div class="taf-grid">
                 <div>
-                    <span class="text-[10px] text-slate-400 block">🏃 CORRIDA</span>
-                    <strong id="meta-distancia-km" class="text-base text-white">1</strong> <span class="text-xs text-slate-400">km</span>
+                    <span style="font-size: 0.68rem; color: #aaa; display: block;">🏃 CORRIDA</span>
+                    <strong id="meta-distancia-km" style="font-size: 1.1rem; color: #fff;">1</strong> km
                 </div>
                 <div>
-                    <span class="text-[10px] text-slate-400 block">💪 FLEXÕES</span>
-                    <strong id="meta-qtd-flexao" class="text-base text-white">10</strong> <span class="text-xs text-slate-400">rep</span>
+                    <span style="font-size: 0.68rem; color: #aaa; display: block;">💪 FLEXÕES</span>
+                    <strong id="meta-qtd-flexao" style="font-size: 1.1rem; color: #fff;">10</strong> rep
                 </div>
                 <div>
-                    <span class="text-[10px] text-slate-400 block">🧘 ABDOMINAIS</span>
-                    <strong id="meta-qtd-abdominal" class="text-base text-white">10</strong> <span class="text-xs text-slate-400">rep</span>
+                    <span style="font-size: 0.68rem; color: #aaa; display: block;">🧘 ABDOMINAIS</span>
+                    <strong id="meta-qtd-abdominal" style="font-size: 1.1rem; color: #fff;">10</strong> rep
                 </div>
             </div>
 
-            <div class="space-y-2 font-mono text-xs">
-                <button onclick="concluirMetaFisica('corrida', 120, 4)" id="btn-meta-corrida" class="w-full py-2.5 bg-red-600 hover:bg-red-500 text-white font-bold rounded shadow-neon-red transition uppercase">
-                    CUMPRIR CORRIDA (+120 XP)
-                </button>
-                <button onclick="concluirMetaFisica('flexao', 90, 3)" id="btn-meta-flexao" class="w-full py-2.5 bg-red-600 hover:bg-red-500 text-white font-bold rounded shadow-neon-red transition uppercase">
-                    CUMPRIR FLEXÃO (+90 XP)
-                </button>
-                <button onclick="concluirMetaFisica('abdominal', 90, 3)" id="btn-meta-abdominal" class="w-full py-2.5 bg-red-600 hover:bg-red-500 text-white font-bold rounded shadow-neon-red transition uppercase">
-                    CUMPRIR ABDOMINAL (+90 XP)
-                </button>
+            <div style="display: flex; flex-direction: column; gap: 6px;">
+                <button onclick="concluirMetaFisica('corrida', 120, 4)" class="btn-taf" id="btn-meta-corrida">CUMPRIR CORRIDA (+120 XP)</button>
+                <button onclick="concluirMetaFisica('flexao', 90, 3)" class="btn-taf" id="btn-meta-flexao">CUMPRIR FLEXÃO (+90 XP)</button>
+                <button onclick="concluirMetaFisica('abdominal', 90, 3)" class="btn-taf" id="btn-meta-abdominal">CUMPRIR ABDOMINAL (+90 XP)</button>
             </div>
-        </section>
+        </div>
 
         <!-- JANELA 3: MISSÕES DIÁRIAS CUSTOMIZADAS -->
-        <section class="system-border bg-slate-950/80 rounded-xl p-5 relative overflow-hidden">
-            <div class="flex justify-between items-center border-b border-cyan-500/30 pb-3 mb-4">
-                <div class="flex items-center gap-2">
-                    <i class="fa-solid fa-list-check text-cyan-400"></i>
-                    <h2 class="text-xs font-mono font-bold text-cyan-400 tracking-wider uppercase">MISSÕES CUSTOMIZADAS</h2>
-                </div>
+        <div class="system-window">
+            <div class="window-header">
+                <span class="window-title"><i class="fa-solid fa-scroll"></i> MISSÕES DIÁRIAS</span>
             </div>
-
-            <div class="flex gap-2 mb-4 font-mono text-xs">
-                <input type="text" id="customTaskInput" placeholder="Nova missão diária..." class="flex-1 bg-slate-900 border border-cyan-500/40 rounded px-3 py-2 text-white outline-none focus:border-cyan-400">
-                <button onclick="addCustomTask()" class="px-3 py-2 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded shadow">
-                    ADD
-                </button>
+            <div class="task-input-box">
+                <input type="text" id="customTaskInput" placeholder="Adicionar nova missão...">
+                <button onclick="addCustomTask()" style="background: var(--system-cyan); color: #000; border: none; font-weight: bold; padding: 0 12px; cursor: pointer;">ADD</button>
             </div>
-
-            <ul id="customTaskList" class="space-y-2 font-mono text-xs max-h-56 overflow-y-auto pr-1"></ul>
-        </section>
+            <ul class="task-list" id="customTaskList"></ul>
+        </div>
 
     </main>
 
-    <!-- ÁREA INFERIOR: SELEÇÃO DE DISCIPLINAS E JANELA DE QUESTÕES DA PMPE -->
-    <section class="max-w-6xl w-full mx-auto system-border bg-slate-950/80 rounded-xl p-5">
-        <div class="flex flex-wrap gap-2 mb-4 overflow-x-auto pb-2 font-mono text-xs border-b border-cyan-500/30">
-            <button class="tab-btn px-4 py-2 bg-cyan-500 text-slate-950 font-bold rounded shadow-neon-blue" onclick="switchTab('portugues', event)">Português (35)</button>
-            <button class="tab-btn px-4 py-2 bg-slate-900 hover:bg-slate-800 text-slate-300 rounded border border-slate-800" onclick="switchTab('racioc_logico', event)">Raciocínio Lógico (35)</button>
-            <button class="tab-btn px-4 py-2 bg-slate-900 hover:bg-slate-800 text-slate-300 rounded border border-slate-800" onclick="switchTab('constitucional', event)">Constitucional (35)</button>
-            <button class="tab-btn px-4 py-2 bg-slate-900 hover:bg-slate-800 text-slate-300 rounded border border-slate-800" onclick="switchTab('direitos_humanos', event)">Direitos Humanos (35)</button>
-            <button class="tab-btn px-4 py-2 bg-slate-900 hover:bg-slate-800 text-slate-300 rounded border border-slate-800" onclick="switchTab('historia', event)">História PE (35)</button>
-            <button class="tab-btn px-4 py-2 bg-slate-900 hover:bg-slate-800 text-slate-300 rounded border border-slate-800" onclick="switchTab('informatica', event)">Informática (35)</button>
-        </div>
+    <!-- ÁREA DE QUESTÕES DA PMPE DA DISCIPLINA ATIVA -->
+    <section class="system-window section-questoes">
+        <nav class="nav-tabs">
+            <button class="tab-btn active" onclick="switchTab('portugues', event)">Português (35)</button>
+            <button class="tab-btn" onclick="switchTab('racioc_logico', event)">Raciocínio Lógico (35)</button>
+            <button class="tab-btn" onclick="switchTab('constitucional', event)">Constitucional (35)</button>
+            <button class="tab-btn" onclick="switchTab('direitos_humanos', event)">Direitos Humanos (35)</button>
+            <button class="tab-btn" onclick="switchTab('historia', event)">História PE (35)</button>
+            <button class="tab-btn" onclick="switchTab('informatica', event)">Informática (35)</button>
+        </nav>
 
-        <div class="text-center py-6 bg-slate-900/60 rounded border border-dashed border-cyan-500/40">
-            <h3 id="titulo-materia-ativa" class="text-sm font-mono font-bold text-cyan-400 tracking-wider uppercase mb-2">DISCIPLINA ATIVA: PORTUGUÊS</h3>
-            <p class="text-xs font-mono text-slate-400 mb-4">Clique no botão para abrir o balão místico de questões estilo game:</p>
-            <button onclick="abrirModalQuestao()" class="px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-mono font-black text-xs tracking-wider uppercase rounded shadow-neon-blue transition">
-                ⚔️ ABRIR JANELA HOLOGRÁFICA
-            </button>
+        <div style="background: rgba(2, 6, 16, 0.8); border: 2px dashed var(--system-cyan); padding: 24px; text-align: center;">
+            <h3 id="titulo-materia-ativa" style="color: var(--system-cyan); font-family: monospace; letter-spacing: 1px; margin-bottom: 6px;">DISCIPLINA ATIVA: PORTUGUÊS</h3>
+            <p style="font-size: 0.85rem; color: var(--text-sub); margin-bottom: 14px;">Abra a Janela Mística Holográfica para resolver as questões da missão.</p>
+            <button class="btn-abrir-pop" onclick="abrirModalQuestao()">⚔️ ABRIR JANELA DO SISTEMA</button>
         </div>
     </section>
 
-    <!-- MODAL DE DISTRIBUIÇÃO RÁPIDA DE ATRIBUTOS -->
-    <div id="stat-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
-        <div class="system-border bg-slate-950 w-full max-w-md rounded-xl p-6 relative font-mono">
-            <h3 class="text-sm font-bold text-cyan-400 mb-2 border-b border-cyan-500/30 pb-2">
-                [DISTRIBUIÇÃO DE STATUS]
-            </h3>
-            <p class="text-xs text-slate-300 mb-4">
-                Pontos disponíveis: <span id="modal-available-points" class="text-yellow-400 font-bold text-sm">0</span>
-            </p>
-
-            <div class="space-y-3 mb-6 text-xs">
-                <div class="flex items-center justify-between bg-slate-900 p-2.5 rounded border border-slate-800">
-                    <span>⚡ FORÇA</span>
-                    <button onclick="adicionarPontoManual('forca')" class="px-3 py-1 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded">+</button>
-                </div>
-                <div class="flex items-center justify-between bg-slate-900 p-2.5 rounded border border-slate-800">
-                    <span>💨 VELOCIDADE</span>
-                    <button onclick="adicionarPontoManual('velocidade')" class="px-3 py-1 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded">+</button>
-                </div>
-                <div class="flex items-center justify-between bg-slate-900 p-2.5 rounded border border-slate-800">
-                    <span>🔮 MANA</span>
-                    <button onclick="adicionarPontoManual('mana')" class="px-3 py-1 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded">+</button>
-                </div>
-                <div class="flex items-center justify-between bg-slate-900 p-2.5 rounded border border-slate-800">
-                    <span>🔥 AURA</span>
-                    <button onclick="adicionarPontoManual('aura')" class="px-3 py-1 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded">+</button>
-                </div>
-            </div>
-
-            <button onclick="fecharStatModal()" class="w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold rounded border border-slate-700">
-                FECHAR
-            </button>
-        </div>
-    </div>
-
-    <!-- LOGIC JAVASCRIPT INTEGRADA -->
     <script>
         const memoriaLocal = {};
         function getSafeStorage(key) {
-            try {
-                return localStorage.getItem(key) || memoriaLocal[key] || null;
-            } catch(e) {
-                return memoriaLocal[key] || null;
-            }
+            try { return localStorage.getItem(key) || memoriaLocal[key] || null; } catch(e) { return memoriaLocal[key] || null; }
         }
-
         function setSafeStorage(key, value) {
-            try {
-                localStorage.setItem(key, value);
-            } catch(e) {}
+            try { localStorage.setItem(key, value); } catch(e) {}
             memoriaLocal[key] = value;
         }
 
         let dadosCacadorRPG = JSON.parse(getSafeStorage('sistema_cacador_god_rpg_200')) || {
-            nome: 'GOD',
-            xp: 0,
-            nivel: 1,
-            pontosDisponiveis: 5,
-            forca: 10,
-            velocidade: 10,
-            mana: 10,
-            aura: 10
+            nome: 'GOD', xp: 0, nivel: 1, pontosDisponiveis: 5, forca: 10, velocidade: 10, mana: 10, aura: 10
         };
 
         let customTasks = JSON.parse(getSafeStorage('sistema_cacador_custom_tasks')) || [
@@ -388,11 +542,7 @@
             { id: 2, text: "Treino TAF Intenso", completed: false }
         ];
 
-        let metasFisicasStatus = JSON.parse(getSafeStorage('sistema_cacador_metas_god')) || {
-            ultimaData: '',
-            concluidas: []
-        };
-
+        let metasFisicasStatus = JSON.parse(getSafeStorage('sistema_cacador_metas_god')) || { ultimaData: '', concluidas: [] };
         let respostasRespondidas = JSON.parse(getSafeStorage('sistema_cacador_respostas')) || {};
         let abaAtual = 'portugues';
         let questaoIndexAtual = 0;
@@ -425,7 +575,7 @@
             for(let i = atual + 1; i <= 35; i++) {
                 bancoQuestoes[mat].push({
                     id: `${mat}_${i}`,
-                    pergunta: `[SISTEMA PMPE 2026 - ${mat.toUpperCase()}] QUESTÃO #${i}: Analise a afirmativa legal/doutrinária do edital e selecione a alternativa correta:`,
+                    pergunta: `[SISTEMA PMPE 2026 - ${mat.toUpperCase()}] QUESTÃO #${i}: Analise a afirmativa legal/doutrinária da disciplina e selecione a alternativa correta:`,
                     opcoes: [
                         `A) Hipótese em conformidade integral com o edital para a questão #${i}.`,
                         `B) Conceito incorreto com violação aos ditames da doutrina.`,
@@ -477,12 +627,8 @@
         function switchTab(materia, evt) {
             abaAtual = materia;
             questaoIndexAtual = 0;
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.className = "tab-btn px-4 py-2 bg-slate-900 hover:bg-slate-800 text-slate-300 rounded border border-slate-800";
-            });
-            if (evt && evt.target) {
-                evt.target.className = "tab-btn px-4 py-2 bg-cyan-500 text-slate-950 font-bold rounded shadow-neon-blue";
-            }
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            if (evt && evt.target) evt.target.classList.add('active');
             document.getElementById('titulo-materia-ativa').innerText = `DISCIPLINA ATIVA: ${materia.toUpperCase().replace('_', ' ')}`;
         }
 
@@ -511,18 +657,13 @@
             const respSalva = respostasRespondidas[q.id];
 
             q.opcoes.forEach((op, opIdx) => {
-                let btnClass = "w-full text-left p-3 rounded border transition bg-slate-900 border-slate-800 hover:border-cyan-500 text-slate-200";
-                
+                let classeOp = '';
                 if (respSalva !== undefined) {
-                    if (opIdx === q.correta) {
-                        btnClass = "w-full text-left p-3 rounded border bg-emerald-950/80 border-emerald-500 text-emerald-300 font-bold";
-                    } else if (opIdx === respSalva && respSalva !== q.correta) {
-                        btnClass = "w-full text-left p-3 rounded border bg-red-950/80 border-red-500 text-red-300";
-                    }
+                    if (opIdx === q.correta) classeOp = 'correct';
+                    else if (opIdx === respSalva && respSalva !== q.correta) classeOp = 'wrong';
                 }
-
                 const btn = document.createElement('button');
-                btn.className = btnClass;
+                btn.className = classeOp;
                 if (respSalva !== undefined) btn.disabled = true;
                 btn.innerText = op;
                 btn.onclick = () => responderGameQuestao(q.id, opIdx);
@@ -583,8 +724,6 @@
             }
 
             document.getElementById('display-pontos-disponiveis').innerText = dadosCacadorRPG.pontosDisponiveis;
-            document.getElementById('modal-available-points').innerText = dadosCacadorRPG.pontosDisponiveis;
-            
             document.getElementById('atrib-forca').innerText = dadosCacadorRPG.forca;
             document.getElementById('atrib-velocidade').innerText = dadosCacadorRPG.velocidade;
             document.getElementById('atrib-mana').innerText = dadosCacadorRPG.mana;
@@ -600,14 +739,6 @@
             }
         }
 
-        function distribuirAtributosModal() {
-            document.getElementById('stat-modal').classList.add('modal-active');
-        }
-
-        function fecharStatModal() {
-            document.getElementById('stat-modal').classList.remove('modal-active');
-        }
-
         function calcularMetasDoNivel() {
             let nivel = dadosCacadorRPG.nivel || 1;
             document.getElementById('meta-distancia-km').innerText = Math.min(10, Math.max(1, nivel));
@@ -621,10 +752,10 @@
             list.innerHTML = '';
             customTasks.forEach(t => {
                 const li = document.createElement('li');
-                li.className = `p-2.5 rounded border flex justify-between items-center ${t.completed ? 'bg-slate-900/40 border-emerald-500/30 text-slate-500 line-through' : 'bg-slate-900 border-slate-800 text-slate-200'}`;
+                li.className = `task-item ${t.completed ? 'completed' : ''}`;
                 li.innerHTML = `
                     <span>${t.text}</span>
-                    <button class="px-2.5 py-1 text-[10px] font-bold rounded ${t.completed ? 'bg-emerald-950 text-emerald-400' : 'bg-emerald-600 hover:bg-emerald-500 text-slate-950'}" ${t.completed ? 'disabled' : ''} onclick="cumprirCustomTask(${t.id})">
+                    <button style="background: #10b981; color: #fff; border: none; padding: 4px 8px; font-weight: bold; cursor: pointer;" ${t.completed ? 'disabled' : ''} onclick="cumprirCustomTask(${t.id})">
                         ${t.completed ? 'CUMPRIDA' : 'CUMPRIR'}
                     </button>
                 `;
