@@ -552,3 +552,406 @@ Comando do Caçador: ${userMsg}`;
     </script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Caçador & PMPE 2026</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --accent: #38bdf8;
+            --text-color: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        header h1 {
+            color: var(--accent);
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+        .nav-tabs {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+            padding: 15px 0;
+            white-space: nowrap;
+        }
+        .tab-btn {
+            background-color: var(--card-bg);
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        .tab-btn.active {
+            background-color: var(--accent);
+            color: var(--bg-color);
+            border-color: var(--accent);
+        }
+        .tab-content {
+            display: none;
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            margin-top: 15px;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .quest-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        .options button {
+            display: block;
+            width: 100%;
+            text-align: left;
+            background: var(--card-bg);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            margin-top: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .options button:hover {
+            border-color: var(--accent);
+        }
+        .status-bar {
+            background: var(--card-bg);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 1px solid var(--accent);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>SISTEMA DE CAÇADOR - PMPE 2026</h1>
+            <p>Foco Total na Aprovação | Delegação Tática</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Barra de Status do Caçador -->
+        <div class="status-bar">
+            <div>
+                <strong>NÍVEL: <span id="nivel-atual">1</span></strong>
+            </div>
+            <div>
+                <strong>XP: <span id="xp-atual">0</span> / 100</strong>
+            </div>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="tab-btn active" onclick="switchTab('constitucional', event)">Constitucional</button>
+            <button class="tab-btn" onclick="switchTab('direitos-humanos', event)">Direitos Humanos</button>
+            <button class="tab-btn" onclick="switchTab('historia', event)">História de PE</button>
+            <button class="tab-btn" onclick="switchTab('informatica', event)">Informática</button>
+            <button class="tab-btn" onclick="switchTab('portugues', event)">Português</button>
+        </nav>
+
+        <!-- Seções de Matérias -->
+        <section id="constitucional" class="tab-content active">
+            <h2>Direito Constitucional</h2>
+            <div class="quest-card">
+                <p><strong>Questão 1:</strong> Sobre os Direitos e Garantias Fundamentais na Constituição Federal de 1988, assinale a alternativa correta:</p>
+                <div class="options">
+                    <button onclick="responder(false)">A) A prática do racismo constitui crime inafiançável e imprescritível.</button>
+                    <button onclick="responder(true)">B) É livre a expressão da atividade intelectual, artística, científica e de comunicação, independentemente de censura ou licença.</button>
+                    <button onclick="responder(false)">C) As associações não podem ter suas atividades suspensas por decisão judicial.</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="direitos-humanos" class="tab-content">
+            <h2>Direitos Humanos</h2>
+            <p>Módulo de Direitos Humanos em carregamento tático...</p>
+        </section>
+
+        <section id="historia" class="tab-content">
+            <h2>História de Pernambuco</h2>
+            <p>Módulo de História de Pernambuco em carregamento tático...</p>
+        </section>
+
+        <section id="informatica" class="tab-content">
+            <h2>Informática</h2>
+            <p>Módulo de Informática em carregamento tático...</p>
+        </section>
+
+        <section id="portugues" class="tab-content">
+            <h2>Língua Portuguesa</h2>
+            <p>Módulo de Língua Portuguesa em carregamento tático...</p>
+        </section>
+    </main>
+
+    <script>
+        let xp = parseInt(localStorage.getItem('hunter_xp')) || 0;
+        let nivel = parseInt(localStorage.getItem('hunter_nivel')) || 1;
+
+        function atualizarUI() {
+            document.getElementById('xp-atual').innerText = xp;
+            document.getElementById('nivel-atual').innerText = nivel;
+        }
+
+        function switchTab(tabId, event) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        function responder(correto) {
+            if (correto) {
+                xp += 20;
+                alert("Respostas corretas! +20 XP de Caçador adquirido.");
+                if (xp >= 100) {
+                    xp = 0;
+                    nivel += 1;
+                    alert("LEVEL UP! Subiste para o Nível " + nivel + "!");
+                }
+                localStorage.setItem('hunter_xp', xp);
+                localStorage.setItem('hunter_nivel', nivel);
+                atualizarUI();
+            } else {
+                alert("Resposta incorreta. O Sistema penaliza a falha. Tenta novamente!");
+            }
+        }
+
+        atualizarUI();
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Caçador & PMPE 2026</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --accent: #38bdf8;
+            --text-color: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        header h1 {
+            color: var(--accent);
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+        .nav-tabs {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+            padding: 15px 0;
+            white-space: nowrap;
+        }
+        .tab-btn {
+            background-color: var(--card-bg);
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        .tab-btn.active {
+            background-color: var(--accent);
+            color: var(--bg-color);
+            border-color: var(--accent);
+        }
+        .tab-content {
+            display: none;
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            margin-top: 15px;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .quest-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        .options button {
+            display: block;
+            width: 100%;
+            text-align: left;
+            background: var(--card-bg);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            margin-top: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .options button:hover {
+            border-color: var(--accent);
+        }
+        .status-bar {
+            background: var(--card-bg);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 1px solid var(--accent);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>SISTEMA DE CAÇADOR - PMPE 2026</h1>
+            <p>Foco Total na Aprovação | Delegação Tática</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Barra de Status do Caçador -->
+        <div class="status-bar">
+            <div>
+                <strong>NÍVEL: <span id="nivel-atual">1</span></strong>
+            </div>
+            <div>
+                <strong>XP: <span id="xp-atual">0</span> / 100</strong>
+            </div>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="tab-btn active" onclick="switchTab('constitucional', event)">Constitucional</button>
+            <button class="tab-btn" onclick="switchTab('direitos-humanos', event)">Direitos Humanos</button>
+            <button class="tab-btn" onclick="switchTab('historia', event)">História de PE</button>
+            <button class="tab-btn" onclick="switchTab('informatica', event)">Informática</button>
+            <button class="tab-btn" onclick="switchTab('portugues', event)">Português</button>
+        </nav>
+
+        <!-- Seções de Matérias -->
+        <section id="constitucional" class="tab-content active">
+            <h2>Direito Constitucional</h2>
+            <div class="quest-card">
+                <p><strong>Questão 1:</strong> Sobre os Direitos e Garantias Fundamentais na Constituição Federal de 1988, assinale a alternativa correta:</p>
+                <div class="options">
+                    <button onclick="responder(false)">A) A prática do racismo constitui crime inafiançável e imprescritível.</button>
+                    <button onclick="responder(true)">B) É livre a expressão da atividade intelectual, artística, científica e de comunicação, independentemente de censura ou licença.</button>
+                    <button onclick="responder(false)">C) As associações não podem ter suas atividades suspensas por decisão judicial.</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="direitos-humanos" class="tab-content">
+            <h2>Direitos Humanos</h2>
+            <p>Módulo de Direitos Humanos em carregamento tático...</p>
+        </section>
+
+        <section id="historia" class="tab-content">
+            <h2>História de Pernambuco</h2>
+            <p>Módulo de História de Pernambuco em carregamento tático...</p>
+        </section>
+
+        <section id="informatica" class="tab-content">
+            <h2>Informática</h2>
+            <p>Módulo de Informática em carregamento tático...</p>
+        </section>
+
+        <section id="portugues" class="tab-content">
+            <h2>Língua Portuguesa</h2>
+            <p>Módulo de Língua Portuguesa em carregamento tático...</p>
+        </section>
+    </main>
+
+    <script>
+        let xp = parseInt(localStorage.getItem('hunter_xp')) || 0;
+        let nivel = parseInt(localStorage.getItem('hunter_nivel')) || 1;
+
+        function atualizarUI() {
+            document.getElementById('xp-atual').innerText = xp;
+            document.getElementById('nivel-atual').innerText = nivel;
+        }
+
+        function switchTab(tabId, event) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        function responder(correto) {
+            if (correto) {
+                xp += 20;
+                alert("Respostas corretas! +20 XP de Caçador adquirido.");
+                if (xp >= 100) {
+                    xp = 0;
+                    nivel += 1;
+                    alert("LEVEL UP! Subiste para o Nível " + nivel + "!");
+                }
+                localStorage.setItem('hunter_xp', xp);
+                localStorage.setItem('hunter_nivel', nivel);
+                atualizarUI();
+            } else {
+                alert("Resposta incorreta. O Sistema penaliza a falha. Tenta novamente!");
+            }
+        }
+
+        atualizarUI();
+    </script>
+</body>
+</html>
+
