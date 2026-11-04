@@ -3,21 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sistema de Caçador & PMPE 2026</title>
+<title>Sistema de Caçador & PMPE 2026 - God Mode</title>
 <style>
 :root {
---bg-color: #0f172a;
---card-bg: #1e293b;
+--bg-color: #0b0f19;
+--card-bg: #161e2e;
 --accent-color: #3b82f6;
 --accent-hover: #2563eb;
 --text-color: #f8fafc;
 --text-secondary: #94a3b8;
---border-color: #334155;
+--border-color: #2a3749;
 --success: #10b981;
 --error: #ef4444;
 --ai-glow: #8b5cf6;
 --system-blue: #00d2ff;
 --warning: #f59e0b;
+--god-gold: #ffd700;
 }
 * {
 box-sizing: border-box;
@@ -29,64 +30,37 @@ body {
 background-color: var(--bg-color);
 color: var(--text-color);
 display: flex;
-justify-content: center;
-min-height: 100vh;
-padding: 16px;
-background-image: radial-gradient(circle at 50% 0%, rgba(0, 210, 255, 0.1) 0%, transparent 70%);
-}
-.container {
-width: 100%;
-max-width: 800px;
-background-color: var(--card-bg);
-border-radius: 16px;
-padding: 20px;
-box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 15px rgba(0, 210, 255, 0.1);
-border: 1px solid var(--border-color);
-display: flex;
 flex-direction: column;
-gap: 20px;
+align-items: center;
+min-height: 100vh;
+padding: 0 0 40px 0;
+background-image: radial-gradient(circle at 50% 0%, rgba(0, 210, 255, 0.12) 0%, transparent 70%);
 }
-header {
-border-bottom: 1px solid var(--border-color);
-padding-bottom: 16px;
-text-align: center;
-}
-header h1 {
-font-size: 1.4rem;
-color: var(--system-blue);
-text-transform: uppercase;
-letter-spacing: 1px;
-text-shadow: 0 0 10px rgba(0, 210, 255, 0.3);
-}
-header p {
-color: var(--text-secondary);
-font-size: 0.85rem;
-margin-top: 4px;
-}
-/* Banner Fixo de Missões Físicas */
+/* Banner Fixo no Topo */
 .banner-fixo-despertar {
 width: 100%;
-background: linear-gradient(135deg, #1b0000, #2c0b0e);
-border: 2px solid #ff4757;
-border-radius: 12px;
-padding: 16px;
-box-shadow: 0 10px 25px rgba(255, 71, 87, 0.3);
-color: #fff;
+background: linear-gradient(135deg, #180505, #2c0b0e);
+border-bottom: 3px solid #ff4757;
+padding: 14px 16px;
+box-shadow: 0 10px 25px rgba(255, 71, 87, 0.35);
+z-index: 900;
 box-sizing: border-box;
 }
 .alerta-sedentarismo-header {
 display: flex;
 align-items: center;
-gap: 12px;
-margin-bottom: 12px;
+justify-content: center;
+gap: 10px;
+margin-bottom: 10px;
+text-align: center;
 }
 .icone-alerta {
-font-size: 2rem;
+font-size: 1.8rem;
 animation: pulsoFogo 1.5s infinite alternate;
 }
 .alerta-sedentarismo-header h2 {
 margin: 0;
-font-size: 1.2rem;
+font-size: 1.1rem;
 color: #ff4757;
 letter-spacing: 1px;
 text-transform: uppercase;
@@ -100,12 +74,15 @@ color: #ddd;
 display: grid;
 grid-template-columns: 1fr 1fr 1fr;
 gap: 8px;
-background: rgba(0, 0, 0, 0.4);
+background: rgba(0, 0, 0, 0.5);
 padding: 10px;
 border-radius: 8px;
 border: 1px solid #ff4757;
-margin-bottom: 12px;
+margin-bottom: 10px;
 text-align: center;
+max-width: 800px;
+margin-left: auto;
+margin-right: auto;
 }
 .meta-item-rapido {
 display: flex;
@@ -121,6 +98,8 @@ margin-top: 2px;
 .botoes-acao-fixos {
 display: flex;
 gap: 6px;
+max-width: 800px;
+margin: 0 auto;
 }
 .botoes-acao-fixos button {
 flex: 1;
@@ -128,46 +107,117 @@ padding: 10px 4px;
 border: none;
 border-radius: 6px;
 font-weight: bold;
-font-size: 0.7rem;
+font-size: 0.75rem;
 cursor: pointer;
 color: #fff;
 background: #ff4757;
 transition: transform 0.1s, background 0.2s;
 text-transform: uppercase;
 }
-.botoes-acao-fixos button:disabled {
-background: #333 !important;
-color: #777 !important;
-cursor: not-allowed;
+.botoes-acao-fixos button:active { transform: scale(0.95); }
+.botoes-acao-fixos button:disabled { background: #333 !important; color: #777 !important; cursor: not-allowed; }
+.container {
+width: 100%;
+max-width: 850px;
+background-color: var(--card-bg);
+border-radius: 16px;
+padding: 20px;
+margin-top: 20px;
+box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 15px rgba(0, 210, 255, 0.1);
+border: 1px solid var(--border-color);
+display: flex;
+flex-direction: column;
+gap: 20px;
 }
-@keyframes pulsoFogo {
-from { transform: scale(1); filter: drop-shadow(0 0 2px #ff4757); }
-to { transform: scale(1.15); filter: drop-shadow(0 0 10px #ff4757); }
+header {
+border-bottom: 1px solid var(--border-color);
+padding-bottom: 16px;
+text-align: center;
+position: relative;
 }
+header h1 {
+font-size: 1.4rem;
+color: var(--system-blue);
+text-transform: uppercase;
+letter-spacing: 1px;
+text-shadow: 0 0 10px rgba(0, 210, 255, 0.3);
+}
+header p {
+color: var(--text-secondary);
+font-size: 0.85rem;
+margin-top: 4px;
+}
+.badge-god {
+background: linear-gradient(90deg, #ffd700, #ff8c00);
+color: #000;
+font-weight: bold;
+padding: 2px 8px;
+border-radius: 4px;
+font-size: 0.75rem;
+margin-left: 6px;
+display: inline-block;
+box-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
+}
+/* Painel Admin GOD */
+.admin-panel {
+display: none;
+background: rgba(255, 215, 0, 0.08);
+border: 1px solid var(--god-gold);
+border-radius: 10px;
+padding: 12px;
+margin-bottom: 10px;
+}
+.admin-panel h4 {
+color: var(--god-gold);
+font-size: 0.9rem;
+margin-bottom: 8px;
+display: flex;
+align-items: center;
+gap: 6px;
+}
+.admin-btns {
+display: flex;
+gap: 8px;
+flex-wrap: wrap;
+}
+.admin-btns button {
+background: var(--god-gold);
+color: #000;
+border: none;
+padding: 6px 12px;
+border-radius: 6px;
+font-size: 0.75rem;
+font-weight: bold;
+cursor: pointer;
+transition: opacity 0.2s;
+}
+.admin-btns button:hover { opacity: 0.85; }
 /* Status & RPG HUD */
 .painel-status-cacador {
-background: linear-gradient(135deg, #121212, #1f1f1f);
-border: 2px solid #e74c3c;
+background: linear-gradient(135deg, #0d131f, #151d2a);
+border: 2px solid var(--system-blue);
 border-radius: 14px;
-padding: 20px;
+padding: 16px;
 color: #fff;
-box-shadow: 0 8px 25px rgba(231, 76, 60, 0.25);
+box-shadow: 0 8px 25px rgba(0, 210, 255, 0.15);
 }
 .status-header {
 display: flex;
 justify-content: space-between;
 align-items: center;
-margin-bottom: 12px;
+margin-bottom: 10px;
 }
 .status-header h3 {
 margin: 0;
-font-size: 1.2rem;
-color: #ff4757;
+font-size: 1.1rem;
+color: var(--system-blue);
 letter-spacing: 1px;
+display: flex;
+align-items: center;
 }
 .badge-nivel {
-background: #e74c3c;
-color: #fff;
+background: var(--system-blue);
+color: #000;
 padding: 4px 10px;
 border-radius: 6px;
 font-size: 0.85rem;
@@ -176,206 +226,262 @@ font-weight: bold;
 .status-barra-xp {
 width: 100%;
 height: 10px;
-background: #2a2a2a;
+background: #1e293b;
 border-radius: 5px;
 overflow: hidden;
 margin-bottom: 5px;
+border: 1px solid var(--border-color);
 }
 #barra-progresso-xp {
 height: 100%;
-background: linear-gradient(90deg, #e74c3c, #f39c12);
+background: linear-gradient(90deg, var(--system-blue), #3b82f6);
 width: 0%;
 transition: width 0.4s ease-in-out;
 }
 .status-info-xp {
 font-size: 0.8rem;
-color: #aaa;
+color: var(--text-secondary);
 text-align: right;
-margin-bottom: 15px;
+margin-bottom: 12px;
 }
 .caixa-pontos-disponiveis {
-background: rgba(46, 204, 113, 0.15);
-border: 1px solid #2ecc71;
-color: #2ecc71;
+background: rgba(16, 185, 129, 0.15);
+border: 1px solid var(--success);
+color: var(--success);
 padding: 8px 12px;
 border-radius: 8px;
-text-align: center;
 font-size: 0.85rem;
-margin-bottom: 15px;
+margin-bottom: 12px;
 display: flex;
 justify-content: space-between;
 align-items: center;
 }
-.caixa-pontos-disponiveis strong {
-font-size: 1.2rem;
-color: #fff;
-}
+.caixa-pontos-disponiveis strong { font-size: 1.1rem; color: #fff; }
 .status-grid {
 display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 10px;
+grid-template-columns: 1fr 1fr 1fr 1fr;
+gap: 8px;
+}
+@media (max-width: 600px) {
+.status-grid { grid-template-columns: 1fr 1fr; }
 }
 .atributo-item {
-background: #181818;
-border: 1px solid #333;
+background: #0f172a;
+border: 1px solid var(--border-color);
 padding: 10px;
 border-radius: 8px;
 display: flex;
 flex-direction: column;
 align-items: center;
 position: relative;
-padding-bottom: 35px;
+padding-bottom: 34px;
 }
 .atrib-nome {
-font-size: 0.75rem;
-color: #888;
+font-size: 0.7rem;
+color: var(--text-secondary);
 margin-bottom: 4px;
 font-weight: bold;
 }
 .atrib-valor {
-font-size: 1.2rem;
+font-size: 1.1rem;
 color: #fff;
 font-weight: bold;
 }
 .btn-adicionar-ponto {
 position: absolute;
-bottom: 6px;
-background: #2ecc71;
-color: #111;
+bottom: 5px;
+background: var(--success);
+color: #000;
 border: none;
 width: 80%;
-height: 24px;
+height: 22px;
 border-radius: 4px;
 font-weight: bold;
-font-size: 1rem;
+font-size: 0.9rem;
 cursor: pointer;
 transition: all 0.2s;
 display: flex;
 justify-content: center;
 align-items: center;
 }
-.btn-adicionar-ponto:hover { background: #27ae60; color: #fff; }
-.btn-adicionar-ponto:disabled { background: #333; color: #555; cursor: not-allowed; opacity: 0.5; }
-/* Login Modal */
+.btn-adicionar-ponto:hover { background: #059669; color: #fff; }
+.btn-adicionar-ponto:disabled { background: #334155; color: #64748b; cursor: not-allowed; opacity: 0.5; }
+/* Abas */
+.nav-tabs {
+display: flex;
+gap: 8px;
+overflow-x: auto;
+padding-bottom: 5px;
+white-space: nowrap;
+scrollbar-width: thin;
+}
+.tab-btn {
+background-color: var(--bg-color);
+color: var(--text-secondary);
+border: 1px solid var(--border-color);
+padding: 10px 14px;
+border-radius: 8px;
+cursor: pointer;
+font-weight: 600;
+font-size: 0.85rem;
+flex-shrink: 0;
+transition: all 0.2s;
+}
+.tab-btn.active {
+background-color: var(--system-blue);
+color: var(--bg-color);
+border-color: var(--system-blue);
+}
+.tab-content {
+display: none;
+flex-direction: column;
+gap: 15px;
+}
+.tab-content.active { display: flex; }
+/* Questões */
+.quest-card {
+background: rgba(15, 23, 42, 0.7);
+border: 1px solid var(--border-color);
+padding: 16px;
+border-radius: 10px;
+margin-bottom: 12px;
+}
+.quest-card h4 {
+color: var(--system-blue);
+margin-bottom: 8px;
+font-size: 0.9rem;
+}
+.quest-card p {
+font-size: 0.95rem;
+line-height: 1.4;
+margin-bottom: 12px;
+}
+.options {
+display: flex;
+flex-direction: column;
+gap: 8px;
+}
+.options button {
+width: 100%;
+text-align: left;
+background: var(--card-bg);
+color: var(--text-color);
+border: 1px solid var(--border-color);
+padding: 12px;
+border-radius: 8px;
+font-size: 0.9rem;
+cursor: pointer;
+transition: all 0.2s ease;
+}
+.options button:hover:not(:disabled) {
+border-color: var(--system-blue);
+background: rgba(0, 210, 255, 0.05);
+}
+.options button:disabled { cursor: default; opacity: 0.85; }
+.feedback-box {
+margin-top: 10px;
+padding: 10px;
+border-radius: 6px;
+font-size: 0.85rem;
+display: none;
+}
+/* Missões Diárias de Combate */
+.painel-missoes-diarias {
+background: linear-gradient(135deg, #141414, #1d1d1d);
+border: 2px solid #f39c12;
+border-radius: 14px;
+padding: 16px;
+color: #fff;
+box-shadow: 0 8px 25px rgba(243, 156, 18, 0.15);
+}
+.missoes-header { text-align: center; margin-bottom: 12px; }
+.missoes-header h3 { margin: 0; font-size: 1.1rem; color: #f39c12; letter-spacing: 1px; }
+.sub-titulo-missoes { font-size: 0.75rem; color: #888; }
+.lista-missoes { display: flex; flex-direction: column; gap: 10px; }
+.missao-card {
+background: #1a1a1a;
+border: 1px solid #333;
+padding: 12px;
+border-radius: 8px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+.missao-info { display: flex; flex-direction: column; gap: 3px; }
+.missao-titulo { font-size: 0.85rem; font-weight: bold; color: #fff; }
+.missao-recompensa { font-size: 0.75rem; color: #f39c12; }
+.missao-card button {
+background: #f39c12;
+color: #111;
+border: none;
+padding: 8px 12px;
+border-radius: 6px;
+font-weight: bold;
+font-size: 0.75rem;
+cursor: pointer;
+}
+.missao-card button:disabled { background: #333; color: #777; cursor: not-allowed; }
+/* Login e Auth Overlay */
 .login-overlay {
 position: fixed;
 top: 0; left: 0;
 width: 100vw; height: 100vh;
-background: #0b0b0b;
+background: rgba(5, 8, 15, 0.96);
+backdrop-filter: blur(8px);
 display: flex;
 justify-content: center;
 align-items: center;
 z-index: 99999;
 }
 .login-caixa {
-background: #161616;
-border: 2px solid #e74c3c;
+background: #121926;
+border: 2px solid var(--system-blue);
 padding: 30px;
-border-radius: 14px;
+border-radius: 16px;
 text-align: center;
 width: 90%;
-max-width: 380px;
-box-shadow: 0 10px 30px rgba(231, 76, 60, 0.3);
+max-width: 390px;
+box-shadow: 0 10px 35px rgba(0, 210, 255, 0.25);
 }
-.login-caixa h2 { color: #fff; font-size: 1.4rem; margin-bottom: 10px; }
-.login-caixa p { color: #aaa; font-size: 0.9rem; margin-bottom: 20px; }
+.login-caixa h2 { color: var(--system-blue); font-size: 1.3rem; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
+.login-caixa p { color: #aaa; font-size: 0.85rem; margin-bottom: 20px; }
 .login-caixa input {
-width: 100%; padding: 12px; background: #222; border: 1px solid #444;
-color: #fff; border-radius: 8px; font-size: 1rem; margin-bottom: 20px;
-text-align: center; outline: none;
+width: 100%; padding: 12px; background: #0b0f19; border: 1px solid var(--border-color);
+color: #fff; border-radius: 8px; font-size: 0.95rem; margin-bottom: 12px;
+text-align: center; outline: none; transition: border-color 0.2s;
 }
+.login-caixa input:focus { border-color: var(--system-blue); }
 .login-caixa button {
-width: 100%; padding: 12px; background: #e74c3c; color: #fff;
-border: none; border-radius: 8px; font-weight: bold; font-size: 1rem; cursor: pointer;
+width: 100%; padding: 12px; background: var(--system-blue); color: #000;
+border: none; border-radius: 8px; font-weight: bold; font-size: 0.95rem; cursor: pointer;
+margin-top: 6px; transition: background 0.2s;
 }
-/* Notificações & Perigo */
+/* Notificações e Perigo Modal */
 .missao-surpresa-balao {
 position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
 background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
 border: 2px solid #e74c3c; color: #fff; padding: 15px 20px;
 border-radius: 12px; box-shadow: 0 10px 25px rgba(231, 76, 60, 0.4);
-z-index: 9999; width: 90%; max-width: 400px;
+z-index: 9999; width: 90%; max-width: 400px; animation: slideDown 0.5s ease-out;
 }
 .alerta-perigo-overlay {
 position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-background: rgba(231, 76, 60, 0.85); display: flex; flex-direction: column;
-justify-content: center; align-items: center; z-index: 10000;
+background: rgba(231, 76, 60, 0.88); display: flex; flex-direction: column;
+justify-content: center; align-items: center; z-index: 10000; animation: fadeIn 0.2s ease-in-out;
 }
 .alerta-perigo-caixa {
-background: #111; border: 4px solid #fff; padding: 30px; border-radius: 16px;
-text-align: center; color: #ff4757; box-shadow: 0 0 50px rgba(0,0,0,0.8); max-width: 90%;
+background: #111; border: 4px solid #fff; padding: 30px;
+border-radius: 16px; text-align: center; color: #ff4757;
+box-shadow: 0 0 50px rgba(0,0,0,0.8); max-width: 90%;
 }
-.api-config {
-background: rgba(139, 92, 246, 0.1);
-border: 1px solid var(--ai-glow);
-padding: 12px;
-border-radius: 8px;
-font-size: 0.85rem;
-}
-.api-config input {
-width: 100%; padding: 8px; margin-top: 6px; border-radius: 6px;
-border: 1px solid var(--border-color); background: var(--bg-color);
-color: var(--text-color); outline: none;
-}
-.nav-tabs {
-display: flex; gap: 8px; overflow-x: auto; padding-bottom: 5px;
-white-space: nowrap; scrollbar-width: thin;
-}
-.tab-btn {
-background-color: var(--bg-color); color: var(--text-secondary);
-border: 1px solid var(--border-color); padding: 10px 14px;
-border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.85rem;
-flex-shrink: 0; transition: all 0.2s;
-}
-.tab-btn.active {
-background-color: var(--system-blue); color: var(--bg-color);
-border-color: var(--system-blue);
-}
-.tab-content { display: none; flex-direction: column; gap: 15px; }
-.tab-content.active { display: flex; }
-.task-input-section { display: flex; gap: 8px; }
-.task-list { list-style: none; max-height: 200px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; }
-.task-item {
-display: flex; align-items: center; justify-content: space-between;
-background-color: var(--bg-color); padding: 10px 14px; border-radius: 8px;
-border: 1px solid var(--border-color); border-left: 3px solid var(--system-blue); font-size: 0.9rem;
-}
-.task-item.completed { border-left-color: var(--success); }
-.task-item.completed span { text-decoration: line-through; color: var(--text-secondary); }
-.task-actions { display: flex; gap: 6px; }
-.btn-check { background-color: transparent; color: var(--success); border: 1px solid var(--success); padding: 4px 8px; font-size: 0.75rem; border-radius: 4px; cursor: pointer; }
-.btn-delete { background-color: transparent; color: var(--error); border: 1px solid var(--error); padding: 4px 8px; font-size: 0.75rem; border-radius: 4px; cursor: pointer; }
-.quest-card { background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border-color); padding: 16px; border-radius: 10px; margin-bottom: 10px; }
-.quest-card p { font-size: 0.95rem; line-height: 1.4; margin-bottom: 12px; }
-.options { display: flex; flex-direction: column; gap: 8px; }
-.options button {
-width: 100%; text-align: left; background: var(--card-bg); color: var(--text-color);
-border: 1px solid var(--border-color); padding: 12px; border-radius: 8px; font-size: 0.9rem; cursor: pointer;
-}
-.options button:hover:not(:disabled) { border-color: var(--system-blue); background: rgba(0, 210, 255, 0.05); }
-.options button:disabled { cursor: default; opacity: 0.85; }
-.ai-section { border-top: 1px solid var(--border-color); padding-top: 16px; display: flex; flex-direction: column; gap: 12px; }
-.ai-header { display: flex; justify-content: space-between; align-items: center; }
-.ai-title { color: var(--system-blue); font-weight: bold; font-size: 0.95rem; display: flex; align-items: center; gap: 6px; }
-.chat-box { background-color: var(--bg-color); border: 1px solid var(--border-color); border-radius: 8px; height: 150px; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 8px; font-size: 0.85rem; }
-.msg { padding: 8px 12px; border-radius: 8px; max-width: 85%; line-height: 1.4; }
-.msg.user { background: var(--accent-color); align-self: flex-end; color: #fff; }
-.msg.ai { background: rgba(0, 210, 255, 0.1); border: 1px solid var(--system-blue); align-self: flex-start; color: #e0f7fa; }
-.input-group { display: flex; gap: 8px; }
-button.action-btn { padding: 10px 16px; border-radius: 8px; border: none; background-color: var(--accent-color); color: white; font-weight: bold; cursor: pointer; }
+.alerta-perigo-caixa h1 { font-size: 2.5rem; margin-bottom: 10px; text-transform: uppercase; }
+.alerta-perigo-caixa p { color: #fff; font-size: 1.1rem; }
+@keyframes slideDown { from { transform: translate(-50%, -100px); opacity: 0; } to { transform: translate(-50%, 0); opacity: 1; } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes pulsoFogo { from { transform: scale(1); } to { transform: scale(1.15); } }
 </style>
 </head>
 <body>
-<!-- Modal de Login -->
-<div id="modal-login" class="login-overlay">
-<div class="login-caixa">
-<h2>⚡ IDENTIFICAÇÃO DO CAÇADOR</h2>
-<p>Insira seu codinome para acessar o painel da PMPE 2026:</p>
-<input type="text" id="input-nome-cacador" placeholder="Ex: Caçador Alpha" autocomplete="off">
-<button onclick="realizarLoginCacador()">ACESSAR SISTEMA</button>
-</div>
-</div>
-<div class="container">
 <!-- BANNER FIXO DE METAS FÍSICAS -->
 <div class="banner-fixo-despertar">
 <div class="alerta-sedentarismo-header">
@@ -400,19 +506,46 @@ button.action-btn { padding: 10px 16px; border-radius: 8px; border: none; backgr
 </div>
 </div>
 <div class="botoes-acao-fixos">
-<button onclick="concluirMetaFisica('corrida', 120, 4)" class="btn-acao-corrida" id="btn-meta-corrida">CUMPRIR CORRIDA</button>
-<button onclick="concluirMetaFisica('flexao', 90, 3)" class="btn-acao-flexao" id="btn-meta-flexao">CUMPRIR FLEXÃO</button>
-<button onclick="concluirMetaFisica('abdominal', 90, 3)" class="btn-acao-abdominal" id="btn-meta-abdominal">CUMPRIR ABDOMINAL</button>
+<button onclick="concluirMetaFisica('corrida', 120, 4)" id="btn-meta-corrida">CUMPRIR CORRIDA</button>
+<button onclick="concluirMetaFisica('flexao', 90, 3)" id="btn-meta-flexao">CUMPRIR FLEXÃO</button>
+<button onclick="concluirMetaFisica('abdominal', 90, 3)" id="btn-meta-abdominal">CUMPRIR ABDOMINAL</button>
 </div>
 </div>
+<!-- TELA DE LOGIN EXCLUSIVA DO DESENVOLVEDOR (GOD) -->
+<div id="modal-login" class="login-overlay">
+<div class="login-caixa">
+<h2>⚡ AUTENTICAÇÃO DO CAÇADOR</h2>
+<p>Acesso exclusivo de desenvolvedor/admin ao sistema de caça PMPE 2026</p>
+<input type="text" id="input-nome-cacador" placeholder="Login de Desenvolvedor" autocomplete="off">
+<input type="password" id="input-senha-cacador" placeholder="Palavra-passe" autocomplete="off">
+<button onclick="processarAutenticacao()">ACESSAR MODO GOD</button>
+</div>
+</div>
+<div class="container">
 <header>
-<h1>Painel do Caçador & PMPE 2026</h1>
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+<h1 style="margin: 0 auto; display: flex; align-items: center; gap: 8px;">
+Painel do Caçador & PMPE 2026
+<span id="god-badge-header" class="badge-god" style="display: none;">GOD MODE</span>
+</h1>
+<button onclick="fazerLogout()" style="background: rgba(239, 68, 68, 0.2); border: 1px solid var(--error); color: var(--error); padding: 5px 12px; border-radius: 6px; font-size: 0.75rem; cursor: pointer; font-weight: bold;">Sair</button>
+</div>
 <p>Gerencie missões diárias, estude por questões e evolua de nível</p>
 </header>
+<!-- Painel Admin GOD (Visível apenas para o login GOD) -->
+<div id="god-admin-panel" class="admin-panel">
+<h4>👑 COMANDOS DE DESENVOLVEDOR (GOD ADMIN)</h4>
+<div class="admin-btns">
+<button onclick="adminAdicionarXp(1000)">+1000 XP</button>
+<button onclick="adminAdicionarPontos(50)">+50 Pontos de Atributos</button>
+<button onclick="adminResetMetas()">Resetar Metas do Dia</button>
+<button onclick="adminMaxOut()">Status Máximos</button>
+</div>
+</div>
 <!-- Status & HUD RPG -->
 <div class="painel-status-cacador">
 <div class="status-header">
-<h3 id="display-nome-usuario">CAÇADOR</h3>
+<h3>CAÇADOR: <span id="display-nome-usuario" style="color:#fff; margin-left: 6px;">GOD</span></h3>
 <span class="badge-nivel">NÍVEL <span id="display-nivel-usuario">1</span></span>
 </div>
 <div class="status-barra-xp">
@@ -421,7 +554,7 @@ button.action-btn { padding: 10px 16px; border-radius: 8px; border: none; backgr
 <div class="status-info-xp">XP: <span id="display-xp-usuario">0</span> / <span id="display-xp-proximo">200</span></div>
 <div class="caixa-pontos-disponiveis">
 <span>PONTOS DISPONÍVEIS PARA ATRIBUIR:</span>
-<strong id="display-pontos-disponiveis">0</strong>
+<strong id="display-pontos-disponiveis">5</strong>
 </div>
 <div class="status-grid">
 <div class="atributo-item">
@@ -446,88 +579,58 @@ button.action-btn { padding: 10px 16px; border-radius: 8px; border: none; backgr
 </div>
 </div>
 </div>
-<!-- Configuração API -->
-<div class="api-config">
-<label for="apiKey">🔑 Chave Gemini API:</label>
-<input type="password" id="apiKey" placeholder="Cole sua chave da API Google Gemini aqui..." onchange="saveApiKey()">
+<!-- Missões Diárias Físicas Complementares -->
+<div class="painel-missoes-diarias">
+<div class="missoes-header">
+<h3>⚡ MISSÕES DIÁRIAS DE COMBATE</h3>
+<span class="sub-titulo-missoes">Conclua os treinos para resgatar recompensas</span>
 </div>
-<!-- Abas -->
-<nav class="nav-tabs">
-<button class="tab-btn active" onclick="switchTab('missoes', event)">Missões</button>
-<button class="tab-btn" onclick="switchTab('constitucional', event)">Constitucional</button>
-<button class="tab-btn" onclick="switchTab('direitos-humanos', event)">Direitos Humanos</button>
+<div class="lista-missoes">
+<div class="missao-card" id="missao-corrida">
+<div class="missao-info">
+<span class="missao-titulo">🏃‍♂️ Operação Cardio (Corrida / Caminhada)</span>
+<span class="missao-recompensa">+80 XP | +5 Velocidade</span>
+</div>
+<button onclick="completarMissaoDiaria('corrida', 80, 0, 5, 2, 2)">CONCLUÍDO</button>
+</div>
+<div class="missao-card" id="missao-musculacao">
+<div class="missao-info">
+<span class="missao-titulo">🏋️‍♂️ Protocolo de Hipertrofia (Musculação)</span>
+<span class="missao-recompensa">+100 XP | +6 Força</span>
+</div>
+<button onclick="completarMissaoDiaria('musculacao', 100, 6, 1, 2, 3)">CONCLUÍDO</button>
+</div>
+<div class="missao-card" id="missao-jiujitsu">
+<div class="missao-info">
+<span class="missao-titulo">🥋 Sparring & Combate (Jiu-Jitsu / Disciplina)</span>
+<span class="missao-recompensa">+120 XP | +5 Aura, +4 Força</span>
+</div>
+<button onclick="completarMissaoDiaria('jiujitsu', 120, 4, 3, 3, 5)">CONCLUÍDO</button>
+</div>
+</div>
+</div>
+<!-- Navegação por Abas (Matérias do Edital PMPE) -->
+<nav class="nav-tabs" id="navDisciplinas">
+<button class="tab-btn active" onclick="switchTab('portugues', event)">Português</button>
+<button class="tab-btn" onclick="switchTab('racioc_logico', event)">Raciocínio Lógico</button>
+<button class="tab-btn" onclick="switchTab('constitucional', event)">Direito Constitucional</button>
+<button class="tab-btn" onclick="switchTab('direitos_humanos', event)">Direitos Humanos</button>
+<button class="tab-btn" onclick="switchTab('legislacao', event)">Legislação Extravagante</button>
 <button class="tab-btn" onclick="switchTab('historia', event)">História de PE</button>
 <button class="tab-btn" onclick="switchTab('informatica', event)">Informática</button>
-<button class="tab-btn" onclick="switchTab('portugues', event)">Português</button>
-<button class="tab-btn" onclick="switchTab('racioc_logico', event)">Raciocínio Lógico</button>
 </nav>
-<!-- Aba Missões -->
-<section id="missoes" class="tab-content active">
-<h2>Missões Diárias do Caçador</h2>
-<div class="task-input-section">
-<input type="text" id="taskInput" placeholder="Adicionar nova missão diária...">
-<button class="action-btn" onclick="addTask()">Adicionar</button>
-</div>
-<ul class="task-list" id="taskList"></ul>
-</section>
-<!-- Dynamic Question Containers -->
-<section id="constitucional" class="tab-content">
-<h2>Direito Constitucional</h2>
-<div id="container-constitucional"></div>
-</section>
-<section id="direitos-humanos" class="tab-content">
-<h2>Direitos Humanos</h2>
-<div class="quest-card">
-<p><strong>Questão 1:</strong> Nos termos dos tratados internacionais de Direitos Humanos incorporados pelo Brasil, assinale a assertiva correta:</p>
-<div class="options">
-<button onclick="responderQuestaoHTML(this, false)">A) A pena de morte pode ser aplicada em tempo de paz por decisão soberana.</button>
-<button onclick="responderQuestaoHTML(this, true)">B) Ninguém será submetido a tortura nem a penas ou tratamentos cruéis, desumanos ou degradantes.</button>
-<button onclick="responderQuestaoHTML(this, false)">C) A prisão por dívida civil é permitida em caso de inadimplência contratual geral.</button>
-</div>
-</div>
-</section>
-<section id="historia" class="tab-content">
-<h2>História de Pernambuco</h2>
-<div class="quest-card">
-<p><strong>Questão 1:</strong> Sobre os movimentos históricos em Pernambuco, qual o contexto da Insurreição Pernambucana (1645-1654)?</p>
-<div class="options">
-<button onclick="responderQuestaoHTML(this, false)">A) A luta contra a coroa espanhola pela independência do comércio de açúcar.</button>
-<button onclick="responderQuestaoHTML(this, true)">B) A revolta armada liderada por luso-brasileiros contra o domínio da Companhia das Índias Ocidentais (Holandeses).</button>
-<button onclick="responderQuestaoHTML(this, false)">C) A proclamação da República separatista em território nordestino.</button>
-</div>
-</div>
-</section>
-<section id="informatica" class="tab-content">
-<h2>Informática</h2>
-<div id="container-informatica"></div>
-</section>
-<section id="portugues" class="tab-content">
-<h2>Língua Portuguesa</h2>
-<div id="container-portugues"></div>
-</section>
-<section id="racioc_logico" class="tab-content">
-<h2>Raciocínio Lógico</h2>
-<div id="container-racioc_logico"></div>
-</section>
-<!-- Chat IA -->
-<div class="ai-section">
-<div class="ai-header">
-<span class="ai-title">🤖 [SISTEMA DE OBTENÇÃO DE PODER]</span>
-<button class="action-btn" style="padding: 6px 12px; font-size: 0.75rem;" onclick="analisarProgressoAI()">Analisar Status</button>
-</div>
-<div class="chat-box" id="chatBox">
-<div class="msg ai">[SISTEMA ATIVADO] Bem-vindo, Caçador. Conclua missões ou responda às questões para acumular XP e evoluir.</div>
-</div>
-<div class="input-group">
-<input type="text" id="aiInput" placeholder="Enviar comando ao Sistema...">
-<button class="action-btn" onclick="sendAIMessage()">Enviar</button>
-</div>
+<!-- Conteúdo Dinâmico de Questões por Matéria -->
+<div id="conteudo-questoes">
+<!-- As seções das questões serão inseridas aqui dinamicamente pelo JS -->
 </div>
 </div>
 <script>
-// Data Store Único
+// Credenciais Fixas do Desenvolvedor Admin
+const ADMIN_USER = "GOD";
+const ADMIN_PASS = "Eusouomaior";
+// Estado do Usuário no localStorage
 let dadosCacadorRPG = JSON.parse(localStorage.getItem('sistema_cacador_rpg')) || {
-nome: '',
+nome: 'GOD',
 xp: 0,
 nivel: 1,
 pontosDisponiveis: 5,
@@ -540,160 +643,263 @@ let metasFisicasStatus = JSON.parse(localStorage.getItem('sistema_cacador_metas_
 ultimaData: '',
 concluidas: []
 };
+let missoesDiariasStatus = JSON.parse(localStorage.getItem('sistema_cacador_missoes_diarias')) || {
+ultimaData: '',
+concluidas: []
+};
+let temporizadorMissao = null;
+const TEMPO_LIMITE_CELULAR = 25000;
+// BANCO DE DADOS DE QUESTÕES DA PMPE (MAIS DE 90 QUESTÕES COMPLETAS)
 const questoesBanco = {
 portugues: [
-{
-id: 1,
-enunciado: "No trecho 'O candidato estudou muito; por isso, obteve a aprovação', a expressão destacada estabelece uma relação semântica de:",
-opcoes: { a: "Oposição", b: "Conclusão", c: "Concessão", d: "Condição" },
-correta: "b",
-explicacao: "A expressão 'por isso' introduz uma consequência lógica do esforço anterior."
-},
-{
-id: 2,
-enunciado: "Assinale a alternativa em que a concordância verbal está em perfeita consonância com a norma-padrão:",
-opcoes: { a: "Fazem anos que não o vejo.", b: "Houveram muitos problemas.", c: "Devem existir novas diretrizes.", d: "Faltou um documento e duas certidões." },
-correta: "c",
-explicacao: "'Existir' tem sujeito ('novas diretrizes') e concorda no plural, atraindo o verbo auxiliar 'dever'."
-},
-{
-id: 3,
-enunciado: "Assinale a opção em que o vocábulo acentuado obedece à mesma regra de acentuação gráfica de 'polícia':",
-opcoes: { a: "país", b: "estudantil", c: "faróis", d: "análise" },
-correta: "d",
-explicacao: "Ambas possuem acentuação em paroxítonas/proparoxítonas com regras análogas de acento diferencial morfológico."
-},
-{
-id: 4,
-enunciado: "Em 'O policial entregou o relatório ao delegado', os termos exercem a função de:",
-opcoes: { a: "Objeto direto e Objeto indireto", b: "Objeto indireto e Objeto direto", c: "Sujeito e Objeto indireto", d: "Adjunto adverbial e Complemento nominal" },
-correta: "a",
-explicacao: "'O relatório' = OD; 'ao delegado' = OI."
-}
-],
-informatica: [
-{
-id: 5,
-enunciado: "No ambiente Windows, qual atalho de teclado é utilizado para salvar o arquivo atual?",
-opcoes: { a: "Ctrl + C", b: "Ctrl + V", c: "Ctrl + S", d: "Ctrl + Z" },
-correta: "c",
-explicacao: "Ctrl + S é o atalho universal de salvamento."
-},
-{
-id: 6,
-enunciado: "Em bancos de dados relacionais (SQL), qual instrução recupera e consulta dados de uma tabela?",
-opcoes: { a: "INSERT", b: "UPDATE", c: "DELETE", d: "SELECT" },
-correta: "d",
-explicacao: "O comando SELECT efetua buscas em tabelas."
-}
-],
-constitucional: [
-{
-id: 8,
-enunciado: "Segundo a CF/88, a segurança pública é exercida através dos seguintes órgãos, EXCETO:",
-opcoes: { a: "Polícias Militares", b: "Polícia Rodoviária Federal", c: "Guardas Municipais armadas em qualquer município", d: "Polícias Civis" },
-correta: "c",
-explicacao: "O caput do Art. 144 elenca taxativamente os órgãos estaduais/federais."
-},
-{
-id: 9,
-enunciado: "Constitui crime inafiançável e imprescritível nos termos da CF/88:",
-opcoes: { a: "A prática de racismo", b: "O homicídio simples", c: "O furto qualificado", d: "O porte ilegal de arma" },
-correta: "a",
-explicacao: "Art. 5º, XLII - a prática do racismo é inafiançável e imprescritível."
-}
+{ id: 1, enunciado: "No trecho 'O candidato estudou muito; por isso, obteve a aprovação', a expressão destacada estabelece uma relação semântica de:", opcoes: { a: "Oposição", b: "Conclusão", c: "Concessão", d: "Condição" }, correta: "b", explicacao: "A locução 'por isso' introduz uma oração coordenada sindética conclusiva." },
+{ id: 2, enunciado: "Assinale a alternativa em que a concordância verbal está em perfeita consonância com a norma-padrão:", opcoes: { a: "Fazem anos que não o vejo na corporação.", b: "Houveram muitos problemas durante o patrulhamento.", c: "Devem existir novas diretrizes para o concurso.", d: "Faltou um documento e duas certidões para a inscrição." }, correta: "c", explicacao: "O verbo 'existir' admite sujeito no plural e atrai o verbo auxiliar 'dever'." },
+{ id: 3, enunciado: "Assinale a opção em que a palavra é acentuada pela mesma regra gráfica de 'polícia':", opcoes: { a: "país", b: "estudantil", c: "faróis", d: "análise" }, correta: "d", explicacao: "'Polícia' e 'Análise' seguem as regras de acentuação proparoxítona ou paroxítona em ditongo." },
+{ id: 4, enunciado: "Em 'O policial entregou o relatório ao delegado', o termo 'ao delegado' é:", opcoes: { a: "Objeto Direto", b: "Objeto Indireto", c: "Complemento Nominal", d: "Adjunto Adverbial" }, correta: "b", explicacao: "Quem entrega, entrega algo a alguém; 'ao delegado' completa o verbo com preposição 'a'." },
+{ id: 5, enunciado: "Qual frase apresenta uso correto da crase?", opcoes: { a: "Entregou o documento à Vossa Senhoria.", b: "Ele caminhou à pé até a sede.", c: "A viatura dirigiu-se à delegacia central.", d: "Referiu-se à um policial militar." }, correta: "c", explicacao: "Há fusão da preposição 'a' com o artigo feminino 'a' antes de 'delegacia'." },
+{ id: 6, enunciado: "Identifique a classe morfológica de 'rapidamente' em 'O soldado agiu rapidamente':", opcoes: { a: "Adjetivo", b: "Advérbio de modo", c: "Substantivo", d: "Preposição" }, correta: "b", explicacao: "Modifica o verbo indicando o modo da ação." },
+{ id: 7, enunciado: "Qual o sinônimo da palavra 'incolumidade' (usada no texto constitucional da segurança pública)?", opcoes: { a: "Insegurança", b: "Integridade / Preservação", c: "Violência", d: "Instabilidade" }, correta: "b", explicacao: "Incolumidade significa estado de quem está livre de perigo ou dano (integridade)." },
+{ id: 8, enunciado: "Qual alternativa apresenta oração na voz passiva analítica?", opcoes: { a: "O suspeito confessou o delito.", b: "A patrulha foi realizada pelos soldados.", c: "Vende-se esta propriedade.", d: "Os policiais treinam diariamente." }, correta: "b", explicacao: "Estrutura: Sujeito Paciente + Verbo Auxiliar + Particípio + Agente da Passiva." },
+{ id: 9, enunciado: "Qual palavra está grafada INCORRETAMENTE?", opcoes: { a: "Exceção", b: "Paralisar", c: "Analizar", d: "Obsessão" }, correta: "c", explicacao: "O correto é 'Analisar' (com S, derivado de análise)." },
+{ id: 10, enunciado: "Em 'Embora estivesse chovendo, o treinamento ocorreu', a conjunção destaca ideia de:", opcoes: { a: "Causa", b: "Concessão", c: "Consequência", d: "Condição" }, correta: "b", explicacao: "'Embora' é conjunção subordinativa concessiva." },
+{ id: 11, enunciado: "Assinale a frase com regência verbal CORRETA segundo a norma-padrão:", opcoes: { a: "O policial aspirava o cargo de oficial.", b: "O soldado aspirava ao cargo de oficial.", c: "Prefiro mais a rua do que o quartel.", d: "Esqueci do documento importante." }, correta: "b", explicacao: "Aspirar no sentido de desejar/almejar exige preposição 'a'." },
+{ id: 12, enunciado: "Qual figura de linguagem está presente em 'O batalhão rugiu como um leão em combate'?", opcoes: { a: "Metáfora", b: "Comparação (Símile)", c: "Metonímia", d: "Hipérbole" }, correta: "b", explicacao: "Há elemento comparativo explícito ('como')." },
+{ id: 13, enunciado: "Assinale a alternativa cuja palavra seja oxítona acentuada:", opcoes: { a: "Caráter", b: "Parabéns", c: "TÁXI", d: "Árvore" }, correta: "b", explicacao: "'Parabéns' é oxítona terminada em -ens." },
+{ id: 14, enunciado: "Assinale o plural correto de 'guarda-civil':", opcoes: { a: "Guardas-civis", b: "Guarda-civis", c: "Guardas-civil", d: "Guarda-civil" }, correta: "a", explicacao: "Substantivo + adjetivo: ambos flexionam no plural." },
+{ id: 15, enunciado: "O pronome em 'Não me disseram a verdade' está em posição de:", opcoes: { a: "Próclise", b: "Mesóclise", c: "Ênclise", d: "Anacoluto" }, correta: "a", explicacao: "O pronome 'me' vem antes do verbo atraído pela palavra negativa 'Não'." }
 ],
 racioc_logico: [
-{
-id: 10,
-enunciado: "Considerando a proposição P: 'Se o policial estuda, então ele passa', a sua contra-recíproca é:",
-opcoes: { a: "Se o policial não passa no concurso, então ele não estuda.", b: "Se o policial não estuda, então ele não passa.", c: "Se o policial passa, então estuda.", d: "O policial estuda e não passa." },
-correta: "a",
-explicacao: "A contra-recíproca inverte e nega ambas as proposições da implicação."
-}
+{ id: 16, enunciado: "Se a proposição P: 'Se o policial estuda, ele passa' é verdadeira, sua equivalência lógica contra-recíproca é:", opcoes: { a: "Se ele não passa, então não estudou.", b: "Se ele estuda, ele não passa.", c: "Se ele passa, ele estuda.", d: "Ele estuda e não passa." }, correta: "a", explicacao: "Equivalência de P -> Q é ~Q -> ~P." },
+{ id: 17, enunciado: "Qual a negação lógica da proposição 'Todo soldado é corajoso'?", opcoes: { a: "Nenhum soldado é corajoso.", b: "Algum soldado não é corajoso.", c: "Todos os soldados são medrosos.", d: "Algum soldado é corajoso." }, correta: "b", explicacao: "A negação de 'Todo A é B' é 'Algum A não é B' (ou P.E.A. + não)." },
+{ id: 18, enunciado: "Na tabela-verdade do conectivo 'E' (conjunção p ∧ q), a proposição só é VERDADEIRA quando:", opcoes: { a: "Ao menos uma for verdadeira.", b: "Ambas as proposições p e q forem verdadeiras.", c: "Ambas forem falsas.", d: "A primeira for falsa." }, correta: "b", explicacao: "A conjunção exige verdade em ambos os termos." },
+{ id: 19, enunciado: "Uma condicional (p -> q) só é FALSA na seguinte situação:", opcoes: { a: "p é Falso e q é Falso.", b: "p é Verdadeiro e q é Falso (V -> F).", c: "p é Falso e q é Verdadeiro.", d: "p é Verdadeiro e q é Verdadeiro." }, correta: "b", explicacao: "Famoso caso 'Vera Fischer' ou V -> F." },
+{ id: 20, enunciado: "Em um grupo de 100 candidatos, 60 praticam corrida, 50 praticam natação e 20 praticam ambos. Quantos não praticam nenhum?", opcoes: { a: "10", b: "20", c: "30", d: "0" }, correta: "a", explicacao: "Total que pratica algo = (60-20) + (50-20) + 20 = 40 + 30 + 20 = 90. Não praticam = 100 - 90 = 10." },
+{ id: 21, enunciado: "Qual o próximo número da sequência lógica: 2, 5, 10, 17, 26, ...?", opcoes: { a: "35", b: "37", c: "39", d: "40" }, correta: "b", explicacao: "Diferenças: +3, +5, +7, +9... próxima diferença é +11. 26 + 11 = 37." },
+{ id: 22, enunciado: "Quantas comissões de 3 policiais podem ser formadas com um grupo de 5 policiais disponíveis?", opcoes: { a: "10", b: "15", c: "20", d: "60" }, correta: "a", explicacao: "Combinação simples C(5,3) = (5x4x3)/(3x2x1) = 10." },
+{ id: 23, enunciado: "Qual a probabilidade de lançar um dado comum de 6 faces e obter um número par?", opcoes: { a: "1/6", b: "1/3", c: "1/2", d: "2/3" }, correta: "c", explicacao: "Pares = {2, 4, 6} -> 3 de 6 = 3/6 = 1/2 (50%)." },
+{ id: 24, enunciado: "Se 4 torneiras enchem um reservatório em 6 horas, em quanto tempo 6 torneiras iguais encherão o mesmo reservatório?", opcoes: { a: "9 horas", b: "4 horas", c: "3 horas", d: "2 horas" }, correta: "b", explicacao: "Regra de 3 inversamente proporcional: 4 * 6 = 6 * x -> 24 = 6x -> x = 4 horas." },
+{ id: 25, enunciado: "A negação de 'Maria é policial OU João é médico' é:", opcoes: { a: "Maria não é policial E João não é médico.", b: "Maria não é policial OU João não é médico.", c: "Se Maria não é policial, João não é médico.", d: "Maria é médica e João é policial." }, correta: "a", explicacao: "Lei de De Morgan: ~(p ∨ q) = ~p ∧ ~q." },
+{ id: 26, enunciado: "Qual o valor de 2^5 + 2^5?", opcoes: { a: "2^6", b: "2^10", c: "4^5", d: "2^7" }, correta: "a", explicacao: "2^5 + 2^5 = 2 * (2^5) = 2^1 * 2^5 = 2^6." },
+{ id: 27, enunciado: "Se todo pernambucano é nordestino e nenhum nordestino é canadense, conclui-se que:", opcoes: { a: "Algum pernambucano é canadense.", b: "Nenhum pernambucano é canadense.", c: "Todo nordestino é pernambucano.", d: "Algum canadense é nordestino." }, correta: "b", explicacao: "Silogismo categórico válido." },
+{ id: 28, enunciado: "O número de anagramas da palavra 'PMPE' é:", opcoes: { a: "24", b: "12", c: "6", d: "4" }, correta: "b", explicacao: "Permutação com repetição de 4 letras (P repete 2x): 4! / 2! = 24 / 2 = 12." },
+{ id: 29, enunciado: "Se p é V e q é F, o valor lógico da disjunção exclusiva (p ⊕ q) é:", opcoes: { a: "Falso", b: "Verdadeiro", c: "Inconclusivo", d: "Nulo" }, correta: "b", explicacao: "A disjunção exclusiva é verdadeira quando os valores lógicos são diferentes." },
+{ id: 30, enunciado: "Qual a negação de 'Se chover, a pista fica molhada'?", opcoes: { a: "Chove e a pista não fica molhada.", b: "Se não chover, a pista não fica molhada.", c: "Não chove e a pista fica molhada.", d: "Se a pista ficar molhada, choveu." }, correta: "a", explicacao: "Negação do condicional: Mantém a 1ª E Nega a 2ª (p ∧ ~q)." }
+],
+constitucional: [
+{ id: 31, enunciado: "Segundo o Art. 144 da CF/88, qual dos órgãos abaixo NÃO integra o rol primário dos órgãos de Segurança Pública?", opcoes: { a: "Polícia Federal", b: "Polícia Militar e Corpo de Bombeiros Militar", c: "Guarda Municipal", d: "Polícia Civil" }, correta: "c", explicacao: "Guardas Municipais são instituídas pelos municípios para proteção de bens/serviços, mas não constam no caput do Art. 144 no rol primário." },
+{ id: 32, enunciado: "Conforme o Art. 5º da CF/88, a prática do racismo constitui crime:", opcoes: { a: "Afiançável e prescritível.", b: "Inafiançável e imprescritível.", c: "Inafiançável e insuscetível de graça.", d: "Prescritível em 5 anos." }, correta: "b", explicacao: "Art. 5º, XLII - a prática do racismo constitui crime inafiançável e imprescritível, sujeito à pena de reclusão." },
+{ id: 33, enunciado: "O alistamento eleitoral e o voto são OBRIGATÓRIOS para os:", opcoes: { a: "Analfabetos.", b: "Maiores de 70 anos.", c: "Maiores de 18 anos.", d: "Jovens entre 16 e 18 anos." }, correta: "c", explicacao: "Art. 14, § 1º, I - Obrigatórios para os maiores de 18 anos." },
+{ id: 34, enunciado: "A casa é asilo inviolável do indivíduo, NINGUÉM nela podendo penetrar sem consentimento do morador, SALVO:", opcoes: { a: "Durante a noite por determinação policial verbal.", b: "Em caso de flagrante delito ou desastre, ou para prestar socorro.", c: "Em qualquer horário com mandado administrativo de busca.", d: "Apenas durante a noite com ordem judicial." }, correta: "b", explicacao: "Art. 5º, XI - salvo em caso de flagrante delito ou desastre, ou para prestar socorro, ou, durante o dia, por determinação judicial." },
+{ id: 35, enunciado: "Qual remédio constitucional é adequado para proteger direito líquido e certo não amparado por Habeas Corpus ou Habeas Data?", opcoes: { a: "Mandado de Segurança", b: "Ação Popular", c: "Mandado de Injunção", d: "Ação Civil Pública" }, correta: "a", explicacao: "Art. 5º, LXIX - Mandado de Segurança." },
+{ id: 36, enunciado: "São crimes insuscetíveis de graça ou anistia (TTT + H):", opcoes: { a: "Racismo e ação de grupos armados.", b: "Tortura, tráfico ilícito de entorpecentes, terrorismo e crimes hediondos.", c: "Furto, roubo e estelionato.", d: "Homicídio simples e lesão corporal." }, correta: "b", explicacao: "Art. 5º, XLIII - a lei considerará crimes inafiançáveis e insuscetíveis de graça ou anistia a tortura, o tráfico, o terrorismo e os hediondos." },
+{ id: 37, enunciado: "Aos militares estaduais é VEDADO (proibido):", opcoes: { a: "O direito de ir e vir.", b: "A sindicalização e a greve.", c: "O casamento com civis.", d: "O estudo universitário." }, correta: "b", explicacao: "Art. 142, § 3º, IV c/c Art. 42 - Ao militar são proibidas a sindicalização e a greve." },
+{ id: 38, enunciado: "Os direitos e garantias fundamentais expressos na Constituição:", opcoes: { a: "São taxativos e esgotam a matéria.", b: "Não excluem outros decorrentes do regime e dos princípios por ela adotados.", c: "Não se aplicam aos estrangeiros residentes no país.", d: "Podem ser revogados por Medida Provisória." }, correta: "b", explicacao: "Art. 5º, § 2º - Princípio da não exaustividade." },
+{ id: 39, enunciado: "Qual autoridade é competente para emitir mandado de prisão preventiva em regra?", opcoes: { a: "Delegado de Polícia", b: "Autoridade Judicial competente", c: "Comandante da PM", d: "Ministro da Justiça" }, correta: "b", explicacao: "Prisão sem flagrante só ocorre por ordem escrita e fundamentada de autoridade judiciária competente." },
+{ id: 40, enunciado: "A perda da nacionalidade brasileira pode ocorrer se o brasileiro naturalizado:", opcoes: { a: "Viajar ao exterior por mais de 1 ano.", b: "Tiver cancelada sua naturalização por sentença judicial em virtude de fraude no processo de naturalização ou atentado contra a ordem constitucional.", c: "Não votar em 2 eleições seguidas.", d: "Casar com estrangeira." }, correta: "b", explicacao: "Conforme redação atualizada do Art. 12 da CF/88." },
+{ id: 41, enunciado: "No Brasil, a pena de morte:", opcoes: { a: "É absolutamente proibida em qualquer hipótese.", b: "É permitida em caso de guerra declarada, nos termos do art. 84, XIX.", c: "É aplicável para crimes de latrocínio.", d: "É aplicável para reincidentes em tráfico." }, correta: "b", explicacao: "Art. 5º, XLVII, a - não haverá penas de morte, salvo em caso de guerra declarada." },
+{ id: 42, enunciado: "O remédio constitucional gratuito para assegurar o conhecimento de informações relativas à pessoa do impetrante constantes de bancos de dados é:", opcoes: { a: "Habeas Corpus", b: "Habeas Data", c: "Mandado de Injunção", d: "Ação Popular" }, correta: "b", explicacao: "Art. 5º, LXXII - Habeas Data." },
+{ id: 43, enunciado: "É direito social dos trabalhadores previstos no Art. 6º da CF/88:", opcoes: { a: "Propriedade privada", b: "Segurança, saúde, educação e trabalho", c: "Livre manifestação do pensamento anônimo", d: "Inviolabilidade de correspondência" }, correta: "b", explicacao: "Art. 6º traz os Direitos Sociais (Educação, saúde, alimentação, trabalho, moradia, transporte, lazer, segurança, etc)." },
+{ id: 44, enunciado: "Qual o limite de idade para a aposentadoria compulsória dos servidores públicos na forma da lei complementar?", opcoes: { a: "65 anos", b: "70 ou 75 anos", c: "80 anos", d: "60 anos" }, correta: "b", explicacao: "Art. 40, § 1º, II - aos 70 ou 75 anos de idade, na forma da lei complementar." },
+{ id: 45, enunciado: "As Polícias Militares e Corpos de Bombeiros Militares são forças auxiliares e reserva de quem?", opcoes: { a: "Da Guarda Municipal", b: "Do Exército Brasileiro", c: "Da Marinha do Brasil", d: "Da Polícia Federal" }, correta: "b", explicacao: "Art. 144, § 6º - Forças auxiliares e reserva do Exército." }
+],
+direitos_humanos: [
+{ id: 46, enunciado: "Segundo a Declaração Universal dos Direitos Humanos (DUDH - 1948), todos os seres humanos nascem:", opcoes: { a: "Iguais apenas perante a lei civil.", b: "Livres e iguais em dignidade e direitos.", c: "Com deveres absolutos perante o Estado soberano.", d: "Submetidos à jurisdição de seu país de origem." }, correta: "b", explicacao: "Artigo 1º da DUDH." },
+{ id: 47, enunciado: "De acordo com a DUDH, NINGUÉM será submetido a:", opcoes: { a: "Julgamento público.", b: "Tortura nem a tratamento ou castigo cruel, desumano ou degradante.", c: "Trabalho assalariado.", d: "Prisão em flagrante." }, correta: "b", explicacao: "Artigo 5º da DUDH." },
+{ id: 48, enunciado: "A Convenção Americana sobre Direitos Humanos (Pacto de San José da Costa Rica) proíbe a prisão civil por dívida, EXCETO a do:", opcoes: { a: "Devedor de alimentos (pensão alimentícia).", b: "Depositário infiel.", c: "Inadimplente de aluguel.", d: "Devedor de impostos estaduais." }, correta: "a", explicacao: "Conforme o Pacto de San José e a Súmula Vinculante 25 do STF, só subsiste a prisão civil do devedor de alimentos." },
+{ id: 49, enunciado: "O princípio da Proibição do Retrocesso dos Direitos Humanos também é conhecido como efeito:", opcoes: { a: "Catraca / Entrancamento (Click)", b: "Efeito Borboleta", c: "Efeito Dominó", d: "Efeito Represtinatório" }, correta: "a", explicacao: "Efeito Cliquet ou proibição do retrocesso social/humanitário." },
+{ id: 50, enunciado: "Direitos de 1ª Geração/Dimensão focam em:", opcoes: { a: "Direitos Sociais e Econômicos.", b: "Liberdades Individuais e Direitos Civis/Políticos.", c: "Direitos Difusos e Meio Ambiente.", d: "Biotecnologia e Informática." }, correta: "b", explicacao: "1ª Geração: Liberdade (Civis e Políticos). 2ª Geração: Igualdade (Sociais). 3ª Geração: Fraternidade." },
+{ id: 51, enunciado: "Segundo a DUDH, todo ser humano tem direito à presunção de inocência até que sua culpabilidade tenha sido provada em julgamento:", opcoes: { a: "Secreto.", b: "Público no qual lhe tenham sido asseguradas todas as garantias de defesa.", c: "Sumário sem advogado.", d: "Policial administrativo." }, correta: "b", explicacao: "Artigo 11 da DUDH." },
+{ id: 52, enunciado: "Os Direitos Humanos possuem como característica a 'Universalidade', o que significa que:", opcoes: { a: "Aplicam-se apenas aos cidadãos cumpridores de deveres.", b: "Pertencem a todos os seres humanos, independentemente de raça, sexo ou nacionalidade.", c: "Podem ser vendidos ou renunciados livremente.", d: "Caducam com o passar do tempo." }, correta: "b", explicacao: "Universalidade indica titularidade universal a todo indivíduo." },
+{ id: 53, enunciado: "Qual órgão julgador foi criado pela Convenção Americana de Direitos Humanos para examinar violações em Estados-partes?", opcoes: { a: "Corte Interamericana de Direitos Humanos (Corte IDH)", b: "Tribunal de Haia de Crimes Comerciais", c: "Conselho de Segurança da ONU", d: "Corte Suprema do Brasil" }, correta: "a", explicacao: "A Corte IDH é a instituição judiciária autônoma da OEA." },
+{ id: 54, enunciado: "A proibição da escravidão e da servidão na DUDH está contida em qual artigo?", opcoes: { a: "Artigo 1º", b: "Artigo 4º", c: "Artigo 10º", d: "Artigo 30º" }, correta: "b", explicacao: "Artigo 4º da DUDH proíbe a escravidão e o tráfico de escravos em todas as suas formas." },
+{ id: 55, enunciado: "Qual documento histórico de 1789 consagrou os ideais de 'Liberdade, Igualdade e Fraternidade'?", opcoes: { a: "Carta das Nações Unidas", b: "Declaração dos Direitos do Homem e do Cidadão (Revolução Francesa)", c: "Código de Hamurabi", d: "Tratado de Versalhes" }, correta: "b", explicacao: "Declaração Francesa de 1789." },
+{ id: 56, enunciado: "O direito ao asilo político contra perseguição está expressamente previsto em qual documento internacional?", opcoes: { a: "Pacto de Varsóvia", b: "Declaração Universal dos Direitos Humanos", c: "Protocolo de Quioto", d: "Estatuto de Roma" }, correta: "b", explicacao: "Artigo 14 da DUDH garante o direito de procurar e gozar asilo em outros países." },
+{ id: 57, enunciado: "Os Direitos Humanos são 'Inalienáveis', o que significa que:", opcoes: { a: "Podem ser doados a terceiros.", b: "Não podem ser transferidos, negociados ou retirados do indivíduo.", c: "São válidos por apenas 50 anos.", d: "Dependem de pagamento de taxa para serem exercidos." }, correta: "b", explicacao: "Inalienabilidade proíbe a alienação ou transferência dos direitos essenciais." },
+{ id: 58, enunciado: "Qual das alternativas traz um direito fundamental de 3ª Dimensão?", opcoes: { a: "Direito à propriedade", b: "Direito a um meio ambiente ecologicamente equilibrado", c: "Direito de voto", d: "Direito à liberdade de locomoção" }, correta: "b", explicacao: "3ª Dimensão se liga à fraternidade e direitos difusos/coletivos." },
+{ id: 59, enunciado: "A Convenção contra a Tortura da ONU define tortura como qual tipo de ato?", opcoes: { a: "Apenas agressão verbal sem dor física.", b: "Qualquer ato pelo qual dores ou sofrimentos graves, físicos ou mentais, são infligidos intencionalmente por agente público ou com sua anuência.", c: "Qualquer penalidade legal prevista em sentença transitada em julgado.", d: "Medidas disciplinares escolares." }, correta: "b", explicacao: "Definição oficial da Convenção contra a Tortura (1984)." },
+{ id: 60, enunciado: "O princípio do 'Non-refoulement' proíbe que um Estado:", opcoes: { a: "Expulse ou devolva um refugiado para território onde sua vida ou liberdade esteja ameaçada.", b: "Cobre impostos de estrangeiros.", c: "Prenda criminosos internacionais.", d: "Conceda passaportes." }, correta: "a", explicacao: "Princípio do não reenvio/não devolução no direito internacional dos refugiados." }
+],
+legislacao: [
+{ id: 61, enunciado: "Nos termos da Lei de Abuso de Autoridade (Lei nº 13.869/2019), a divergência na interpretação de lei ou na avaliação de fatos e provas:", opcoes: { a: "Configura abuso automático.", b: "NÃO configura abuso de autoridade.", c: "Gera demissão imediata do policial.", d: "É crime inafiançável." }, correta: "b", explicacao: "Art. 1º, § 2º da Lei 13.869/19 - O elemento subjetivo exige dolo específico de prejudicar ou beneficiar." },
+{ id: 62, enunciado: "Conforme a Lei de Crimes de Tortura (Lei nº 9.455/97), a condenação acarretará como efeito da sentença a perda do cargo e a interdição para seu exercício pelo:", opcoes: { a: "Mesmo tempo da pena.", b: "Dobro do prazo da pena aplicada.", c: "Prazo fixo de 20 anos.", d: "Triplo do prazo." }, correta: "b", explicacao: "Art. 1º, § 5º - Acarreta a perda do cargo e a interdição pelo dobro do prazo da pena." },
+{ id: 63, enunciado: "Segundo o Estatuto do Desarmamento (Lei nº 10.826/03), portar arma de fogo de uso permitido sem autorização configura crime com pena de:", opcoes: { a: "Reclusão de 2 a 4 anos e multa.", b: "Detenção de 1 a 3 anos apenas.", c: "Trabalho comunitário.", d: "Prisão administrativa." }, correta: "a", explicacao: "Art. 14 da Lei 10.826/03." },
+{ id: 64, enunciado: "Na Lei de Drogas (Lei nº 11.343/06), quem adquire ou transporta droga para consumo pessoal (Art. 28) é sujeito a:", opcoes: { a: "Pena de reclusão de 2 a 5 anos.", b: "Advertência sobre os efeitos das drogas, prestação de serviços à comunidade e medida educativa.", c: "Prisão em flagrante inafiançável.", d: "Perda da cidadania." }, correta: "b", explicacao: "O Art. 28 não prevê pena privativa de liberdade (despenalização mitigada)." },
+{ id: 65, enunciado: "De acordo com a Lei Maria da Penha (Lei nº 11.340/06), a prisão preventiva do agressor poderá ser decretada pelo juiz em qual fase?", opcoes: { a: "Apenas após a condenação definitiva.", b: "Em qualquer fase do inquérito policial ou da instrução criminal.", c: "Apenas durante a noite.", d: "Somente com autorização do Ministério Público." }, correta: "b", explicacao: "Art. 20 da Lei 11.340/06." },
+{ id: 66, enunciado: "No Estatuto da Criança e do Adolescente (ECA - Lei 8.069/90), considera-se adolescente a pessoa na faixa etária de:", opcoes: { a: "0 a 12 anos incompletos.", b: "12 a 18 anos de idade.", c: "14 a 21 anos de idade.", d: "10 a 16 anos de idade." }, correta: "b", explicacao: "Art. 2º do ECA (Criança: até 12 incompletos; Adolescente: de 12 a 18 anos)." },
+{ id: 67, enunciado: "Conforme o Código Penal Militar (CPM), a desobediência a ordem de superior sobre matéria de serviço configura crime militar de:", opcoes: { a: "Insubmissão", b: "Desobediência / Recusa de obediência", c: "Motim", d: "Revolta" }, correta: "b", explicacao: "Art. 163 do CPM - Recusar obedecer a ordem do superior sobre assunto ou matéria de serviço." },
+{ id: 68, enunciado: "Na Lei de Crimes Ambientais (Lei 9.605/98), matar ou utilizar espécimes da fauna silvestre sem licença é:", opcoes: { a: "Infração administrativa apenas.", b: "Crime contra a fauna.", c: "Atos de mero descaso civil.", d: "Permitido no Nordeste." }, correta: "b", explicacao: "Art. 29 da Lei 9.605/98." },
+{ id: 69, enunciado: "O crime de Tráfico Ilícito de Entorpecentes (Art. 33 da Lei de Drogas) é classificado como:", opcoes: { a: "Crime de mera conduta afiançável.", b: "Equiparado a hediondo, inafiançável e insuscetível de graça/anistia.", c: "Infração de menor potencial ofensivo.", d: "Crime culposo." }, correta: "b", explicacao: "Equiparado a hediondo perante a CF/88 e a Lei de Crimes Hediondos (Lei 8.072/90)." },
+{ id: 70, enunciado: "Pela Lei de Abuso de Autoridade, constranger o preso a produzir prova contra si mesmo sob ameaça de violência física é:", opcoes: { a: "Conduta atípica.", b: "Crime de abuso de autoridade punido com reclusão.", c: "Permitido durante interrogatório policial.", d: "Mera falta disciplinar leve." }, correta: "b", explicacao: "Art. 13 da Lei 13.869/19 criminaliza o constrangimento ilegal do detido." },
+{ id: 71, enunciado: "No Estatuto do Idoso (Lei 10.741/03), considera-se idosa a pessoa com idade igual ou superior a:", opcoes: { a: "50 anos", b: "60 anos", c: "65 anos", d: "70 anos" }, correta: "b", explicacao: "Art. 1º da Lei 10.741/03 (Pessoa com idade igual ou superior a 60 anos)." },
+{ id: 72, enunciado: "O crime militar de 'Desertar' (Art. 187 do CPM) ocorre quando o militar se ausenta sem licença da unidade por mais de quantos dias?", opcoes: { a: "24 horas", b: "8 dias", c: "30 dias", d: "15 dias" }, correta: "b", explicacao: "Art. 187 do CPM - Ausentar-se por mais de 8 dias consecutivamente." },
+{ id: 73, enunciado: "Segundo a Lei dos Crimes Hediondos (Lei 8.072/90), o crime de latrocínio (roubo seguido de morte) é considerado:", opcoes: { a: "Hediondo", b: "Crime comum afiançável", c: "Crime culposo", d: "Contravenção penal" }, correta: "a", explicacao: "O latrocínio consta expressamente no rol dos crimes hediondos." },
+{ id: 74, enunciado: "O disparo de arma de fogo em lugar habitado ou em suas adjacências (Art. 15 do Estatuto do Desarmamento) é crime:", opcoes: { a: "Afiançável na delegacia sempre.", b: "Inafiançável e de perigo abstrato.", c: "Culposo.", d: "Permitido para comemoração." }, correta: "b", explicacao: "Disparo de arma de fogo em via pública ou local habitado é crime formal e de perigo abstrato." },
+{ id: 75, enunciado: "De acordo com a Lei 13.869/19, decretar medida privativa de liberdade em manifesta conformidade com a lei é:", opcoes: { a: "Abuso de autoridade culposo.", b: "Exercício regular do dever legal (Não é crime).", c: "Crime preterdoloso.", d: "Falta funcional." }, correta: "b", explicacao: "Decisão respaldada na lei afasta a tipicidade de abuso." }
+],
+historia: [
+{ id: 76, enunciado: "A Insurreição Pernambucana (1645-1654) teve como objetivo principal a expulsão de qual povo invasor de Pernambuco?", opcoes: { a: "Ingleses", b: "Holandeses (Companhia das Índias Ocidentais)", c: "Franceses", d: "Espanhóis" }, correta: "b", explicacao: "Conflito armado que culminou na batalha dos Guararapes e expulsão dos holandeses." },
+{ id: 77, enunciado: "As Batalhas dos Guararapes (1648 e 1649) são simbolicamente consideradas a origem histórico-militar de qual instituição brasileira?", opcoes: { a: "Marinha do Brasil", b: "Exército Brasileiro", c: "Polícia Federal", d: "Guarda Nacional" }, correta: "b", explicacao: "O Exército Brasileiro celebra sua criação na 1ª Batalha dos Guararapes (19 de abril de 1648)." },
+{ id: 78, enunciado: "A Revolução Pernambucana de 1817 foi um movimento de caráter:", opcoes: { a: "Monarquista e absolutista.", b: "Emancipacionista, republicano e separatista.", c: "Apenas uma greve comercial.", d: "A favor do retorno do domínio holandês." }, correta: "b", explicacao: "Proclamou uma República temporária independente em Pernambuco." },
+{ id: 79, enunciado: "A Guerra dos Mascates (1710-1711) envolveu o conflito de interesses entre a elite fundiária de Olinda e os comerciantes portugueses de:", opcoes: { a: "Recife", b: "Caruaru", c: "Petrolina", d: "Garanhuns" }, correta: "a", explicacao: "Os comerciantes portugueses de Recife ('Mascates') queriam autonomia em relação a Olinda." },
+{ id: 80, enunciado: "Quem foi o governador holandês que promoveu o 'Período Áureo' em Recife, modernizando a infraestrutura e a cultura?", opcoes: { a: "Maurício de Nassau", b: "Duarte Coelho", c: "Vidal de Negreiros", d: "Henrique Dias" }, correta: "a", explicacao: "Johan Maurits van Nassau-Siegen governou a Nova Holanda entre 1637 e 1644." },
+{ id: 81, enunciado: "A Confederação do Equador (1824), liderada por Frei Caneca, surgiu em oposição a qual ato de Dom Pedro I?", opcoes: { a: "À abolição da escravatura.", b: "À outorga da Constituição de 1824 e ao Poder Moderador autoritário.", c: "Ao casamento com a imperatriz.", d: "À guerra contra o Paraguai." }, correta: "b", explicacao: "Revolta republicana contra a Constituição outorgada e o absolutismo do Imperador." },
+{ id: 82, enunciado: "Duarte Coelho foi o primeiro doatário de qual Capitania Hereditária?", opcoes: { a: "Capitania de Pernambuco (Nova Lusitânia)", b: "Capitania de São Vicente", c: "Capitania da Bahia", d: "Capitania do Maranhão" }, correta: "a", explicacao: "Duarte Coelho recebeu a doação da Capitania em 1534." },
+{ id: 83, enunciado: "Qual produto agrícola garantiu a grande riqueza econômica de Pernambuco nos séculos XVI e XVII?", opcoes: { a: "Café", b: "Cana-de-açúcar (Açúcar)", c: "Algodão", d: "Borracha" }, correta: "b", explicacao: "Pernambuco tornou-se o maior produtor mundial de açúcar na era colonial." },
+{ id: 84, enunciado: "A Revolução Praieira (1848-1850) foi o último grande movimento liberal/revolucionário do Brasil Império e ocorreu em:", opcoes: { a: "São Paulo", b: "Pernambuco", c: "Rio de Janeiro", d: "Bahia" }, correta: "b", explicacao: "Inspirada em ideais liberais radicais europeus ('Primavera dos Povos')." },
+{ id: 85, enunciado: "Henrique Dias e João Fernandes Vieira destacaram-se historicamente em qual evento pernambucano?", opcoes: { a: "Guerra dos Mascates", b: "Insurreição Pernambucana", c: "Revolução de 1930", d: "Cangaço" }, correta: "b", explicacao: "Líderes negros e luso-brasileiros que lutaram pela expulsão dos batavos." },
+{ id: 86, enunciado: "Qual o nome do manifesto lançado durante a Revolução Praieira em Recife?", opcoes: { a: "Manifesto ao Mundo", b: "Carta de Caminha", c: "Tratado de Tordesilhas", d: "Constituição de 1891" }, correta: "a", explicacao: "O 'Manifesto ao Mundo' reivindicava voto livre e universal e fim do monopólio comercial." },
+{ id: 87, enunciado: "A Quilombo dos Palmares situava-se originalmente na Serra da Barriga, território que pertenceu à Capitania de Pernambuco e hoje integra o estado de:", opcoes: { a: "Alagoas", b: "Ceará", c: "Paraíba", d: "Sergipe" }, correta: "a", explicacao: "Na época colonial pertencia a PE; atualmente fica no estado de Alagoas." },
+{ id: 88, enunciado: "Qual o líder religioso e político executado por fuzilamento após o fracasso da Confederação do Equador em 1825?", opcoes: { a: "Frei Caneca (Joaquim do Amor Divino)", b: "Padre Roma", c: "Tiradentes", d: "Zumbi dos Palmares" }, correta: "a", explicacao: "Frei Caneca foi fuzilado no Recife (Forte das Cinco Pontas)." },
+{ id: 89, enunciado: "O Quilombo dos Palmares teve como seu principal e lendário líder militar defensivo:", opcoes: { a: "Zumbi dos Palmares", b: "Ganga Zumba", c: "Chica da Silva", d: "Aleijadinho" }, correta: "a", explicacao: "Zumbi tornou-se o grande símbolo da resistência antiescravista." },
+{ id: 90, enunciado: "A Convenção de Beberibe (1821) em Pernambuco resultou na:", opcoes: { a: "Expulsão das tropas portuguesas fiéis às Cortes de Lisboa e posse da junta governativa.", b: "Entrega do Recife aos ingleses.", c: "Fundação da cidade de Olinda.", d: "Prisão de Dom Pedro I." }, correta: "a", explicacao: "Episódio marcante no processo de independência política pernambucana." }
+],
+informatica: [
+{ id: 91, enunciado: "Qual a função do protocolo DHCP em uma rede de computadores?", opcoes: { a: "Enviar e-mails com anexo.", b: "Atribuir endereços IP automaticamente aos dispositivos da rede.", c: "Traduzir nomes de domínios em IPs.", d: "Criptografar senhas." }, correta: "b", explicacao: "DHCP (Dynamic Host Configuration Protocol) distribui IPs dinamicamente." },
+{ id: 92, enunciado: "O atalho padrão universal para selecionar TODOS os arquivos em uma pasta no Windows em português é:", opcoes: { a: "Ctrl + A", b: "Ctrl + T", c: "Ctrl + C", d: "Ctrl + S" }, correta: "a", explicacao: "Ctrl + A seleciona tudo no Windows PT-BR." },
+{ id: 93, enunciado: "Qual tipo de código malicioso (Malware) sequestra arquivos do computador através de criptografia e exige resgate em dinheiro/criptomoeda?", opcoes: { a: "Spyware", b: "Ransomware", c: "Adware", d: "Keylogger" }, correta: "b", explicacao: "Ransomware (Ransom = Resgate)." },
+{ id: 94, enunciado: "No Microsoft Excel, a fórmula para somar o intervalo da célula A1 até A10 é escrita como:", opcoes: { a: "=SOMAR(A1;A10)", b: "=SOMA(A1:A10)", c: "=SOMA(A1..A10)", d: "=SUM(A1-A10)" }, correta: "b", explicacao: "Os dois pontos (:) representam o intervalo contínuo 'até'." },
+{ id: 95, enunciado: "O protocolo HTTPS utiliza criptografia SSL/TLS e opera por padrão em qual porta de comunicação TCP?", opcoes: { a: "Porta 80", b: "Porta 21", c: "Porta 443", d: "Porta 25" }, correta: "c", explicacao: "HTTP usa porta 80 e HTTPS usa porta 443." },
+{ id: 96, enunciado: "Um Firewall de rede tem como função principal:", opcoes: { a: "Remover vírus da memória RAM.", b: "Filtrar o tráfego de rede bloqueando acessos não autorizados com base em regras de segurança.", c: "Acelerar a velocidade da internet.", d: "Fazer backup de arquivos corrompidos." }, correta: "b", explicacao: "Barreira de proteção que controla portas e pacotes de rede." },
+{ id: 97, enunciado: "Em banco de dados SQL, o comando usado para alterar dados existentes em uma tabela é:", opcoes: { a: "SELECT", b: "INSERT", c: "UPDATE", d: "DELETE" }, correta: "c", explicacao: "UPDATE atualiza registros armazenados." },
+{ id: 98, enunciado: "Em navegadores modernos, a combinação Ctrl + Shift + N no Google Chrome abre uma:", opcoes: { a: "Nova janela de navegação anônima.", b: "Nova aba comum.", c: "Janela de downloads.", d: "Página de histórico." }, correta: "a", explicacao: "Ctrl + Shift + N abre a janela anônima no Chrome." },
+{ id: 99, enunciado: "Qual dispositivo de hardware é considerado a 'Mente' ou Cérebro do computador, responsável por processar dados e instruções?", opcoes: { a: "Disco Rígido (HD)", b: "Processador (CPU)", c: "Placa de Vídeo", d: "Fonte ATX" }, correta: "b", explicacao: "CPU (Unidade Central de Processamento)." },
+{ id: 100, enunciado: "A memória RAM do computador é classificada como uma memória:", opcoes: { a: "Não volátil e permanente.", b: "Volátil (seus dados são apagados ao desligar o computador).", c: "Secundária magnética.", d: "Exclusiva de leitura óptica." }, correta: "b", explicacao: "A memória RAM necessita de energia para manter as informações." }
 ]
 };
-// Eventos Iniciais
+// EVENTOS AO CARREGAR A PÁGINA
 document.addEventListener('DOMContentLoaded', () => {
-verificarLogin();
-loadTasks();
-renderizarBancoQuestoes();
+verificarSessao();
+loadStatusRPG();
 calcularMetasDoNivel();
 renderizarBotoesMetas();
-salvarEAtualizarHUDRPG();
-const savedKey = localStorage.getItem('gemini_api_key') || '';
-if (savedKey) document.getElementById('apiKey').value = savedKey;
+atualizarBotoesMissoesUI();
+renderizarTodasQuestoes();
 });
-function verificarLogin() {
-const modal = document.getElementById('modal-login');
-if (dadosCacadorRPG.nome) {
-modal.style.display = 'none';
+// AUTENTICAÇÃO E MODOS ADMIN
+function processarAutenticacao() {
+const userInput = document.getElementById('input-nome-cacador').value.trim();
+const passInput = document.getElementById('input-senha-cacador').value.trim();
+if (userInput === ADMIN_USER && passInput === ADMIN_PASS) {
+dadosCacadorRPG.nome = ADMIN_USER;
+localStorage.setItem('sistema_cacador_rpg', JSON.stringify(dadosCacadorRPG));
+sessionStorage.setItem('cacador_sessao_god', 'true');
+document.getElementById('modal-login').style.display = 'none';
+ativarModoGodUI();
 solicitarPermissaoNotificacao();
+alert(⁠👑 BEM-VINDO, DESENVOLVEDOR ${ADMIN_USER}! Modo God e estatísticas ilimitadas ativadas.⁠);
+} else {
+alert('❌ ACESSO NEGADO! Apenas o desenvolvedor GOD com a senha exclusiva pode acessar este sistema.');
+}
+}
+function verificarSessao() {
+const sessaoGod = sessionStorage.getItem('cacador_sessao_god');
+const modal = document.getElementById('modal-login');
+if (sessaoGod === 'true') {
+modal.style.display = 'none';
+ativarModoGodUI();
 } else {
 modal.style.display = 'flex';
 }
 }
-function realizarLoginCacador() {
-const inputNome = document.getElementById('input-nome-cacador').value.trim();
-if (!inputNome) {
-alert('Digite seu codinome!');
-return;
-}
-dadosCacadorRPG.nome = inputNome;
+function ativarModoGodUI() {
+document.getElementById('god-badge-header').style.display = 'inline-block';
+document.getElementById('god-admin-panel').style.display = 'block';
 salvarEAtualizarHUDRPG();
-document.getElementById('modal-login').style.display = 'none';
-solicitarPermissaoNotificacao();
 }
-// Sistema RPG & Status
+function fazerLogout() {
+sessionStorage.removeItem('cacador_sessao_god');
+location.reload();
+}
+// COMANDOS EXCLUSIVOS ADMIN GOD
+function adminAdicionarXp(qtd) {
+adicionarXpPersonagem(qtd);
+}
+function adminAdicionarPontos(qtd) {
+dadosCacadorRPG.pontosDisponiveis += qtd;
+salvarEAtualizarHUDRPG();
+}
+function adminResetMetas() {
+metasFisicasStatus.concluidas = [];
+missoesDiariasStatus.concluidas = [];
+localStorage.setItem('sistema_cacador_metas_fisicas', JSON.stringify(metasFisicasStatus));
+localStorage.setItem('sistema_cacador_missoes_diarias', JSON.stringify(missoesDiariasStatus));
+renderizarBotoesMetas();
+atualizarBotoesMissoesUI();
+alert('⚙️ METAS DIÁRIAS RESETADAS PELO ADMIN!');
+}
+function adminMaxOut() {
+dadosCacadorRPG.nivel = 50;
+dadosCacadorRPG.xp = 0;
+dadosCacadorRPG.forca = 150;
+dadosCacadorRPG.velocidade = 150;
+dadosCacadorRPG.mana = 200;
+dadosCacadorRPG.aura = 250;
+dadosCacadorRPG.pontosDisponiveis = 100;
+salvarEAtualizarHUDRPG();
+calcularMetasDoNivel();
+alert('⚡ ATRIBUTOS MÁXIMOS E LEVEL 50 APLICADOS!');
+}
+// SISTEMA DE STATUS E ATRIBUTOS RPG
+function loadStatusRPG() {
+salvarEAtualizarHUDRPG();
+}
 function adicionarPontoManual(atributo) {
 if (dadosCacadorRPG.pontosDisponiveis > 0) {
 dadosCacadorRPG[atributo] += 1;
 dadosCacadorRPG.pontosDisponiveis -= 1;
 salvarEAtualizarHUDRPG();
 } else {
-alert("⚠️ Sem pontos disponíveis! Suba de nível ou cumpra metas para obter mais.");
+alert("⚠️ Você não possui pontos de atributo disponíveis! Suba de nível ou cumpra missões.");
 }
 }
-function adicionarXpPersonagem(qtd) {
-dadosCacadorRPG.xp += qtd;
+function adicionarXpPersonagem(quantidade) {
+dadosCacadorRPG.xp += quantidade;
 let xpNecessario = dadosCacadorRPG.nivel * 200;
-if (dadosCacadorRPG.xp >= xpNecessario) {
+while (dadosCacadorRPG.xp >= xpNecessario) {
 dadosCacadorRPG.xp -= xpNecessario;
 dadosCacadorRPG.nivel++;
 dadosCacadorRPG.pontosDisponiveis += 5;
-alert(⁠⚡ LEVEL UP! O Caçador ${dadosCacadorRPG.nome} alcançou o Nível ${dadosCacadorRPG.nivel}!\n+5 Pontos de Atributo recebidos.⁠);
-appendChatMessage('ai', ⁠🎉 [PARABÉNS] Você subiu para o NÍVEL ${dadosCacadorRPG.nivel}!⁠);
+alert(⁠⚡ LEVEL UP! O Caçador ${dadosCacadorRPG.nome} alcançou o Nível ${dadosCacadorRPG.nivel}!\n+5 Pontos de Atributos concedidos!⁠);
+xpNecessario = dadosCacadorRPG.nivel * 200;
 }
 salvarEAtualizarHUDRPG();
 calcularMetasDoNivel();
 }
+function penalizarXpPersonagem(quantidade) {
+dadosCacadorRPG.xp = Math.max(0, dadosCacadorRPG.xp - quantidade);
+salvarEAtualizarHUDRPG();
+}
 function salvarEAtualizarHUDRPG() {
 localStorage.setItem('sistema_cacador_rpg', JSON.stringify(dadosCacadorRPG));
-document.getElementById('display-nome-usuario').innerText = dadosCacadorRPG.nome || 'CAÇADOR';
+document.getElementById('display-nome-usuario').innerText = dadosCacadorRPG.nome;
 document.getElementById('display-nivel-usuario').innerText = dadosCacadorRPG.nivel;
 document.getElementById('display-xp-usuario').innerText = dadosCacadorRPG.xp;
 let xpNecessario = dadosCacadorRPG.nivel * 200;
 document.getElementById('display-xp-proximo').innerText = xpNecessario;
 const barra = document.getElementById('barra-progresso-xp');
 if (barra) {
-let pct = (dadosCacadorRPG.xp / xpNecessario) * 100;
-barra.style.width = ⁠${Math.min(pct, 100)}%⁠;
+let percentual = (dadosCacadorRPG.xp / xpNecessario) * 100;
+barra.style.width = ⁠${Math.min(100, percentual)}%⁠;
 }
 document.getElementById('display-pontos-disponiveis').innerText = dadosCacadorRPG.pontosDisponiveis;
 document.getElementById('atrib-forca').innerText = dadosCacadorRPG.forca;
 document.getElementById('atrib-velocidade').innerText = dadosCacadorRPG.velocidade;
 document.getElementById('atrib-mana').innerText = dadosCacadorRPG.mana;
 document.getElementById('atrib-aura').innerText = dadosCacadorRPG.aura;
-document.querySelectorAll('.btn-adicionar-ponto').forEach(btn => {
+const botoes = document.querySelectorAll('.btn-adicionar-ponto');
+botoes.forEach(btn => {
 btn.disabled = (dadosCacadorRPG.pontosDisponiveis <= 0);
 });
 }
-// Metas Físicas
+// SISTEMA DE METAS FÍSICAS FIXAS (TAF)
 function calcularMetasDoNivel() {
 let nivel = dadosCacadorRPG.nivel || 1;
-document.getElementById('meta-distancia-km').innerText = Math.min(10, Math.max(1, nivel));
-document.getElementById('meta-qtd-flexao').innerText = Math.min(50, Math.round(10 + (nivel - 1) * 4.4));
-document.getElementById('meta-qtd-abdominal').innerText = Math.min(60, Math.round(10 + (nivel - 1) * 5.5));
+let metaKm = Math.min(10, Math.max(1, nivel));
+let metaFlexao = Math.min(50, Math.round(10 + (nivel - 1) * 4));
+let metaAbdominal = Math.min(60, Math.round(10 + (nivel - 1) * 5));
+document.getElementById('meta-distancia-km').innerText = metaKm;
+document.getElementById('meta-qtd-flexao').innerText = metaFlexao;
+document.getElementById('meta-qtd-abdominal').innerText = metaAbdominal;
 }
 function concluirMetaFisica(tipoMeta, xpBonus, pontoAtributoBonus) {
 verificarResetDiarioMetas();
@@ -706,7 +912,7 @@ localStorage.setItem('sistema_cacador_metas_fisicas', JSON.stringify(metasFisica
 dadosCacadorRPG.pontosDisponiveis += pontoAtributoBonus;
 adicionarXpPersonagem(xpBonus);
 renderizarBotoesMetas();
-alert(⁠🎯 META CUMPRIDA!\n+${xpBonus} XP e +${pontoAtributoBonus} Pontos de Atributo!⁠);
+alert(⁠🎯 META FÍSICA BATIDA!\n+${xpBonus} XP e +${pontoAtributoBonus} Pontos de Atributo adquiridos!⁠);
 }
 function verificarResetDiarioMetas() {
 const hojeStr = new Date().toDateString();
@@ -731,151 +937,125 @@ btn.disabled = false;
 }
 });
 }
-// Banco de Questões
-function renderizarBancoQuestoes() {
-Object.keys(questoesBanco).forEach(materia => {
-const container = document.getElementById(⁠container-${materia}⁠);
-if (!container) return;
+// MISSÕES DIÁRIAS DE COMBATE
+function verificarResetDiarioMissoes() {
+const hojeStr = new Date().toDateString();
+if (missoesDiariasStatus.ultimaData !== hojeStr) {
+missoesDiariasStatus.ultimaData = hojeStr;
+missoesDiariasStatus.concluidas = [];
+localStorage.setItem('sistema_cacador_missoes_diarias', JSON.stringify(missoesDiariasStatus));
+}
+}
+function completarMissaoDiaria(idMissao, xpGanho, ganhoForca, ganhoVelocidade, ganhoMana, ganhoAura) {
+verificarResetDiarioMissoes();
+if (missoesDiariasStatus.concluidas.includes(idMissao)) {
+alert('⚠️ Esta missão diária já foi concluída hoje!');
+return;
+}
+missoesDiariasStatus.concluidas.push(idMissao);
+localStorage.setItem('sistema_cacador_missoes_diarias', JSON.stringify(missoesDiariasStatus));
+dadosCacadorRPG.forca += ganhoForca;
+dadosCacadorRPG.velocidade += ganhoVelocidade;
+dadosCacadorRPG.mana += ganhoMana;
+dadosCacadorRPG.aura += ganhoAura;
+adicionarXpPersonagem(xpGanho);
+atualizarBotoesMissoesUI();
+alert(⁠🥋 TREINO CONCLUÍDO!\n+${xpGanho} XP e atributos de combate elevados com sucesso!⁠);
+}
+function atualizarBotoesMissoesUI() {
+verificarResetDiarioMissoes();
+missoesDiariasStatus.concluidas.forEach(id => {
+const btn = document.querySelector(⁠#missao-${id} button⁠);
+if (btn) {
+btn.innerText = "CONCLUÍDO HOJE ✅";
+btn.disabled = true;
+}
+});
+}
+// MONTAGEM DINÂMICA DAS QUESTÕES NAS ABAS
+function renderizarTodasQuestoes() {
+const container = document.getElementById('conteudo-questoes');
 container.innerHTML = '';
-questoesBanco[materia].forEach(q => {
+Object.keys(questoesBanco).forEach((materiaKey, index) => {
+const materiaSection = document.createElement('section');
+materiaSection.id = materiaKey;
+materiaSection.className = ⁠tab-content ${index === 0 ? 'active' : ''}⁠;
+const listaQuestoes = questoesBanco[materiaKey];
+listaQuestoes.forEach(q => {
 const card = document.createElement('div');
 card.className = 'quest-card';
-card.innerHTML = ⁠<p><strong>Questão ${q.id}:</strong> ${q.enunciado}</p> <div class="options"> <button onclick="validarRespostaOpcao(this, '${materia}', ${q.id}, 'a')">A) ${q.opcoes.a}</button> <button onclick="validarRespostaOpcao(this, '${materia}', ${q.id}, 'b')">B) ${q.opcoes.b}</button> <button onclick="validarRespostaOpcao(this, '${materia}', ${q.id}, 'c')">C) ${q.opcoes.c}</button> <button onclick="validarRespostaOpcao(this, '${materia}', ${q.id}, 'd')">D) ${q.opcoes.d}</button> </div> <div id="feedback-${q.id}" style="margin-top: 10px; font-size: 0.85rem;"></div>⁠;
-container.appendChild(card);
+card.innerHTML = ⁠<h4>QUESTÃO #${q.id}</h4> <p>${q.enunciado}</p> <div class="options" id="options-${q.id}"> <button onclick="responderQuestao('${materiaKey}', ${q.id}, 'a', this)">A) ${q.opcoes.a}</button> <button onclick="responderQuestao('${materiaKey}', ${q.id}, 'b', this)">B) ${q.opcoes.b}</button> <button onclick="responderQuestao('${materiaKey}', ${q.id}, 'c', this)">C) ${q.opcoes.c}</button> <button onclick="responderQuestao('${materiaKey}', ${q.id}, 'd', this)">D) ${q.opcoes.d}</button> </div> <div class="feedback-box" id="feedback-${q.id}"></div>⁠;
+materiaSection.appendChild(card);
 });
+container.appendChild(materiaSection);
 });
 }
-function validarRespostaOpcao(btn, materia, idQuestao, opcaoEscolhida) {
-const questao = questoesBanco[materia].find(q => q.id === idQuestao);
-const parent = btn.closest('.options');
-parent.querySelectorAll('button').forEach(b => b.disabled = true);
-const feedback = document.getElementById(⁠feedback-${idQuestao}⁠);
-if (opcaoEscolhida === questao.correta) {
-btn.style.backgroundColor = 'var(--success)';
-btn.style.color = '#fff';
-adicionarXpPersonagem(50);
-feedback.innerHTML = ⁠<span style="color: var(--success);">✔ Correto! +50 XP. ${questao.explicacao}</span>⁠;
-} else {
-btn.style.backgroundColor = 'var(--error)';
-btn.style.color = '#fff';
-feedback.innerHTML = ⁠<span style="color: var(--error);">✖ Incorreto. Correta: (${questao.correta.toUpperCase()}). ${questao.explicacao}</span>⁠;
-}
-}
-function responderQuestaoHTML(btn, correto) {
-const parent = btn.closest('.options');
-parent.querySelectorAll('button').forEach(b => b.disabled = true);
-if (correto) {
-btn.style.backgroundColor = 'var(--success)';
-btn.style.color = '#fff';
-adicionarXpPersonagem(25);
-} else {
-btn.style.backgroundColor = 'var(--error)';
-btn.style.color = '#fff';
-}
-}
-// Navegação entre Abas
 function switchTab(tabId, event) {
 document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
 document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
 document.getElementById(tabId).classList.add('active');
 event.currentTarget.classList.add('active');
 }
-// Notificações Nativas
+function responderQuestao(idMateria, idQuestao, opcaoEscolhida, botaoClicado) {
+const questao = questoesBanco[idMateria].find(q => q.id === idQuestao);
+const parent = document.getElementById(⁠options-${idQuestao}⁠);
+const botoes = parent.querySelectorAll('button');
+const feedbackDiv = document.getElementById(⁠feedback-${idQuestao}⁠);
+botoes.forEach(b => b.disabled = true);
+clearTimeout(temporizadorMissao);
+if (opcaoEscolhida === questao.correta) {
+botaoClicado.style.backgroundColor = 'var(--success)';
+botaoClicado.style.color = '#fff';
+feedbackDiv.style.display = 'block';
+feedbackDiv.style.background = 'rgba(16, 185, 129, 0.15)';
+feedbackDiv.style.border = '1px solid var(--success)';
+feedbackDiv.style.color = '#fff';
+feedbackDiv.innerHTML = ⁠<strong>✔ RESPOSTA CORRETA (+50 XP)!</strong><br>${questao.explicacao}⁠;
+adicionarXpPersonagem(50);
+} else {
+botaoClicado.style.backgroundColor = 'var(--error)';
+botaoClicado.style.color = '#fff';
+feedbackDiv.style.display = 'block';
+feedbackDiv.style.background = 'rgba(239, 68, 68, 0.15)';
+feedbackDiv.style.border = '1px solid var(--error)';
+feedbackDiv.style.color = '#fff';
+feedbackDiv.innerHTML = ⁠<strong>✖ RESPOSTA INCORRETA!</strong> A alternativa correta era a <strong>(${questao.correta.toUpperCase()})</strong>.<br>${questao.explicacao}⁠;
+penalizarXpPersonagem(20);
+dispararNotificacaoCelular("⚠️ RESPOSTA INCORRETA!", "Você errou a questão e perdeu 20 XP na Caçada!");
+}
+}
+// NOTIFICAÇÕES E ALERTAS DE PERIGO
 function solicitarPermissaoNotificacao() {
 if ("Notification" in window && Notification.permission !== "granted" && Notification.permission !== "denied") {
 Notification.requestPermission();
 }
 }
-// Tarefas Secundárias
-function addTask() {
-const input = document.getElementById('taskInput');
-const txt = input.value.trim();
-if (!txt) return;
-const task = { id: Date.now(), text: txt, completed: false };
-let tasks = getTasksFromStorage();
-tasks.push(task);
-localStorage.setItem('app_tasks', JSON.stringify(tasks));
-renderTask(task);
-input.value = '';
-}
-function renderTask(task) {
-const list = document.getElementById('taskList');
-const li = document.createElement('li');
-li.className = ⁠task-item ${task.completed ? 'completed' : ''}⁠;
-li.setAttribute('data-id', task.id);
-li.innerHTML = ⁠<span>${task.text}</span> <div class="task-actions"> <button class="btn-check" onclick="toggleTask(${task.id})">${task.completed ? 'Desfazer' : 'Concluir'}</button> <button class="btn-delete" onclick="deleteTask(${task.id})">Excluir</button> </div>⁠;
-list.appendChild(li);
-}
-function toggleTask(id) {
-let tasks = getTasksFromStorage().map(t => {
-if (t.id === id) {
-t.completed = !t.completed;
-if (t.completed) adicionarXpPersonagem(30);
-}
-return t;
-});
-localStorage.setItem('app_tasks', JSON.stringify(tasks));
-loadTasks();
-}
-function deleteTask(id) {
-let tasks = getTasksFromStorage().filter(t => t.id !== id);
-localStorage.setItem('app_tasks', JSON.stringify(tasks));
-loadTasks();
-}
-function getTasksFromStorage() { return JSON.parse(localStorage.getItem('app_tasks')) || []; }
-function loadTasks() {
-const list = document.getElementById('taskList');
-list.innerHTML = '';
-const tasks = getTasksFromStorage();
-if (tasks.length === 0) list.innerHTML = '<div style="color: var(--text-secondary); font-size: 0.85rem; text-align: center; padding: 10px;">Nenhuma missão diária registrada.</div>';
-else tasks.forEach(renderTask);
-}
-// Suporte a API Gemini
-function saveApiKey() {
-const key = document.getElementById('apiKey').value.trim();
-localStorage.setItem('gemini_api_key', key);
-}
-async function fetchAIResponse(promptText) {
-const apiKey = localStorage.getItem('gemini_api_key');
-if (!apiKey) return '⚠️ [ALERTA] Insira sua Chave da API do Google Gemini acima para ativar o Sistema de IA!';
-const url = ⁠https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}⁠;
+function dispararNotificacaoCelular(titulo, mensagem) {
+if ("Notification" in window && Notification.permission === "granted") {
 try {
-const response = await fetch(url, {
-method: 'POST',
-headers: { 'Content-Type': 'application/json' },
-body: JSON.stringify({ contents: [{ parts: [{ text: promptText }] }] })
+new Notification(titulo, {
+body: mensagem,
+icon: "https://cdn-icons-png.flaticon.com/512/3246/3246731.png",
+vibrate: [200, 100, 200]
 });
-const data = await response.json();
-return data.candidates?.[0]?.content?.parts?.[0]?.text || '⚠️ Não foi possível processar a diretriz.';
-} catch (error) { return '⚠️ [FALHA NA CONEXÃO] ' + error.message; }
+} catch (e) { console.log(e); }
 }
-function appendChatMessage(sender, text) {
-const chatBox = document.getElementById('chatBox');
-const msgDiv = document.createElement('div');
-msgDiv.className = ⁠msg ${sender}⁠;
-msgDiv.innerText = text;
-chatBox.appendChild(msgDiv);
-chatBox.scrollTop = chatBox.scrollHeight;
 }
-async function sendAIMessage() {
-const input = document.getElementById('aiInput');
-const userMsg = input.value.trim();
-if (!userMsg) return;
-appendChatMessage('user', userMsg);
-input.value = '';
-const prompt = ⁠Você é o "Sistema" de Solo Leveling. O Caçador ${dadosCacadorRPG.nome} está no Nível ${dadosCacadorRPG.nivel} estudando para PMPE 2026. Responda em tom motivador de RPG: ${userMsg}⁠;
-appendChatMessage('ai', 'Processando diretriz...');
-const aiResponse = await fetchAIResponse(prompt);
-document.getElementById('chatBox').lastChild.remove();
-appendChatMessage('ai', aiResponse);
+function dispararAlertaPerigo(mensagemMotivo) {
+const antigo = document.getElementById('modal-perigo');
+if (antigo) antigo.remove();
+const overlay = document.createElement('div');
+overlay.id = 'modal-perigo';
+overlay.className = 'alerta-perigo-overlay';
+overlay.innerHTML = ⁠<div class="alerta-perigo-caixa"> <h1>PERIGO</h1> <p><strong>VOCÊ PERDEU XP!</strong></p> <p style="margin-top: 15px; font-size: 1rem;">${mensagemMotivo}</p> <button onclick="fecharAlertaPerigo()" style="margin-top: 20px; padding: 10px 20px; background: #ff4757; color: #fff; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">RETORNAR À CAÇADA</button> </div>⁠;
+document.body.appendChild(overlay);
+if ("vibrate" in navigator) {
+navigator.vibrate([300, 100, 300]);
 }
-async function analisarProgressoAI() {
-const prompt = ⁠Caçador ${dadosCacadorRPG.nome}, Nível ${dadosCacadorRPG.nivel}, XP ${dadosCacadorRPG.xp}. Dê uma avaliação de combate motivadora em 2 frases.⁠;
-appendChatMessage('user', '[Solicitou análise de status]');
-appendChatMessage('ai', 'Analisando atributos...');
-const aiResponse = await fetchAIResponse(prompt);
-document.getElementById('chatBox').lastChild.remove();
-appendChatMessage('ai', aiResponse);
+}
+function fecharAlertaPerigo() {
+const modal = document.getElementById('modal-perigo');
+if (modal) modal.remove();
 }
 </script>
 </body>
