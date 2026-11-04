@@ -7,10 +7,9 @@
     <style>
         :root {
             --bg-color: #030712;
-            --card-bg: #0b1528;
             --system-cyan: #00f0ff;
             --system-cyan-glow: rgba(0, 240, 255, 0.4);
-            --system-blue-dark: rgba(10, 25, 47, 0.85);
+            --system-blue-dark: rgba(6, 22, 43, 0.92);
             --text-color: #f8fafc;
             --text-secondary: #7dd3fc;
             --border-cyan: #00d2ff;
@@ -34,32 +33,25 @@
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            padding: 12px;
+            padding: 16px;
             background-image: 
                 radial-gradient(circle at 50% 20%, rgba(0, 240, 255, 0.15) 0%, transparent 60%),
                 linear-gradient(180deg, #020617 0%, #080f1e 100%);
-        }
-
-        .container {
-            width: 100%;
-            max-width: 850px;
-            background-color: rgba(11, 21, 40, 0.7);
-            border-radius: 4px;
-            padding: 18px;
-            box-shadow: 0 0 20px rgba(0, 240, 255, 0.15);
-            border: 1px solid var(--border-cyan);
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
-            margin-top: 10px;
-            backdrop-filter: blur(8px);
+            overflow-x: hidden;
         }
 
         header {
-            border-bottom: 1px solid var(--border-cyan);
-            padding-bottom: 14px;
+            width: 100%;
+            max-width: 900px;
+            border-bottom: 2px solid var(--system-cyan);
+            padding-bottom: 12px;
+            margin-bottom: 20px;
             text-align: center;
             position: relative;
+            background: rgba(6, 22, 43, 0.7);
+            padding: 14px;
+            border: 1px solid var(--system-cyan);
+            box-shadow: 0 0 20px var(--system-cyan-glow);
         }
 
         header h1 {
@@ -83,51 +75,73 @@
             font-weight: bold;
             font-size: 0.75rem;
             padding: 3px 8px;
-            border-radius: 2px;
-            margin-top: 5px;
+            margin-top: 6px;
             text-transform: uppercase;
         }
 
         .btn-logout {
             position: absolute;
-            right: 5px;
-            top: 5px;
+            right: 10px;
+            top: 10px;
             background: rgba(239, 68, 68, 0.2);
             border: 1px solid var(--error);
             color: var(--error);
-            padding: 6px 10px;
-            border-radius: 4px;
+            padding: 6px 12px;
             cursor: pointer;
             font-size: 0.75rem;
             font-weight: bold;
         }
 
-        .banner-fixo-despertar {
+        /* -------------------------------------------------------------------------- */
+        /* LAYOUT DE JANELAS FLUTUANTES HOLOGRÁFICAS (ESTILO SISTEMA MANHWA)        */
+        /* -------------------------------------------------------------------------- */
+        .system-desktop {
             width: 100%;
-            max-width: 850px;
-            background: linear-gradient(135deg, #1b0000, #2c0b0e);
-            border: 2px solid #ff4757;
-            padding: 16px;
-            color: #fff;
-            box-sizing: border-box;
-            box-shadow: 0 0 15px rgba(255, 71, 87, 0.3);
+            max-width: 900px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
         }
 
-        .alerta-sedentarismo-header {
+        .system-window {
+            background: linear-gradient(180deg, rgba(6, 22, 43, 0.95) 0%, rgba(3, 12, 26, 0.98) 100%);
+            border: 2px solid var(--system-cyan);
+            outline: 1px solid rgba(0, 240, 255, 0.3);
+            outline-offset: 3px;
+            padding: 16px;
+            box-shadow: 0 0 25px var(--system-cyan-glow), inset 0 0 15px rgba(0, 240, 255, 0.1);
+            position: relative;
+            backdrop-filter: blur(8px);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .system-window:hover {
+            box-shadow: 0 0 35px var(--system-cyan), inset 0 0 20px rgba(0, 240, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .window-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--system-cyan);
+            padding-bottom: 8px;
+            margin-bottom: 14px;
+        }
+
+        .window-header h2 {
+            font-size: 0.95rem;
+            color: var(--system-cyan);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow: 0 0 8px var(--system-cyan-glow);
             display: flex;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 12px;
+            gap: 6px;
         }
 
-        .alerta-sedentarismo-header h2 {
-            margin: 0;
-            font-size: 1.1rem;
-            color: #ff4757;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
+        /* BANNER FÍSICO TAF (DENTRO DE JANELA) */
         .metas-rapidas-grid {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
@@ -154,32 +168,31 @@
 
         .botoes-acao-fixos {
             display: flex;
+            flex-direction: column;
             gap: 6px;
         }
 
         .botoes-acao-fixos button {
-            flex: 1;
-            padding: 10px 4px;
-            border: none;
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ff4757;
             font-weight: bold;
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             cursor: pointer;
             color: #fff;
-            background: #ff4757;
+            background: rgba(255, 71, 87, 0.2);
             text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.2s;
         }
 
-        /* ESTILO DO PAINEL HUD RPG HOLOGRÁFICO */
-        .painel-status-cacador {
-            background: rgba(8, 25, 45, 0.9);
-            border: 2px solid var(--system-cyan);
-            padding: 16px;
-            color: #fff;
-            box-shadow: 0 0 15px var(--system-cyan-glow), inset 0 0 15px var(--system-cyan-glow);
-            position: relative;
+        .botoes-acao-fixos button:hover {
+            background: #ff4757;
+            box-shadow: 0 0 12px rgba(255, 71, 87, 0.5);
         }
 
-        .status-header {
+        /* STATUS DO CAÇADOR */
+        .status-header-info {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -189,8 +202,8 @@
         .badge-nivel {
             background: var(--system-cyan);
             color: #000;
-            padding: 4px 10px;
-            font-size: 0.85rem;
+            padding: 3px 8px;
+            font-size: 0.8rem;
             font-weight: bold;
             letter-spacing: 1px;
         }
@@ -225,12 +238,11 @@
             color: var(--system-cyan);
             padding: 8px 12px;
             text-align: center;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             margin-bottom: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            text-shadow: 0 0 5px var(--system-cyan);
         }
 
         .status-grid {
@@ -242,24 +254,24 @@
         .atributo-item {
             background: rgba(3, 12, 27, 0.8);
             border: 1px solid rgba(0, 240, 255, 0.4);
-            padding: 10px;
+            padding: 8px;
             display: flex;
             flex-direction: column;
             align-items: center;
             position: relative;
-            padding-bottom: 35px;
+            padding-bottom: 32px;
         }
 
         .atrib-nome {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: var(--text-secondary);
-            margin-bottom: 4px;
+            margin-bottom: 2px;
             font-weight: bold;
             letter-spacing: 1px;
         }
 
         .atrib-valor {
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: #fff;
             font-weight: bold;
             text-shadow: 0 0 8px var(--system-cyan);
@@ -267,41 +279,35 @@
 
         .btn-adicionar-ponto {
             position: absolute;
-            bottom: 6px;
+            bottom: 4px;
             background: var(--system-cyan);
             color: #000;
             border: none;
             width: 85%;
-            height: 24px;
+            height: 22px;
             font-weight: bold;
-            font-size: 1rem;
+            font-size: 0.9rem;
             cursor: pointer;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        .missoes-diarias-custom {
-            background: rgba(8, 25, 45, 0.8);
-            border: 1px solid var(--border-cyan);
-            padding: 16px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
+        /* MISSÕES CUSTOMIZADAS */
         .task-input-section {
             display: flex;
             gap: 8px;
+            margin-bottom: 12px;
         }
 
         .task-input-section input {
             flex: 1;
-            padding: 10px 12px;
-            border: 1px solid var(--border-cyan);
+            padding: 8px 10px;
+            border: 1px solid var(--system-cyan);
             background: rgba(3, 7, 18, 0.8);
             color: #fff;
             outline: none;
+            font-size: 0.85rem;
         }
 
         .task-list {
@@ -309,7 +315,7 @@
             display: flex;
             flex-direction: column;
             gap: 8px;
-            max-height: 220px;
+            max-height: 200px;
             overflow-y: auto;
         }
 
@@ -318,9 +324,10 @@
             justify-content: space-between;
             align-items: center;
             background: rgba(3, 7, 18, 0.8);
-            padding: 12px;
+            padding: 10px;
             border: 1px solid var(--border-cyan);
             border-left: 4px solid var(--system-cyan);
+            font-size: 0.85rem;
         }
 
         .task-item.completed {
@@ -337,93 +344,21 @@
             background: var(--success);
             color: #fff;
             border: none;
-            padding: 6px 12px;
+            padding: 6px 10px;
             font-weight: bold;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             cursor: pointer;
         }
 
-        /* OVERLAY DO MODAL DE LOGIN ESTILO SISTEMA */
-        .login-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(3, 7, 18, 0.95);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 999999;
-            pointer-events: auto;
-        }
-
-        .login-caixa {
-            background: linear-gradient(180deg, #091a34 0%, #050d1a 100%);
-            border: 2px solid var(--system-cyan);
-            padding: 28px;
-            text-align: center;
-            width: 90%;
-            max-width: 380px;
-            box-shadow: 0 0 35px var(--system-cyan-glow), inset 0 0 15px var(--system-cyan-glow);
-            position: relative;
-            z-index: 1000000;
-        }
-
-        .login-caixa h2 {
-            color: var(--system-cyan);
-            font-size: 1.1rem;
-            margin-bottom: 6px;
-            letter-spacing: 2px;
-            text-shadow: 0 0 10px var(--system-cyan-glow);
-        }
-
-        .login-caixa p {
-            color: var(--text-secondary);
-            font-size: 0.8rem;
-            margin-bottom: 18px;
-        }
-
-        .login-caixa input {
-            width: 100%;
-            padding: 12px;
-            background: rgba(3, 7, 18, 0.9);
-            border: 1px solid var(--system-cyan);
-            color: #fff;
-            font-size: 1rem;
-            margin-bottom: 14px;
-            text-align: center;
-            outline: none;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
-        .btn-acessar-sistema {
-            width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, var(--system-cyan), #0077ff);
-            color: #000;
-            border: none;
-            font-weight: bold;
-            font-size: 0.95rem;
-            cursor: pointer;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            box-shadow: 0 0 15px var(--system-cyan-glow);
-            display: block;
-            touch-action: manipulation;
-        }
-
-        .btn-acessar-sistema:active {
-            transform: scale(0.98);
-            opacity: 0.9;
-        }
-
+        /* NAVEGAÇÃO DE DISCIPLINA */
         .nav-tabs {
+            width: 100%;
+            max-width: 900px;
             display: flex;
             gap: 6px;
             overflow-x: auto;
-            padding-bottom: 5px;
+            padding-bottom: 6px;
+            margin-bottom: 14px;
             white-space: nowrap;
         }
 
@@ -431,7 +366,7 @@
             background-color: rgba(3, 7, 18, 0.8);
             color: var(--text-secondary);
             border: 1px solid var(--border-cyan);
-            padding: 10px 12px;
+            padding: 10px 14px;
             cursor: pointer;
             font-weight: 600;
             font-size: 0.8rem;
@@ -448,6 +383,8 @@
         }
 
         .painel-iniciar-missao {
+            width: 100%;
+            max-width: 900px;
             background: rgba(8, 25, 45, 0.8);
             border: 2px dashed var(--system-cyan);
             padding: 24px;
@@ -479,9 +416,7 @@
             100% { box-shadow: 0 0 10px var(--system-cyan-glow); }
         }
 
-        /* -------------------------------------------------------------------------- */
-        /* BALÃO QUADRADO DO SISTEMA (ESTILO MANHWA MANHUA HOLOGRÁFICO AZUL)        */
-        /* -------------------------------------------------------------------------- */
+        /* JANELA FLUTUANTE HOLOGRÁFICA DE QUESTÃO (JANELA DO SISTEMA) */
         .game-modal-overlay {
             position: fixed;
             top: 0;
@@ -497,9 +432,8 @@
             padding: 16px;
         }
 
-        /* CARD DO SISTEMA HOLOGRÁFICO COM BORDA DUPLA E BRILHO CYAN */
         .game-modal-card {
-            background: linear-gradient(180deg, rgba(6, 22, 43, 0.95) 0%, rgba(3, 12, 26, 0.98) 100%);
+            background: linear-gradient(180deg, rgba(6, 22, 43, 0.96) 0%, rgba(3, 12, 26, 0.98) 100%);
             border: 2px solid var(--system-cyan);
             outline: 1px solid rgba(0, 240, 255, 0.3);
             outline-offset: 4px;
@@ -512,10 +446,8 @@
             gap: 16px;
             position: relative;
             animation: systemPop 0.3s ease-out;
-            border-radius: 2px;
         }
 
-        /* EFEITO DE ENTRADA DO BALÃO DE SISTEMA */
         @keyframes systemPop {
             0% { opacity: 0; transform: scale(0.85); }
             100% { opacity: 1; transform: scale(1); }
@@ -527,7 +459,6 @@
             align-items: center;
             border-bottom: 1px solid var(--system-cyan);
             padding-bottom: 10px;
-            position: relative;
         }
 
         .game-modal-header h3 {
@@ -545,10 +476,8 @@
             font-size: 1.3rem;
             font-weight: bold;
             cursor: pointer;
-            text-shadow: 0 0 5px #ff4757;
         }
 
-        /* PERGUNTA EM CAIXA HOLOGRÁFICA QUADRADA */
         .game-pergunta-texto {
             font-size: 0.95rem;
             color: #ffffff;
@@ -557,10 +486,8 @@
             padding: 16px;
             border: 1px solid rgba(0, 240, 255, 0.5);
             border-left: 4px solid var(--system-cyan);
-            box-shadow: inset 0 0 10px rgba(0, 240, 255, 0.1);
         }
 
-        /* ALTERNATIVAS ESTILO BOTÃO DE INTERFACE RPG */
         .game-options-grid {
             display: flex;
             flex-direction: column;
@@ -577,14 +504,11 @@
             font-size: 0.88rem;
             cursor: pointer;
             transition: all 0.2s ease;
-            letter-spacing: 0.5px;
-            border-radius: 2px;
         }
 
         .game-options-grid button:hover {
             border-color: var(--system-cyan);
             background: rgba(0, 240, 255, 0.15);
-            box-shadow: 0 0 10px var(--system-cyan-glow);
             color: #fff;
         }
 
@@ -593,14 +517,12 @@
             border-color: var(--success) !important;
             color: #fff !important;
             font-weight: bold;
-            box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
         }
 
         .game-options-grid button.wrong {
             background: rgba(239, 68, 68, 0.25) !important;
             border-color: var(--error) !important;
             color: #fff !important;
-            box-shadow: 0 0 12px rgba(239, 68, 68, 0.4);
         }
 
         .game-nav-footer {
@@ -621,13 +543,6 @@
             font-weight: bold;
             font-size: 0.85rem;
             letter-spacing: 1px;
-            text-transform: uppercase;
-            box-shadow: 0 0 8px rgba(0, 240, 255, 0.2);
-        }
-
-        .btn-game-nav:active {
-            background: var(--system-cyan);
-            color: #000;
         }
 
         .feedback-expl {
@@ -639,21 +554,71 @@
             border: 1px solid var(--system-cyan);
             border-left: 4px solid var(--god-gold);
         }
+
+        /* OVERLAY DO MODAL DE LOGIN */
+        .login-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(3, 7, 18, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 999999;
+        }
+
+        .login-caixa {
+            background: linear-gradient(180deg, #091a34 0%, #050d1a 100%);
+            border: 2px solid var(--system-cyan);
+            padding: 28px;
+            text-align: center;
+            width: 90%;
+            max-width: 380px;
+            box-shadow: 0 0 35px var(--system-cyan-glow);
+        }
+
+        .login-caixa input {
+            width: 100%;
+            padding: 12px;
+            background: rgba(3, 7, 18, 0.9);
+            border: 1px solid var(--system-cyan);
+            color: #fff;
+            font-size: 1rem;
+            margin-bottom: 14px;
+            text-align: center;
+            outline: none;
+            font-weight: bold;
+        }
+
+        .btn-acessar-sistema {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--system-cyan), #0077ff);
+            color: #000;
+            border: none;
+            font-weight: bold;
+            font-size: 0.95rem;
+            cursor: pointer;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
     </style>
 </head>
 <body>
 
     <div id="modal-login" class="login-overlay">
         <form class="login-caixa" onsubmit="event.preventDefault(); autenticarGOD();">
-            <h2>⚡ IDENTIFICAÇÃO DO CAÇADOR</h2>
-            <p>Insira seu codinome para acessar o painel da PMPE 2026:</p>
+            <h2 style="color: var(--system-cyan); letter-spacing: 2px; margin-bottom: 8px;">⚡ IDENTIFICAÇÃO DO CAÇADOR</h2>
+            <p style="color: var(--text-secondary); font-size: 0.8rem; margin-bottom: 16px;">Insira seu codinome para acessar o painel da PMPE 2026:</p>
             <input type="text" id="input-login" value="GOD" placeholder="Insira seu codinome..." autocomplete="off">
             <button type="submit" class="btn-acessar-sistema" onclick="autenticarGOD()">ACESSAR SISTEMA</button>
             <div id="login-erro" style="color: #ff4757; font-size: 0.8rem; margin-top: 8px; display: none;">Por favor, digite um codinome válido!</div>
         </form>
     </div>
 
-    <!-- BALÃO POP-UP DO SISTEMA (ESTILO MANHWA HOLOGRÁFICO AZUL) -->
+    <!-- JANELA FLUTUANTE HOLOGRÁFICA DO SISTEMA (QUESTÕES) -->
     <div id="game-quest-overlay" class="game-modal-overlay">
         <div class="game-modal-card">
             <div class="game-modal-header">
@@ -677,50 +642,24 @@
         </div>
     </div>
 
-    <div class="banner-fixo-despertar">
-        <div class="alerta-sedentarismo-header">
-            <span style="font-size: 2rem;">🔥</span>
-            <div>
-                <h2>MISSÕES FÍSICAS DIÁRIAS (TAF)</h2>
-                <p style="font-size: 0.8rem; color: #ddd;">Cumpra suas metas hoje e ganhe XP + Pontos de Habilidade!</p>
-            </div>
-        </div>
+    <header>
+        <button class="btn-logout" onclick="fazerLogout()">SAIR</button>
+        <h1>Painel do Caçador & PMPE 2026</h1>
+        <p>Sistema Gamificado de Alta Performance (210 Questões Integradas)</p>
+        <span class="admin-badge">MODO DESENVOLVEDOR GOD</span>
+    </header>
 
-        <div class="metas-rapidas-grid">
-            <div class="meta-item-rapido">
-                <span>🏃 CORRIDA</span>
-                <strong id="meta-distancia-km">1</strong> km
-            </div>
-            <div class="meta-item-rapido">
-                <span>💪 FLEXÕES</span>
-                <strong id="meta-qtd-flexao">10</strong> rep
-            </div>
-            <div class="meta-item-rapido">
-                <span>🧘 ABDOMINAIS</span>
-                <strong id="meta-qtd-abdominal">10</strong> rep
-            </div>
-        </div>
+    <!-- ÁREA DE DESKTOPS COM JANELAS FLUTUANTES -->
+    <div class="system-desktop">
 
-        <div class="botoes-acao-fixos">
-            <button onclick="concluirMetaFisica('corrida', 120, 4)" id="btn-meta-corrida">CUMPRIR CORRIDA</button>
-            <button onclick="concluirMetaFisica('flexao', 90, 3)" id="btn-meta-flexao">CUMPRIR FLEXÃO</button>
-            <button onclick="concluirMetaFisica('abdominal', 90, 3)" id="btn-meta-abdominal">CUMPRIR ABDOMINAL</button>
-        </div>
-    </div>
-
-    <div class="container">
-        <header>
-            <button class="btn-logout" onclick="fazerLogout()">SAIR</button>
-            <h1>Painel do Caçador & PMPE 2026</h1>
-            <p>Sistema Gamificado de Alta Performance (210 Questões Integradas)</p>
-            <span class="admin-badge">MODO DESENVOLVEDOR GOD</span>
-        </header>
-
-        <div class="painel-status-cacador">
-            <div class="status-header">
-                <h3 id="display-nome-usuario" style="color: var(--system-cyan);">CAÇADOR: GOD</h3>
+        <!-- JANELA 1: STATUS DO CAÇADOR (HUD RPG) -->
+        <div class="system-window">
+            <div class="window-header">
+                <h2>⚡ JANELA DE STATUS</h2>
                 <span class="badge-nivel">NÍVEL <span id="display-nivel-usuario">1</span></span>
             </div>
+            
+            <h3 id="display-nome-usuario" style="color: var(--system-cyan); margin-bottom: 8px; font-size: 1rem;">CAÇADOR: GOD</h3>
             
             <div class="status-barra-xp">
                 <div id="barra-progresso-xp" style="width: 0%;"></div>
@@ -728,7 +667,7 @@
             <div class="status-info-xp">XP: <span id="display-xp-usuario">0</span> / <span id="display-xp-proximo">200</span></div>
 
             <div class="caixa-pontos-disponiveis">
-                <span>PONTOS DE HABILIDADE DISPONÍVEIS:</span>
+                <span>PONTOS DE HABILIDADE:</span>
                 <strong id="display-pontos-disponiveis">5</strong>
             </div>
 
@@ -756,32 +695,63 @@
             </div>
         </div>
 
-        <div class="missoes-diarias-custom">
-            <h3 style="color: var(--system-cyan); font-size: 1rem; letter-spacing: 1px;">⚡ MISSÕES DIÁRIAS DO CAÇADOR</h3>
-            <p style="font-size: 0.75rem; color: #aaa;">Cumprir risca a missão e dá XP/Pontos.</p>
-            
-            <div class="task-input-section">
-                <input type="text" id="customTaskInput" placeholder="Adicionar nova missão diária...">
-                <button class="btn-cumprir-missao" style="background: var(--accent-color);" onclick="addCustomTask()">Adicionar</button>
+        <!-- JANELA 2: MISSÕES FÍSICAS DIÁRIAS (TAF) -->
+        <div class="system-window" style="border-color: #ff4757; outline-color: rgba(255, 71, 87, 0.4);">
+            <div class="window-header" style="border-bottom-color: #ff4757;">
+                <h2 style="color: #ff4757;">🔥 MISSÕES FÍSICAS (TAF)</h2>
+            </div>
+            <p style="font-size: 0.78rem; color: #ddd; margin-bottom: 10px;">Cumpra suas metas hoje e ganhe XP + Pontos!</p>
+
+            <div class="metas-rapidas-grid">
+                <div class="meta-item-rapido">
+                    <span>🏃 CORRIDA</span>
+                    <strong id="meta-distancia-km">1</strong> km
+                </div>
+                <div class="meta-item-rapido">
+                    <span>💪 FLEXÕES</span>
+                    <strong id="meta-qtd-flexao">10</strong> rep
+                </div>
+                <div class="meta-item-rapido">
+                    <span>🧘 ABDOMINAIS</span>
+                    <strong id="meta-qtd-abdominal">10</strong> rep
+                </div>
             </div>
 
+            <div class="botoes-acao-fixos">
+                <button onclick="concluirMetaFisica('corrida', 120, 4)" id="btn-meta-corrida">CUMPRIR CORRIDA</button>
+                <button onclick="concluirMetaFisica('flexao', 90, 3)" id="btn-meta-flexao">CUMPRIR FLEXÃO</button>
+                <button onclick="concluirMetaFisica('abdominal', 90, 3)" id="btn-meta-abdominal">CUMPRIR ABDOMINAL</button>
+            </div>
+        </div>
+
+        <!-- JANELA 3: MISSÕES DIÁRIAS CUSTOMIZADAS -->
+        <div class="system-window">
+            <div class="window-header">
+                <h2>📜 MISSÕES DIÁRIAS</h2>
+            </div>
+            <div class="task-input-section">
+                <input type="text" id="customTaskInput" placeholder="Nova missão diária...">
+                <button class="btn-cumprir-missao" style="background: var(--accent-color);" onclick="addCustomTask()">Add</button>
+            </div>
             <ul class="task-list" id="customTaskList"></ul>
         </div>
 
-        <nav class="nav-tabs">
-            <button class="tab-btn active" onclick="switchTab('portugues', event)">Português (35)</button>
-            <button class="tab-btn" onclick="switchTab('racioc_logico', event)">Raciocínio Lógico (35)</button>
-            <button class="tab-btn" onclick="switchTab('constitucional', event)">Constitucional (35)</button>
-            <button class="tab-btn" onclick="switchTab('direitos_humanos', event)">Direitos Humanos (35)</button>
-            <button class="tab-btn" onclick="switchTab('historia', event)">História de PE (35)</button>
-            <button class="tab-btn" onclick="switchTab('informatica', event)">Informática (35)</button>
-        </nav>
+    </div>
 
-        <div class="painel-iniciar-missao">
-            <h3 id="titulo-materia-ativa" style="color: var(--system-cyan); text-transform: uppercase; letter-spacing: 1px;">DISCIPLINA: PORTUGUÊS</h3>
-            <p style="font-size: 0.85rem; color: var(--text-secondary);">Abra a Janela do Sistema para responder as questões da missão.</p>
-            <button class="btn-pop-quest" onclick="abrirModalQuestao()">⚔️ ABRIR JANELA DO SISTEMA</button>
-        </div>
+    <!-- SELEÇÃO DE DISCIPLINA E BOTÃO DO SISTEMA -->
+    <nav class="nav-tabs">
+        <button class="tab-btn active" onclick="switchTab('portugues', event)">Português (35)</button>
+        <button class="tab-btn" onclick="switchTab('racioc_logico', event)">Raciocínio Lógico (35)</button>
+        <button class="tab-btn" onclick="switchTab('constitucional', event)">Constitucional (35)</button>
+        <button class="tab-btn" onclick="switchTab('direitos_humanos', event)">Direitos Humanos (35)</button>
+        <button class="tab-btn" onclick="switchTab('historia', event)">História de PE (35)</button>
+        <button class="tab-btn" onclick="switchTab('informatica', event)">Informática (35)</button>
+    </nav>
+
+    <div class="painel-iniciar-missao">
+        <h3 id="titulo-materia-ativa" style="color: var(--system-cyan); text-transform: uppercase; letter-spacing: 1px;">DISCIPLINA: PORTUGUÊS</h3>
+        <p style="font-size: 0.85rem; color: var(--text-secondary);">Abra a Janela HOLOGRÁFICA para resolver as questões da missão.</p>
+        <button class="btn-pop-quest" onclick="abrirModalQuestao()">⚔️ ABRIR JANELA DO SISTEMA</button>
     </div>
 
     <script>
