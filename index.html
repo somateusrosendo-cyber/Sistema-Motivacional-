@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Caçador & Produtividade</title>
+    <title>Sistema de Caçador & PMPE 2026</title>
     <style>
         :root {
             --bg-color: #0f172a;
@@ -14,6 +14,7 @@
             --text-secondary: #94a3b8;
             --border-color: #334155;
             --success: #10b981;
+            --error: #ef4444;
             --ai-glow: #8b5cf6;
             --system-blue: #00d2ff;
             --warning: #f59e0b;
@@ -31,18 +32,17 @@
             color: var(--text-color);
             display: flex;
             justify-content: center;
-            align-items: center;
             min-height: 100vh;
-            padding: 20px;
+            padding: 16px;
             background-image: radial-gradient(circle at 50% 0%, rgba(0, 210, 255, 0.1) 0%, transparent 70%);
         }
 
         .container {
             width: 100%;
-            max-width: 650px;
+            max-width: 800px;
             background-color: var(--card-bg);
             border-radius: 16px;
-            padding: 24px;
+            padding: 20px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 15px rgba(0, 210, 255, 0.1);
             border: 1px solid var(--border-color);
             display: flex;
@@ -53,10 +53,11 @@
         header {
             border-bottom: 1px solid var(--border-color);
             padding-bottom: 16px;
+            text-align: center;
         }
 
         header h1 {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             color: var(--system-blue);
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -65,7 +66,7 @@
 
         header p {
             color: var(--text-secondary);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             margin-top: 4px;
         }
 
@@ -86,13 +87,8 @@
             font-size: 0.95rem;
         }
 
-        .status-level {
-            color: var(--system-blue);
-        }
-
-        .status-xp {
-            color: var(--warning);
-        }
+        .status-level { color: var(--system-blue); }
+        .status-xp { color: var(--warning); }
 
         .xp-bar-container {
             width: 100%;
@@ -126,47 +122,59 @@
             border: 1px solid var(--border-color);
             background: var(--bg-color);
             color: var(--text-color);
+            outline: none;
         }
 
-        .input-group {
+        .nav-tabs {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 5px;
+            white-space: nowrap;
+            scrollbar-width: thin;
+        }
+
+        .tab-btn {
+            background-color: var(--bg-color);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+            padding: 10px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            background-color: var(--system-blue);
+            color: var(--bg-color);
+            border-color: var(--system-blue);
+        }
+
+        .tab-content {
+            display: none;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .tab-content.active {
+            display: flex;
+        }
+
+        .task-input-section {
             display: flex;
             gap: 8px;
         }
 
-        input[type="text"], input[type="password"] {
-            flex: 1;
-            padding: 12px 16px;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            outline: none;
-            font-size: 0.95rem;
-        }
-
-        input[type="text"]:focus, input[type="password"]:focus {
-            border-color: var(--system-blue);
-        }
-
-        button {
-            padding: 12px 20px;
-            border-radius: 8px;
-            border: none;
-            background-color: var(--accent-color);
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.2s ease;
-        }
-
-        button:hover {
-            background-color: var(--accent-hover);
-        }
-
         .task-list {
             list-style: none;
-            max-height: 220px;
+            max-height: 200px;
             overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
         }
 
         .task-item {
@@ -174,11 +182,11 @@
             align-items: center;
             justify-content: space-between;
             background-color: var(--bg-color);
-            padding: 12px 16px;
+            padding: 10px 14px;
             border-radius: 8px;
-            margin-bottom: 8px;
             border: 1px solid var(--border-color);
             border-left: 3px solid var(--system-blue);
+            font-size: 0.9rem;
         }
 
         .task-item.completed {
@@ -192,7 +200,7 @@
 
         .task-actions {
             display: flex;
-            gap: 8px;
+            gap: 6px;
         }
 
         .btn-check {
@@ -200,68 +208,97 @@
             color: var(--success);
             border: 1px solid var(--success);
             padding: 4px 8px;
-            font-size: 0.8rem;
-        }
-
-        .btn-check:hover {
-            background-color: var(--success);
-            color: white;
+            font-size: 0.75rem;
+            border-radius: 4px;
+            cursor: pointer;
         }
 
         .btn-delete {
             background-color: transparent;
-            color: #ef4444;
-            border: 1px solid #ef4444;
+            color: var(--error);
+            border: 1px solid var(--error);
             padding: 4px 8px;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
+            border-radius: 4px;
+            cursor: pointer;
         }
 
-        .btn-delete:hover {
-            background-color: #ef4444;
-            color: white;
+        .quest-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--border-color);
+            padding: 16px;
+            border-radius: 10px;
         }
 
-        .empty-state {
-            text-align: center;
-            color: var(--text-secondary);
+        .quest-card p {
+            font-size: 0.95rem;
+            line-height: 1.4;
+            margin-bottom: 12px;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .options button {
+            width: 100%;
+            text-align: left;
+            background: var(--card-bg);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            border-radius: 8px;
             font-size: 0.9rem;
-            padding: 15px 0;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .options button:hover:not(:disabled) {
+            border-color: var(--system-blue);
+            background: rgba(0, 210, 255, 0.05);
+        }
+
+        .options button:disabled {
+            cursor: default;
+            opacity: 0.85;
         }
 
         .ai-section {
             border-top: 1px solid var(--border-color);
             padding-top: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
 
         .ai-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 10px;
         }
 
         .ai-title {
             color: var(--system-blue);
             font-weight: bold;
-            font-size: 1rem;
+            font-size: 0.95rem;
             display: flex;
             align-items: center;
             gap: 6px;
-            letter-spacing: 0.5px;
         }
 
         .chat-box {
             background-color: var(--bg-color);
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            height: 160px;
+            height: 150px;
             overflow-y: auto;
             padding: 12px;
-            margin-bottom: 10px;
             display: flex;
             flex-direction: column;
             gap: 8px;
-            font-size: 0.88rem;
+            font-size: 0.85rem;
         }
 
         .msg {
@@ -284,12 +321,39 @@
             color: #e0f7fa;
         }
 
-        .btn-ai {
-            background-color: #0284c7;
+        .input-group {
+            display: flex;
+            gap: 8px;
         }
 
-        .btn-ai:hover {
-            background-color: #0369a1;
+        input[type="text"], input[type="password"] {
+            flex: 1;
+            padding: 10px 14px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            outline: none;
+            font-size: 0.9rem;
+        }
+
+        input[type="text"]:focus, input[type="password"]:focus {
+            border-color: var(--system-blue);
+        }
+
+        button.action-btn {
+            padding: 10px 16px;
+            border-radius: 8px;
+            border: none;
+            background-color: var(--accent-color);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        button.action-btn:hover {
+            background-color: var(--accent-hover);
         }
     </style>
 </head>
@@ -297,10 +361,11 @@
 
     <div class="container">
         <header>
-            <h1>Painel do Caçador & Sistema IA</h1>
-            <p>Gerencie suas missões e receba diretrizes do Sistema.</p>
+            <h1>Painel do Caçador & PMPE 2026</h1>
+            <p>Gerencie missões diárias, estude por questões e evolua de nível</p>
         </header>
 
+        <!-- Barra de Status / XP -->
         <div class="status-panel">
             <div class="status-info">
                 <span class="status-level" id="hunterLevel">NÍVEL: 1</span>
@@ -311,31 +376,111 @@
             </div>
         </div>
 
+        <!-- Configuração da Chave Gemini -->
         <div class="api-config">
             <label for="apiKey">🔑 Configuração de IA (Chave da API Gemini):</label>
             <input type="password" id="apiKey" placeholder="Cole sua chave da API Google Gemini aqui..." onchange="saveApiKey()">
         </div>
 
-        <div class="input-group">
-            <input type="text" id="taskInput" placeholder="Adicionar nova missão diária...">
-            <button onclick="addTask()">Adicionar</button>
-        </div>
+        <!-- Navegação por Abas (Missões + Matérias) -->
+        <nav class="nav-tabs">
+            <button class="tab-btn active" onclick="switchTab('missoes', event)">Missões</button>
+            <button class="tab-btn" onclick="switchTab('constitucional', event)">Constitucional</button>
+            <button class="tab-btn" onclick="switchTab('direitos-humanos', event)">Direitos Humanos</button>
+            <button class="tab-btn" onclick="switchTab('historia', event)">História de PE</button>
+            <button class="tab-btn" onclick="switchTab('informatica', event)">Informática</button>
+            <button class="tab-btn" onclick="switchTab('portugues', event)">Português</button>
+        </nav>
 
-        <ul class="task-list" id="taskList"></ul>
+        <!-- Aba de Missões Diárias -->
+        <section id="missoes" class="tab-content active">
+            <h2>Missões Diárias do Caçador</h2>
+            <div class="task-input-section">
+                <input type="text" id="taskInput" placeholder="Adicionar nova missão diária...">
+                <button class="action-btn" onclick="addTask()">Adicionar</button>
+            </div>
+            <ul class="task-list" id="taskList"></ul>
+        </section>
 
+        <!-- Matéria 1: Direito Constitucional -->
+        <section id="constitucional" class="tab-content">
+            <h2>Direito Constitucional</h2>
+            <div class="quest-card">
+                <p><strong>Questão 1:</strong> Sobre os Direitos e Garantias Fundamentais na Constituição Federal de 1988, assinale a alternativa correta:</p>
+                <div class="options">
+                    <button onclick="responderQuestao(this, false)">A) A prática do racismo constitui crime inafiançável e imprescritível.</button>
+                    <button onclick="responderQuestao(this, true)">B) É livre a expressão da atividade intelectual, artística, científica e de comunicação, independentemente de censura ou licença.</button>
+                    <button onclick="responderQuestao(this, false)">C) As associações não podem ter suas atividades suspensas por decisão judicial.</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Matéria 2: Direitos Humanos -->
+        <section id="direitos-humanos" class="tab-content">
+            <h2>Direitos Humanos</h2>
+            <div class="quest-card">
+                <p><strong>Questão 1:</strong> Nos termos dos tratados internacionais de Direitos Humanos incorporados pelo Brasil, assinale a assertiva correta:</p>
+                <div class="options">
+                    <button onclick="responderQuestao(this, false)">A) A pena de morte pode ser aplicada em tempo de paz por decisão soberana.</button>
+                    <button onclick="responderQuestao(this, true)">B) Ninguém será submetido a tortura nem a penas ou tratamentos cruéis, desumanos ou degradantes.</button>
+                    <button onclick="responderQuestao(this, false)">C) A prisão por dívida civil é permitida em caso de inadimplência contratual geral.</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Matéria 3: História de Pernambuco -->
+        <section id="historia" class="tab-content">
+            <h2>História de Pernambuco</h2>
+            <div class="quest-card">
+                <p><strong>Questão 1:</strong> Sobre os movimentos históricos em Pernambuco, qual o contexto da Insurreição Pernambucana (1645-1654)?</p>
+                <div class="options">
+                    <button onclick="responderQuestao(this, false)">A) A luta contra a coroa espanhola pela independência do comércio de açúcar.</button>
+                    <button onclick="responderQuestao(this, true)">B) A revolta armada liderada por luso-brasileiros contra o domínio da Companhia das Índias Ocidentais (Holandeses).</button>
+                    <button onclick="responderQuestao(this, false)">C) A proclamação da República separatista em território nordestino.</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Matéria 4: Informática -->
+        <section id="informatica" class="tab-content">
+            <h2>Informática</h2>
+            <div class="quest-card">
+                <p><strong>Questão 1:</strong> No contexto de segurança da informação e redes de computadores, o protocolo HTTPS utiliza qual porta padrão por segurança?</p>
+                <div class="options">
+                    <button onclick="responderQuestao(this, false)">A) Porta 80</button>
+                    <button onclick="responderQuestao(this, false)">B) Porta 21</button>
+                    <button onclick="responderQuestao(this, true)">C) Porta 443</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Matéria 5: Língua Portuguesa -->
+        <section id="portugues" class="tab-content">
+            <h2>Língua Portuguesa</h2>
+            <div class="quest-card">
+                <p><strong>Questão 1:</strong> Assinale a alternativa em que a regência do verbo assistir está em conformidade com a norma-padrão (no sentido de prestar assistência):</p>
+                <div class="options">
+                    <button onclick="responderQuestao(this, false)">A) O médico assistiu o paciente com dedicação exclusiva.</button>
+                    <button onclick="responderQuestao(this, true)">B) O médico assistiu ao paciente com dedicação exclusiva.</button>
+                    <button onclick="responderQuestao(this, false)">C) O médico assistiu pelo paciente no hospital.</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de IA / Chat do Sistema -->
         <div class="ai-section">
             <div class="ai-header">
                 <span class="ai-title">🤖 [SISTEMA DE OBTENÇÃO DE PODER]</span>
-                <button class="btn-ai" style="padding: 6px 12px; font-size: 0.75rem;" onclick="analyzeTasksWithAI()">Analisar Missões</button>
+                <button class="action-btn" style="padding: 6px 12px; font-size: 0.75rem;" onclick="analisarProgressoAI()">Analisar Status</button>
             </div>
 
             <div class="chat-box" id="chatBox">
-                <div class="msg ai">[SISTEMA ATIVADO] Bem-vindo, Caçador. Insira sua chave de API acima, adicione missões e interaja com o Sistema.</div>
+                <div class="msg ai">[SISTEMA ATIVADO] Bem-vindo, Caçador. Conclua missões ou responda às questões para acumular XP e evoluir.</div>
             </div>
 
             <div class="input-group">
                 <input type="text" id="aiInput" placeholder="Enviar comando ao Sistema...">
-                <button class="btn-ai" onclick="sendAIMessage()">Enviar</button>
+                <button class="action-btn" onclick="sendAIMessage()">Enviar</button>
             </div>
         </div>
     </div>
@@ -386,10 +531,18 @@
 
             saveHunterData();
             if (leveledUp) {
-                appendChatMessage('ai', `🎉 [PARABÉNS] O Caçador subiu para o NÍVEL ${hunterData.level}! Seus atributos aumentaram.`);
+                appendChatMessage('ai', `🎉 [PARABÉNS] O Caçador subiu para o NÍVEL ${hunterData.level}! Atributos aumentados.`);
             }
         }
 
+        function switchTab(tabId, event) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        // Gestão de Missões Diárias
         function addTask() {
             const input = document.getElementById('taskInput');
             const taskText = input.value.trim();
@@ -403,9 +556,6 @@
 
         function renderTask(task) {
             const list = document.getElementById('taskList');
-            const emptyState = document.querySelector('.empty-state');
-            if (emptyState) emptyState.remove();
-
             const li = document.createElement('li');
             li.className = `task-item ${task.completed ? 'completed' : ''}`;
             li.setAttribute('data-id', task.id);
@@ -426,10 +576,10 @@
                 if (t.id === id) {
                     t.completed = !t.completed;
                     if (t.completed) {
-                        addXp(35);
-                        appendChatMessage('ai', `[MISSÃO CONCLUÍDA] +35 XP concedidos ao Caçador.`);
+                        addXp(30);
+                        appendChatMessage('ai', `[MISSÃO CONCLUÍDA] +30 XP concedidos ao Caçador.`);
                     } else {
-                        addXp(-35);
+                        addXp(-30);
                     }
                 }
                 return t;
@@ -457,22 +607,48 @@
 
         function loadTasks() {
             const tasks = getTasksFromStorage();
+            const list = document.getElementById('taskList');
+            list.innerHTML = '';
             if (tasks.length === 0) {
-                document.getElementById('taskList').innerHTML = '<div class="empty-state">Nenhuma missão diária registrada.</div>';
+                list.innerHTML = '<div style="color: var(--text-secondary); font-size: 0.85rem; text-align: center; padding: 10px;">Nenhuma missão diária registrada.</div>';
             } else {
                 tasks.forEach(renderTask);
             }
         }
 
         function refreshTasksUI() {
-            document.getElementById('taskList').innerHTML = '';
             loadTasks();
+        }
+
+        // Validação correta e independente para cada questão
+        function responderQuestao(botaoClicado, correto) {
+            const cardPai = botaoClicado.closest('.options');
+            const botoes = cardPai.querySelectorAll('button');
+            
+            botoes.forEach(btn => btn.disabled = true);
+
+            if (correto) {
+                botaoClicado.style.backgroundColor = 'var(--success)';
+                botaoClicado.style.color = '#fff';
+                addXp(25);
+                appendChatMessage('ai', `[RESPOSTA CERTA] +25 XP adicionados ao Caçador.`);
+            } else {
+                botaoClicado.style.backgroundColor = 'var(--error)';
+                botaoClicado.style.color = '#fff';
+                botoes.forEach(btn => {
+                    if (btn.getAttribute('onclick').includes('true')) {
+                        btn.style.backgroundColor = 'var(--success)';
+                        btn.style.color = '#fff';
+                    }
+                });
+                appendChatMessage('ai', `[FALHA DETECTADA] Resposta incorreta. Estude a alternativa destacada em verde.`);
+            }
         }
 
         async function fetchAIResponse(promptText) {
             const apiKey = localStorage.getItem('gemini_api_key');
             if (!apiKey) {
-                appendChatMessage('ai', '⚠️ [ALERTA] Insira sua Chave da API do Google Gemini no campo superior para sincronizar o Sistema!');
+                appendChatMessage('ai', '⚠️ [ALERTA] Insira sua Chave da API do Google Gemini acima para ativar o Sistema de IA!');
                 return;
             }
 
@@ -492,7 +668,7 @@
                     return '⚠️ [ERRO DE PROTOCOLO] Não foi possível processar a diretriz. Verifique sua chave de API.';
                 }
             } catch (error) {
-                return '⚠️ [FALHA NA CONEXÃO DO SISTEMA] ' + error.message;
+                return '⚠️ [FALHA NA CONEXÃO] ' + error.message;
             }
         }
 
@@ -516,33 +692,27 @@
             const tasks = getTasksFromStorage();
             const taskContext = tasks.map(t => `- ${t.text} (${t.completed ? 'Concluída' : 'Pendente'})`).join('\n');
 
-            const fullPrompt = `Você é o "Sistema" de Solo Leveling. O Caçador está atualmente no Nível ${hunterData.level} com ${hunterData.xp}/${hunterData.maxXp} XP. Seja frio, imperativo, use termos de RPG (como Caçador, Status, Penalidade, Missão Urgente) e mantenha um tom robótico, porém motivador. Use caixa alta para alertas.
+            const fullPrompt = `Você é o "Sistema" de Solo Leveling. O Caçador está atualmente no Nível ${hunterData.level} com ${hunterData.xp}/${hunterData.maxXp} XP estudando para a PMPE 2026. Seja imperativo, use termos de RPG e tom motivador.
             
-Status do Caçador: Nível ${hunterData.level}
-Lista de missões atual:
-${taskContext || 'Nenhuma missão registrada no momento.'}
+Missões ativas:
+${taskContext || 'Nenhuma'}
 
-Comando do Caçador: ${userMsg}`;
+Comando: ${userMsg}`;
 
-            appendChatMessage('ai', 'Processando dados do jogador...');
+            appendChatMessage('ai', 'Processando diretriz...');
             const aiResponse = await fetchAIResponse(fullPrompt);
             const chatBox = document.getElementById('chatBox');
             chatBox.removeChild(chatBox.lastChild);
             appendChatMessage('ai', aiResponse);
         }
 
-        async function analyzeTasksWithAI() {
+        async function analisarProgressoAI() {
             const tasks = getTasksFromStorage();
-            if (tasks.length === 0) {
-                appendChatMessage('ai', '[ALERTA] Nenhuma missão ativa detectada. O Caçador precisa registrar tarefas imediatamente!');
-                return;
-            }
-
             const taskContext = tasks.map(t => `- ${t.text} (${t.completed ? 'Concluída' : 'Pendente'})`).join('\n');
-            const prompt = `Você é o "Sistema" de Solo Leveling. O Caçador está no Nível ${hunterData.level}. Analise as missões abaixo e emita uma ordem direta e severa de prioridade em no máximo 2 frases. Use termos como [ALERTA] e [MISSÃO PRIORITÁRIA]:\n${taskContext}`;
-
-            appendChatMessage('user', '[Solicitou análise de missões]');
-            appendChatMessage('ai', 'Analisando status do Caçador...');
+            const prompt = `O Caçador está no Nível ${hunterData.level} com ${hunterData.xp} XP estudando para a PMPE 2026. Missões:\n${taskContext}\nDê uma avaliação severa e motivadora de combatente em 2 frases.`;
+            
+            appendChatMessage('user', '[Solicitou análise de status]');
+            appendChatMessage('ai', 'Analisando atributos...');
 
             const aiResponse = await fetchAIResponse(prompt);
             const chatBox = document.getElementById('chatBox');
@@ -552,406 +722,3 @@ Comando do Caçador: ${userMsg}`;
     </script>
 </body>
 </html>
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Caçador & PMPE 2026</title>
-    <style>
-        :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --accent: #38bdf8;
-            --text-color: #f8fafc;
-            --text-muted: #94a3b8;
-            --border-color: #334155;
-        }
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        header {
-            text-align: center;
-            padding: 20px 0;
-            border-bottom: 1px solid var(--border-color);
-        }
-        header h1 {
-            color: var(--accent);
-            font-size: 1.5rem;
-            margin-bottom: 5px;
-        }
-        .nav-tabs {
-            display: flex;
-            overflow-x: auto;
-            gap: 10px;
-            padding: 15px 0;
-            white-space: nowrap;
-        }
-        .tab-btn {
-            background-color: var(--card-bg);
-            color: var(--text-muted);
-            border: 1px solid var(--border-color);
-            padding: 10px 15px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 500;
-        }
-        .tab-btn.active {
-            background-color: var(--accent);
-            color: var(--bg-color);
-            border-color: var(--accent);
-        }
-        .tab-content {
-            display: none;
-            background-color: var(--card-bg);
-            padding: 20px;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            margin-top: 15px;
-        }
-        .tab-content.active {
-            display: block;
-        }
-        .quest-card {
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid var(--border-color);
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-        }
-        .options button {
-            display: block;
-            width: 100%;
-            text-align: left;
-            background: var(--card-bg);
-            color: var(--text-color);
-            border: 1px solid var(--border-color);
-            padding: 10px;
-            margin-top: 8px;
-            border-radius: 6px;
-            cursor: pointer;
-        }
-        .options button:hover {
-            border-color: var(--accent);
-        }
-        .status-bar {
-            background: var(--card-bg);
-            padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            border: 1px solid var(--accent);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <div class="container">
-            <h1>SISTEMA DE CAÇADOR - PMPE 2026</h1>
-            <p>Foco Total na Aprovação | Delegação Tática</p>
-        </div>
-    </header>
-
-    <main class="container">
-        <!-- Barra de Status do Caçador -->
-        <div class="status-bar">
-            <div>
-                <strong>NÍVEL: <span id="nivel-atual">1</span></strong>
-            </div>
-            <div>
-                <strong>XP: <span id="xp-atual">0</span> / 100</strong>
-            </div>
-        </div>
-
-        <nav class="nav-tabs">
-            <button class="tab-btn active" onclick="switchTab('constitucional', event)">Constitucional</button>
-            <button class="tab-btn" onclick="switchTab('direitos-humanos', event)">Direitos Humanos</button>
-            <button class="tab-btn" onclick="switchTab('historia', event)">História de PE</button>
-            <button class="tab-btn" onclick="switchTab('informatica', event)">Informática</button>
-            <button class="tab-btn" onclick="switchTab('portugues', event)">Português</button>
-        </nav>
-
-        <!-- Seções de Matérias -->
-        <section id="constitucional" class="tab-content active">
-            <h2>Direito Constitucional</h2>
-            <div class="quest-card">
-                <p><strong>Questão 1:</strong> Sobre os Direitos e Garantias Fundamentais na Constituição Federal de 1988, assinale a alternativa correta:</p>
-                <div class="options">
-                    <button onclick="responder(false)">A) A prática do racismo constitui crime inafiançável e imprescritível.</button>
-                    <button onclick="responder(true)">B) É livre a expressão da atividade intelectual, artística, científica e de comunicação, independentemente de censura ou licença.</button>
-                    <button onclick="responder(false)">C) As associações não podem ter suas atividades suspensas por decisão judicial.</button>
-                </div>
-            </div>
-        </section>
-
-        <section id="direitos-humanos" class="tab-content">
-            <h2>Direitos Humanos</h2>
-            <p>Módulo de Direitos Humanos em carregamento tático...</p>
-        </section>
-
-        <section id="historia" class="tab-content">
-            <h2>História de Pernambuco</h2>
-            <p>Módulo de História de Pernambuco em carregamento tático...</p>
-        </section>
-
-        <section id="informatica" class="tab-content">
-            <h2>Informática</h2>
-            <p>Módulo de Informática em carregamento tático...</p>
-        </section>
-
-        <section id="portugues" class="tab-content">
-            <h2>Língua Portuguesa</h2>
-            <p>Módulo de Língua Portuguesa em carregamento tático...</p>
-        </section>
-    </main>
-
-    <script>
-        let xp = parseInt(localStorage.getItem('hunter_xp')) || 0;
-        let nivel = parseInt(localStorage.getItem('hunter_nivel')) || 1;
-
-        function atualizarUI() {
-            document.getElementById('xp-atual').innerText = xp;
-            document.getElementById('nivel-atual').innerText = nivel;
-        }
-
-        function switchTab(tabId, event) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-            document.getElementById(tabId).classList.add('active');
-            event.currentTarget.classList.add('active');
-        }
-
-        function responder(correto) {
-            if (correto) {
-                xp += 20;
-                alert("Respostas corretas! +20 XP de Caçador adquirido.");
-                if (xp >= 100) {
-                    xp = 0;
-                    nivel += 1;
-                    alert("LEVEL UP! Subiste para o Nível " + nivel + "!");
-                }
-                localStorage.setItem('hunter_xp', xp);
-                localStorage.setItem('hunter_nivel', nivel);
-                atualizarUI();
-            } else {
-                alert("Resposta incorreta. O Sistema penaliza a falha. Tenta novamente!");
-            }
-        }
-
-        atualizarUI();
-    </script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Caçador & PMPE 2026</title>
-    <style>
-        :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --accent: #38bdf8;
-            --text-color: #f8fafc;
-            --text-muted: #94a3b8;
-            --border-color: #334155;
-        }
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        header {
-            text-align: center;
-            padding: 20px 0;
-            border-bottom: 1px solid var(--border-color);
-        }
-        header h1 {
-            color: var(--accent);
-            font-size: 1.5rem;
-            margin-bottom: 5px;
-        }
-        .nav-tabs {
-            display: flex;
-            overflow-x: auto;
-            gap: 10px;
-            padding: 15px 0;
-            white-space: nowrap;
-        }
-        .tab-btn {
-            background-color: var(--card-bg);
-            color: var(--text-muted);
-            border: 1px solid var(--border-color);
-            padding: 10px 15px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 500;
-        }
-        .tab-btn.active {
-            background-color: var(--accent);
-            color: var(--bg-color);
-            border-color: var(--accent);
-        }
-        .tab-content {
-            display: none;
-            background-color: var(--card-bg);
-            padding: 20px;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            margin-top: 15px;
-        }
-        .tab-content.active {
-            display: block;
-        }
-        .quest-card {
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid var(--border-color);
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-        }
-        .options button {
-            display: block;
-            width: 100%;
-            text-align: left;
-            background: var(--card-bg);
-            color: var(--text-color);
-            border: 1px solid var(--border-color);
-            padding: 10px;
-            margin-top: 8px;
-            border-radius: 6px;
-            cursor: pointer;
-        }
-        .options button:hover {
-            border-color: var(--accent);
-        }
-        .status-bar {
-            background: var(--card-bg);
-            padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            border: 1px solid var(--accent);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <div class="container">
-            <h1>SISTEMA DE CAÇADOR - PMPE 2026</h1>
-            <p>Foco Total na Aprovação | Delegação Tática</p>
-        </div>
-    </header>
-
-    <main class="container">
-        <!-- Barra de Status do Caçador -->
-        <div class="status-bar">
-            <div>
-                <strong>NÍVEL: <span id="nivel-atual">1</span></strong>
-            </div>
-            <div>
-                <strong>XP: <span id="xp-atual">0</span> / 100</strong>
-            </div>
-        </div>
-
-        <nav class="nav-tabs">
-            <button class="tab-btn active" onclick="switchTab('constitucional', event)">Constitucional</button>
-            <button class="tab-btn" onclick="switchTab('direitos-humanos', event)">Direitos Humanos</button>
-            <button class="tab-btn" onclick="switchTab('historia', event)">História de PE</button>
-            <button class="tab-btn" onclick="switchTab('informatica', event)">Informática</button>
-            <button class="tab-btn" onclick="switchTab('portugues', event)">Português</button>
-        </nav>
-
-        <!-- Seções de Matérias -->
-        <section id="constitucional" class="tab-content active">
-            <h2>Direito Constitucional</h2>
-            <div class="quest-card">
-                <p><strong>Questão 1:</strong> Sobre os Direitos e Garantias Fundamentais na Constituição Federal de 1988, assinale a alternativa correta:</p>
-                <div class="options">
-                    <button onclick="responder(false)">A) A prática do racismo constitui crime inafiançável e imprescritível.</button>
-                    <button onclick="responder(true)">B) É livre a expressão da atividade intelectual, artística, científica e de comunicação, independentemente de censura ou licença.</button>
-                    <button onclick="responder(false)">C) As associações não podem ter suas atividades suspensas por decisão judicial.</button>
-                </div>
-            </div>
-        </section>
-
-        <section id="direitos-humanos" class="tab-content">
-            <h2>Direitos Humanos</h2>
-            <p>Módulo de Direitos Humanos em carregamento tático...</p>
-        </section>
-
-        <section id="historia" class="tab-content">
-            <h2>História de Pernambuco</h2>
-            <p>Módulo de História de Pernambuco em carregamento tático...</p>
-        </section>
-
-        <section id="informatica" class="tab-content">
-            <h2>Informática</h2>
-            <p>Módulo de Informática em carregamento tático...</p>
-        </section>
-
-        <section id="portugues" class="tab-content">
-            <h2>Língua Portuguesa</h2>
-            <p>Módulo de Língua Portuguesa em carregamento tático...</p>
-        </section>
-    </main>
-
-    <script>
-        let xp = parseInt(localStorage.getItem('hunter_xp')) || 0;
-        let nivel = parseInt(localStorage.getItem('hunter_nivel')) || 1;
-
-        function atualizarUI() {
-            document.getElementById('xp-atual').innerText = xp;
-            document.getElementById('nivel-atual').innerText = nivel;
-        }
-
-        function switchTab(tabId, event) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-            document.getElementById(tabId).classList.add('active');
-            event.currentTarget.classList.add('active');
-        }
-
-        function responder(correto) {
-            if (correto) {
-                xp += 20;
-                alert("Respostas corretas! +20 XP de Caçador adquirido.");
-                if (xp >= 100) {
-                    xp = 0;
-                    nivel += 1;
-                    alert("LEVEL UP! Subiste para o Nível " + nivel + "!");
-                }
-                localStorage.setItem('hunter_xp', xp);
-                localStorage.setItem('hunter_nivel', nivel);
-                atualizarUI();
-            } else {
-                alert("Resposta incorreta. O Sistema penaliza a falha. Tenta novamente!");
-            }
-        }
-
-        atualizarUI();
-    </script>
-</body>
-</html>
-
