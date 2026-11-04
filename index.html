@@ -378,7 +378,7 @@
 
         <!-- Configuração da Chave Gemini -->
         <div class="api-config">
-            <label for="apiKey">🔑 Configuração de IA (Chave da API Gemini):</label>
+            <label for="apiKey">🔑 </label>
             <input type="password" id="apiKey" placeholder="Cole sua chave da API Google Gemini aqui..." onchange="saveApiKey()">
         </div>
 
@@ -722,3 +722,1813 @@ Comando: ${userMsg}`;
     </script>
 </body>
 </html>
+<script>
+// ...outras funções anteriores]
+const questoesBanco = {
+    portugues: [
+        {
+            id: 1,
+            enunciado: "No trecho 'O candidato estudou muito; por isso, obteve a aprovação', a expressão destacada estabelece uma relação semântica de:",
+            opcoes: {
+                a: "Oposição",
+                b: "Conclusão",
+                c: "Concessão",
+                d: "Condição"
+            },
+            correta: "b",
+            explicacao: "A expressão 'por isso' introduz uma consequência lógica do esforço anterior, caracterizando uma oração coordenada sindética conclusiva."
+        },
+        {
+            id: 2,
+            enunciado: "Assinale a alternativa em que a concordância verbal está em perfeita consonância com a norma-padrão da língua portuguesa:",
+            opcoes: {
+                a: "Fazem anos que não o vejo na corporação.",
+                b: "Houveram muitos problemas durante o patrulhamento.",
+                c: "Devem existir novas diretrizes para o concurso.",
+                d: "Faltou um documento e duas certidões para a inscrição."
+            },
+            correta: "c",
+            explicacao: "O verbo 'dever' é auxiliar e acompanha o verbo principal 'existir'. Como 'existir' tem sujeito ('novas diretrizes'), ele concorda no plural, atraindo o auxiliar."
+        },
+        {
+            id: 3,
+            enunciado: "Assinale a opção em que o vocábulo acentuado obedece à mesma regra de acentuação gráfica de 'polícia':",
+            opcoes: {
+                a: "país",
+                b: "estudantil",
+                c: "faróis",
+                d: "análise"
+            },
+            correta: "d",
+            explicacao: "A palavra 'polícia' é uma paroxítona terminada em ditongo crescente. 'Análise' é uma proparoxítona (regra própria). 'País' é hiato. 'Faróis' é oxítona terminada em ditongo."
+        },
+        {
+            id: 4,
+            enunciado: "Em 'O policial entregou o relatório ao delegado', os termos 'o relatório' e 'ao delegado' exercem, sintaticamente, as funções de:",
+            opcoes: {
+                a: "Objeto direto e Objeto indireto",
+                b: "Objeto indireto e Objeto direto",
+                c: "Sujeito e Objeto indireto",
+                d: "Adjunto adverbial e Complemento nominal"
+            },
+            correta: "a",
+            explicacao: "'O relatório' completa o verbo transitivo direto sem preposição (objeto direto). 'Ao delegado' completa o verbo bitransitivo com preposição 'a' (objeto indireto)."
+        }
+    ],
+    informatica: [
+        {
+            id: 5,
+            enunciado: "No ambiente Windows e editores de texto como o VS Code, qual atalho de teclado é universalmente utilizado para salvar o arquivo atual?",
+            opcoes: {
+                a: "Ctrl + C",
+                b: "Ctrl + V",
+                c: "Ctrl + S",
+                d: "Ctrl + Z"
+            },
+            correta: "c",
+            explicacao: "O atalho Ctrl + S (de *Save*) é o comando padrão para salvar o documento ou código em edição."
+        },
+        {
+            id: 6,
+            enunciado: "Em bancos de dados relacionais e comandos DML (Data Manipulation Language), qual instrução é utilizada para recuperar e consultar dados de uma tabela?",
+            opcoes: {
+                a: "INSERT",
+                b: "UPDATE",
+                c: "DELETE",
+                d: "SELECT"
+            },
+            correta: "d",
+            explicacao: "O comando SELECT pertence à linguagem DML (e ao subconjunto de consulta DQL) e serve estritamente para extração e consulta de registros."
+        },
+        {
+            id: 7,
+            enunciado: "Sobre redes de computadores, o protocolo responsável pela atribuição dinâmica de endereços IP aos dispositivos conectados na rede local é o:",
+            opcoes: {
+                a: "DHCP",
+                b: "HTTP",
+                c: "FTP",
+                d: "SMTP"
+            },
+            correta: "a",
+            explicacao: "O DHCP (*Dynamic Host Configuration Protocol*) automatiza a distribuição de configurações de rede, como endereços IP e máscaras de sub-rede."
+        }
+    ],
+    constitucional: [
+        {
+            id: 8,
+            enunciado: "Segundo a Constituição Federal de 1988, a segurança pública, dever do Estado, direito e responsabilidade de todos, é exercida para a preservação da ordem pública e da incolumidade das pessoas e do patrimônio, através dos seguintes órgãos, EXCETO:",
+            opcoes: {
+                a: "Polícias Militares e Corpos de Bombeiros Militares",
+                b: "Polícia Rodoviária Federal",
+                c: "Guardas Municipais armadas em qualquer município",
+                d: "Polícias Civis"
+            },
+            correta: "c",
+            explicacao: "O art. 144 da CF/88 elenca taxativamente os órgãos de segurança pública. As Guardas Municipais auxiliam, mas não integram o rol primário dos órgãos federais/estaduais descritos no caput do art. 144 com as mesmas prerrogativas estaduais."
+        },
+        {
+            id: 9,
+            enunciado: "Constitui crime inafiançável e imprescritível, sujeito à pena de reclusão, nos termos da Constituição Federal:",
+            opcoes: {
+                a: "A prática de racismo",
+                b: "O homicídio simples",
+                c: "O furto qualificado por rompimento de obstáculo",
+                d: "O porte ilegal de arma de fogo de uso restrito"
+            },
+            correta: "a",
+            explicacao: "Conforme o art. 5°, inciso XLII da CF/88, a prática do racismo constitui crime inafiançável e imprescritível, sujeito à pena de reclusão."
+        }
+    ],
+    racioc_logico: [
+        {
+            id: 10,
+            enunciado: "Considerando a proposição lógica P: 'Se o policial estuda, então ele passa no concurso', a sua contra-recíproca (equivalência lógica) é:",
+            opcoes: {
+                a: "Se o policial não passa no concurso, então ele não estuda.",
+                b: "Se o policial não estuda, então ele não passa no concurso.",
+                c: "Se o policial passa no concurso, então ele estuda.",
+                d: "O policial estuda e não passa no concurso."
+            },
+            correta: "a",
+            explicacao: "A equivalência lógica da implicação (Se P, então Q) é dada pela contra-recíproca: (Se não Q, então não P). Nega-se e inverte-se a ordem."
+        }
+    ],
+    const questoesBanco = {
+    portugues: [
+        {
+            id: 1,
+            enunciado: "No trecho 'O candidato estudou muito; por isso, obteve a aprovação', a expressão destacada estabelece uma relação semântica de:",
+            opcoes: {
+                a: "Oposição",
+                b: "Conclusão",
+                c: "Concessão",
+                d: "Condição"
+            },
+            correta: "b",
+            explicacao: "A expressão 'por isso' introduz uma consequência lógica do esforço anterior, caracterizando uma oração coordenada sindética conclusiva."
+        },
+        {
+            id: 2,
+            enunciado: "Assinale a alternativa em que a concordância verbal está em perfeita consonância com a norma-padrão da língua portuguesa:",
+            opcoes: {
+                a: "Fazem anos que não o vejo na corporação.",
+                b: "Houveram muitos problemas durante o patrulhamento.",
+                c: "Devem existir novas diretrizes para o concurso.",
+                d: "Faltou um documento e duas certidões para a inscrição."
+            },
+            correta: "c",
+            explicacao: "O verbo 'dever' é auxiliar e acompanha o verbo principal 'existir'. Como 'existir' tem sujeito ('novas diretrizes'), ele concorda no plural, atraindo o auxiliar."
+        },
+        {
+            id: 3,
+            enunciado: "Assinale a opção em que o vocábulo acentuado obedece à mesma regra de acentuação gráfica de 'polícia':",
+            opcoes: {
+                a: "país",
+                b: "estudantil",
+                c: "faróis",
+                d: "análise"
+            },
+            correta: "d",
+            explicacao: "A palavra 'polícia' é uma paroxítona terminada em ditongo crescente. 'Análise' é uma proparoxítona (regra própria). 'País' é hiato. 'Faróis' é oxítona terminada em ditongo."
+        },
+        {
+            id: 4,
+            enunciado: "Em 'O policial entregou o relatório ao delegado', os termos 'o relatório' e 'ao delegado' exercem, sintaticamente, as funções de:",
+            opcoes: {
+                a: "Objeto direto e Objeto indireto",
+                b: "Objeto indireto e Objeto direto",
+                c: "Sujeito e Objeto indireto",
+                d: "Adjunto adverbial e Complemento nominal"
+            },
+            correta: "a",
+            explicacao: "'O relatório' completa o verbo transitivo direto sem preposição (objeto direto). 'Ao delegado' completa o verbo bitransitivo com preposição 'a' (objeto indireto)."
+        },
+        {
+            id: 11,
+            enunciado: "Assinale a alternativa em que o uso da crase está INCORRETO de acordo com a norma-padrão:",
+            opcoes: {
+                a: "O policial foi à ronda noturna.",
+                b: "Chegou a Vossa Excelência uma cópia do memorando.",
+                c: "Fomos a Salvador participar do treinamento tático.",
+                d: "Entreguei o relatório à guarnição de serviço."
+            },
+            correta: "b",
+            explicacao: "Não se emprega crase antes de pronomes de tratamento iniciados por 'Vossa'."
+        },
+        {
+            id: 12,
+            enunciado: "No trecho 'Os soldados marcharam determinadamente', a palavra destacada exerce função morfológica de:",
+            opcoes: {
+                a: "Substantivo",
+                b: "Adjetivo",
+                c: "Advérbio",
+                d: "Preposição"
+            },
+            correta: "c",
+            explicacao: "A palavra 'determinadamente' é um advérbio de modo (terminada em -mente), modificando o verbo marchar."
+        }
+    ],
+    informatica: [
+        {
+            id: 5,
+            enunciado: "No ambiente Windows e editores de texto como o VS Code, qual atalho de teclado é universalmente utilizado para salvar o arquivo atual?",
+            opcoes: {
+                a: "Ctrl + C",
+                b: "Ctrl + V",
+                c: "Ctrl + S",
+                d: "Ctrl + Z"
+            },
+            correta: "c",
+            explicacao: "O atalho Ctrl + S (de *Save*) é o comando padrão para salvar o documento ou código em edição."
+        },
+        {
+            id: 6,
+            enunciado: "Em bancos de dados relacionais e comandos DML (Data Manipulation Language), qual instrução é utilizada para recuperar e consultar dados de uma tabela?",
+            opcoes: {
+                a: "INSERT",
+                b: "UPDATE",
+                c: "DELETE",
+                d: "SELECT"
+            },
+            correta: "d",
+            explicacao: "O comando SELECT pertence à linguagem DML (e ao subconjunto de consulta DQL) e serve estritamente para extração e consulta de registros."
+        },
+        {
+            id: 7,
+            enunciado: "Sobre redes de computadores, o protocolo responsável pela atribuição dinâmica de endereços IP aos dispositivos conectados na rede local é o:",
+            opcoes: {
+                a: "DHCP",
+                b: "HTTP",
+                c: "FTP",
+                d: "SMTP"
+            },
+            correta: "a",
+            explicacao: "O DHCP (*Dynamic Host Configuration Protocol*) automatiza a distribuição de configurações de rede, como endereços IP e máscaras de sub-rede."
+        },
+        {
+            id: 13,
+            enunciado: "No contexto de bancos de dados SQL, qual comando DDL (Data Definition Language) é utilizado para apagar uma tabela inteira do banco, removendo sua estrutura e dados permanentemente?",
+            opcoes: {
+                a: "DELETE",
+                b: "DROP TABLE",
+                c: "REMOVE TABLE",
+                d: "TRUNCATE VIEW"
+            },
+            correta: "b",
+            explicacao: "O comando DROP TABLE exclui completamente a tabela do banco de dados."
+        },
+        {
+            id: 14,
+            enunciado: "Em sistemas operacionais Windows, qual comando executado no Prompt de Comando (CMD) exibe a configuração de endereço IP da máquina?",
+            opcoes: {
+                a: "ping",
+                b: "tracert",
+                c: "ipconfig",
+                d: "netstat"
+            },
+            correta: "c",
+            explicacao: "O comando 'ipconfig' é utilizado para visualizar os endereços IPv4, máscara de sub-rede e gateway padrão das interfaces de rede."
+        }
+    ],
+    constitucional: [
+        {
+            id: 8,
+            enunciado: "Segundo a Constituição Federal de 1988, a segurança pública, dever do Estado, direito e responsabilidade de todos, é exercida para a preservação da ordem pública e da incolumidade das pessoas e do patrimônio, através dos seguintes órgãos, EXCETO:",
+            opcoes: {
+                a: "Polícias Militares e Corpos de Bombeiros Militares",
+                b: "Polícia Rodoviária Federal",
+                c: "Guardas Municipais armadas em qualquer município",
+                d: "Polícias Civis"
+            },
+            correta: "c",
+            explicacao: "O art. 144 da CF/88 elenca taxativamente os órgãos de segurança pública. As Guardas Municipais auxiliam, mas não integram o rol primário dos órgãos federais/estaduais descritos no caput."
+        },
+        {
+            id: 9,
+            enunciado: "Constitui crime inafiançável e imprescritível, sujeito à pena de reclusão, nos termos da Constituição Federal:",
+            opcoes: {
+                a: "A prática de racismo",
+                b: "O homicídio simples",
+                c: "O furto qualificado por rompimento de obstáculo",
+                d: "O porte ilegal de arma de fogo de uso restrito"
+            },
+            correta: "a",
+            explicacao: "Conforme o art. 5°, inciso XLII da CF/88, a prática do racismo constitui crime inafiançável e imprescritível, sujeito à pena de reclusão."
+        },
+        {
+            id: 15,
+            enunciado: "Nos termos da Constituição Federal, o alistamento eleitoral e o voto são obrigatórios para:",
+            opcoes: {
+                a: "Os analfabetos e os maiores de setenta anos.",
+                b: "Os maiores de dezoito anos.",
+                c: "Os maiores de dezesseis e menores de dezoito anos.",
+                d: "Os conscritos durante o período do serviço militar obrigatório."
+            },
+            correta: "b",
+            explicacao: "O voto é obrigatório para os maiores de 18 anos e facultativo para analfabetos, maiores de 70 anos e maiores de 16 e menores de 18 anos."
+        }
+    ],
+    racioc_logico: [
+        {
+            id: 10,
+            enunciado: "Considerando a proposição lógica P: 'Se o policial estuda, então ele passa no concurso', a sua contra-recíproca (equivalência lógica) é:",
+            opcoes: {
+                a: "Se o policial não passa no concurso, então ele não estuda.",
+                b: "Se o policial não estuda, então ele não passa no concurso.",
+                c: "Se o policial passa no concurso, então ele estuda.",
+                d: "O policial estuda e não passa no concurso."
+            },
+            correta: "a",
+            explicacao: "A equivalência lógica da implicação (Se P, então Q) é dada pela contra-recíproca: (Se não Q, então não P)."
+        }
+    ]
+};
+
+};
+let pontuacaoUsuario = {
+    xp: 0,
+    nivel: 1,
+    acertosConsecutivos: 0
+};
+
+function responderQuestao(idMateria, idQuestao, respostaEscolhida) {
+    const questao = questoesBanco[idMateria].find(q => q.id === idQuestao);
+    const feedbackDiv = document.getElementById(`feedback-${idQuestao}`);
+
+    if (respostaEscolhida === questao.correta) {
+        // Recompensa de XP por acerto
+        pontuacaoUsuario.xp += 50;
+        pontuacaoUsuario.acertosConsecutivos++;
+        
+        feedbackDiv.innerHTML = `<span style="color: green;">✔ Resposta Correta! +50 XP. Explicação: ${questao.explicacao}</span>`;
+        
+        // Sistema de Nível Automático
+        if (pontuacaoUsuario.xp >= pontuacaoUsuario.nivel * 200) {
+            pontuacaoUsuario.nivel++;
+            alert(`♾️ Parabéns! Você avançou para o Nível ${pontuacaoUsuario.nivel} no Sistema de Caçador!`);
+        }
+    } else {
+        pontuacaoUsuario.acertosConsecutivos = 0;
+        feedbackDiv.innerHTML = `<span style="color: red;">✖ Resposta Incorreta. A alternativa correta era a letra (${questao.correta.toUpperCase()}). Explicação: ${questao.explicacao}</span>`;
+    }
+    
+    // Atualizar interface gráfica se houver elementos de display de XP
+    atualizarPainelHUD();
+}
+
+function atualizarPainelHUD() {
+    console.log(`XP Atual: ${pontuacaoUsuario.xp} | Nível: ${pontuacaoUsuario.nivel}`);
+}
+/* Estilo do Balão de Missão Surpresa */
+.missao-surpresa-balao {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+    border: 2px solid #e74c3c;
+    color: #fff;
+    padding: 15px 20px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(231, 76, 60, 0.4);
+    z-index: 9999;
+    width: 90%;
+    max-width: 400px;
+    animation: slideDown 0.5s ease-out;
+}
+
+/* Alerta de Perigo Grane (XP Perdido) */
+.alerta-perigo-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(231, 76, 60, 0.85);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    animation: fadeIn 0.2s ease-in-out;
+}
+
+.alerta-perigo-caixa {
+    background: #111;
+    border: 4px solid #fff;
+    padding: 30px;
+    border-radius: 16px;
+    text-align: center;
+    color: #ff4757;
+    box-shadow: 0 0 50px rgba(0,0,0,0.8);
+    max-width: 90%;
+}
+
+.alerta-perigo-caixa h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.alerta-perigo-caixa p {
+    color: #fff;
+    font-size: 1.2rem;
+}
+
+@keyframes slideDown {
+    from { transform: translate(-50%, -100px); opacity: 0; }
+    to { transform: translate(-50%, 0); opacity: 1; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+let temporizadorMissao = null;
+const TEMPO_LIMITE_CELULAR = 15000; // 15 segundos para responder no celular antes de perder o XP
+
+function iniciarMissaoSurpresa(idMateria, idQuestao) {
+    // Exibe o balão de missão surpresa na tela
+    mostrarBalaoNotificacao("♾️ MISSÃO SURPRESA ATIVA! Responda rápido!");
+
+    // Configura o temporizador automático para dispositivos móveis
+    clearTimeout(temporizadorMissao);
+    temporizadorMissao = setTimeout(() => {
+        perderXpPorTempoEsgotado();
+    }, TEMPO_LIMITE_CELULAR);
+}
+
+function mostrarBalaoNotificacao(mensagem) {
+    const balao = document.createElement('div');
+    balao.className = 'missao-surpresa-balao';
+    balao.innerHTML = `<strong>⚠️ ATENÇÃO CAÇADOR:</strong><br>${mensagem}`;
+    document.body.appendChild(balao);
+
+    setTimeout(() => {
+        balao.remove();
+    }, 4000);
+}
+
+function perderXpPorTempoEsgotado() {
+    // Reduz o XP do usuário como penalidade
+    pontuacaoUsuario.xp = Math.max(0, pontuacaoUsuario.xp - 100);
+    pontuacaoUsuario.acertosConsecutivos = 0;
+
+    // Dispara a tela cheia de PERIGO
+    dispararAlertaPerigo("TEMPO ESGOTADO! Você perdeu 100 XP.");
+    
+    // Atualiza a interface e passa para a próxima questão automaticamente
+    atualizarPainelHUD();
+    avancarParaProximaQuestaoAutomatica();
+}
+
+function dispararAlertaPerigo(mensagemMotivo) {
+    // Remove alerta anterior se existir
+    const antigo = document.getElementById('modal-perigo');
+    if (antigo) antigo.remove();
+
+    const overlay = document.createElement('div');
+    overlay.id = 'modal-perigo';
+    overlay.className = 'alerta-perigo-overlay';
+    overlay.innerHTML = `
+        <div class="alerta-perigo-caixa">
+            <h1>PERIGO</h1>
+            <p><strong>VOCÊ PERDEU MUITO XP!</strong></p>
+            <p style="margin-top: 15px; font-size: 1rem;">${mensagemMotivo}</p>
+            <button onclick="fecharAlertaPerigo()" style="margin-top: 20px; padding: 10px 20px; background: #ff4757; color: #fff; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">RETORNAR À CAÇADA</button>
+        </div>
+    `;
+    document.body.appendChild(overlay);
+
+    // Vibração no celular (se suportado pelo navegador)
+    if ("vibrate" in navigator) {
+        navigator.vibrate([300, 100, 300]);
+    }
+}
+
+function fecharAlertaPerigo() {
+    const modal = document.getElementById('modal-perigo');
+    if (modal) modal.remove();
+}
+
+function avancarParaProximaQuestaoAutomatica() {
+    // Lógica para carregar automaticamente a próxima questão no seu index.html
+    console.log("Passando automaticamente para a próxima questão...");
+    // Exemplo: carregarProximaQuestaoDaFila();
+}
+<!-- Tela de Login do Caçador -->
+<div id="modal-login" class="login-overlay">
+    <div class="login-caixa">
+        <h2>⚡ IDENTIFICAÇÃO DO CAÇADOR</h2>
+        <p>Insira seu codinome para acessar o painel da PMPE 2026:</p>
+        <input type="text" id="input-nome-cacador" placeholder="Ex: Caçador Alpha" autocomplete="off">
+        <button onclick="realizarLoginCacador()">ACESSAR SISTEMA</button>
+    </div>
+</div>
+
+<style>
+.login-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #0b0b0b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+}
+
+.login-caixa {
+    background: #161616;
+    border: 2px solid #e74c3c;
+    padding: 30px;
+    border-radius: 14px;
+    text-align: center;
+    width: 90%;
+    max-width: 380px;
+    box-shadow: 0 10px 30px rgba(231, 76, 60, 0.3);
+}
+
+.login-caixa h2 {
+    color: #fff;
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+}
+
+.login-caixa p {
+    color: #aaa;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+.login-caixa input {
+    width: 100%;
+    padding: 12px;
+    background: #222;
+    border: 1px solid #444;
+    color: #fff;
+    border-radius: 8px;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    text-align: center;
+    outline: none;
+}
+
+.login-caixa input:focus {
+    border-color: #e74c3c;
+}
+
+.login-caixa button {
+    width: 100%;
+    padding: 12px;
+    background: #e74c3c;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.login-caixa button:hover {
+    background: #c0392b;
+}
+</style>
+// Objeto de dados do usuário persistente
+let dadosCacador = JSON.parse(localStorage.getItem('sistema_cacador_user')) || {
+    nome: '',
+    xp: 0,
+    nivel: 1,
+    acertosConsecutivos: 0
+};
+
+// Verifica o login ao carregar a página
+window.addEventListener('DOMContentLoaded', () => {
+    const modalLogin = document.getElementById('modal-login');
+    if (dadosCacador.nome) {
+        // Se já estiver logado, esconde a tela de login e atualiza a HUD
+        modalLogin.style.display = 'none';
+        atualizarPainelHUD();
+    } else {
+        // Se não, exibe a tela de login
+        modalLogin.style.display = 'flex';
+    }
+});
+
+function realizarLoginCacador() {
+    const inputNome = document.getElementById('input-nome-cacador').value.trim();
+    
+    if (inputNome === '') {
+        alert('Por favor, insira um codinome válido para iniciar!');
+        return;
+    }
+
+    // Salva o nome e inicializa os dados
+    dadosCacador.nome = inputNome;
+    salvarDadosLocalmente();
+
+    // Esconde o modal de login com animação suave
+    document.getElementById('modal-login').style.display = 'none';
+    
+    atualizarPainelHUD();
+}
+
+function salvarDadosLocalmente() {
+    localStorage.setItem('sistema_cacador_user', JSON.stringify(dadosCacador));
+}
+
+// Função auxiliar para atualizar o XP e salvar automaticamente
+function adicionarXp(quantidade) {
+    dadosCacador.xp += quantidade;
+    
+    // Sistema de progressão de Nível
+    if (dadosCacador.xp >= dadosCacador.nivel * 200) {
+        dadosCacador.nivel++;
+        alert(`🎉 SUBIU DE NÍVEL! O Caçador ${dadosCacador.nome} alcançou o Nível ${dadosCacador.nivel}!`);
+    }
+
+    salvarDadosLocalmente();
+    atualizarPainelHUD();
+}
+
+function penalizarXp(quantidade) {
+    dadosCacador.xp = Math.max(0, dadosCacador.xp - quantidade);
+    salvarDadosLocalmente();
+    atualizarPainelHUD();
+}
+
+function atualizarPainelHUD() {
+    // Se você tiver elementos visuais no HTML para mostrar o nome, XP e nível, atualize aqui:
+    console.log(`Caçador: ${dadosCacador.nome} | Nível: ${dadosCacador.nivel} | XP: ${dadosCacador.xp}`);
+    
+    // Exemplo se houver elementos com IDs específicos na sua tela:
+    const elNome = document.getElementById('display-nome-usuario');
+    if (elNome) elNome.innerText = dadosCacador.nome;
+
+    const elXp = document.getElementById('display-xp-usuario');
+    if (elXp) elXp.innerText = dadosCacador.xp;
+
+    const elNivel = document.getElementById('display-nivel-usuario');
+    if (elNivel) elNivel.innerText = dadosCacador.nivel;
+}
+<!-- Painel de Status do Caçador -->
+<div class="painel-status-cacador">
+    <div class="status-header">
+        <h3 id="display-nome-usuario">CAÇADOR</h3>
+        <span class="badge-nivel">NÍVEL <span id="display-nivel-usuario">1</span></span>
+    </div>
+    
+    <div class="status-barra-xp">
+        <div id="barra-progresso-xp" style="width: 0%;"></div>
+    </div>
+    <div class="status-info-xp">XP: <span id="display-xp-usuario">0</span> / <span id="display-xp-proximo">200</span></div>
+
+    <!-- Atributos de RPG -->
+    <div class="status-grid">
+        <div class="atributo-item">
+            <span class="atrib-nome">⚡ FORÇA</span>
+            <span id="atrib-forca" class="atrib-valor">10</span>
+        </div>
+        <div class="atributo-item">
+            <span class="atrib-nome">💨 VELOCIDADE</span>
+            <span id="atrib-velocidade" class="atrib-valor">10</span>
+        </div>
+        <div class="atributo-item">
+            <span class="atrib-nome">🔮 MANA</span>
+            <span id="atrib-mana" class="atrib-valor">10</span>
+        </div>
+        <div class="atributo-item">
+            <span class="atrib-nome">🔥 AURA</span>
+            <span id="atrib-aura" class="atrib-valor">10</span>
+        </div>
+    </div>
+</div>
+.painel-status-cacador {
+    background: linear-gradient(135deg, #121212, #1f1f1f);
+    border: 2px solid #e74c3c;
+    border-radius: 14px;
+    padding: 20px;
+    color: #fff;
+    max-width: 400px;
+    margin: 20px auto;
+    box-shadow: 0 8px 25px rgba(231, 76, 60, 0.25);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.status-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.status-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #ff4757;
+    letter-spacing: 1px;
+}
+
+.badge-nivel {
+    background: #e74c3c;
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+.status-barra-xp {
+    width: 100%;
+    height: 10px;
+    background: #2a2a2a;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+
+#barra-progresso-xp {
+    height: 100%;
+    background: linear-gradient(90deg, #e74c3c, #f39c12);
+    width: 0%;
+    transition: width 0.4s ease-in-out;
+}
+
+.status-info-xp {
+    font-size: 0.8rem;
+    color: #aaa;
+    text-align: right;
+    margin-bottom: 15px;
+}
+
+.status-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.atributo-item {
+    background: #181818;
+    border: 1px solid #333;
+    padding: 10px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.atrib-nome {
+    font-size: 0.75rem;
+    color: #888;
+    margin-bottom: 4px;
+    font-weight: bold;
+}
+
+.atrib-valor {
+    font-size: 1.2rem;
+    color: #fff;
+    font-weight: bold;
+}
+// Carrega ou inicializa os dados do caçador com os atributos de RPG
+let dadosCacadorRPG = JSON.parse(localStorage.getItem('sistema_cacador_rpg')) || {
+    nome: 'Caçador',
+    xp: 0,
+    nivel: 1,
+    forca: 10,
+    velocidade: 10,
+    mana: 10,
+    aura: 10
+};
+
+// Função chamada sempre que o usuário ganha XP (ex: acertar uma questão)
+function adicionarXpPersonagem(quantidade) {
+    dadosCacadorRPG.xp += quantidade;
+    
+    // Cada nível exige 200 XP vezes o nível atual
+    let xpNecessario = dadosCacadorRPG.nivel * 200;
+
+    if (dadosCacadorRPG.xp >= xpNecessario) {
+        dadosCacadorRPG.xp -= xpNecessario;
+        dadosCacadorRPG.nivel++;
+        
+        // Bônus automático de atributos ao subir de nível!
+        dadosCacadorRPG.forca += 3;
+        dadosCacadorRPG.velocidade += 3;
+        dadosCacadorRPG.mana += 4;
+        dadosCacadorRPG.aura += 5;
+
+        alert(`⚡ LEVEL UP! O Caçador ${dadosCacadorRPG.nome} alcançou o Nível ${dadosCacadorRPG.nivel}!\nSeus atributos físicos e mentais aumentaram!`);
+    }
+
+    salvarEAtualizarHUDRPG();
+}
+
+// Função para penalizar XP e atributos caso perca a missão surpresa / tempo esgotado
+function penalizarXpPersonagem(quantidade) {
+    dadosCacadorRPG.xp = Math.max(0, dadosCacadorRPG.xp - quantidade);
+    
+    // Reduz levemente os atributos por punição (opcional, mantendo o mínimo de 10)
+    dadosCacadorRPG.forca = Math.max(10, dadosCacadorRPG.forca - 1);
+    dadosCacadorRPG.velocidade = Math.max(10, dadosCacadorRPG.velocidade - 1);
+
+    salvarEAtualizarHUDRPG();
+}
+
+function salvarEAtualizarHUDRPG() {
+    localStorage.setItem('sistema_cacador_rpg', JSON.stringify(dadosCacadorRPG));
+    renderizarHUDRPG();
+}
+
+function renderizarHUDRPG() {
+    // Atualiza textos na tela
+    const elNome = document.getElementById('display-nome-usuario');
+    if (elNome) elNome.innerText = dadosCacadorRPG.nome;
+
+    const elNivel = document.getElementById('display-nivel-usuario');
+    if (elNivel) elNivel.innerText = dadosCacadorRPG.nivel;
+
+    const elXp = document.getElementById('display-xp-usuario');
+    if (elXp) elXp.innerText = dadosCacadorRPG.xp;
+
+    let xpNecessario = dadosCacadorRPG.nivel * 200;
+    const elXpProx = document.getElementById('display-xp-proximo');
+    if (elXpProx) elXpProx.innerText = xpNecessario;
+
+    // Barra de progresso percentual
+    const barra = document.getElementById('barra-progresso-xp');
+    if (barra) {
+        let percentual = (dadosCacadorRPG.xp / xpNecessario) * 100;
+        barra.style.width = `${percentual}%`;
+    }
+
+    // Atributos de RPG
+    document.getElementById('atrib-forca').innerText = dadosCacadorRPG.forca;
+    document.getElementById('atrib-velocidade').innerText = dadosCacadorRPG.velocidade;
+    document.getElementById('atrib-mana').innerText = dadosCacadorRPG.mana;
+    document.getElementById('atrib-aura').innerText = dadosCacadorRPG.aura;
+}
+
+// Executa ao carregar a página
+window.addEventListener('DOMContentLoaded', () => {
+    renderizarHUDRPG();
+});
+<!-- Painel de Missões Diárias do Caçador -->
+<div class="painel-missoes-diarias">
+    <div class="missoes-header">
+        <h3>⚡ MISSÕES DIÁRIAS DE COMBATE</h3>
+        <span class="sub-titulo-missoes">Conclua os treinos para resgatar recompensas</span>
+    </div>
+
+    <div class="lista-missoes">
+        <!-- Missão 1: Corrida / Cardio -->
+        <div class="missao-card" id="missao-corrida">
+            <div class="missao-info">
+                <span class="missao-titulo">🏃‍♂️ Operação Cardio (Corrida / Caminhada)</span>
+                <span class="missao-recompensa">+80 XP | +5 Velocidade</span>
+            </div>
+            <button onclick="completarMissaoDiaria('corrida', 80, 0, 5, 2, 2)">CONCLUÍDO</button>
+        </div>
+
+        <!-- Missão 2: Musculação / Força -->
+        <div class="missao-card" id="missao-musculacao">
+            <div class="missao-info">
+                <span class="missao-titulo">🏋️‍♂️ Protocolo de Hipertrofia (Musculação)</span>
+                <span class="missao-recompensa">+100 XP | +6 Força</span>
+            </div>
+            <button onclick="completarMissaoDiaria('musculacao', 100, 6, 1, 2, 3)">CONCLUÍDO</button>
+        </div>
+
+        <!-- Missao 3: Jiu-Jitsu / Combate -->
+        <div class="missao-card" id="missao-jiujitsu">
+            <div class="missao-info">
+                <span class="missao-titulo">🥋 Sparring & Combate (Jiu-Jitsu / Disciplina)</span>
+                <span class="missao-recompensa">+120 XP | +5 Aura, +4 Força</span>
+            </div>
+            <button onclick="completarMissaoDiaria('jiujitsu', 120, 4, 3, 3, 5)">CONCLUÍDO</button>
+        </div>
+    </div>
+</div>
+.painel-missoes-diarias {
+    background: linear-gradient(135deg, #141414, #1d1d1d);
+    border: 2px solid #f39c12;
+    border-radius: 14px;
+    padding: 20px;
+    color: #fff;
+    max-width: 400px;
+    margin: 20px auto;
+    box-shadow: 0 8px 25px rgba(243, 156, 18, 0.2);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.missoes-header {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.missoes-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #f39c12;
+    letter-spacing: 1px;
+}
+
+.sub-titulo-missoes {
+    font-size: 0.75rem;
+    color: #888;
+}
+
+.lista-missoes {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.missao-card {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    padding: 12px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.2s;
+}
+
+.missao-card:hover {
+    border-color: #f39c12;
+}
+
+.missao-info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.missao-titulo {
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #fff;
+}
+
+.missao-recompensa {
+    font-size: 0.75rem;
+    color: #f39c12;
+}
+
+.missao-card button {
+    background: #f39c12;
+    color: #111;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.missao-card button:hover {
+    background: #e67e22;
+}
+
+.missao-card button:disabled {
+    background: #333;
+    color: #777;
+    cursor: not-allowed;
+}
+// Sistema de salvamento de missões diárias concluídas
+let missoesDiariasStatus = JSON.parse(localStorage.getItem('sistema_cacador_missoes_diarias')) || {
+    ultimaData: '',
+    concluidas: []
+};
+
+// Verifica a data de hoje para resetar as missões diariamente
+function verificarResetDiarioMissoes() {
+    const hojeStr = new Date().toDateString();
+    if (missoesDiariasStatus.ultimaData !== hojeStr) {
+        // Novo dia, reseta as missões concluídas
+        missoesDiariasStatus.ultimaData = hojeStr;
+        missoesDiariasStatus.concluidas = [];
+        localStorage.setItem('sistema_cacador_missoes_diarias', JSON.stringify(missoesDiariasStatus));
+    }
+}
+
+function completarMissaoDiaria(idMissao, xpGanho, ganhoForca, ganhoVelocidade, ganhoMana, ganhoAura) {
+    verificarResetDiarioMissoes();
+
+    if (missoesDiariasStatus.concluidas.includes(idMissao)) {
+        alert('⚠️ Esta missão diária já foi concluída hoje! Descanse para a próxima.');
+        return;
+    }
+
+    // Marca como concluída hoje
+    missoesDiariasStatus.concluidas.push(idMissao);
+    localStorage.setItem('sistema_cacador_missoes_diarias', JSON.stringify(missoesDiariasStatus));
+
+    // Adiciona XP e atributos ao personagem (utilizando as funções criadas anteriormente)
+    dadosCacadorRPG.xp += xpGanho;
+    dadosCacadorRPG.forca += ganhoForca;
+    dadosCacadorRPG.velocidade += ganhoVelocidade;
+    dadosCacadorRPG.mana += ganhoMana;
+    dadosCacadorRPG.aura += ganhoAura;
+
+    // Checa level up geral
+    let xpNecessario = dadosCacadorRPG.nivel * 200;
+    if (dadosCacadorRPG.xp >= xpNecessario) {
+        dadosCacadorRPG.xp -= xpNecessario;
+        dadosCacadorRPG.nivel++;
+        alert(`🎉 LEVEL UP POR TREINAMENTO! O Caçador alcançou o Nível ${dadosCacadorRPG.nivel}!`);
+    }
+
+    salvarEAtualizarHUDRPG();
+    atualizarBotoesMissoesUI();
+    
+    alert(`🎯 MISSÃO CUMPRIDA!\nVocê recebeu +${xpGanho} XP e evoluiu seus atributos físicos!`);
+}
+
+function atualizarBotoesMissoesUI() {
+    verificarResetDiarioMissoes();
+    missoesDiariasStatus.concluidas.forEach(id => {
+        const btn = document.querySelector(`#missao-${id} button`);
+        if (btn) {
+            btn.innerText = "CONCLUÍDO HOJE ✅";
+            btn.disabled = true;
+        }
+    });
+}
+
+// Executa ao carregar a página
+window.addEventListener('DOMContentLoaded', () => {
+    atualizarBotoesMissoesUI();
+});
+function solicitarPermissaoNotificacao() {
+    if (!("Notification" in window)) {
+        alert("Este navegador não suporta notificações de sistema.");
+        return;
+    }
+
+    if (Notification.permission === "granted") {
+        console.log("Permissão de notificação já concedida.");
+    } else if (Notification.permission !== "denied") {
+        Notification.requestPermission().then(permission => {
+            if (permission === "granted") {
+                new Notification("⚡ SISTEMA DE CAÇADOR ATIVADO", {
+                    body: "Notificações de perigo e missões ativadas com sucesso!",
+                    icon: "https://cdn-icons-png.flaticon.com/512/3246/3246731.png" // Ícone opcional
+                });
+            }
+        });
+    }
+}
+function dispararNotificacaoCelular(titulo, mensagem) {
+    // Verifica se o navegador tem permissão
+    if (Notification.permission === "granted") {
+        // Opções de vibração e persistência para dispositivos móveis
+        const options = {
+            body: mensagem,
+            icon: "https://cdn-icons-png.flaticon.com/512/3246/3246731.png",
+            vibrate: [200, 100, 200, 100, 300], // Vibração forte de alerta
+            tag: "alerta-perigo-cacador",
+            renotify: true
+        };
+
+        // Dispara a notificação do sistema
+        try {
+            const n = new Notification(titulo, options);
+            n.onclick = function(event) {
+                event.preventDefault();
+                window.focus(); // Traz a aba do jogo de volta ao tocar na notificação
+                n.close();
+            };
+        } catch (err) {
+            console.log("Erro ao disparar notificação nativa:", err);
+        }
+    }
+}
+function perderXpPorTempoEsgotado() {
+    // Reduz o XP do usuário como penalidade
+    dadosCacadorRPG.xp = Math.max(0, dadosCacadorRPG.xp - 100);
+    salvarEAtualizarHUDRPG();
+
+    // 1. Dispara o alerta visual na tela (modal de Perigo)
+    dispararAlertaPerigo("TEMPO ESGOTADO! Você perdeu 100 XP.");
+
+    // 2. Dispara a notificação nativa para a barra de status do celular
+    dispararNotificacaoCelular("⚠️ PERIGO: PUNIÇÃO DE XP!", "Você demorou muito na missão surpresa e perdeu 100 XP!");
+    
+    // Vibração física extra no celular
+    if ("vibrate" in navigator) {
+        navigator.vibrate([400, 200, 400]);
+    }
+}
+const questoesBanco = {
+    portugues: [
+        {
+            id: 1,
+            enunciado: "No trecho 'O candidato estudou muito; por isso, obteve a aprovação', a expressão destacada estabelece uma relação semântica de:",
+            opcoes: {
+                a: "Oposição",
+                b: "Conclusão",
+                c: "Concessão",
+                d: "Condição"
+            },
+            correta: "b",
+            explicacao: "A expressão 'por isso' introduz uma consequência lógica do esforço anterior, caracterizando uma oração coordenada sindética conclusiva."
+        },
+        {
+            id: 2,
+            enunciado: "Assinale a alternativa em que a concordância verbal está em perfeita consonância com a norma-padrão da língua portuguesa:",
+            opcoes: {
+                a: "Fazem anos que não o vejo na corporação.",
+                b: "Houveram muitos problemas durante o patrulhamento.",
+                c: "Devem existir novas diretrizes para o concurso.",
+                d: "Faltou um documento e duas certidões para a inscrição."
+            },
+            correta: "c",
+            explicacao: "O verbo 'dever' é auxiliar e acompanha o verbo principal 'existir'. Como 'existir' tem sujeito ('novas diretrizes'), ele concorda no plural, atraindo o auxiliar."
+        },
+        {
+            id: 3,
+            enunciado: "Assinale a opção em que o vocábulo acentuado obedece à mesma regra de acentuação gráfica de 'polícia':",
+            opcoes: {
+                a: "país",
+                b: "estudantil",
+                c: "faróis",
+                d: "análise"
+            },
+            correta: "d",
+            explicacao: "A palavra 'polícia' é uma paroxítona terminada em ditongo crescente. 'Análise' é uma proparoxítona."
+        },
+        {
+            id: 4,
+            enunciado: "Em 'O policial entregou o relatório ao delegado', os termos 'o relatório' e 'ao delegado' exercem, sintaticamente, as funções de:",
+            opcoes: {
+                a: "Objeto direto e Objeto indireto",
+                b: "Objeto indireto e Objeto direto",
+                c: "Sujeito e Objeto indireto",
+                d: "Adjunto adverbial e Complemento nominal"
+            },
+            correta: "a",
+            explicacao: "'O relatório' completa o verbo transitivo direto sem preposição (objeto direto). 'Ao delegado' completa o verbo bitransitivo (objeto indireto)."
+        },
+        {
+            id: 11,
+            enunciado: "Assinale a alternativa em que o uso da crase está INCORRETO de acordo com a norma-padrão:",
+            opcoes: {
+                a: "O policial foi à ronda noturna.",
+                b: "Chegou a Vossa Excelência uma cópia do memorando.",
+                c: "Fomos a Salvador participar do treinamento tático.",
+                d: "Entreguei o relatório à guarnição de serviço."
+            },
+            correta: "b",
+            explicacao: "Não se emprega crase antes de pronomes de tratamento iniciados por 'Vossa'."
+        },
+        {
+            id: 12,
+            enunciado: "No trecho 'Os soldados marcharam determinadamente', a palavra destacada exerce função morfológica de:",
+            opcoes: {
+                a: "Substantivo",
+                b: "Adjetivo",
+                c: "Advérbio",
+                d: "Preposição"
+            },
+            correta: "c",
+            explicacao: "A palavra 'determinadamente' é um advérbio de modo, terminada em -mente."
+        },
+        {
+            id: 16,
+            enunciado: "Assinale a alternativa em que todas as palavras são acentuadas devido à regra das oxítonas:",
+            opcoes: {
+                a: "café, pajé, apóia",
+                b: "maracujá, vêm, parabéns",
+                c: "hipótese, lápis, hífen",
+                d: "tatu, caju, álcool"
+            },
+            correta: "b",
+            explicacao: "Maracujá, vêm e parabéns são oxítonas terminadas nas vogais/letras indicadas pelas regras de acentuação."
+        },
+        {
+            id: 17,
+            enunciado: "Qual das opções apresenta um exemplo de figura de linguagem chamada 'Metáfora'?",
+            opcoes: {
+                a: "O policial era um leão em combate.",
+                b: "O suspeito correu como uma flecha.",
+                c: "A viatura chorava nas curvas da estrada.",
+                d: "Ele comprou um Picasso autêntico."
+            },
+            correta: "a",
+            explicacao: "A metáfora estabelece uma comparação implícita ('era um leão'), sem o conectivo comparativo explícito."
+        }
+    ],
+    informatica: [
+        {
+            id: 5,
+            enunciado: "No ambiente Windows e editores de texto como o VS Code, qual atalho de teclado é universalmente utilizado para salvar o arquivo atual?",
+            opcoes: {
+                a: "Ctrl + C",
+                b: "Ctrl + V",
+                c: "Ctrl + S",
+                d: "Ctrl + Z"
+            },
+            correta: "c",
+            explicacao: "O atalho Ctrl + S é o comando padrão para salvar arquivos."
+        },
+        {
+            id: 6,
+            enunciado: "Em bancos de dados relacionais e comandos DML, qual instrução é utilizada para recuperar e consultar dados de uma tabela?",
+            opcoes: {
+                a: "INSERT",
+                b: "UPDATE",
+                c: "DELETE",
+                d: "SELECT"
+            },
+            correta: "d",
+            explicacao: "O comando SELECT serve estritamente para extração e consulta de registros."
+        },
+        {
+            id: 7,
+            enunciado: "Sobre redes de computadores, o protocolo responsável pela atribuição dinâmica de endereços IP aos dispositivos conectados na rede local é o:",
+            opcoes: {
+                a: "DHCP",
+                b: "HTTP",
+                c: "FTP",
+                d: "SMTP"
+            },
+            correta: "a",
+            explicacao: "O DHCP automatiza a distribuição de configurações de rede e IPs."
+        },
+        {
+            id: 13,
+            enunciado: "No contexto de bancos de dados SQL, qual comando DDL é utilizado para apagar uma tabela inteira do banco, removendo sua estrutura e dados permanentemente?",
+            opcoes: {
+                a: "DELETE",
+                b: "DROP TABLE",
+                c: "REMOVE TABLE",
+                d: "TRUNCATE VIEW"
+            },
+            correta: "b",
+            explicacao: "O comando DROP TABLE exclui completamente a tabela do banco de dados."
+        },
+        {
+            id: 14,
+            enunciado: "Em sistemas operacionais Windows, qual comando executado no Prompt de Comando (CMD) exibe a configuração de endereço IP da máquina?",
+            opcoes: {
+                a: "ping",
+                b: "tracert",
+                c: "ipconfig",
+                d: "netstat"
+            },
+            correta: "c",
+            explicacao: "O comando 'ipconfig' visualiza os endereços IPv4, máscara de sub-rede e gateway padrão."
+        },
+        {
+            id: 18,
+            enunciado: "Qual ferramenta de segurança protege a rede interna contra acessos não autorizados vindos da internet?",
+            opcoes: {
+                a: "Firewall",
+                b: "Compilador",
+                c: "Switch",
+                d: "No-break"
+            },
+            correta: "a",
+            explicacao: "O Firewall atua filtrando o tráfego de rede com base em regras de segurança."
+        }
+    ],
+    constitucional: [
+        {
+            id: 8,
+            enunciado: "Segundo a Constituição Federal de 1988, a segurança pública é exercida para a preservação da ordem pública através dos seguintes órgãos, EXCETO:",
+            opcoes: {
+                a: "Polícias Militares e Corpos de Bombeiros Militares",
+                b: "Polícia Rodoviária Federal",
+                c: "Guardas Municipais armadas em qualquer município",
+                d: "Polícias Civis"
+            },
+            correta: "c",
+            explicacao: "O art. 144 da CF/88 elenca taxativamente os órgãos de segurança pública primários."
+        },
+        {
+            id: 9,
+            enunciado: "Constitui crime inafiançável e imprescritível, sujeito à pena de reclusão, nos termos da Constituição Federal:",
+            opcoes: {
+                a: "A prática de racismo",
+                b: "O homicídio simples",
+                c: "O furto qualificado por rompimento de obstáculo",
+                d: "O porte ilegal de arma de fogo de uso restrito"
+            },
+            correta: "a",
+            explicacao: "Conforme o art. 5°, inciso XLII da CF/88, o racismo é inafiançável e imprescritível."
+        },
+        {
+            id: 15,
+            enunciado: "Nos termos da Constituição Federal, o alistamento eleitoral e o voto são obrigatórios para:",
+            opcoes: {
+                a: "Os analfabetos e os maiores de setenta anos.",
+                b: "Os maiores de dezoito anos.",
+                c: "Os maiores de dezesseis e menores de dezesseis anos.",
+                d: "Os conscritos durante o período do serviço militar obrigatório."
+            },
+            correta: "b",
+            explicacao: "O voto é obrigatório para os maiores de 18 anos e facultativo para analfabetos e maiores de 70 anos."
+        },
+        {
+            id: 19,
+            enunciado: "De acordo com a CF/88, os direitos e garantias fundamentais expressos na Constituição:",
+            opcoes: {
+                a: "Excluem outros decorrentes do regime e dos princípios por ela adotados.",
+                b: "Não admitem aplicação imediata.",
+                c: "Possuem caráter taxativo absoluto.",
+                d: "Não excluem outros decorrentes de tratados internacionais em que a República Federativa do Brasil seja parte."
+            },
+            correta: "d",
+            explicacao: "O parágrafo 2° do art. 5° da CF/88 estabelece que os direitos expressos não excluem outros decorrentes de tratados internacionais."
+        }
+    ],
+    racioc_logico: [
+        {
+            id: 10,
+            enunciado: "Considerando a proposição lógica P: 'Se o policial estuda, então ele passa no concurso', a sua contra-recíproca (equivalência lógica) é:",
+            opcoes: {
+                a: "Se o policial não passa no concurso, então ele não estuda.",
+                b: "Se o policial não estuda, então ele não passa no concurso.",
+                c: "Se o policial passa no concurso, então ele estuda.",
+                d: "O policial estuda e não passa no concurso."
+            },
+            correta: "a",
+            explicacao: "A equivalência lógica da implicação usa a contra-recíproca invertendo e negando ambos os termos."
+        },
+        {
+            id: 20,
+            enunciado: "Se a negação da proposição 'Todo soldado é corajoso' é verdadeira, então é correto afirmar logicamente que:",
+            opcoes: {
+                a: "Nenhum soldado é corajoso.",
+                b: "Algum soldado não é corajoso.",
+                c: "Todo soldado não é corajoso.",
+                d: "Algum soldado é corajoso."
+            },
+            correta: "b",
+            explicacao: "A negação de 'Todo A é B' (universal afirmativa) é 'Existe algum A que não é B' (particular negativa)."
+        }
+    ]
+};
+<!-- Painel de Status com Distribuição Manual de Pontos -->
+<div class="painel-status-cacador">
+    <div class="status-header">
+        <h3 id="display-nome-usuario">CAÇADOR</h3>
+        <span class="badge-nivel">NÍVEL <span id="display-nivel-usuario">1</span></span>
+    </div>
+    
+    <div class="status-barra-xp">
+        <div id="barra-progresso-xp" style="width: 0%;"></div>
+    </div>
+    <div class="status-info-xp">XP: <span id="display-xp-usuario">0</span> / <span id="display-xp-proximo">200</span></div>
+
+    <!-- Banner de Pontos de Atributos Disponíveis -->
+    <div class="caixa-pontos-disponiveis">
+        <span>PONTOS DISPONÍVEIS PARA ATRIBUIR:</span>
+        <strong id="display-pontos-disponiveis">0</strong>
+    </div>
+
+    <!-- Atributos com Botão de Adicionar (+) -->
+    <div class="status-grid">
+        <div class="atributo-item">
+            <span class="atrib-nome">⚡ FORÇA</span>
+            <span id="atrib-forca" class="atrib-valor">10</span>
+            <button class="btn-adicionar-ponto" onclick="adicionarPontoManual('forca')">+</button>
+        </div>
+        <div class="atributo-item">
+            <span class="atrib-nome">💨 VELOCIDADE</span>
+            <span id="atrib-velocidade" class="atrib-valor">10</span>
+            <button class="btn-adicionar-ponto" onclick="adicionarPontoManual('velocidade')">+</button>
+        </div>
+        <div class="atributo-item">
+            <span class="atrib-nome">🔮 MANA</span>
+            <span id="atrib-mana" class="atrib-valor">10</span>
+            <button class="btn-adicionar-ponto" onclick="adicionarPontoManual('mana')">+</button>
+        </div>
+        <div class="atributo-item">
+            <span class="atrib-nome">🔥 AURA</span>
+            <span id="atrib-aura" class="atrib-valor">10</span>
+            <button class="btn-adicionar-ponto" onclick="adicionarPontoManual('aura')">+</button>
+        </div>
+    </div>
+</div>
+.caixa-pontos-disponiveis {
+    background: rgba(46, 204, 113, 0.15);
+    border: 1px solid #2ecc71;
+    color: #2ecc71;
+    padding: 8px 12px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 0.85rem;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.caixa-pontos-disponiveis strong {
+    font-size: 1.2rem;
+    color: #fff;
+}
+
+.atributo-item {
+    position: relative;
+    padding-bottom: 35px; /* Espaço para o botão */
+}
+
+.btn-adicionar-ponto {
+    position: absolute;
+    bottom: 6px;
+    background: #2ecc71;
+    color: #111;
+    border: none;
+    width: 80%;
+    height: 24px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-adicionar-ponto:hover {
+    background: #27ae60;
+    color: #fff;
+}
+
+.btn-adicionar-ponto:disabled {
+    background: #333;
+    color: #555;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+// Atualizando o objeto dos dados do caçador para conter a chave 'pontosDisponiveis'
+let dadosCacadorRPG = JSON.parse(localStorage.getItem('sistema_cacador_rpg')) || {
+    nome: 'Caçador',
+    xp: 0,
+    nivel: 1,
+    pontosDisponiveis: 5, // Começa com 5 pontos bônus de presente!
+    forca: 10,
+    velocidade: 10,
+    mana: 10,
+    aura: 10
+};
+
+// Função para o usuário clicar no (+) e distribuir o ponto
+function adicionarPontoManual(atributo) {
+    if (dadosCacadorRPG.pontosDisponiveis > 0) {
+        dadosCacadorRPG[atributo] += 1;
+        dadosCacadorRPG.pontosDisponiveis -= 1;
+        
+        salvarEAtualizarHUDRPG();
+    } else {
+        alert("⚠️ Você não possui pontos de atributo disponíveis! Conclua mais missões ou suba de nível para ganhar mais.");
+    }
+}
+
+// Ao subir de nível, você dá pontos livres em vez de subir os atributos direto
+function adicionarXpPersonagem(quantidade) {
+    dadosCacadorRPG.xp += quantidade;
+    let xpNecessario = dadosCacadorRPG.nivel * 200;
+
+    if (dadosCacadorRPG.xp >= xpNecessario) {
+        dadosCacadorRPG.xp -= xpNecessario;
+        dadosCacadorRPG.nivel++;
+        
+        // RECOMPENSA: Ganha 5 Pontos de Atributo Livres para distribuir!
+        dadosCacadorRPG.pontosDisponiveis += 5;
+
+        alert(`⚡ LEVEL UP! O Caçador alcançou o Nível ${dadosCacadorRPG.nivel}!\nVocê recebeu +5 Pontos de Atributo para distribuir livremente!`);
+    }
+
+    salvarEAtualizarHUDRPG();
+}
+
+function renderizarHUDRPG() {
+    // Atualiza os dados normais
+    document.getElementById('display-nome-usuario').innerText = dadosCacadorRPG.nome;
+    document.getElementById('display-nivel-usuario').innerText = dadosCacadorRPG.nivel;
+    document.getElementById('display-xp-usuario').innerText = dadosCacadorRPG.xp;
+
+    let xpNecessario = dadosCacadorRPG.nivel * 200;
+    document.getElementById('display-xp-proximo').innerText = xpNecessario;
+
+    const barra = document.getElementById('barra-progresso-xp');
+    if (barra) {
+        let percentual = (dadosCacadorRPG.xp / xpNecessario) * 100;
+        barra.style.width = `${percentual}%`;
+    }
+
+    // Exibe a quantidade de pontos livres guardados
+    document.getElementById('display-pontos-disponiveis').innerText = dadosCacadorRPG.pontosDisponiveis;
+
+    // Atualiza os valores na tela
+    document.getElementById('atrib-forca').innerText = dadosCacadorRPG.forca;
+    document.getElementById('atrib-velocidade').innerText = dadosCacadorRPG.velocidade;
+    document.getElementById('atrib-mana').innerText = dadosCacadorRPG.mana;
+    document.getElementById('atrib-aura').innerText = dadosCacadorRPG.aura;
+
+    // Desativa os botões (+) caso o usuário esteja sem pontos disponíveis
+    const botoes = document.querySelectorAll('.btn-adicionar-ponto');
+    botoes.forEach(btn => {
+        btn.disabled = (dadosCacadorRPG.pontosDisponiveis <= 0);
+    });
+}
+<!-- Quadro de Metas Físicas Escalonadas por Nível -->
+<div class="painel-metas-fisicas">
+    <div class="metas-header">
+        <h3>🎯 METAS FÍSICAS DIÁRIAS (TAF)</h3>
+        <span class="sub-titulo-metas">Calculadas de acordo com seu Nível e Foco Atual</span>
+    </div>
+
+    <div class="metas-grid">
+        <!-- Corrida / Caminhada -->
+        <div class="meta-card">
+            <div class="meta-detalhes">
+                <span class="meta-nome">🏃 Meta de Corrida</span>
+                <span class="meta-alvo"><strong id="meta-distancia-km">1</strong> km / dia</span>
+            </div>
+            <button class="btn-meta" id="btn-meta-corrida" onclick="concluirMetaFisica('corrida', 120, 4)">CONCLUIR</button>
+        </div>
+
+        <!-- Flexões -->
+        <div class="meta-card">
+            <div class="meta-detalhes">
+                <span class="meta-nome">💪 Meta de Flexões</span>
+                <span class="meta-alvo"><strong id="meta-qtd-flexao">10</strong> repetições</span>
+            </div>
+            <button class="btn-meta" id="btn-meta-flexao" onclick="concluirMetaFisica('flexao', 90, 3)">CONCLUIR</button>
+        </div>
+
+        <!-- Abdominais -->
+        <div class="meta-card">
+            <div class="meta-detalhes">
+                <span class="meta-nome">🧘 Meta de Abdominais</span>
+                <span class="meta-alvo"><strong id="meta-qtd-abdominal">10</strong> repetições</span>
+            </div>
+            <button class="btn-meta" id="btn-meta-abdominal" onclick="concluirMetaFisica('abdominal', 90, 3)">CONCLUIR</button>
+        </div>
+    </div>
+</div>
+.painel-metas-fisicas {
+    background: linear-gradient(135deg, #111a2e, #1a2636);
+    border: 2px solid #3498db;
+    border-radius: 14px;
+    padding: 20px;
+    color: #fff;
+    max-width: 400px;
+    margin: 20px auto;
+    box-shadow: 0 8px 25px rgba(52, 152, 219, 0.25);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.metas-header {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.metas-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #3498db;
+    letter-spacing: 1px;
+}
+
+.sub-titulo-metas {
+    font-size: 0.75rem;
+    color: #a0a8b5;
+}
+
+.metas-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.meta-card {
+    background: #0d131d;
+    border: 1px solid #243447;
+    padding: 12px 15px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.meta-detalhes {
+    display: flex;
+    flex-direction: column;
+}
+
+.meta-nome {
+    font-size: 0.85rem;
+    color: #cbd5e1;
+}
+
+.meta-alvo {
+    font-size: 1rem;
+    color: #fff;
+}
+
+.meta-alvo strong {
+    color: #3498db;
+    font-size: 1.2rem;
+}
+
+.btn-meta {
+    background: #3498db;
+    color: #fff;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-meta:hover {
+    background: #2980b9;
+}
+
+.btn-meta:disabled {
+    background: #1c2836;
+    color: #64748b;
+    cursor: not-allowed;
+}
+// Estado das metas físicas do dia
+let metasFisicasStatus = JSON.parse(localStorage.getItem('sistema_cacador_metas_fisicas')) || {
+    ultimaData: '',
+    concluidas: []
+};
+
+// Calcula e atualiza dinamicamente as metas com base no Nível atual (de 1 a 10+)
+function calcularMetasDoNivel() {
+    let nivel = dadosCacadorRPG.nivel || 1;
+
+    // Escalonamento de 1 km (Nível 1) até 10 km (Nível 10+)
+    let metaKm = Math.min(10, Math.max(1, nivel));
+
+    // Escalonamento de 10 flexões (Nível 1) até 50 flexões (Nível 10+)
+    let metaFlexao = Math.min(50, 10 + (nivel - 1) * 4.4);
+    metaFlexao = Math.round(metaFlexao);
+
+    // Escalonamento de 10 abdominais (Nível 1) até 60 abdominais (Nível 10+)
+    let metaAbdominal = Math.min(60, 10 + (nivel - 1) * 5.5);
+    metaAbdominal = Math.round(metaAbdominal);
+
+    // Atualiza a exibição visual das metas
+    const elKm = document.getElementById('meta-distancia-km');
+    if (elKm) elKm.innerText = metaKm;
+
+    const elFlex = document.getElementById('meta-qtd-flexao');
+    if (elFlex) elFlex.innerText = metaFlexao;
+
+    const elAbd = document.getElementById('meta-qtd-abdominal');
+    if (elAbd) elAbd.innerText = metaAbdominal;
+}
+
+function concluirMetaFisica(tipoMeta, xpBonus, pontoAtributoBonus) {
+    verificarResetDiarioMetas();
+
+    if (metasFisicasStatus.concluidas.includes(tipoMeta)) {
+        alert("⚠️ Esta meta física já foi batida hoje!");
+        return;
+    }
+
+    // Registra a conclusão
+    metasFisicasStatus.concluidas.push(tipoMeta);
+    localStorage.setItem('sistema_cacador_metas_fisicas', JSON.stringify(metasFisicasStatus));
+
+    // Atribui recompensas de XP e Pontos de Atributo Livres
+    dadosCacadorRPG.xp += xpBonus;
+    dadosCacadorRPG.pontosDisponiveis += pontoAtributoBonus;
+
+    // Checa level up
+    let xpNecessario = dadosCacadorRPG.nivel * 200;
+    if (dadosCacadorRPG.xp >= xpNecessario) {
+        dadosCacadorRPG.xp -= xpNecessario;
+        dadosCacadorRPG.nivel++;
+        dadosCacadorRPG.pontosDisponiveis += 5;
+        alert(`⚡ LEVEL UP! Caçador alcançou o Nível ${dadosCacadorRPG.nivel}!`);
+    }
+
+    salvarEAtualizarHUDRPG();
+    calcularMetasDoNivel();
+    renderizarBotoesMetas();
+
+    alert(`🎯 META FÍSICA CUMPRIDA!\n+${xpBonus} XP e +${pontoAtributoBonus} Pontos de Atributos Livres conquistados!`);
+}
+
+function verificarResetDiarioMetas() {
+    const hojeStr = new Date().toDateString();
+    if (metasFisicasStatus.ultimaData !== hojeStr) {
+        metasFisicasStatus.ultimaData = hojeStr;
+        metasFisicasStatus.concluidas = [];
+        localStorage.setItem('sistema_cacador_metas_fisicas', JSON.stringify(metasFisicasStatus));
+    }
+}
+
+function renderizarBotoesMetas() {
+    verificarResetDiarioMetas();
+    ['corrida', 'flexao', 'abdominal'].forEach(tipo => {
+        const btn = document.getElementById(`btn-meta-${tipo}`);
+        if (btn) {
+            if (metasFisicasStatus.concluidas.includes(tipo)) {
+                btn.innerText = "BATIDA ✅";
+                btn.disabled = true;
+            } else {
+                btn.innerText = "CONCLUÍDIR";
+                btn.disabled = false;
+            }
+        }
+    });
+}
+
+// Inicializa junto com a página
+window.addEventListener('DOMContentLoaded', () => {
+    calcularMetasDoNivel();
+    renderizarBotoesMetas();
+});
+<!-- BANNER FIXO DE MOTIVAÇÃO E COMBATE  -->
+<div class="banner-fixo-despertar">
+    
+        <span class="icone-alerta">🔥</span>
+        <div>
+            <h2></h2>
+            <p>O TAF não espera. Cumpra suas metas hoje e evolua seu Caçador!</p>
+        </div>
+    </div>
+
+    <!-- METAS FÍSICAS DO DIA -->
+    <div class="metas-rapidas-grid">
+        <div class="meta-item-rapido">
+            <span>🏃 CORRIDA</span>
+            <strong id="meta-distancia-km">1</strong> km
+        </div>
+        <div class="meta-item-rapido">
+            <span>💪 FLEXÕES</span>
+            <strong id="meta-qtd-flexao">10</strong> rep
+        </div>
+        <div class="meta-item-rapido">
+            <span>🧘 ABDOMINAIS</span>
+            <strong id="meta-qtd-abdominal">10</strong> rep
+        </div>
+    </div>
+
+    <!-- BOTOES DE AÇÃO RÁPIDA -->
+    <div class="botoes-acao-fixos">
+        <button onclick="concluirMetaFisica('corrida', 120, 4)" class="btn-acao-corrida" id="btn-meta-corrida">CUMPRIR CORRIDA</button>
+        <button onclick="concluirMetaFisica('flexao', 90, 3)" class="btn-acao-flexao" id="btn-meta-flexao">CUMPRIR FLEXÃO</button>
+        <button onclick="concluirMetaFisica('abdominal', 90, 3)" class="btn-acao-abdominal" id="btn-meta-abdominal">CUMPRIR ABDOMINAL</button>
+    </div>
+</div>
+    <script>
+    // Inicializa junto com a página
+window.addEventListener('DOMContentLoaded', () => {
+    calcularMetasDoNivel();
+    renderizarBotoesMetas();
+});
+</script>
+<!-- BANNER FIXO DE MOTIVAÇÃO E METAS FÍSICAS -->
+<div class="banner-fixo-despertar">
+    <div class="alerta-sedentarismo-header">
+        <span class="icone-alerta">🔥</span>
+        <div>
+            <h2>MISSÕES FÍSICAS DIÁRIAS</h2>
+            <p>O TAF não espera. Cumpra suas metas hoje e evolua seu Caçador!</p>
+        </div>
+    </div>
+
+    <!-- METAS FÍSICAS DO DIA -->
+    <div class="metas-rapidas-grid">
+        <div class="meta-item-rapido">
+            <span>🏃 CORRIDA</span>
+            <strong id="meta-distancia-km">1</strong> km
+        </div>
+        <div class="meta-item-rapido">
+            <span>💪 FLEXÕES</span>
+            <strong id="meta-qtd-flexao">10</strong> rep
+        </div>
+        <div class="meta-item-rapido">
+            <span>🧘 ABDOMINAIS</span>
+            <strong id="meta-qtd-abdominal">10</strong> rep
+        </div>
+    </div>
+
+    <!-- BOTÕES DE AÇÃO RÁPIDA -->
+    <div class="botoes-acao-fixos">
+        <button onclick="concluirMetaFisica('corrida', 120, 4)" class="btn-acao-corrida" id="btn-meta-corrida">CUMPRIR CORRIDA</button>
+        <button onclick="concluirMetaFisica('flexao', 90, 3)" class="btn-acao-flexao" id="btn-meta-flexao">CUMPRIR FLEXÃO</button>
+        <button onclick="concluirMetaFisica('abdominal', 90, 3)" class="btn-acao-abdominal" id="btn-meta-abdominal">CUMPRIR ABDOMINAL</button>
+    </div>
+</div>
+
