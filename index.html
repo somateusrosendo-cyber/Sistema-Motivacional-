@@ -11,12 +11,12 @@
 
     <style>
         :root {
-            --bg-dark: #040814;
+            --bg-dark: #02040a;
             --system-cyan: #00f0ff;
-            --system-cyan-glow: rgba(0, 240, 255, 0.4);
-            --system-blue-card: rgba(8, 22, 44, 0.95);
+            --system-cyan-glow: rgba(0, 240, 255, 0.45);
+            --system-blue-card: rgba(6, 18, 38, 0.95);
             --system-red: #ff2a6d;
-            --system-red-glow: rgba(255, 42, 109, 0.4);
+            --system-red-glow: rgba(255, 42, 109, 0.45);
             --god-gold: #ffd700;
             --text-main: #f8fafc;
             --text-sub: #7dd3fc;
@@ -39,13 +39,12 @@
             flex-direction: column;
             align-items: center;
             background-image: 
-                radial-gradient(circle at 50% 10%, rgba(0, 240, 255, 0.15) 0%, transparent 60%),
-                linear-gradient(180deg, #02050e 0%, #081024 100%);
+                radial-gradient(circle at 50% 20%, rgba(0, 240, 255, 0.1) 0%, transparent 70%),
+                linear-gradient(180deg, #010206 0%, #050c1e 100%);
             background-attachment: fixed;
             overflow-x: hidden;
         }
 
-        /* EFEITO VISUAL DE SCANLINES HOLOGRÁFICAS */
         body::before {
             content: "";
             position: fixed;
@@ -57,7 +56,62 @@
             opacity: 0.2;
         }
 
-        /* CABEÇALHO PRINCIPAL DO SISTEMA */
+        /* TELA DE INÍCIO: O ABISMO DO SISTEMA */
+        .abyss-screen {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: #010205;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999999;
+            cursor: pointer;
+            text-align: center;
+            padding: 24px;
+        }
+
+        .abyss-portal {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0,240,255,0.4) 0%, rgba(0,0,0,0.9) 70%);
+            box-shadow: 0 0 50px var(--system-cyan), inset 0 0 30px var(--system-cyan);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 24px;
+            animation: pulseAbyss 2.5s infinite ease-in-out;
+        }
+
+        @keyframes pulseAbyss {
+            0%, 100% { transform: scale(0.95); box-shadow: 0 0 30px var(--system-cyan); }
+            50% { transform: scale(1.08); box-shadow: 0 0 60px var(--system-cyan), 0 0 100px var(--system-cyan-glow); }
+        }
+
+        .abyss-title {
+            color: var(--system-cyan);
+            font-family: monospace;
+            letter-spacing: 3px;
+            font-size: 1.1rem;
+            text-shadow: 0 0 10px var(--system-cyan-glow);
+            margin-bottom: 8px;
+        }
+
+        .abyss-sub {
+            color: var(--text-sub);
+            font-size: 0.8rem;
+            font-family: monospace;
+            opacity: 0.8;
+            animation: blinkText 2s infinite;
+        }
+
+        @keyframes blinkText {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* HEADER PRINCIPAL */
         header {
             width: 100%;
             max-width: 600px;
@@ -75,13 +129,13 @@
             align-items: center;
         }
 
-        /* MENU SELETORES DE JANELAS FLUTUANTES (WIDGETS) */
+        /* MENU SELETORES (5 BOTÕES COM ÍCONES) */
         .window-selector-bar {
             width: 100%;
             max-width: 600px;
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 6px;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 4px;
             margin-bottom: 16px;
         }
 
@@ -89,8 +143,8 @@
             background: rgba(2, 6, 16, 0.8);
             border: 1px solid var(--system-cyan);
             color: var(--text-sub);
-            padding: 10px 4px;
-            font-size: 0.72rem;
+            padding: 8px 2px;
+            font-size: 0.65rem;
             font-weight: bold;
             font-family: monospace;
             cursor: pointer;
@@ -98,6 +152,14 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
             transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+        }
+
+        .btn-select-window i {
+            font-size: 0.85rem;
         }
 
         .btn-select-window.active {
@@ -106,7 +168,7 @@
             box-shadow: 0 0 12px var(--system-cyan-glow);
         }
 
-        /* CONTÊINER DE JANELA ÚNICA FLUTUANTE */
+        /* JANELA FLUTUANTE */
         .single-window-viewport {
             width: 100%;
             max-width: 600px;
@@ -158,7 +220,6 @@
             gap: 8px;
         }
 
-        /* BARRA DE EXPERIÊNCIA */
         .xp-bar-outer {
             width: 100%;
             height: 12px;
@@ -176,17 +237,67 @@
             transition: width 0.4s ease;
         }
 
-        /* ATRIBUTOS RPG */
-        .attrib-grid {
+        /* HUMANO HOLOGRÁFICO */
+        .hologram-status-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .hologram-stage {
+            width: 100%;
+            height: 200px;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 240, 255, 0.18) 0%, rgba(2, 6, 16, 0.95) 75%);
+            border: 1px solid rgba(0, 240, 255, 0.4);
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: inset 0 0 20px rgba(0, 240, 255, 0.2);
+            overflow: hidden;
+        }
+
+        .hologram-scanner {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 3px;
+            background: linear-gradient(90deg, transparent, var(--system-cyan), transparent);
+            box-shadow: 0 0 12px var(--system-cyan);
+            animation: scanAnimation 3.5s infinite linear;
+            z-index: 5;
+        }
+
+        @keyframes scanAnimation {
+            0% { top: 0%; opacity: 0; }
+            15% { opacity: 1; }
+            85% { opacity: 1; }
+            100% { top: 100%; opacity: 0; }
+        }
+
+        .hologram-avatar {
+            font-size: 7.5rem;
+            color: var(--system-cyan);
+            filter: drop-shadow(0 0 18px var(--system-cyan));
+            animation: avatarGlow 3s infinite ease-in-out;
+            z-index: 2;
+        }
+
+        @keyframes avatarGlow {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 15px var(--system-cyan)); opacity: 0.95; }
+            50% { transform: scale(1.02); filter: drop-shadow(0 0 25px var(--system-cyan)); opacity: 1; }
+        }
+
+        .hologram-attrib-grid {
+            width: 100%;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 10px;
-            margin-top: 12px;
         }
 
         .attrib-card {
             background: rgba(3, 10, 22, 0.9);
-            border: 1px solid rgba(0, 240, 255, 0.3);
+            border: 1px solid rgba(0, 240, 255, 0.35);
             padding: 10px;
             display: flex;
             flex-direction: column;
@@ -206,9 +317,78 @@
             font-size: 0.9rem;
             cursor: pointer;
             padding: 2px 0;
+            box-shadow: 0 0 8px var(--system-cyan-glow);
         }
 
-        /* MISSÕES TAF FÍSICAS */
+        /* SEÇÃO DE ARMAZENAMENTO / INVENTÁRIO (RELÓGIO, CRONÔMETRO E BÚSSOLA) */
+        .equip-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .equip-card {
+            background: rgba(3, 10, 24, 0.9);
+            border: 1px solid var(--system-cyan);
+            padding: 14px;
+            text-align: center;
+            box-shadow: inset 0 0 10px rgba(0,240,255,0.1);
+        }
+
+        .equip-card-title {
+            font-family: monospace;
+            font-size: 0.8rem;
+            color: var(--text-sub);
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .digital-clock-display {
+            font-family: monospace;
+            font-size: 2rem;
+            color: var(--system-cyan);
+            text-shadow: 0 0 12px var(--system-cyan);
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        /* BÚSSOLA HOLOGRÁFICA */
+        .compass-dial-container {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            border: 2px solid var(--system-cyan);
+            box-shadow: 0 0 15px var(--system-cyan-glow), inset 0 0 15px var(--system-cyan-glow);
+            margin: 10px auto;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle, rgba(0,240,255,0.1) 0%, rgba(2,6,16,0.95) 80%);
+        }
+
+        .compass-needle {
+            width: 4px;
+            height: 110px;
+            background: linear-gradient(180deg, var(--system-red) 50%, var(--system-cyan) 50%);
+            position: absolute;
+            transition: transform 0.2s ease-out;
+            box-shadow: 0 0 8px var(--system-cyan);
+            clip-path: polygon(50% 0%, 100% 25%, 60% 100%, 40% 100%, 0% 25%);
+        }
+
+        .compass-heading-text {
+            font-family: monospace;
+            color: var(--god-gold);
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        /* MISSÕES TAF */
         .taf-grid {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
@@ -241,7 +421,7 @@
             box-shadow: 0 0 15px var(--system-red-glow);
         }
 
-        /* LISTA DE MISSÕES CUSTOMIZADAS */
+        /* MISSÕES CUSTOMIZADAS */
         .task-input-box {
             display: flex;
             gap: 6px;
@@ -347,7 +527,20 @@
             clip-path: polygon(0 15px, 15px 0, calc(100% - 15px) 0, 100% 15px, 100% calc(100% - 15px), calc(100% - 15px) 100%, 15px 100%, 0 calc(100% - 15px));
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 14px;
+        }
+
+        .timer-badge {
+            background: rgba(255, 42, 109, 0.2);
+            border: 1px solid var(--system-red);
+            color: var(--system-red);
+            padding: 4px 10px;
+            font-family: monospace;
+            font-size: 0.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .game-options-grid button {
@@ -386,33 +579,61 @@
         .login-caixa {
             background: #07152b;
             border: 2px solid var(--system-cyan);
-            padding: 30px;
+            padding: 28px;
             text-align: center;
             width: 90%;
             max-width: 380px;
             box-shadow: 0 0 30px var(--system-cyan-glow);
             clip-path: polygon(0 15px, 15px 0, calc(100% - 15px) 0, 100% 15px, 100% calc(100% - 15px), calc(100% - 15px) 100%, 15px 100%, 0 calc(100% - 15px));
         }
+
+        .login-caixa input {
+            width: 100%;
+            padding: 10px 12px;
+            background: #030a16;
+            border: 1px solid var(--system-cyan);
+            color: #fff;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 10px;
+            outline: none;
+        }
     </style>
 </head>
 <body>
 
-    <!-- MODAL DE LOGIN GOD -->
-    <div id="modal-login" class="login-overlay">
-        <form class="login-caixa" onsubmit="event.preventDefault(); autenticarGOD();">
-            <h2 style="color: var(--system-cyan); letter-spacing: 2px; font-family: monospace; margin-bottom: 8px;">⚡ IDENTIFICAÇÃO DO CAÇADOR</h2>
-            <p style="color: var(--text-sub); font-size: 0.8rem; margin-bottom: 16px;">Insira seu codinome para sincronizar o sistema:</p>
-            <input type="text" id="input-login" value="GOD" style="width: 100%; padding: 12px; background: #030a16; border: 1px solid var(--system-cyan); color: #fff; text-align: center; font-weight: bold; margin-bottom: 14px; outline: none;">
-            <button type="submit" onclick="autenticarGOD()" style="width: 100%; padding: 12px; background: var(--system-cyan); color: #000; border: none; font-weight: bold; cursor: pointer; text-transform: uppercase;">ACESSAR SISTEMA</button>
-            <div id="login-erro" style="color: #ff4757; font-size: 0.8rem; margin-top: 8px; display: none;">Codinome inválido!</div>
+    <!-- 1. TELA TIPO ABISMO DO SISTEMA -->
+    <div id="abyss-screen" class="abyss-screen" onclick="despertarSistema()">
+        <div class="abyss-portal">
+            <i class="fa-solid fa-eye" style="font-size: 3.5rem; color: var(--system-cyan);"></i>
+        </div>
+        <h1 class="abyss-title">[O ABISMO DO CAÇADOR]</h1>
+        <p class="abyss-sub">MANTENHA PRESSIONADO / TOQUE NA TELA PARA DESPERTAR O SISTEMA</p>
+    </div>
+
+    <!-- 2. LOGIN ÚNICO INDIVIDUAL COM SENHA -->
+    <div id="modal-login" class="login-overlay" style="display: none;">
+        <form class="login-caixa" onsubmit="event.preventDefault(); autenticarUsuario();">
+            <h2 style="color: var(--system-cyan); letter-spacing: 2px; font-family: monospace; margin-bottom: 8px;">⚡ SESSÃO DO CAÇADOR</h2>
+            <p style="color: var(--text-sub); font-size: 0.78rem; margin-bottom: 14px;">Entre com suas credenciais ou crie seu cadastro único:</p>
+            
+            <input type="text" id="input-login-user" placeholder="Codinome do Caçador..." autocomplete="off">
+            <input type="password" id="input-login-pass" placeholder="Senha do Sistema..." autocomplete="off">
+            
+            <button type="submit" style="width: 100%; padding: 12px; background: var(--system-cyan); color: #000; border: none; font-weight: bold; cursor: pointer; text-transform: uppercase; margin-top: 4px;">ACESSAR SISTEMA</button>
+            <div id="login-erro" style="color: #ff4757; font-size: 0.75rem; margin-top: 8px; display: none;">Preencha o codinome e a senha corretamente!</div>
         </form>
     </div>
 
-    <!-- JANELA POP-UP MÍSTICA DE QUESTÕES DO JOGO -->
+    <!-- 3. BALÃO MÍSTICO DE QUESTÕES DA PMPE COM TEMPORIZADOR DE 10 MIN -->
     <div id="game-quest-overlay" class="game-modal-overlay">
         <div class="game-modal-card">
             <div class="window-header">
                 <h3 id="pop-materia-titulo" class="window-title">PORTUGUÊS - QUESTÃO #1</h3>
+                <div class="timer-badge">
+                    <i class="fa-solid fa-clock"></i>
+                    <span id="pop-timer-display">10:00</span>
+                </div>
                 <button onclick="fecharModalQuestao()" style="background: none; border: none; color: #ff4757; font-size: 1.3rem; font-weight: bold; cursor: pointer;">✕</button>
             </div>
 
@@ -432,7 +653,7 @@
         </div>
     </div>
 
-    <!-- HEADER DE REGISTRO DO SISTEMA -->
+    <!-- HEADER DO SISTEMA -->
     <header>
         <div class="header-info">
             <div>
@@ -443,25 +664,40 @@
         </div>
     </header>
 
-    <!-- MENU SELETOR DE JANELA FLUTUANTE (WIDGET MENU) -->
+    <!-- MENU COM 5 SELETORES (STATUS, TAF, MISSÕES, QUESTÕES, INVENTÁRIO) -->
     <div class="window-selector-bar">
-        <button id="btn-win-status" class="btn-select-window active" onclick="exibirJanela('status')">⚡ STATUS</button>
-        <button id="btn-win-taf" class="btn-select-window" onclick="exibirJanela('taf')">🔥 TAF</button>
-        <button id="btn-win-missoes" class="btn-select-window" onclick="exibirJanela('missoes')">📜 MISSÕES</button>
-        <button id="btn-win-banco" class="btn-select-window" onclick="exibirJanela('banco')">⚔️ QUESTÕES</button>
+        <button id="btn-win-status" class="btn-select-window active" onclick="exibirJanela('status')">
+            <i class="fa-solid fa-bolt"></i>
+            <span>STATUS</span>
+        </button>
+        <button id="btn-win-taf" class="btn-select-window" onclick="exibirJanela('taf')">
+            <i class="fa-solid fa-fire"></i>
+            <span>TAF</span>
+        </button>
+        <button id="btn-win-missoes" class="btn-select-window" onclick="exibirJanela('missoes')">
+            <i class="fa-solid fa-scroll"></i>
+            <span>MISSÕES</span>
+        </button>
+        <button id="btn-win-banco" class="btn-select-window" onclick="exibirJanela('banco')">
+            <i class="fa-solid fa-crosshairs"></i>
+            <span>QUESTÕES</span>
+        </button>
+        <button id="btn-win-equip" class="btn-select-window" onclick="exibirJanela('equip')">
+            <i class="fa-solid fa-box-archive"></i>
+            <span>EQUIP</span>
+        </button>
     </div>
 
-    <!-- VISUALIZADOR DE JANELA ÚNICA FLUTUANTE -->
     <main class="single-window-viewport">
 
-        <!-- JANELA 1: STATUS DO CAÇADOR (HUD RPG) -->
+        <!-- JANELA 1: STATUS DO CAÇADOR COM HUMANO HOLOGRÁFICO -->
         <div id="win-status" class="system-window">
             <div class="window-header">
                 <span class="window-title"><i class="fa-solid fa-user-ninja"></i> JANELA DE STATUS</span>
                 <span style="background: var(--system-cyan); color: #000; padding: 2px 8px; font-size: 0.8rem; font-weight: bold; font-family: monospace;">LVL <span id="display-nivel-usuario">1</span></span>
             </div>
 
-            <h3 id="display-nome-usuario" style="color: #fff; font-size: 1rem; margin-bottom: 6px;">CAÇADOR: GOD</h3>
+            <h3 id="display-nome-usuario" style="color: #fff; font-size: 1rem; margin-bottom: 6px;">CAÇADOR: USER</h3>
 
             <div class="xp-bar-outer">
                 <div id="barra-progresso-xp" class="xp-bar-inner"></div>
@@ -475,26 +711,33 @@
                 <strong id="display-pontos-disponiveis" style="color: var(--god-gold); font-size: 0.95rem;">5</strong>
             </div>
 
-            <div class="attrib-grid">
-                <div class="attrib-card">
-                    <span style="font-size: 0.7rem; color: var(--text-sub); font-weight: bold;"><i class="fa-solid fa-dumbbell" style="color: #ff4757;"></i> FORÇA</span>
-                    <span id="atrib-forca" style="font-size: 1.1rem; color: #fff; font-weight: bold; margin-top: 2px;">10</span>
-                    <button class="btn-add-stat" onclick="adicionarPontoManual('forca')">+</button>
+            <div class="hologram-status-container">
+                <div class="hologram-stage">
+                    <div class="hologram-scanner"></div>
+                    <i class="fa-solid fa-user-ninja hologram-avatar"></i>
                 </div>
-                <div class="attrib-card">
-                    <span style="font-size: 0.7rem; color: var(--text-sub); font-weight: bold;"><i class="fa-solid fa-bolt" style="color: #ffd700;"></i> VELOCIDADE</span>
-                    <span id="atrib-velocidade" style="font-size: 1.1rem; color: #fff; font-weight: bold; margin-top: 2px;">10</span>
-                    <button class="btn-add-stat" onclick="adicionarPontoManual('velocidade')">+</button>
-                </div>
-                <div class="attrib-card">
-                    <span style="font-size: 0.7rem; color: var(--text-sub); font-weight: bold;"><i class="fa-solid fa-brain" style="color: #9d4edd;"></i> MANA</span>
-                    <span id="atrib-mana" style="font-size: 1.1rem; color: #fff; font-weight: bold; margin-top: 2px;">10</span>
-                    <button class="btn-add-stat" onclick="adicionarPontoManual('mana')">+</button>
-                </div>
-                <div class="attrib-card">
-                    <span style="font-size: 0.7rem; color: var(--text-sub); font-weight: bold;"><i class="fa-solid fa-fire" style="color: #ff758c;"></i> AURA</span>
-                    <span id="atrib-aura" style="font-size: 1.1rem; color: #fff; font-weight: bold; margin-top: 2px;">10</span>
-                    <button class="btn-add-stat" onclick="adicionarPontoManual('aura')">+</button>
+
+                <div class="hologram-attrib-grid">
+                    <div class="attrib-card">
+                        <span style="font-size: 0.7rem; color: var(--text-sub); font-weight: bold;"><i class="fa-solid fa-dumbbell" style="color: #ff4757;"></i> FORÇA</span>
+                        <span id="atrib-forca" style="font-size: 1.1rem; color: #fff; font-weight: bold; margin-top: 2px;">10</span>
+                        <button class="btn-add-stat" onclick="adicionarPontoManual('forca')">+</button>
+                    </div>
+                    <div class="attrib-card">
+                        <span style="font-size: 0.7rem; color: var(--text-sub); font-weight: bold;"><i class="fa-solid fa-bolt" style="color: #ffd700;"></i> VELOCIDADE</span>
+                        <span id="atrib-velocidade" style="font-size: 1.1rem; color: #fff; font-weight: bold; margin-top: 2px;">10</span>
+                        <button class="btn-add-stat" onclick="adicionarPontoManual('velocidade')">+</button>
+                    </div>
+                    <div class="attrib-card">
+                        <span style="font-size: 0.7rem; color: var(--text-sub); font-weight: bold;"><i class="fa-solid fa-brain" style="color: #9d4edd;"></i> MANA</span>
+                        <span id="atrib-mana" style="font-size: 1.1rem; color: #fff; font-weight: bold; margin-top: 2px;">10</span>
+                        <button class="btn-add-stat" onclick="adicionarPontoManual('mana')">+</button>
+                    </div>
+                    <div class="attrib-card">
+                        <span style="font-size: 0.7rem; color: var(--text-sub); font-weight: bold;"><i class="fa-solid fa-fire" style="color: #ff758c;"></i> AURA</span>
+                        <span id="atrib-aura" style="font-size: 1.1rem; color: #fff; font-weight: bold; margin-top: 2px;">10</span>
+                        <button class="btn-add-stat" onclick="adicionarPontoManual('aura')">+</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -561,6 +804,42 @@
             </div>
         </div>
 
+        <!-- JANELA 5: INVENTÁRIO / ARMAZENAMENTO (RELÓGIO, CRONÔMETRO E BÚSSOLA) -->
+        <div id="win-equip" class="system-window" style="display: none;">
+            <div class="window-header">
+                <span class="window-title"><i class="fa-solid fa-box-archive"></i> ARMAZENAMENTO DIMENSIONAL</span>
+            </div>
+
+            <div class="equip-grid">
+                <!-- RELÓGIO TEMPO REAL DO MUNDO -->
+                <div class="equip-card">
+                    <div class="equip-card-title"><i class="fa-solid fa-clock"></i> HORÁRIO MUNDIAL DO SISTEMA</div>
+                    <div id="real-time-clock" class="digital-clock-display">00:00:00</div>
+                </div>
+
+                <!-- CRONÔMETRO DE MEDIÇÃO -->
+                <div class="equip-card">
+                    <div class="equip-card-title"><i class="fa-solid fa-stopwatch"></i> CRONÔMETRO DE TREINO / ESTUDO</div>
+                    <div id="stopwatch-display" class="digital-clock-display" style="color: var(--god-gold); text-shadow: 0 0 10px var(--god-gold);">00:00:00</div>
+                    <div style="display: flex; gap: 6px; justify-content: center; margin-top: 10px;">
+                        <button onclick="iniciarCronometro()" style="background: var(--system-cyan); color: #000; border: none; padding: 6px 14px; font-weight: bold; cursor: pointer; font-size: 0.75rem;">INICIAR</button>
+                        <button onclick="pausarCronometro()" style="background: rgba(255, 42, 109, 0.3); border: 1px solid var(--system-red); color: #fff; padding: 6px 14px; font-weight: bold; cursor: pointer; font-size: 0.75rem;">PAUSAR</button>
+                        <button onclick="zerarCronometro()" style="background: rgba(2, 6, 16, 0.9); border: 1px solid var(--system-cyan); color: var(--system-cyan); padding: 6px 14px; font-weight: bold; cursor: pointer; font-size: 0.75rem;">ZERAR</button>
+                    </div>
+                </div>
+
+                <!-- BÚSSOLA TÁTICA HOLOGRÁFICA -->
+                <div class="equip-card">
+                    <div class="equip-card-title"><i class="fa-solid fa-compass"></i> BÚSSOLA TÁTICA HOLOGRÁFICA</div>
+                    <div class="compass-dial-container">
+                        <div id="compass-needle-el" class="compass-needle"></div>
+                        <i class="fa-solid fa-crosshairs" style="position: absolute; color: var(--system-cyan); opacity: 0.4; font-size: 6rem;"></i>
+                    </div>
+                    <div id="compass-heading-val" class="compass-heading-text">0° NORTE</div>
+                </div>
+            </div>
+        </div>
+
     </main>
 
     <script>
@@ -573,14 +852,63 @@
             memoriaLocal[key] = value;
         }
 
-        let dadosCacadorRPG = JSON.parse(getSafeStorage('sistema_cacador_god_rpg_200')) || {
-            nome: 'GOD', xp: 0, nivel: 1, pontosDisponiveis: 5, forca: 10, velocidade: 10, mana: 10, aura: 10
-        };
+        // DESPERTA O SISTEMA A PARTIR DA TELA DO ABISMO
+        function despertarSistema() {
+            document.getElementById('abyss-screen').style.display = 'none';
+            const autenticado = sessionStorage.getItem('cacador_autenticado');
+            if (autenticado === 'true') {
+                renderizarTudo();
+            } else {
+                document.getElementById('modal-login').style.display = 'flex';
+            }
+        }
+
+        // AUTENTICAÇÃO ÚNICA DE CADA USUÁRIO COM SENHA
+        let dadosCacadorRPG = { nome: 'CAÇADOR', xp: 0, nivel: 1, pontosDisponiveis: 5, forca: 10, velocidade: 10, mana: 10, aura: 10 };
+
+        function autenticarUsuario() {
+            const u = document.getElementById('input-login-user').value.trim();
+            const p = document.getElementById('input-login-pass').value.trim();
+
+            if (u.length > 0 && p.length > 0) {
+                const userKey = `cacador_user_data_${u.toLowerCase()}`;
+                let saved = JSON.parse(getSafeStorage(userKey));
+
+                if (saved && saved.senha && saved.senha !== p) {
+                    alert('Senha incorreta para este Caçador!');
+                    return;
+                }
+
+                if (!saved) {
+                    saved = {
+                        nome: u.toUpperCase(),
+                        senha: p,
+                        xp: 0, nivel: 1, pontosDisponiveis: 5, forca: 10, velocidade: 10, mana: 10, aura: 10
+                    };
+                }
+
+                dadosCacadorRPG = saved;
+                setSafeStorage(userKey, JSON.stringify(dadosCacadorRPG));
+                sessionStorage.setItem('cacador_usuario_ativo', userKey);
+                sessionStorage.setItem('cacador_autenticado', 'true');
+
+                document.getElementById('modal-login').style.display = 'none';
+                renderizarTudo();
+            } else {
+                document.getElementById('login-erro').style.display = 'block';
+            }
+        }
+
+        function fazerLogout() {
+            sessionStorage.removeItem('cacador_autenticado');
+            sessionStorage.removeItem('cacador_usuario_ativo');
+            document.getElementById('abyss-screen').style.display = 'flex';
+            document.getElementById('modal-login').style.display = 'none';
+        }
 
         let customTasks = JSON.parse(getSafeStorage('sistema_cacador_custom_tasks')) || [
-            { id: 1, text: "Viver uma aventura", completed: true },
-            { id: 2, text: "Estudar 2 horas de Português/RLM", completed: false },
-            { id: 3, text: "Treino Físico Intenso", completed: false }
+            { id: 1, text: "Estudar 2 horas de Português/RLM", completed: false },
+            { id: 2, text: "Treino Físico Intenso", completed: false }
         ];
 
         let metasFisicasStatus = JSON.parse(getSafeStorage('sistema_cacador_metas_god')) || { ultimaData: '', concluidas: [] };
@@ -588,9 +916,98 @@
         let abaAtual = 'portugues';
         let questaoIndexAtual = 0;
 
-        // CONTROLE DA NAVEGAÇÃO DE JANELAS FLUTUANTES (WIDGET MENU)
+        // CRONÔMETRO DE 10 MINUTOS PARA QUESTÕES
+        let tempoQuestaoSegundos = 600;
+        let timerQuestaoInterval = null;
+
+        function iniciarTimerQuestao() {
+            pararTimerQuestao();
+            tempoQuestaoSegundos = 600;
+            atualizarDisplayTimer();
+
+            timerQuestaoInterval = setInterval(() => {
+                tempoQuestaoSegundos--;
+                atualizarDisplayTimer();
+
+                if (tempoQuestaoSegundos <= 0) {
+                    pararTimerQuestao();
+                    navegarQuestao(1);
+                }
+            }, 1000);
+        }
+
+        function pararTimerQuestao() {
+            if (timerQuestaoInterval) clearInterval(timerQuestaoInterval);
+        }
+
+        function atualizarDisplayTimer() {
+            const m = Math.floor(tempoQuestaoSegundos / 60).toString().padStart(2, '0');
+            const s = (tempoQuestaoSegundos % 60).toString().padStart(2, '0');
+            const el = document.getElementById('pop-timer-display');
+            if (el) el.innerText = `${m}:${s}`;
+        }
+
+        // RELÓGIO TEMPO REAL E CRONÔMETRO DO ARMAZENAMENTO
+        setInterval(() => {
+            const ag = new Date();
+            const h = ag.getHours().toString().padStart(2, '0');
+            const m = ag.getMinutes().toString().padStart(2, '0');
+            const s = ag.getSeconds().toString().padStart(2, '0');
+            const elClock = document.getElementById('real-time-clock');
+            if (elClock) elClock.innerText = `${h}:${m}:${s}`;
+        }, 1000);
+
+        let cronometroSegundos = 0;
+        let cronometroInterval = null;
+
+        function iniciarCronometro() {
+            if (cronometroInterval) return;
+            cronometroInterval = setInterval(() => {
+                cronometroSegundos++;
+                const h = Math.floor(cronometroSegundos / 3600).toString().padStart(2, '0');
+                const m = Math.floor((cronometroSegundos % 3600) / 60).toString().padStart(2, '0');
+                const s = (cronometroSegundos % 60).toString().padStart(2, '0');
+                const el = document.getElementById('stopwatch-display');
+                if (el) el.innerText = `${h}:${m}:${s}`;
+            }, 1000);
+        }
+
+        function pausarCronometro() {
+            if (cronometroInterval) {
+                clearInterval(cronometroInterval);
+                cronometroInterval = null;
+            }
+        }
+
+        function zerarCronometro() {
+            pausarCronometro();
+            cronometroSegundos = 0;
+            const el = document.getElementById('stopwatch-display');
+            if (el) el.innerText = "00:00:00";
+        }
+
+        // BÚSSOLA TÁTICA COM SENSOR DE ORIENTAÇÃO DO DISPOSITIVO
+        if (window.DeviceOrientationEvent) {
+            window.addEventListener('deviceorientation', function(e) {
+                let compassHeading = e.alpha || 0;
+                if (e.webkitCompassHeading) compassHeading = e.webkitCompassHeading;
+                
+                const needle = document.getElementById('compass-needle-el');
+                const valText = document.getElementById('compass-heading-val');
+                
+                if (needle) needle.style.transform = `rotate(${compassHeading}deg)`;
+                
+                let dir = "NORTE";
+                if (compassHeading > 45 && compassHeading <= 135) dir = "LESTE";
+                else if (compassHeading > 135 && compassHeading <= 225) dir = "SUL";
+                else if (compassHeading > 225 && compassHeading <= 315) dir = "OESTE";
+
+                if (valText) valText.innerText = `${Math.round(compassHeading)}° ${dir}`;
+            });
+        }
+
         function exibirJanela(nomeJanela) {
-            const janelas = ['status', 'taf', 'missoes', 'banco'];
+            const janelas = ['status', 'taf', 'missoes', 'banco', 'equip'];
             janelas.forEach(j => {
                 const elWin = document.getElementById(`win-${j}`);
                 const elBtn = document.getElementById(`btn-win-${j}`);
@@ -643,37 +1060,12 @@
             }
         });
 
-        function autenticarGOD() {
-            const inputLogin = document.getElementById('input-login');
-            const u = inputLogin ? inputLogin.value.trim() : '';
-
-            if (u.length > 0) {
-                dadosCacadorRPG.nome = u.toUpperCase();
-                setSafeStorage('sistema_cacador_god_rpg_200', JSON.stringify(dadosCacadorRPG));
-                document.getElementById('modal-login').style.display = 'none';
-                sessionStorage.setItem('god_autenticado', 'true');
-                renderizarTudo();
-            } else {
-                document.getElementById('login-erro').style.display = 'block';
-            }
-        }
-
-        function fazerLogout() {
-            sessionStorage.removeItem('god_autenticado');
-            document.getElementById('modal-login').style.display = 'flex';
-        }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            const autenticado = sessionStorage.getItem('god_autenticado');
-            if (autenticado === 'true') {
-                document.getElementById('modal-login').style.display = 'none';
-                renderizarTudo();
-            } else {
-                document.getElementById('modal-login').style.display = 'flex';
-            }
-        });
-
         function renderizarTudo() {
+            const userKey = sessionStorage.getItem('cacador_usuario_ativo');
+            if (userKey) {
+                const saved = JSON.parse(getSafeStorage(userKey));
+                if (saved) dadosCacadorRPG = saved;
+            }
             calcularMetasDoNivel();
             renderizarHUDRPG();
             renderizarCustomTasks();
@@ -693,10 +1085,12 @@
         }
 
         function fecharModalQuestao() {
+            pararTimerQuestao();
             document.getElementById('game-quest-overlay').style.display = 'none';
         }
 
         function renderizarBalaoQuestao() {
+            iniciarTimerQuestao();
             const lista = bancoQuestoes[abaAtual] || [];
             if (lista.length === 0) return;
 
@@ -748,7 +1142,7 @@
                     dadosCacadorRPG.pontosDisponiveis += 5;
                     if (typeof confetti === 'function') confetti({ particleCount: 100, spread: 70 });
                 }
-                setSafeStorage('sistema_cacador_god_rpg_200', JSON.stringify(dadosCacadorRPG));
+                salvarDadosUsuario();
             }
 
             renderizarHUDRPG();
@@ -761,6 +1155,13 @@
             if (novoIndex >= 0 && novoIndex < lista.length) {
                 questaoIndexAtual = novoIndex;
                 renderizarBalaoQuestao();
+            }
+        }
+
+        function salvarDadosUsuario() {
+            const userKey = sessionStorage.getItem('cacador_usuario_ativo');
+            if (userKey) {
+                setSafeStorage(userKey, JSON.stringify(dadosCacadorRPG));
             }
         }
 
@@ -789,7 +1190,7 @@
             if (dadosCacadorRPG.pontosDisponiveis > 0) {
                 dadosCacadorRPG.pontosDisponiveis -= 1;
                 dadosCacadorRPG[atrib] += 1;
-                setSafeStorage('sistema_cacador_god_rpg_200', JSON.stringify(dadosCacadorRPG));
+                salvarDadosUsuario();
                 renderizarHUDRPG();
             }
         }
@@ -835,7 +1236,7 @@
                 setSafeStorage('sistema_cacador_custom_tasks', JSON.stringify(customTasks));
                 dadosCacadorRPG.pontosDisponiveis += 1;
                 dadosCacadorRPG.xp += 60;
-                setSafeStorage('sistema_cacador_god_rpg_200', JSON.stringify(dadosCacadorRPG));
+                salvarDadosUsuario();
                 renderizarCustomTasks();
                 renderizarHUDRPG();
                 if (typeof confetti === 'function') confetti({ particleCount: 80, spread: 60 });
@@ -848,10 +1249,11 @@
             setSafeStorage('sistema_cacador_metas_god', JSON.stringify(metasFisicasStatus));
             dadosCacadorRPG.pontosDisponiveis += pontoBonus;
             dadosCacadorRPG.xp += xpBonus;
-            setSafeStorage('sistema_cacador_god_rpg_200', JSON.stringify(dadosCacadorRPG));
+            salvarDadosUsuario();
             renderizarHUDRPG();
             if (typeof confetti === 'function') confetti({ particleCount: 120, spread: 80 });
         }
     </script>
 </body>
 </html>
+
