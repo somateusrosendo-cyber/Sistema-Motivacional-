@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
     <title>SISTEMA DO CAÇADOR - PMPE 2026</title>
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -13,11 +13,12 @@
         :root {
             --bg-dark: #02040a;
             --system-cyan: #00f0ff;
-            --system-cyan-glow: rgba(0, 240, 255, 0.45);
+            --system-cyan-glow: rgba(0, 240, 255, 0.55);
             --system-blue-card: rgba(6, 18, 38, 0.95);
             --system-red: #ff2a6d;
-            --system-red-glow: rgba(255, 42, 109, 0.45);
+            --system-red-glow: rgba(255, 42, 109, 0.65);
             --god-gold: #ffd700;
+            --god-gold-glow: rgba(255, 215, 0, 0.5);
             --text-main: #f8fafc;
             --text-sub: #7dd3fc;
         }
@@ -28,21 +29,23 @@
             padding: 0;
             font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
             -webkit-tap-highlight-color: transparent;
+            user-select: none;
         }
 
         body {
             background-color: var(--bg-dark);
             color: var(--text-main);
             min-height: 100vh;
-            padding: 12px;
+            padding: 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
             background-image: 
-                radial-gradient(circle at 50% 20%, rgba(0, 240, 255, 0.1) 0%, transparent 70%),
+                radial-gradient(circle at 50% 20%, rgba(0, 240, 255, 0.12) 0%, transparent 75%),
                 linear-gradient(180deg, #010206 0%, #050c1e 100%);
             background-attachment: fixed;
             overflow-x: hidden;
+            perspective: 1000px;
         }
 
         body::before {
@@ -111,92 +114,126 @@
             50% { opacity: 1; }
         }
 
-        /* HEADER PRINCIPAL */
+        /* HEADER PRINCIPAL IMPACTANTE */
         header {
             width: 100%;
             max-width: 600px;
-            background: var(--system-blue-card);
+            background: linear-gradient(135deg, rgba(6, 18, 38, 0.98) 0%, rgba(2, 6, 16, 0.95) 100%);
             border: 2px solid var(--system-cyan);
-            box-shadow: 0 0 15px var(--system-cyan-glow);
-            padding: 14px;
+            box-shadow: 0 0 25px var(--system-cyan-glow), inset 0 0 15px rgba(0, 240, 255, 0.2);
+            padding: 16px;
             margin-bottom: 12px;
-            clip-path: polygon(0 10px, 10px 0, calc(100% - 10px) 0, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px));
+            clip-path: polygon(0 15px, 15px 0, calc(100% - 15px) 0, 100% 15px, 100% calc(100% - 15px), calc(100% - 15px) 100%, 15px 100%, 0 calc(100% - 15px));
+            text-align: center;
+            position: relative;
         }
 
-        .header-info {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .header-title-glow {
+            color: #fff;
+            font-family: monospace;
+            font-size: 1.35rem;
+            font-weight: 900;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-shadow: 0 0 15px var(--system-cyan), 0 0 30px var(--system-cyan-glow);
+            margin-bottom: 4px;
         }
 
-        /* MENU SELETORES DE JANELA */
+        .header-sub-tag {
+            color: var(--system-cyan);
+            font-size: 0.8rem;
+            font-family: monospace;
+            letter-spacing: 2px;
+            font-weight: bold;
+            background: rgba(0, 240, 255, 0.1);
+            display: inline-block;
+            padding: 3px 12px;
+            border: 1px solid var(--system-cyan);
+            border-radius: 12px;
+            text-shadow: 0 0 8px var(--system-cyan);
+        }
+
+        .btn-notify-toggle {
+            position: absolute;
+            right: 12px;
+            top: 12px;
+            background: rgba(0, 240, 255, 0.15);
+            border: 1px solid var(--system-cyan);
+            color: var(--system-cyan);
+            padding: 6px 10px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+            box-shadow: 0 0 10px var(--system-cyan-glow);
+        }
+
+        /* MENU SELETORES DE JANELA COM ROLAGEM HORIZONTAL */
         .window-selector-bar {
             width: 100%;
             max-width: 600px;
             display: grid;
-            grid-template-columns: repeat(6, 1fr);
+            grid-template-columns: repeat(7, 1fr);
             gap: 3px;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
 
         .btn-select-window {
-            background: rgba(2, 6, 16, 0.8);
+            background: rgba(2, 6, 16, 0.85);
             border: 1px solid var(--system-cyan);
             color: var(--text-sub);
             padding: 8px 1px;
-            font-size: 0.58rem;
+            font-size: 0.55rem;
             font-weight: bold;
             font-family: monospace;
             cursor: pointer;
             text-align: center;
             text-transform: uppercase;
             letter-spacing: 0.3px;
-            transition: all 0.2s;
+            transition: all 0.25s;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 2px;
+            gap: 3px;
         }
 
         .btn-select-window i {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
         }
 
         .btn-select-window.active {
             background: var(--system-cyan);
             color: #000;
-            box-shadow: 0 0 12px var(--system-cyan-glow);
+            box-shadow: 0 0 15px var(--system-cyan-glow);
+            transform: translateY(-2px);
         }
 
-        /* JANELA FLUTUANTE */
+        /* CONTAINER FLUTUANTE 3D COM GESTOS DE TOUCH/SWIPE */
         .single-window-viewport {
             width: 100%;
             max-width: 600px;
             display: flex;
             justify-content: center;
+            touch-action: pan-y;
         }
 
         .system-window {
             width: 100%;
             background: var(--system-blue-card);
             border: 2px solid var(--system-cyan);
-            box-shadow: 0 0 25px var(--system-cyan-glow), inset 0 0 15px rgba(0, 240, 255, 0.15);
+            box-shadow: 0 0 30px var(--system-cyan-glow), inset 0 0 20px rgba(0, 240, 255, 0.15);
             padding: 20px;
             position: relative;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
             clip-path: polygon(0 15px, 15px 0, calc(100% - 15px) 0, 100% 15px, 100% calc(100% - 15px), calc(100% - 15px) 100%, 15px 100%, 0 calc(100% - 15px));
-            animation: fadeIn 0.25s ease-out;
+            transition: transform 0.15s ease-out, opacity 0.25s ease-out;
+            transform-style: preserve-3d;
         }
 
         .system-window-red {
             background: rgba(26, 8, 16, 0.95);
             border: 2px solid var(--system-red);
-            box-shadow: 0 0 25px var(--system-red-glow), inset 0 0 15px rgba(255, 42, 109, 0.15);
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(8px) scale(0.98); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
+            box-shadow: 0 0 30px var(--system-red-glow), inset 0 0 20px rgba(255, 42, 109, 0.2);
         }
 
         .window-header {
@@ -214,7 +251,7 @@
             color: var(--system-cyan);
             letter-spacing: 2px;
             text-transform: uppercase;
-            text-shadow: 0 0 8px var(--system-cyan-glow);
+            text-shadow: 0 0 10px var(--system-cyan-glow);
             display: flex;
             align-items: center;
             gap: 8px;
@@ -232,34 +269,36 @@
         .xp-bar-inner {
             height: 100%;
             background: linear-gradient(90deg, var(--system-cyan), #9d4edd);
-            box-shadow: 0 0 10px var(--system-cyan);
+            box-shadow: 0 0 12px var(--system-cyan);
             width: 0%;
             transition: width 0.4s ease;
         }
 
-        /* RADAR PENTAGONAL DE ATRIBUTOS COM O CAÇADOR */
+        /* RADAR PENTAGONAL MALEÁVEL DE ATRIBUTOS */
         .radar-status-stage {
             width: 100%;
             padding: 20px 10px;
-            background: radial-gradient(circle at 50% 50%, rgba(0, 240, 255, 0.15) 0%, rgba(2, 6, 16, 0.95) 80%);
+            background: radial-gradient(circle at 50% 50%, rgba(0, 240, 255, 0.18) 0%, rgba(2, 6, 16, 0.95) 80%);
             border: 1px solid rgba(0, 240, 255, 0.4);
             position: relative;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            box-shadow: inset 0 0 20px rgba(0, 240, 255, 0.15);
+            box-shadow: inset 0 0 25px rgba(0, 240, 255, 0.2);
             margin-top: 10px;
+            transform-style: preserve-3d;
         }
 
         .pentagon-frame {
-            width: 160px;
-            height: 160px;
+            width: 170px;
+            height: 170px;
             position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 30px 0;
+            margin: 35px 0;
+            transform-style: preserve-3d;
         }
 
         .pentagon-border {
@@ -268,20 +307,20 @@
             height: 100%;
             border: 2px solid var(--system-cyan);
             clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
-            box-shadow: 0 0 20px var(--system-cyan-glow);
+            box-shadow: 0 0 25px var(--system-cyan-glow);
             background: rgba(0, 240, 255, 0.05);
             animation: pulsePentagon 3s infinite ease-in-out;
         }
 
         @keyframes pulsePentagon {
             0%, 100% { filter: drop-shadow(0 0 8px var(--system-cyan)); }
-            50% { filter: drop-shadow(0 0 18px var(--system-cyan)); }
+            50% { filter: drop-shadow(0 0 20px var(--system-cyan)); }
         }
 
         .avatar-display-box {
             z-index: 2;
-            width: 90px;
-            height: 90px;
+            width: 95px;
+            height: 95px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -293,16 +332,15 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: drop-shadow(0 0 8px var(--system-cyan));
+            filter: drop-shadow(0 0 10px var(--system-cyan));
         }
 
         .pentagon-avatar-icon {
-            font-size: 4.8rem;
+            font-size: 5rem;
             color: var(--system-cyan);
-            filter: drop-shadow(0 0 12px var(--system-cyan));
+            filter: drop-shadow(0 0 15px var(--system-cyan));
         }
 
-        /* OPÇÃO SELETORA DE ÍCONES HOLOGRÁFICOS */
         .avatar-controls-bar {
             display: flex;
             gap: 6px;
@@ -358,11 +396,11 @@
             padding: 4px 8px;
             font-family: monospace;
             text-align: center;
-            box-shadow: 0 0 10px var(--system-cyan-glow);
+            box-shadow: 0 0 12px var(--system-cyan-glow);
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-width: 70px;
+            min-width: 72px;
         }
 
         .radar-stat-label {
@@ -391,11 +429,60 @@
             margin-top: 2px;
         }
 
-        .pos-top { position: absolute; top: -35px; }
-        .pos-left-top { position: absolute; left: -35px; top: 35px; }
-        .pos-right-top { position: absolute; right: -35px; top: 35px; }
-        .pos-left-bottom { position: absolute; left: -25px; bottom: -35px; }
-        .pos-right-bottom { position: absolute; right: -25px; bottom: -35px; }
+        .pos-top { position: absolute; top: -38px; }
+        .pos-left-top { position: absolute; left: -38px; top: 38px; }
+        .pos-right-top { position: absolute; right: -38px; top: 38px; }
+        .pos-left-bottom { position: absolute; left: -28px; bottom: -38px; }
+        .pos-right-bottom { position: absolute; right: -28px; bottom: -38px; }
+
+        /* MÓDULO BOSSES DE SOLO LEVELING */
+        .boss-card {
+            background: rgba(20, 4, 12, 0.9);
+            border: 1px solid var(--system-red);
+            padding: 12px;
+            margin-bottom: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            box-shadow: inset 0 0 15px rgba(255, 42, 109, 0.2);
+        }
+
+        .boss-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--system-red);
+            font-family: monospace;
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+
+        .boss-hp-outer {
+            width: 100%;
+            height: 10px;
+            background: #100206;
+            border: 1px solid var(--system-red);
+        }
+
+        .boss-hp-inner {
+            height: 100%;
+            background: linear-gradient(90deg, #ff2a6d, #ff758c);
+            width: 100%;
+            transition: width 0.3s;
+        }
+
+        .btn-attack-boss {
+            background: var(--system-red);
+            color: #fff;
+            border: none;
+            padding: 10px;
+            font-weight: bold;
+            font-family: monospace;
+            font-size: 0.8rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            box-shadow: 0 0 12px var(--system-red-glow);
+        }
 
         /* ARMAZENAMENTO */
         .equip-grid {
@@ -758,14 +845,14 @@
             <i class="fa-solid fa-eye" style="font-size: 3.5rem; color: var(--system-cyan);"></i>
         </div>
         <h1 class="abyss-title">[O ABISMO DO CAÇADOR]</h1>
-        <p class="abyss-sub">MANTENHA PRESSIONADO / TOQUE NA TELA PARA DESPERTAR O SISTEMA</p>
+        <p class="abyss-sub">TOQUE / ARRASTE NA TELA PARA DESPERTAR O SISTEMA</p>
     </div>
 
     <!-- 2. LOGIN ÚNICO INDIVIDUAL COM SENHA -->
     <div id="modal-login" class="login-overlay" style="display: none;">
         <form class="login-caixa" onsubmit="event.preventDefault(); autenticarUsuario();">
             <h2 style="color: var(--system-cyan); letter-spacing: 2px; font-family: monospace; margin-bottom: 8px;">⚡ SESSÃO DO CAÇADOR</h2>
-            <p style="color: var(--text-sub); font-size: 0.78rem; margin-bottom: 14px;">Entre com suas credenciais ou crie seu cadastro único:</p>
+            <p style="color: var(--text-sub); font-size: 0.78rem; margin-bottom: 14px;">Entre com suas credenciais para sincronizar:</p>
             
             <input type="text" id="input-login-user" placeholder="Codinome do Caçador..." autocomplete="off">
             <input type="password" id="input-login-pass" placeholder="Senha do Sistema..." autocomplete="off">
@@ -803,18 +890,17 @@
         </div>
     </div>
 
-    <!-- HEADER DO SISTEMA COM SUBTÍTULO "PAINEL PESSOAL" -->
+    <!-- HEADER DO SISTEMA DESTACADO -->
     <header>
-        <div class="header-info">
-            <div>
-                <h1 style="color: var(--system-cyan); font-family: monospace; font-size: 1.05rem; letter-spacing: 1px;">[SISTEMA DO CAÇADOR]</h1>
-                <p style="color: var(--text-sub); font-size: 0.78rem; font-family: monospace; letter-spacing: 1px; font-weight: bold; text-transform: uppercase;">PAINEL PESSOAL</p>
-            </div>
-            <button onclick="fazerLogout()" style="background: rgba(255, 42, 109, 0.2); border: 1px solid var(--system-red); color: var(--system-red); padding: 4px 10px; font-weight: bold; font-size: 0.7rem; cursor: pointer;">SAIR</button>
+        <button class="btn-notify-toggle" onclick="solicitarPermissaoNotificacao()"><i class="fa-solid fa-bell"></i> NOTIFICAÇÕES</button>
+        <h1 class="header-title-glow">[SISTEMA DO CAÇADOR]</h1>
+        <div class="header-sub-tag">PAINEL PESSOAL - PMPE 2026</div>
+        <div style="margin-top: 6px;">
+            <button onclick="fazerLogout()" style="background: rgba(255, 42, 109, 0.2); border: 1px solid var(--system-red); color: var(--system-red); padding: 2px 8px; font-weight: bold; font-size: 0.65rem; cursor: pointer;">SAIR DA SESSÃO</button>
         </div>
     </header>
 
-    <!-- MENU COM SELETORES DE JANELA -->
+    <!-- MENU COM 7 SELETORES (STATUS, TAF, MISSÕES, QUESTÕES, CHAT, BOSSES, EQUIP) -->
     <div class="window-selector-bar">
         <button id="btn-win-status" class="btn-select-window active" onclick="exibirJanela('status')">
             <i class="fa-solid fa-bolt"></i>
@@ -836,15 +922,20 @@
             <i class="fa-solid fa-comments"></i>
             <span>CHAT</span>
         </button>
+        <button id="btn-win-bosses" class="btn-select-window" onclick="exibirJanela('bosses')">
+            <i class="fa-solid fa-skull"></i>
+            <span>BOSSES</span>
+        </button>
         <button id="btn-win-equip" class="btn-select-window" onclick="exibirJanela('equip')">
             <i class="fa-solid fa-box-archive"></i>
             <span>EQUIP</span>
         </button>
     </div>
 
-    <main class="single-window-viewport">
+    <!-- VIEWPORT COM NAVEGAÇÃO FLUIDA POR TOUCH/DESLIZAR DE DEDO -->
+    <main class="single-window-viewport" id="viewportMain">
 
-        <!-- JANELA 1: STATUS DO CAÇADOR COM AVATAR PERSONALIZÁVEL -->
+        <!-- JANELA 1: STATUS DO CAÇADOR COM RADAR 3D -->
         <div id="win-status" class="system-window">
             <div class="window-header">
                 <span class="window-title"><i class="fa-solid fa-user-ninja"></i> JANELA DE STATUS</span>
@@ -865,46 +956,39 @@
                 <strong id="display-pontos-disponiveis" style="color: var(--god-gold); font-size: 0.95rem;">5</strong>
             </div>
 
-            <!-- ESTRUTURA RADAR PENTAGONAL -->
-            <div class="radar-status-stage">
+            <div class="radar-status-stage" id="radarStage3D">
                 <div class="pentagon-frame">
                     <div class="pentagon-border"></div>
                     
-                    <!-- AVATAR CENTRAL DO CAÇADOR (FOTO OU ÍCONE HOLOGRÁFICO) -->
                     <div class="avatar-display-box" id="avatarContainer">
                         <i id="defaultAvatarIcon" class="fa-solid fa-user-ninja pentagon-avatar-icon"></i>
                         <img id="customAvatarImg" class="avatar-custom-img" style="display: none;" alt="Foto Caçador">
                     </div>
 
-                    <!-- ENT (Topo) -->
                     <div class="radar-stat-box pos-top">
                         <span class="radar-stat-label">ENT</span>
                         <span id="atrib-ent" class="radar-stat-val">10</span>
                         <button class="btn-stat-add-small" onclick="adicionarPontoManual('ent')">+</button>
                     </div>
 
-                    <!-- OFE (Esquerda Superior) -->
                     <div class="radar-stat-box pos-left-top">
                         <span class="radar-stat-label">OFE</span>
                         <span id="atrib-ofe" class="radar-stat-val">10</span>
                         <button class="btn-stat-add-small" onclick="adicionarPontoManual('ofe')">+</button>
                     </div>
 
-                    <!-- DEF (Direita Superior) -->
                     <div class="radar-stat-box pos-right-top">
                         <span class="radar-stat-label">DEF</span>
                         <span id="atrib-def" class="radar-stat-val">10</span>
                         <button class="btn-stat-add-small" onclick="adicionarPontoManual('def')">+</button>
                     </div>
 
-                    <!-- VEL (Esquerda Inferior) -->
                     <div class="radar-stat-box pos-left-bottom">
                         <span class="radar-stat-label">VEL</span>
                         <span id="atrib-vel" class="radar-stat-val">10</span>
                         <button class="btn-stat-add-small" onclick="adicionarPontoManual('vel')">+</button>
                     </div>
 
-                    <!-- TEC (Direita Inferior) -->
                     <div class="radar-stat-box pos-right-bottom">
                         <span class="radar-stat-label">TEC</span>
                         <span id="atrib-tec" class="radar-stat-val">10</span>
@@ -912,14 +996,12 @@
                     </div>
                 </div>
 
-                <!-- CONTROLES PARA MUDAR DE FOTO OU SELECIONAR ÍCONES HOLOGRÁFICOS -->
                 <div class="avatar-controls-bar">
                     <button class="btn-avatar-opt" onclick="document.getElementById('avatarFileInput').click()"><i class="fa-solid fa-camera"></i> CARREGAR SUA FOTO</button>
                     <button class="btn-avatar-opt" onclick="toggleHoloPicker()"><i class="fa-solid fa-wand-magic-sparkles"></i> ÍCONES HOLOGRÁFICOS</button>
                     <input type="file" id="avatarFileInput" accept="image/*" style="display: none;" onchange="uploadFotoCaçador(event)">
                 </div>
 
-                <!-- GRADE DE ÍCONES HOLOGRÁFICOS ALEATÓRIOS DO SISTEMA -->
                 <div id="holoPickerGrid" class="holo-picker-grid" style="display: none;">
                     <button class="holo-icon-btn" onclick="selecionarIconeHolo('fa-user-ninja')"><i class="fa-solid fa-user-ninja"></i></button>
                     <button class="holo-icon-btn" onclick="selecionarIconeHolo('fa-ghost')"><i class="fa-solid fa-ghost"></i></button>
@@ -1027,7 +1109,17 @@
             </div>
         </div>
 
-        <!-- JANELA 6: INVENTÁRIO / ARMAZENAMENTO -->
+        <!-- JANELA 6: BOSSES DE MASMORRA SOLO LEVELING -->
+        <div id="win-bosses" class="system-window system-window-red" style="display: none;">
+            <div class="window-header" style="border-bottom-color: var(--system-red);">
+                <span class="window-title" style="color: var(--system-red);"><i class="fa-solid fa-skull"></i> MASMORRAS & BOSSES</span>
+            </div>
+            <p style="font-size: 0.78rem; color: #ddd; margin-bottom: 12px;">Enfrante os Guardiões de Portal para obter itens e status lendários!</p>
+
+            <div id="bossesFeedContainer"></div>
+        </div>
+
+        <!-- JANELA 7: INVENTÁRIO / ARMAZENAMENTO -->
         <div id="win-equip" class="system-window" style="display: none;">
             <div class="window-header">
                 <span class="window-title"><i class="fa-solid fa-box-archive"></i> ARMAZENAMENTO DIMENSIONAL</span>
@@ -1125,7 +1217,113 @@
             document.getElementById('modal-login').style.display = 'none';
         }
 
-        /* UPLOAD E SELEÇÃO DE AVATAR DO CAÇADOR */
+        /* NOTIFICAÇÕES ATIVAS DO SISTEMA */
+        function solicitarPermissaoNotificacao() {
+            if ("Notification" in window) {
+                Notification.requestPermission().then(permission => {
+                    if (permission === "granted") {
+                        new Notification("[SISTEMA DO CAÇADOR]", {
+                            body: "Notificações de Masmorra e Treino ativas!",
+                            icon: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/svgs/solid/bell.svg"
+                        });
+                    }
+                });
+            } else {
+                alert("Este navegador não suporta Notificações Push.");
+            }
+        }
+
+        /* NAVEGAÇÃO FLUIDA POR TOUCH / SWIPE DO DEDO */
+        const listaJanelasOrder = ['status', 'taf', 'missoes', 'banco', 'chat', 'bosses', 'equip'];
+        let janelaAtualIndex = 0;
+        let startX = 0;
+
+        const viewportEl = document.getElementById('viewportMain');
+        viewportEl.addEventListener('touchstart', e => {
+            startX = e.changedTouches[0].screenX;
+        }, {passive: true});
+
+        viewportEl.addEventListener('touchend', e => {
+            let endX = e.changedTouches[0].screenX;
+            if (startX - endX > 50) {
+                // Arrastou para a esquerda -> Próxima janela
+                if (janelaAtualIndex < listaJanelasOrder.length - 1) {
+                    exibirJanela(listaJanelasOrder[janelaAtualIndex + 1]);
+                }
+            } else if (endX - startX > 50) {
+                // Arrastou para a direita -> Janela anterior
+                if (janelaAtualIndex > 0) {
+                    exibirJanela(listaJanelasOrder[janelaAtualIndex - 1]);
+                }
+            }
+        }, {passive: true});
+
+        /* EFEITO TILT 3D COM SENSOR DO DISPOSITIVO OU MOUSE */
+        window.addEventListener('deviceorientation', e => {
+            const stage = document.getElementById('radarStage3D');
+            if (stage && e.beta && e.gamma) {
+                let rotX = Math.min(15, Math.max(-15, e.beta / 4));
+                let rotY = Math.min(15, Math.max(-15, e.gamma / 4));
+                stage.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+            }
+        });
+
+        /* BOSSES DE SOLO LEVELING */
+        let bossesData = JSON.parse(getSafeStorage('sistema_cacador_bosses')) || [
+            { id: 1, name: "IGRIS O COMANDANTE VERMELHO", hp: 500, maxHp: 500, xpReward: 300, ptsReward: 3, defeated: false },
+            { id: 2, name: "KARGALGAN O MAGO ORC", hp: 1000, maxHp: 1000, xpReward: 600, ptsReward: 5, defeated: false },
+            { id: 3, name: "BERU O REI DAS FORMIGAS", hp: 2000, maxHp: 2000, xpReward: 1200, ptsReward: 8, defeated: false }
+        ];
+
+        function renderizarBosses() {
+            const container = document.getElementById('bossesFeedContainer');
+            if (!container) return;
+            container.innerHTML = '';
+
+            bossesData.forEach(b => {
+                let pct = (b.hp / b.maxHp) * 100;
+                const card = document.createElement('div');
+                card.className = 'boss-card';
+                card.innerHTML = `
+                    <div class="boss-header">
+                        <span>👹 ${b.name}</span>
+                        <span>HP: ${b.hp}/${b.maxHp}</span>
+                    </div>
+                    <div class="boss-hp-outer">
+                        <div class="boss-hp-inner" style="width: ${Math.max(0, pct)}%;"></div>
+                    </div>
+                    <div style="font-size: 0.72rem; color: var(--god-gold); font-family: monospace;">RECOMPENSA: +${b.xpReward} XP / +${b.ptsReward} PONTOS STATUS</div>
+                    <button class="btn-attack-boss" ${b.defeated ? 'disabled' : ''} onclick="atacarBoss(${b.id})">
+                        ${b.defeated ? 'DERROTADO (COMPLETO)' : '⚔️ GOLPEAR BOSS (-50 HP)'}
+                    </button>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function atacarBoss(id) {
+            const boss = bossesData.find(b => b.id === id);
+            if (boss && !boss.defeated) {
+                let dano = (dadosCacadorRPG.ofe || 10) * 3;
+                boss.hp -= dano;
+                if (boss.hp <= 0) {
+                    boss.hp = 0;
+                    boss.defeated = true;
+                    dadosCacadorRPG.xp += boss.xpReward;
+                    dadosCacadorRPG.pontosDisponiveis += boss.ptsReward;
+                    if (typeof confetti === 'function') confetti({ particleCount: 150, spread: 90 });
+                    if ("Notification" in window && Notification.permission === "granted") {
+                        new Notification("[SISTEMA DO CAÇADOR]", { body: `Você derrotou ${boss.name}! Recompensas adicionadas ao Status.` });
+                    }
+                }
+                setSafeStorage('sistema_cacador_bosses', JSON.stringify(bossesData));
+                salvarDadosUsuario();
+                renderizarHUDRPG();
+                renderizarBosses();
+            }
+        }
+
+        /* AVATAR DO CAÇADOR */
         function uploadFotoCaçador(event) {
             const file = event.target.files[0];
             if (file) {
@@ -1380,7 +1578,9 @@
         }
 
         function exibirJanela(nomeJanela) {
-            const janelas = ['status', 'taf', 'missoes', 'banco', 'chat', 'equip'];
+            const janelas = ['status', 'taf', 'missoes', 'banco', 'chat', 'bosses', 'equip'];
+            janelaAtualIndex = janelas.indexOf(nomeJanela);
+
             janelas.forEach(j => {
                 const elWin = document.getElementById(`win-${j}`);
                 const elBtn = document.getElementById(`btn-win-${j}`);
@@ -1392,6 +1592,8 @@
             });
             if (nomeJanela === 'chat') {
                 renderizarChatMessages();
+            } else if (nomeJanela === 'bosses') {
+                renderizarBosses();
             }
         }
 
