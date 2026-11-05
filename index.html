@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
-    <title>SISTEMA DO CAÇADOR - PMPE 2026</title>
+    <title>SISTEMA DO CAÇADOR - PAINEL PESSOAL</title>
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Canvas Confetti -->
@@ -14,7 +14,7 @@
             --bg-dark: #02040a;
             --system-cyan: #00f0ff;
             --system-cyan-glow: rgba(0, 240, 255, 0.55);
-            --system-blue-card: rgba(6, 18, 38, 0.88);
+            --system-blue-card: rgba(6, 18, 38, 0.9);
             --system-red: #ff2a6d;
             --system-red-glow: rgba(255, 42, 109, 0.65);
             --god-gold: #ffd700;
@@ -41,7 +41,7 @@
             flex-direction: column;
             align-items: center;
             background-image: 
-                radial-gradient(circle at 50% 30%, rgba(0, 240, 255, 0.18) 0%, transparent 70%),
+                radial-gradient(circle at 50% 30%, rgba(0, 240, 255, 0.18) 0%, transparent 75%),
                 linear-gradient(180deg, #010206 0%, #050c1e 100%);
             background-attachment: fixed;
             overflow-x: hidden;
@@ -59,7 +59,7 @@
             opacity: 0.2;
         }
 
-        /* TELA DE INÍCIO: O ABISMO DO SISTEMA */
+        /* TELA DE INÍCIO: ABISMO */
         .abyss-screen {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
@@ -114,21 +114,22 @@
             50% { opacity: 1; }
         }
 
-        /* HEADER PRINCIPAL LEVITANDO NO TOPO */
+        /* HEADER LEVITANDO COM MENU DE 3 PONTOS (⋮) */
         header {
             width: 100%;
             max-width: 600px;
             background: linear-gradient(135deg, rgba(6, 18, 38, 0.95) 0%, rgba(2, 6, 16, 0.9) 100%);
             border: 2px solid var(--system-cyan);
             box-shadow: 0 10px 25px var(--system-cyan-glow);
-            padding: 12px;
+            padding: 12px 16px;
             margin-bottom: 16px;
             clip-path: polygon(0 12px, 12px 0, calc(100% - 12px) 0, 100% 12px, 100% calc(100% - 12px), calc(100% - 12px) 100%, 12px 100%, 0 calc(100% - 12px));
             text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
+            position: relative;
             animation: floatHeader 5s infinite ease-in-out;
         }
 
@@ -137,12 +138,11 @@
             50% { transform: translateY(-4px); }
         }
 
-        .header-top-row {
+        .header-top-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
             width: 100%;
-            padding: 0 4px;
         }
 
         .header-title-glow {
@@ -157,30 +157,85 @@
 
         .header-sub-tag {
             color: var(--system-cyan);
-            font-size: 0.72rem;
+            font-size: 0.7rem;
             font-family: monospace;
             letter-spacing: 1.5px;
             font-weight: bold;
             background: rgba(0, 240, 255, 0.1);
-            padding: 3px 10px;
+            padding: 2px 8px;
             border: 1px solid var(--system-cyan);
-            border-radius: 10px;
+            border-radius: 8px;
             text-shadow: 0 0 8px var(--system-cyan);
         }
 
-        .btn-notify-toggle {
-            background: rgba(0, 240, 255, 0.15);
+        .btn-notify-small {
+            background: rgba(0, 240, 255, 0.12);
             border: 1px solid var(--system-cyan);
             color: var(--system-cyan);
-            padding: 4px 10px;
-            font-size: 0.68rem;
-            font-weight: bold;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             cursor: pointer;
-            border-radius: 4px;
-            box-shadow: 0 0 10px var(--system-cyan-glow);
+            font-size: 0.8rem;
+            box-shadow: 0 0 8px var(--system-cyan-glow);
+            transition: transform 0.2s;
         }
 
-        /* REDE DE ÍCONES FLUTUANTES E ESPALHADOS PELO ESPAÇO */
+        .btn-notify-small:active { transform: scale(0.85); }
+
+        .btn-options-dots {
+            background: none;
+            border: none;
+            color: var(--system-cyan);
+            font-size: 1.3rem;
+            cursor: pointer;
+            padding: 0 4px;
+            transition: transform 0.2s;
+        }
+
+        .btn-options-dots:active { transform: scale(0.85); }
+
+        /* MENU SUSPENSO DE CONFIGURAÇÕES (3 PONTOS) */
+        .options-dropdown-panel {
+            position: absolute;
+            top: 45px;
+            right: 12px;
+            background: rgba(3, 10, 24, 0.98);
+            border: 2px solid var(--system-cyan);
+            box-shadow: 0 0 25px var(--system-cyan-glow);
+            padding: 12px;
+            width: 200px;
+            z-index: 99999;
+            display: none;
+            flex-direction: column;
+            gap: 8px;
+            clip-path: polygon(0 10px, 10px 0, calc(100% - 10px) 0, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px));
+        }
+
+        .options-btn-item {
+            background: rgba(0, 240, 255, 0.08);
+            border: 1px solid var(--system-cyan);
+            color: #fff;
+            padding: 8px;
+            font-size: 0.75rem;
+            font-family: monospace;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .options-btn-item:hover {
+            background: var(--system-cyan);
+            color: #000;
+        }
+
+        /* REDE DE ÍCONES FLUTUANTES COM TOUCH TÁTIL INTERATIVO */
         .window-selector-floating-grid {
             width: 100%;
             max-width: 600px;
@@ -188,14 +243,14 @@
             flex-wrap: wrap;
             justify-content: center;
             gap: 12px;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         .btn-floating-node {
             background: rgba(4, 14, 32, 0.85);
             border: 1px solid var(--system-cyan);
             color: var(--text-sub);
-            padding: 8px 12px;
+            padding: 9px 13px;
             font-size: 0.65rem;
             font-weight: bold;
             font-family: monospace;
@@ -208,16 +263,21 @@
             align-items: center;
             gap: 6px;
             backdrop-filter: blur(8px);
-            transition: all 0.3s ease;
+            transition: transform 0.2s ease, background-color 0.2s, box-shadow 0.2s;
             animation: floatNode 4s infinite ease-in-out;
         }
 
-        .btn-floating-node:nth-child(even) { animation-delay: 0.5s; }
-        .btn-floating-node:nth-child(3n) { animation-delay: 1s; }
+        .btn-floating-node:nth-child(even) { animation-delay: 0.6s; }
+        .btn-floating-node:nth-child(3n) { animation-delay: 1.2s; }
 
         @keyframes floatNode {
-            0%, 100% { transform: translateY(0px) scale(1); }
-            50% { transform: translateY(-5px) scale(1.03); }
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .btn-floating-node:active {
+            transform: scale(0.92) rotate(2deg) !important;
+            box-shadow: 0 0 25px var(--system-cyan);
         }
 
         .btn-floating-node i {
@@ -233,11 +293,9 @@
             transform: translateY(-4px) scale(1.05);
         }
 
-        .btn-floating-node.active i {
-            color: #000;
-        }
+        .btn-floating-node.active i { color: #000; }
 
-        /* VIEWPORT DAS PÁGINAS SOLTAS / FLUTUANTES NO ESPAÇO */
+        /* JANELA FLUTUANTE HOLOGRÁFICA COM SUPERATIVIDADE DE ANIME */
         .single-window-viewport {
             width: 100%;
             max-width: 600px;
@@ -262,7 +320,7 @@
 
         @keyframes floatPage {
             0%, 100% { transform: translateY(0px) rotateX(0deg); box-shadow: 0 20px 40px rgba(0, 240, 255, 0.35); }
-            50% { transform: translateY(-10px) rotateX(1.2deg); box-shadow: 0 30px 55px rgba(0, 240, 255, 0.55); }
+            50% { transform: translateY(-8px) rotateX(1deg); box-shadow: 0 30px 55px rgba(0, 240, 255, 0.55); }
         }
 
         .system-window-red {
@@ -273,8 +331,21 @@
         }
 
         @keyframes floatPageRed {
-            0%, 100% { transform: translateY(0px); box-shadow: 0 20px 40px rgba(255, 42, 109, 0.4); }
-            50% { transform: translateY(-10px); box-shadow: 0 30px 55px rgba(255, 42, 109, 0.65); }
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* MENSAGEM DE SUPERAÇÃO DE LIMITES EM CADA PÁGINA */
+        .anime-limit-quote {
+            background: rgba(0, 240, 255, 0.08);
+            border-left: 3px solid var(--system-cyan);
+            padding: 6px 10px;
+            font-size: 0.72rem;
+            font-family: monospace;
+            color: var(--text-sub);
+            margin-bottom: 14px;
+            font-style: italic;
+            letter-spacing: 0.5px;
         }
 
         .window-header {
@@ -282,8 +353,8 @@
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid var(--system-cyan);
-            padding-bottom: 10px;
-            margin-bottom: 16px;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
         }
 
         .window-title {
@@ -315,7 +386,7 @@
             transition: width 0.4s ease;
         }
 
-        /* RADAR PENTAGONAL DE ATRIBUTOS */
+        /* RADAR PENTAGONAL COM HOLOGRAMAS EM ROTAÇÃO CONSTANTE */
         .radar-status-stage {
             width: 100%;
             padding: 20px 10px;
@@ -342,20 +413,21 @@
             transform-style: preserve-3d;
         }
 
-        .pentagon-border {
+        /* ANEL HOLOGRÁFICO EM ROTAÇÃO CONSTANTE */
+        .pentagon-border-rotating {
             position: absolute;
             width: 100%;
             height: 100%;
-            border: 2px solid var(--system-cyan);
+            border: 2px dashed var(--system-cyan);
             clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
             box-shadow: 0 0 25px var(--system-cyan-glow);
-            background: rgba(0, 240, 255, 0.05);
-            animation: pulsePentagon 3s infinite ease-in-out;
+            background: rgba(0, 240, 255, 0.04);
+            animation: spinHolo 12s linear infinite;
         }
 
-        @keyframes pulsePentagon {
-            0%, 100% { filter: drop-shadow(0 0 8px var(--system-cyan)); }
-            50% { filter: drop-shadow(0 0 20px var(--system-cyan)); }
+        @keyframes spinHolo {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         .avatar-display-box {
@@ -379,12 +451,6 @@
             filter: drop-shadow(0 0 10px var(--system-cyan));
         }
 
-        .pentagon-avatar-icon {
-            font-size: 3.8rem;
-            color: var(--system-cyan);
-            filter: drop-shadow(0 0 15px var(--system-cyan));
-        }
-
         .avatar-controls-bar {
             display: flex;
             gap: 6px;
@@ -397,43 +463,53 @@
             background: rgba(2, 6, 16, 0.9);
             border: 1px solid var(--system-cyan);
             color: var(--text-sub);
-            padding: 6px;
+            padding: 8px;
             font-size: 0.72rem;
             font-weight: bold;
             font-family: monospace;
             cursor: pointer;
             text-align: center;
+            transition: transform 0.2s;
         }
 
-        .holo-picker-grid {
+        .btn-avatar-opt:active { transform: scale(0.92); }
+
+        /* SELETOR DE AVATARES DE FERAS MEIO-HUMANAS EM FORMATO HEXAGONAL HOLOGRÁFICO */
+        .beast-picker-grid {
             display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 6px;
-            margin-top: 8px;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin-top: 12px;
             background: rgba(0, 240, 255, 0.05);
             border: 1px dashed var(--system-cyan);
-            padding: 8px;
+            padding: 10px;
         }
 
-        .holo-icon-btn {
+        .beast-avatar-card {
+            width: 50px;
+            height: 50px;
             background: rgba(2, 6, 16, 0.9);
-            border: 1px solid var(--system-cyan);
-            color: var(--system-cyan);
-            padding: 8px 0;
-            font-size: 1.3rem;
-            cursor: pointer;
+            border: 1.5px solid var(--system-cyan);
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
             display: flex;
             justify-content: center;
             align-items: center;
-            transition: all 0.2s;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        .holo-icon-btn:hover {
-            background: var(--system-cyan);
-            color: #000;
+        .beast-avatar-card:hover, .beast-avatar-card:active {
+            transform: scale(1.15);
+            box-shadow: 0 0 15px var(--system-cyan);
         }
 
-        /* ATRIBUTOS DO CAÇADOR */
+        .beast-avatar-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* BLOCOS DE ATRIBUTOS */
         .radar-stat-box {
             background: rgba(4, 14, 30, 0.95);
             border: 1px solid var(--system-cyan);
@@ -479,7 +555,7 @@
         .pos-left-bottom { position: absolute; left: -28px; bottom: -38px; }
         .pos-right-bottom { position: absolute; right: -28px; bottom: -38px; }
 
-        /* MÓDULO BOSSES */
+        /* BOSSES */
         .boss-card {
             background: rgba(20, 4, 12, 0.9);
             border: 1px solid var(--system-red);
@@ -528,7 +604,7 @@
             box-shadow: 0 0 12px var(--system-red-glow);
         }
 
-        /* ARMAZENAMENTO / EQUIP */
+        /* ARMAZENAMENTO */
         .equip-grid {
             display: flex;
             flex-direction: column;
@@ -596,7 +672,7 @@
             font-weight: bold;
         }
 
-        /* BOTÃO FLUTUANTE PERMANENTE DE ARMAZENAMENTO (ACCESSÍVEL EM QUALQUER LUGAR) */
+        /* BOTÃO FLUTUANTE DE ARMAZENAMENTO PERMANENTE */
         .floating-storage-trigger {
             position: fixed;
             bottom: 20px;
@@ -619,7 +695,7 @@
 
         @keyframes pulseStorage {
             0%, 100% { transform: scale(1); box-shadow: 0 0 15px var(--god-gold-glow); }
-            50% { transform: scale(1.1); box-shadow: 0 0 30px var(--god-gold); }
+            50% { transform: scale(1.08); box-shadow: 0 0 30px var(--god-gold); }
         }
 
         /* CHAT E OFERTAS */
@@ -771,7 +847,7 @@
             text-decoration: line-through;
         }
 
-        /* QUESTÕES PMPE */
+        /* QUESTÕES - ENUNCIADOS TOTALMENTE VISÍVEIS E LEGÍVEIS */
         .nav-tabs {
             display: flex;
             gap: 6px;
@@ -815,8 +891,8 @@
         .game-modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(2, 5, 14, 0.94);
-            backdrop-filter: blur(8px);
+            background: rgba(2, 5, 14, 0.95);
+            backdrop-filter: blur(10px);
             display: none;
             justify-content: center;
             align-items: center;
@@ -827,14 +903,16 @@
         .game-modal-card {
             background: linear-gradient(180deg, #07152b 0%, #030a16 100%);
             border: 2px solid var(--system-cyan);
-            padding: 24px;
+            padding: 20px;
             width: 100%;
-            max-width: 550px;
+            max-width: 580px;
+            max-height: 90vh;
+            overflow-y: auto;
             box-shadow: 0 0 35px var(--system-cyan-glow);
             clip-path: polygon(0 15px, 15px 0, calc(100% - 15px) 0, 100% 15px, 100% calc(100% - 15px), calc(100% - 15px) 100%, 15px 100%, 0 calc(100% - 15px));
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 12px;
         }
 
         .timer-badge {
@@ -860,6 +938,9 @@
             font-size: 0.88rem;
             margin-top: 8px;
             cursor: pointer;
+            white-space: normal;
+            word-wrap: break-word;
+            line-height: 1.4;
         }
 
         .game-options-grid button.correct {
@@ -949,7 +1030,7 @@
                 <button onclick="fecharModalQuestao()" style="background: none; border: none; color: #ff4757; font-size: 1.3rem; font-weight: bold; cursor: pointer;">✕</button>
             </div>
 
-            <div id="pop-pergunta-texto" style="background: rgba(2, 6, 16, 0.9); border: 1px solid rgba(0, 240, 255, 0.4); border-left: 4px solid var(--system-cyan); padding: 14px; font-size: 0.95rem; line-height: 1.5;">
+            <div id="pop-pergunta-texto" style="background: rgba(2, 6, 16, 0.9); border: 1px solid rgba(0, 240, 255, 0.4); border-left: 4px solid var(--system-cyan); padding: 14px; font-size: 0.95rem; line-height: 1.5; max-height: 250px; overflow-y: auto; white-space: normal; word-wrap: break-word;">
                 Carregando pergunta...
             </div>
 
@@ -965,19 +1046,24 @@
         </div>
     </div>
 
-    <!-- HEADER DO SISTEMA COM EFEITO DE FLOATING HOLOGRÁFICO -->
+    <!-- HEADER DO SISTEMA COM MENU DE 3 PONTOS E NOTIFICAÇÃO COMPACTA -->
     <header>
-        <div class="header-top-row">
-            <div class="header-sub-tag">PAINEL PESSOAL - PMPE 2026</div>
-            <button class="btn-notify-toggle" onclick="solicitarPermissaoNotificacao()"><i class="fa-solid fa-bell"></i> NOTIFICAÇÕES</button>
+        <div class="header-top-bar">
+            <button class="btn-notify-small" title="Ativar Notificações" onclick="solicitarPermissaoNotificacao()"><i class="fa-solid fa-bell"></i></button>
+            <div class="header-sub-tag">PAINEL PESSOAL</div>
+            <button class="btn-options-dots" title="Opções" onclick="toggleOptionsMenu()">⋮</button>
         </div>
         <h1 class="header-title-glow">[SISTEMA DO CAÇADOR]</h1>
-        <div>
-            <button onclick="fazerLogout()" style="background: rgba(255, 42, 109, 0.2); border: 1px solid var(--system-red); color: var(--system-red); padding: 2px 8px; font-weight: bold; font-size: 0.65rem; cursor: pointer;">SAIR DA SESSÃO</button>
+
+        <!-- MENU DE OPÇÕES HOLOGRÁFICO -->
+        <div id="optionsDropdown" class="options-dropdown-panel">
+            <button class="options-btn-item" onclick="promptMudarSenha()"><i class="fa-solid fa-key"></i> MUDAR SENHA</button>
+            <button class="options-btn-item" onclick="solicitarPermissaoNotificacao()"><i class="fa-solid fa-bell"></i> NOTIFICAÇÕES</button>
+            <button class="options-btn-item" style="color: #ff4757; border-color: #ff4757;" onclick="fazerLogout()"><i class="fa-solid fa-right-from-bracket"></i> SAIR DA SESSÃO</button>
         </div>
     </header>
 
-    <!-- REDE DE ÍCONES FLUTUANTES E ESPALHADOS PELO ESPAÇO -->
+    <!-- REDE DE ÍCONES FLUTUANTES PELO ESPAÇO -->
     <div class="window-selector-floating-grid">
         <button id="btn-win-status" class="btn-floating-node active" onclick="exibirJanela('status')">
             <i class="fa-solid fa-bolt"></i>
@@ -1009,11 +1095,12 @@
         </button>
     </div>
 
-    <!-- VIEWPORT COM PÁGINAS SOLTAS / FLUTUANTES NO ESPAÇO -->
+    <!-- VIEWPORT COM PÁGINAS FLUTUANTES -->
     <main class="single-window-viewport" id="viewportMain">
 
         <!-- JANELA 1: STATUS DO CAÇADOR -->
         <div id="win-status" class="system-window">
+            <div class="anime-limit-quote">🔥 "Mesmo que você seja o Caçador mais fraco, o Sistema não permite fraqueza. Erga-se e supere seus limites!"</div>
             <div class="window-header">
                 <span class="window-title"><i class="fa-solid fa-user-ninja"></i> JANELA DE STATUS</span>
                 <span style="background: var(--system-cyan); color: #000; padding: 2px 8px; font-size: 0.8rem; font-weight: bold; font-family: monospace;">LVL <span id="display-nivel-usuario">1</span></span>
@@ -1035,11 +1122,11 @@
 
             <div class="radar-status-stage" id="radarStage3D">
                 <div class="pentagon-frame">
-                    <div class="pentagon-border"></div>
+                    <!-- ROTAÇÃO CONSTANTE HOLOGRÁFICA DO ANEL -->
+                    <div class="pentagon-border-rotating"></div>
                     
                     <div class="avatar-display-box" id="avatarContainer">
-                        <i id="defaultAvatarIcon" class="fa-solid fa-skull-crossbones pentagon-avatar-icon"></i>
-                        <img id="customAvatarImg" class="avatar-custom-img" style="display: none;" alt="Foto Caçador">
+                        <img id="customAvatarImg" class="avatar-custom-img" src="https://images.unsplash.com/photo-1563089145-599997674d42?w=150&auto=format&fit=crop&q=80" alt="Avatar Caçador">
                     </div>
 
                     <div class="radar-stat-box pos-top">
@@ -1075,23 +1162,34 @@
 
                 <div class="avatar-controls-bar">
                     <button class="btn-avatar-opt" onclick="document.getElementById('avatarFileInput').click()"><i class="fa-solid fa-camera"></i> CARREGAR SUA FOTO</button>
-                    <button class="btn-avatar-opt" onclick="toggleHoloPicker()"><i class="fa-solid fa-wand-magic-sparkles"></i> AVATARES INTIMIDADORES</button>
+                    <button class="btn-avatar-opt" onclick="toggleBeastPicker()"><i class="fa-solid fa-wand-magic-sparkles"></i> FERAS MEIO-HUMANAS</button>
                     <input type="file" id="avatarFileInput" accept="image/*" style="display: none;" onchange="uploadFotoCaçador(event)">
                 </div>
 
-                <div id="holoPickerGrid" class="holo-picker-grid" style="display: none;">
-                    <button class="holo-icon-btn" title="Caveira Guerreiro" onclick="selecionarIconeHolo('fa-skull-crossbones')"><i class="fa-solid fa-skull-crossbones"></i></button>
-                    <button class="holo-icon-btn" title="Dragão Humanoide" onclick="selecionarIconeHolo('fa-dragon')"><i class="fa-solid fa-dragon"></i></button>
-                    <button class="holo-icon-btn" title="Leão Tático" onclick="selecionarIconeHolo('fa-cat')"><i class="fa-solid fa-cat"></i></button>
-                    <button class="holo-icon-btn" title="Lobo Solitário" onclick="selecionarIconeHolo('fa-dog')"><i class="fa-solid fa-dog"></i></button>
-                    <button class="holo-icon-btn" title="Sombra de Solo" onclick="selecionarIconeHolo('fa-user-ninja')"><i class="fa-solid fa-user-ninja"></i></button>
-                    <button class="holo-icon-btn" title="Guerreiro Demoníaco" onclick="selecionarIconeHolo('fa-mask-ventilator')"><i class="fa-solid fa-mask-ventilator"></i></button>
+                <!-- SELETOR DE AVATARES DE BESTAS MEIO-HUMANAS (FORMATO HEXAGONAL HOLOGRÁFICO) -->
+                <div id="beastPickerGrid" class="beast-picker-grid" style="display: none;">
+                    <div class="beast-avatar-card" title="Lobo Bestial" onclick="selecionarBeastImg('https://images.unsplash.com/photo-1563089145-599997674d42?w=150&auto=format&fit=crop&q=80')">
+                        <img src="https://images.unsplash.com/photo-1563089145-599997674d42?w=150&auto=format&fit=crop&q=80" alt="Lobo">
+                    </div>
+                    <div class="beast-avatar-card" title="Dragão Guerreiro" onclick="selecionarBeastImg('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=150&auto=format&fit=crop&q=80')">
+                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=150&auto=format&fit=crop&q=80" alt="Dragão">
+                    </div>
+                    <div class="beast-avatar-card" title="Leão Humanoide" onclick="selecionarBeastImg('https://images.unsplash.com/photo-1534447677768-be436bb09401?w=150&auto=format&fit=crop&q=80')">
+                        <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?w=150&auto=format&fit=crop&q=80" alt="Leão">
+                    </div>
+                    <div class="beast-avatar-card" title="Demônio de Solo" onclick="selecionarBeastImg('https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=150&auto=format&fit=crop&q=80')">
+                        <img src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=150&auto=format&fit=crop&q=80" alt="Demônio">
+                    </div>
+                    <div class="beast-avatar-card" title="Cavaleiro Obscuro" onclick="selecionarBeastImg('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=150&auto=format&fit=crop&q=80')">
+                        <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=150&auto=format&fit=crop&q=80" alt="Cavaleiro">
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- JANELA 2: MISSÕES FÍSICAS DIÁRIAS (TAF) -->
+        <!-- JANELA 2: TAF -->
         <div id="win-taf" class="system-window system-window-red" style="display: none;">
+            <div class="anime-limit-quote" style="border-left-color: var(--system-red);">⚡ "A dor de hoje é a força que quebrará qualquer inimigo amanhã. Não pare!"</div>
             <div class="window-header" style="border-bottom-color: var(--system-red);">
                 <span class="window-title" style="color: var(--system-red);"><i class="fa-solid fa-person-running"></i> MISSÕES FÍSICAS (TAF)</span>
             </div>
@@ -1119,8 +1217,9 @@
             </div>
         </div>
 
-        <!-- JANELA 3: MISSÕES DIÁRIAS CUSTOMIZADAS -->
+        <!-- JANELA 3: MISSÕES CUSTOMIZADAS -->
         <div id="win-missoes" class="system-window" style="display: none;">
+            <div class="anime-limit-quote">📜 "Se você não lutar pelo seu futuro diário, ninguém o fará. Conclua cada missão como se dependesse disso!"</div>
             <div class="window-header">
                 <span class="window-title"><i class="fa-solid fa-scroll"></i> MISSÕES DIÁRIAS</span>
             </div>
@@ -1131,10 +1230,11 @@
             <ul class="task-list" id="customTaskList"></ul>
         </div>
 
-        <!-- JANELA 4: BANCO DE QUESTÕES PMPE -->
+        <!-- JANELA 4: BANCO DE QUESTÕES -->
         <div id="win-banco" class="system-window" style="display: none;">
+            <div class="anime-limit-quote">🧠 "O conhecimento é a lâmina mais afiada do Caçador. Domine o edital e alcance o topo!"</div>
             <div class="window-header">
-                <span class="window-title"><i class="fa-solid fa-book"></i> QUESTÕES PMPE 2026</span>
+                <span class="window-title"><i class="fa-solid fa-book"></i> BANCO DE QUESTÕES</span>
             </div>
             <nav class="nav-tabs">
                 <button class="tab-btn active" onclick="switchTab('portugues', event)">Português (35)</button>
@@ -1152,8 +1252,9 @@
             </div>
         </div>
 
-        <!-- JANELA 5: CHAT DOS CAÇADORES & OFERTAS DE MISSÕES -->
+        <!-- JANELA 5: CHAT & OFERTAS -->
         <div id="win-chat" class="system-window" style="display: none;">
+            <div class="anime-limit-quote">🛡️ "Sozinhos somos fortes, mas juntos formamos uma Guilda imbatível!"</div>
             <div class="window-header">
                 <span class="window-title"><i class="fa-solid fa-comments"></i> COMUNIDADE DE CAÇADORES</span>
             </div>
@@ -1186,8 +1287,9 @@
             </div>
         </div>
 
-        <!-- JANELA 6: BOSSES DE MASMORRA SOLO LEVELING -->
+        <!-- JANELA 6: BOSSES -->
         <div id="win-bosses" class="system-window system-window-red" style="display: none;">
+            <div class="anime-limit-quote" style="border-left-color: var(--system-red);">👹 "Diante de um inimigo devastador, apenas a determinação absoluta traz a vitória!"</div>
             <div class="window-header" style="border-bottom-color: var(--system-red);">
                 <span class="window-title" style="color: var(--system-red);"><i class="fa-solid fa-skull"></i> MASMORRAS & BOSSES</span>
             </div>
@@ -1196,8 +1298,9 @@
             <div id="bossesFeedContainer"></div>
         </div>
 
-        <!-- JANELA 7: INVENTÁRIO / ARMAZENAMENTO -->
+        <!-- JANELA 7: EQUIP / ARMAZENAMENTO -->
         <div id="win-equip" class="system-window" style="display: none;">
+            <div class="anime-limit-quote">🎒 "Seus recursos e o controle do tempo são as armas supremas para a evolução continua."</div>
             <div class="window-header">
                 <span class="window-title"><i class="fa-solid fa-box-archive"></i> ARMAZENAMENTO DIMENSIONAL</span>
             </div>
@@ -1251,7 +1354,7 @@
             }
         }
 
-        let dadosCacadorRPG = { nome: 'CAÇADOR', xp: 0, nivel: 1, pontosDisponiveis: 5, ent: 10, ofe: 10, def: 10, vel: 10, tec: 10, avatarType: 'icon', avatarVal: 'fa-skull-crossbones' };
+        let dadosCacadorRPG = { nome: 'CAÇADOR', xp: 0, nivel: 1, pontosDisponiveis: 5, ent: 10, ofe: 10, def: 10, vel: 10, tec: 10, avatarType: 'img', avatarVal: 'https://images.unsplash.com/photo-1563089145-599997674d42?w=150&auto=format&fit=crop&q=80' };
 
         function autenticarUsuario() {
             const u = document.getElementById('input-login-user').value.trim();
@@ -1271,7 +1374,7 @@
                         nome: u.toUpperCase(),
                         senha: p,
                         xp: 0, nivel: 1, pontosDisponiveis: 5, ent: 10, ofe: 10, def: 10, vel: 10, tec: 10,
-                        avatarType: 'icon', avatarVal: 'fa-skull-crossbones'
+                        avatarType: 'img', avatarVal: 'https://images.unsplash.com/photo-1563089145-599997674d42?w=150&auto=format&fit=crop&q=80'
                     };
                 }
 
@@ -1292,9 +1395,26 @@
             sessionStorage.removeItem('cacador_usuario_ativo');
             document.getElementById('abyss-screen').style.display = 'flex';
             document.getElementById('modal-login').style.display = 'none';
+            document.getElementById('optionsDropdown').style.display = 'none';
         }
 
-        /* NOTIFICAÇÕES ATIVAS DO SISTEMA */
+        /* MENU DE CONFIGURAÇÕES (3 PONTOS) */
+        function toggleOptionsMenu() {
+            const dropdown = document.getElementById('optionsDropdown');
+            dropdown.style.display = (dropdown.style.display === 'flex') ? 'none' : 'flex';
+        }
+
+        function promptMudarSenha() {
+            const novaSenha = prompt("Digite a sua nova senha do Sistema:");
+            if (novaSenha && novaSenha.trim().length > 0) {
+                dadosCacadorRPG.senha = novaSenha.trim();
+                salvarDadosUsuario();
+                alert("Senha alterada com sucesso!");
+                document.getElementById('optionsDropdown').style.display = 'none';
+            }
+        }
+
+        /* NOTIFICAÇÕES */
         function solicitarPermissaoNotificacao() {
             if ("Notification" in window) {
                 Notification.requestPermission().then(permission => {
@@ -1310,7 +1430,7 @@
             }
         }
 
-        /* NAVEGAÇÃO FLUIDA POR TOUCH / SWIPE DO DEDO */
+        /* NAVEGAÇÃO TOUCH / SWIPE */
         const listaJanelasOrder = ['status', 'taf', 'missoes', 'banco', 'chat', 'bosses', 'equip'];
         let janelaAtualIndex = 0;
         let startX = 0;
@@ -1333,7 +1453,7 @@
             }
         }, {passive: true});
 
-        /* EFEITO TILT 3D COM SENSOR DO DISPOSITIVO OU MOUSE */
+        /* EFEITO TILT 3D */
         window.addEventListener('deviceorientation', e => {
             const stage = document.getElementById('radarStage3D');
             if (stage && e.beta && e.gamma) {
@@ -1413,36 +1533,28 @@
             }
         }
 
-        function toggleHoloPicker() {
-            const grid = document.getElementById('holoPickerGrid');
+        function toggleBeastPicker() {
+            const grid = document.getElementById('beastPickerGrid');
             if (grid) grid.style.display = (grid.style.display === 'none') ? 'grid' : 'none';
         }
 
-        function selecionarIconeHolo(iconClass) {
-            dadosCacadorRPG.avatarType = 'icon';
-            dadosCacadorRPG.avatarVal = iconClass;
+        function selecionarBeastImg(urlImg) {
+            dadosCacadorRPG.avatarType = 'img';
+            dadosCacadorRPG.avatarVal = urlImg;
             salvarDadosUsuario();
             renderizarAvatar();
-            document.getElementById('holoPickerGrid').style.display = 'none';
+            document.getElementById('beastPickerGrid').style.display = 'none';
         }
 
         function renderizarAvatar() {
-            const iconEl = document.getElementById('defaultAvatarIcon');
             const imgEl = document.getElementById('customAvatarImg');
-
-            if (dadosCacadorRPG.avatarType === 'img' && dadosCacadorRPG.avatarVal) {
-                iconEl.style.display = 'none';
-                imgEl.style.display = 'block';
-                imgEl.src = dadosCacadorRPG.avatarVal;
-            } else {
-                imgEl.style.display = 'none';
-                iconEl.style.display = 'block';
-                iconEl.className = `fa-solid ${dadosCacadorRPG.avatarVal || 'fa-skull-crossbones'} pentagon-avatar-icon`;
+            if (imgEl) {
+                imgEl.src = dadosCacadorRPG.avatarVal || 'https://images.unsplash.com/photo-1563089145-599997674d42?w=150&auto=format&fit=crop&q=80';
             }
         }
 
         let customTasks = JSON.parse(getSafeStorage('sistema_cacador_custom_tasks')) || [
-            { id: 1, text: "Estudar 2 horas de Português/RLM", completed: false },
+            { id: 1, text: "Estudar 2 horas do Edital", completed: false },
             { id: 2, text: "Treino Físico Intenso", completed: false }
         ];
 
@@ -1453,7 +1565,7 @@
 
         let chatMessages = JSON.parse(getSafeStorage('sistema_cacador_chat_msg')) || [
             { user: "SYSTEM", text: "Bem-vindo ao Chat dos Caçadores!", time: "12:00" },
-            { user: "SHADOW", text: "Prontos para o certame da PMPE 2026?", time: "12:05" }
+            { user: "SHADOW", text: "Prontos para o certame da PMPE?", time: "12:05" }
         ];
 
         let missionOffers = JSON.parse(getSafeStorage('sistema_cacador_mission_offers')) || [
@@ -1674,23 +1786,23 @@
 
         const bancoQuestoes = {
             portugues: [
-                { id: "p1", pergunta: "Assinale a opção em que a regência verbal está em conformidade com a norma-padrão:", opcoes: ["Aspirava ao cargo de oficial com determinação.", "Assistiu o filme até o final.", "Prefiro mais a teoria do que a prática.", "Esqueci do documento em casa."], correta: 0, explicacao: "O verbo 'aspirar' no sentido de desejar exige preposição 'a'." },
-                { id: "p2", pergunta: "Qual frase apresenta uso correto da crase?", opcoes: ["Refiro-me à todas as candidatas.", "Chegamos à uma conclusão lógica.", "Entregou o relatório à diretora.", "Ele foi à pé para o batalhão."], correta: 2, explicacao: "Antes de palavra feminina determinada exige fusão de a+a." }
+                { id: "p1", pergunta: "Assinale a opção em que a regência verbal está em conformidade integral com a norma-padrão da língua portuguesa:", opcoes: ["Aspirava ao cargo de oficial com extrema determinação e foco.", "Assistiu o filme até o final sem piscar os olhos.", "Prefiro mais a teoria do que a prática intensiva.", "Esqueci do documento importante em cima da mesa."], correta: 0, explicacao: "O verbo 'aspirar' no sentido de desejar exige preposição 'a'." },
+                { id: "p2", pergunta: "Qual das alternativas a seguir apresenta o emprego estritamente correto do sinal indicativo de crase?", opcoes: ["Refiro-me à todas as candidatas presentes no recinto.", "Chegamos à uma conclusão lógica após a análise dos fatos.", "Entregou a documentação oficial à diretora da instituição.", "Ele foi à pé para a sede do batalhão central."], correta: 2, explicacao: "Antes de palavra feminina determinada exige a fusão da preposição 'a' com artigo 'a'." }
             ],
             racioc_logico: [
-                { id: "rl1", pergunta: "Se p é Verdadeiro e q é Falso, qual o valor lógico de (p ∧ ~q)?", opcoes: ["Falso", "Verdadeiro", "Inconclusivo", "Nulo"], correta: 1, explicacao: "p (V) e ~q (V) resulta em Verdadeiro no operador E (∧)." }
+                { id: "rl1", pergunta: "Considerando as proposições lógicas puras, se a proposição p é Verdadeira e a proposição q é Falsa, qual o valor lógico final da expressão (p ∧ ~q)?", opcoes: ["Falso", "Verdadeiro", "Inconclusivo", "Nulo"], correta: 1, explicacao: "p (V) e ~q (V) resulta em Verdadeiro no operador lógico E (∧)." }
             ],
             constitucional: [
-                { id: "c1", pergunta: "São remédios constitucionais fundamentais, EXCETO:", opcoes: ["Habeas Corpus", "Habeas Data", "Mandado de Segurança", "Ação Penal Privada"], correta: 3, explicacao: "Ação penal privada é instituto de Direito Processual Penal." }
+                { id: "c1", pergunta: "São considerados remédios constitucionais fundamentais previstos na Carta Magna, EXCETO:", opcoes: ["Habeas Corpus", "Habeas Data", "Mandado de Segurança", "Ação Penal Privada"], correta: 3, explicacao: "Ação penal privada é instituto de Direito Processual Penal." }
             ],
             direitos_humanos: [
-                { id: "dh1", pergunta: "A Declaração Universal dos Direitos Humanos foi proclamada em:", opcoes: ["1948", "1988", "1945", "1950"], correta: 0, explicacao: "Proclamada pela Assembleia Geral da ONU em 1948." }
+                { id: "dh1", pergunta: "A Declaração Universal dos Direitos Humanos (DUDH) foi historicamente proclamada pela ONU no ano de:", opcoes: ["1948", "1988", "1945", "1950"], correta: 0, explicacao: "Proclamada pela Assembleia Geral da ONU em 1948." }
             ],
             historia: [
-                { id: "h1", pergunta: "A Revolução Pernambucana ocorreu no ano de:", opcoes: ["1817", "1824", "1848", "1710"], correta: 0, explicacao: "A Revolução Pernambucana eclodiu em 1817." }
+                { id: "h1", pergunta: "A famosa Revolução Pernambucana eclodiu no estado no ano histórico de:", opcoes: ["1817", "1824", "1848", "1710"], correta: 0, explicacao: "A Revolução Pernambucana ocorreu em 1817." }
             ],
             informatica: [
-                { id: "inf1", pergunta: "Qual protocolo é utilizado para transferência segura de páginas web?", opcoes: ["HTTP", "HTTPS", "FTP", "SMTP"], correta: 1, explicacao: "HTTPS utiliza criptografia SSL/TLS." }
+                { id: "inf1", pergunta: "Qual protocolo da camada de aplicação é utilizado para a transferência segura e criptografada de dados em páginas web?", opcoes: ["HTTP", "HTTPS", "FTP", "SMTP"], correta: 1, explicacao: "HTTPS utiliza criptografia SSL/TLS para segurança." }
             ]
         };
 
@@ -1700,15 +1812,15 @@
             for(let i = atual + 1; i <= 35; i++) {
                 bancoQuestoes[mat].push({
                     id: `${mat}_${i}`,
-                    pergunta: `[SISTEMA PMPE 2026 - ${mat.toUpperCase()}] QUESTÃO #${i}: Analise a afirmativa legal/doutrinária da disciplina e selecione a alternativa correta:`,
+                    pergunta: `[AVALIAÇÃO DO SISTEMA - ${mat.toUpperCase()}] QUESTÃO COMPLETA #${i}: Analise detalhadamente a afirmativa legal, doutrinária ou teórica aplicada a esta questão e assinale a alternativa que apresenta a fundamentação correta em conformidade com o edital do exame:`,
                     opcoes: [
-                        `A) Hipótese em conformidade integral com o edital para a questão #${i}.`,
-                        `B) Conceito incorreto com violação aos ditames da doutrina.`,
-                        `C) Inversão de conceito não aceita no certame oficial.`,
-                        `D) Ausência de amparo normativo no caso concreto.`
+                        `A) A afirmação encontra-se em conformidade integral com a doutrina de regência para o item #${i}.`,
+                        `B) Conceito incorreto com violação expressa aos ditames legais e normativos.`,
+                        `C) Inversão de conceito não aceita pela jurisprudência ou banca examinadora.`,
+                        `D) Ausência completa de amparo legal para o caso concreto apresentado.`
                     ],
                     correta: 0,
-                    explicacao: `Relatório do Sistema: A alternativa A apresenta a fundamentação correta para o item #${i}.`
+                    explicacao: `Relatório de Análise do Sistema: A alternativa A apresenta a fundamentação doutrinária correta para o item #${i}.`
                 });
             }
         });
@@ -1723,8 +1835,8 @@
                     if (saved.def === undefined) saved.def = 10;
                     if (saved.vel === undefined) saved.vel = 10;
                     if (saved.tec === undefined) saved.tec = 10;
-                    if (saved.avatarType === undefined) saved.avatarType = 'icon';
-                    if (saved.avatarVal === undefined) saved.avatarVal = 'fa-skull-crossbones';
+                    if (saved.avatarType === undefined) saved.avatarType = 'img';
+                    if (saved.avatarVal === undefined) saved.avatarVal = 'https://images.unsplash.com/photo-1563089145-599997674d42?w=150&auto=format&fit=crop&q=80';
                     dadosCacadorRPG = saved;
                 }
             }
