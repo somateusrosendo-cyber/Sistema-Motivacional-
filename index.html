@@ -14,7 +14,7 @@
             --bg-dark: #010308;
             --system-cyan: #00f0ff;
             --system-cyan-glow: rgba(0, 240, 255, 0.6);
-            --system-blue-card: rgba(4, 14, 30, 0.92);
+            --system-blue-card: rgba(4, 14, 30, 0.94);
             --system-red: #ff2a6d;
             --system-red-glow: rgba(255, 42, 109, 0.65);
             --god-gold: #ffd700;
@@ -36,7 +36,7 @@
             background-color: var(--bg-dark);
             color: var(--text-main);
             min-height: 100vh;
-            padding: 12px 10px 80px 10px;
+            padding: 12px 10px 90px 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -45,21 +45,10 @@
                 linear-gradient(180deg, #010205 0%, #030a1c 100%);
             background-attachment: fixed;
             overflow-x: hidden;
-            perspective: 1200px;
+            touch-action: pan-y;
         }
 
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
-            background-size: 100% 4px;
-            z-index: 999;
-            pointer-events: none;
-            opacity: 0.2;
-        }
-
-        /* 1. TELA TIPO ABISMO UNIVERSO COM OLHO OBSERVADOR DO ABISMO */
+        /* 1. TELA UNIVERSO ESPACIAL & OLHOS TRANSCENDENTES COM SUPERNOVA */
         .abyss-screen {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
@@ -76,87 +65,85 @@
             background-image: 
                 radial-gradient(2px 2px at 20px 30px, #fff, rgba(0,0,0,0)),
                 radial-gradient(2px 2px at 40px 70px, var(--system-cyan), rgba(0,0,0,0)),
-                radial-gradient(1px 1px at 90px 40px, #fff, rgba(0,0,0,0)),
+                radial-gradient(1.5px 1.5px at 90px 40px, #ffd700, rgba(0,0,0,0)),
                 radial-gradient(2px 2px at 160px 120px, var(--system-cyan), rgba(0,0,0,0));
             background-repeat: repeat;
-            background-size: 200px 200px;
-            animation: cosmicStars 20s linear infinite;
+            background-size: 250px 250px;
+            animation: cosmicStars 30s linear infinite;
         }
 
         @keyframes cosmicStars {
             0% { background-position: 0 0; }
-            100% { background-position: 200px 400px; }
+            100% { background-position: 250px 500px; }
         }
 
-        .abyss-eye-portal {
-            width: 170px;
-            height: 170px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(0,240,255,0.2) 0%, rgba(0,0,0,0.95) 75%);
-            border: 2px solid var(--system-cyan);
-            box-shadow: 0 0 60px var(--system-cyan-glow), inset 0 0 40px var(--system-cyan-glow);
+        /* ANIMAÇÃO DE RACHADURA DA TELA */
+        .abyss-screen.cracking {
+            animation: crackEffect 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97) forwards;
+        }
+
+        @keyframes crackEffect {
+            0% { transform: scale(1); filter: brightness(1); }
+            20% { transform: scale(1.03) rotate(1deg); filter: brightness(2) contrast(1.5); }
+            40% { transform: scale(0.97) rotate(-2deg); filter: hue-rotate(90deg); }
+            60% { transform: scale(1.05); }
+            100% { transform: scale(0); opacity: 0; }
+        }
+
+        .supernova-eye-stage {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 28px;
-            position: relative;
-            animation: pulseEyeStage 3s infinite ease-in-out;
+            gap: 20px;
+            margin-bottom: 24px;
         }
 
-        @keyframes pulseEyeStage {
-            0%, 100% { transform: scale(0.96); box-shadow: 0 0 40px var(--system-cyan-glow); }
-            50% { transform: scale(1.06); box-shadow: 0 0 80px var(--system-cyan), 0 0 120px rgba(0,240,255,0.4); }
-        }
-
-        .abyss-eye-lens {
-            width: 110px;
-            height: 65px;
+        .supernova-eye {
+            width: 90px;
+            height: 50px;
             border-radius: 100% 0%;
             transform: rotate(-45deg);
-            border: 3px solid var(--system-cyan);
-            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid var(--system-cyan);
+            background: #000;
+            box-shadow: 0 0 30px var(--system-cyan-glow), inset 0 0 25px rgba(0, 240, 255, 0.8);
             display: flex;
             justify-content: center;
             align-items: center;
             overflow: hidden;
-            box-shadow: 0 0 20px var(--system-cyan);
-            animation: eyeBlink 5s infinite;
+            position: relative;
+            animation: softBlink 6s infinite ease-in-out;
         }
 
-        @keyframes eyeBlink {
-            0%, 90%, 100% { transform: rotate(-45deg) scaleY(1); }
-            95% { transform: rotate(-45deg) scaleY(0.1); }
+        @keyframes softBlink {
+            0%, 92%, 100% { transform: rotate(-45deg) scaleY(1); }
+            96% { transform: rotate(-45deg) scaleY(0.08); }
         }
 
-        .abyss-pupil {
-            width: 18px;
-            height: 48px;
-            background: var(--system-cyan);
+        .supernova-core {
+            width: 26px;
+            height: 26px;
             border-radius: 50%;
-            box-shadow: 0 0 15px var(--system-cyan), 0 0 30px #fff;
-            animation: pupilLook 4s ease-in-out infinite alternate;
+            background: radial-gradient(circle, #ffffff 0%, var(--system-cyan) 40%, #9d4edd 75%, transparent 100%);
+            box-shadow: 0 0 20px #fff, 0 0 40px var(--system-cyan), 0 0 60px #9d4edd;
+            animation: pulseSupernova 2.5s infinite alternate ease-in-out;
         }
 
-        @keyframes pupilLook {
-            0% { transform: translateX(-12px); }
-            50% { transform: translateX(12px); }
-            100% { transform: translateX(0px); }
+        @keyframes pulseSupernova {
+            0% { transform: scale(0.85); box-shadow: 0 0 15px #fff, 0 0 30px var(--system-cyan); }
+            100% { transform: scale(1.25); box-shadow: 0 0 30px #fff, 0 0 60px var(--system-cyan), 0 0 90px #9d4edd; }
         }
 
         .abyss-title {
             color: var(--system-cyan);
             font-family: monospace;
             letter-spacing: 4px;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             text-shadow: 0 0 15px var(--system-cyan);
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .abyss-sub {
             color: var(--text-sub);
             font-size: 0.8rem;
             font-family: monospace;
-            letter-spacing: 1.5px;
             animation: blinkText 1.8s infinite;
         }
 
@@ -165,48 +152,19 @@
             50% { opacity: 1; }
         }
 
-        /* BOLHA FLUTUANTE EXTRA DE PERFIL */
-        .floating-avatar-bubble {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 58px;
-            height: 58px;
-            border-radius: 50%;
-            border: 2px solid var(--system-cyan);
-            box-shadow: 0 0 20px var(--system-cyan-glow);
-            background: rgba(2, 6, 16, 0.95);
-            z-index: 99999;
-            cursor: pointer;
-            overflow: hidden;
-            transition: transform 0.2s;
-        }
-
-        .floating-avatar-bubble:active { transform: scale(0.9); }
-        .floating-avatar-bubble img { width: 100%; height: 100%; object-fit: cover; }
-
-        /* MODAL ESTATÍSTICAS DO CAÇADOR */
-        .stats-modal-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(1, 3, 10, 0.94);
-            backdrop-filter: blur(10px);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 999999;
-            padding: 16px;
-        }
-
-        .stats-modal-card {
-            background: linear-gradient(180deg, #06152d 0%, #020712 100%);
-            border: 2px solid var(--system-cyan);
-            padding: 22px;
-            width: 100%;
-            max-width: 420px;
-            box-shadow: 0 0 35px var(--system-cyan-glow);
-            clip-path: polygon(0 15px, 15px 0, calc(100% - 15px) 0, 100% 15px, 100% calc(100% - 15px), calc(100% - 15px) 100%, 15px 100%, 0 calc(100% - 15px));
-            text-align: center;
+        /* SELO SÚTIL MR NO CANTO DA TELA */
+        .mr-stamp-subtle {
+            position: absolute;
+            bottom: 16px;
+            right: 18px;
+            font-family: monospace;
+            font-size: 0.72rem;
+            color: var(--text-sub);
+            opacity: 0.6;
+            letter-spacing: 2px;
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            padding: 2px 6px;
+            border-radius: 4px;
         }
 
         /* HEADER DO SISTEMA */
@@ -217,14 +175,9 @@
             border: 2px solid var(--system-cyan);
             box-shadow: 0 10px 25px var(--system-cyan-glow);
             padding: 12px 16px;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
             clip-path: polygon(0 12px, 12px 0, calc(100% - 12px) 0, 100% 12px, 100% calc(100% - 12px), calc(100% - 12px) 100%, 12px 100%, 0 calc(100% - 12px));
             text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-            position: relative;
         }
 
         .header-top-bar {
@@ -237,7 +190,7 @@
         .header-title-glow {
             color: #fff;
             font-family: monospace;
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             font-weight: 900;
             letter-spacing: 2px;
             text-transform: uppercase;
@@ -246,7 +199,7 @@
 
         .header-sub-tag {
             color: var(--system-cyan);
-            font-size: 0.7rem;
+            font-size: 0.68rem;
             font-family: monospace;
             letter-spacing: 1.5px;
             font-weight: bold;
@@ -254,20 +207,6 @@
             padding: 2px 8px;
             border: 1px solid var(--system-cyan);
             border-radius: 8px;
-        }
-
-        .btn-notify-small {
-            background: rgba(0, 240, 255, 0.12);
-            border: 1px solid var(--system-cyan);
-            color: var(--system-cyan);
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            font-size: 0.8rem;
         }
 
         .btn-options-dots {
@@ -304,12 +243,9 @@
             font-weight: bold;
             cursor: pointer;
             text-align: left;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
 
-        /* NAVEGAÇÃO SUPERIOR IGUAL IMAGEM 2 */
+        /* NAVEGAÇÃO SUPERIOR */
         .window-selector-floating-grid {
             width: 100%;
             max-width: 600px;
@@ -317,7 +253,7 @@
             flex-wrap: wrap;
             justify-content: center;
             gap: 8px;
-            margin-bottom: 18px;
+            margin-bottom: 16px;
         }
 
         .btn-floating-node {
@@ -343,7 +279,7 @@
             box-shadow: 0 0 18px var(--system-cyan-glow);
         }
 
-        /* VIEWPORT E JANELA DO SISTEMA IGUAL IMAGEM 2 */
+        /* VIEWPORT MAIN */
         .single-window-viewport {
             width: 100%;
             max-width: 600px;
@@ -356,7 +292,7 @@
             background: var(--system-blue-card);
             border: 2px solid var(--system-cyan);
             box-shadow: 0 0 35px rgba(0, 240, 255, 0.35), inset 0 0 20px rgba(0, 240, 255, 0.1);
-            padding: 20px;
+            padding: 18px;
             border-radius: 12px;
             position: relative;
         }
@@ -374,7 +310,7 @@
             font-size: 0.72rem;
             font-family: monospace;
             color: var(--text-sub);
-            margin-bottom: 14px;
+            margin-bottom: 12px;
             font-style: italic;
         }
 
@@ -389,7 +325,7 @@
 
         .window-title {
             font-family: monospace;
-            font-size: 0.95rem;
+            font-size: 0.92rem;
             color: var(--system-cyan);
             letter-spacing: 2px;
             text-transform: uppercase;
@@ -413,7 +349,7 @@
             transition: width 0.4s ease;
         }
 
-        /* DIAGRAMA CIRCULAR DOS PECADOS (IMAGEM 3) */
+        /* 2. DIAGRAMA COM ÍCONE ESCOLHIDO NO CENTRO E ATRIBUTOS DE CLASSE AO REDOR */
         .sins-diagram-stage {
             width: 100%;
             height: 290px;
@@ -439,94 +375,90 @@
             100% { transform: rotate(360deg); }
         }
 
-        .sin-node-icon {
-            position: absolute;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            background: rgba(2, 6, 16, 0.95);
-            border: 2px solid var(--system-cyan);
-            box-shadow: 0 0 12px var(--system-cyan-glow);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: var(--system-cyan);
-            font-size: 1.1rem;
-        }
-
-        .node-top { top: 0px; }
-        .node-top-right { top: 40px; right: 25px; }
-        .node-bottom-right { bottom: 40px; right: 25px; }
-        .node-bottom { bottom: 0px; }
-        .node-bottom-left { bottom: 40px; left: 25px; }
-        .node-top-left { top: 40px; left: 25px; }
-
-        .sin-node-center {
+        /* ÍCONE CENTRAL RECEBE O EMBLEMA DA CLASSE SELECIONADA */
+        .sin-node-center-chosen {
             z-index: 10;
-            width: 105px;
-            height: 105px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
-            background: rgba(3, 12, 30, 0.95);
+            background: radial-gradient(circle, rgba(0,240,255,0.25) 0%, rgba(2,6,16,0.95) 80%);
             border: 2px solid var(--system-cyan);
-            box-shadow: 0 0 25px var(--system-cyan-glow);
+            box-shadow: 0 0 30px var(--system-cyan-glow), inset 0 0 18px var(--system-cyan-glow);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            text-align: center;
-            padding: 8px;
+            color: var(--system-cyan);
+            transition: all 0.3s ease;
         }
 
-        .center-char-title {
-            font-family: monospace;
-            font-size: 0.85rem;
-            font-weight: bold;
-            color: #fff;
-            text-shadow: 0 0 8px var(--system-cyan);
+        .sin-node-center-chosen i {
+            font-size: 2.2rem;
+            filter: drop-shadow(0 0 10px var(--system-cyan));
         }
 
-        .center-class-sub {
+        .sin-node-center-chosen span {
             font-family: monospace;
-            font-size: 0.65rem;
+            font-size: 0.62rem;
             color: var(--god-gold);
-            margin-top: 2px;
+            margin-top: 4px;
+            font-weight: bold;
         }
 
-        /* ATRIBUTOS IMAGEM 2 */
+        /* CÍRCULOS DE ATRIBUTOS DA CLASSE AO REDOR DO ANEL */
+        .class-stat-circle {
+            position: absolute;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: rgba(2, 6, 16, 0.95);
+            border: 1.5px solid var(--system-cyan);
+            box-shadow: 0 0 12px var(--system-cyan-glow);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: monospace;
+            z-index: 5;
+        }
+
+        .class-stat-circle .stat-name { font-size: 0.65rem; color: var(--system-cyan); font-weight: bold; }
+        .class-stat-circle .stat-num { font-size: 0.9rem; color: #fff; font-weight: bold; }
+
+        .node-pos-top { top: -2px; }
+        .node-pos-right-top { top: 40px; right: 20px; }
+        .node-pos-right-bot { bottom: 40px; right: 20px; }
+        .node-pos-left-bot { bottom: 40px; left: 20px; }
+        .node-pos-left-top { top: 40px; left: 20px; }
+
+        /* PAINEL DE ADIÇÃO DE PONTOS DE ATRIBUTO DA CLASSE */
         .attributes-grid-hud {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-top: 15px;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 6px;
+            margin-top: 12px;
         }
 
         .stat-hud-box {
             background: rgba(3, 10, 24, 0.95);
             border: 1px solid var(--system-cyan);
-            padding: 8px;
+            padding: 6px 2px;
             text-align: center;
-            box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
             font-family: monospace;
         }
 
-        .stat-hud-label { font-size: 0.72rem; color: var(--system-cyan); font-weight: bold; }
-        .stat-hud-val { font-size: 1.1rem; color: #fff; font-weight: bold; margin: 4px 0; }
+        .stat-hud-label { font-size: 0.65rem; color: var(--system-cyan); font-weight: bold; }
+        .stat-hud-val { font-size: 0.95rem; color: #fff; font-weight: bold; margin: 2px 0; }
         .btn-add-stat {
-            width: 100%;
-            background: var(--system-cyan);
-            color: #000;
-            border: none;
-            font-weight: bold;
-            padding: 2px 0;
-            cursor: pointer;
+            width: 100%; background: var(--system-cyan); color: #000; border: none; font-weight: bold; padding: 2px 0; cursor: pointer; font-size: 0.75rem;
         }
 
-        /* CLASSES SELETORAS */
+        /* GRADE SELETORA DE CLASSES (SOLO LEVELING & PECADOS) */
         .class-selection-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 8px;
-            margin-top: 15px;
+            margin-top: 14px;
             background: rgba(0, 240, 255, 0.05);
             border: 1px dashed var(--system-cyan);
             padding: 10px;
@@ -543,83 +475,103 @@
             gap: 4px;
             cursor: pointer;
             border-radius: 6px;
+            transition: transform 0.2s, border-color 0.2s;
         }
 
-        .class-select-card i { font-size: 1.4rem; color: var(--system-cyan); }
-        .class-select-card span { font-size: 0.65rem; font-family: monospace; color: #fff; text-align: center; }
-
-        /* OUTROS MÓDULOS (TAF, MISSÕES, QUESTÕES, CHAT, BOSSES, EQUIP) */
-        .taf-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 8px;
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid var(--system-red);
-            padding: 10px;
-            text-align: center;
-            margin-bottom: 12px;
-            font-family: monospace;
+        .class-select-card.selected {
+            border-color: var(--god-gold);
+            background: rgba(255, 215, 0, 0.1);
+            box-shadow: 0 0 15px var(--god-gold-glow);
         }
 
-        .btn-taf {
-            width: 100%;
-            padding: 12px;
-            background: rgba(255, 42, 109, 0.2);
-            border: 1px solid var(--system-red);
-            color: #fff;
-            font-weight: bold;
-            font-size: 0.8rem;
-            cursor: pointer;
-            margin-bottom: 8px;
-        }
+        .class-select-card i { font-size: 1.3rem; color: var(--system-cyan); }
+        .class-select-card span { font-size: 0.62rem; font-family: monospace; color: #fff; text-align: center; }
 
-        .task-input-box { display: flex; gap: 6px; margin-bottom: 12px; }
-        .task-input-box input {
-            flex: 1; background: rgba(2, 6, 16, 0.9); border: 1px solid var(--system-cyan); color: #fff; padding: 8px 12px; outline: none;
-        }
-        .task-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-        .task-item {
-            background: rgba(2, 6, 16, 0.8); border: 1px solid rgba(0, 240, 255, 0.3); border-left: 4px solid var(--system-cyan); padding: 10px 12px; display: flex; justify-content: space-between; align-items: center;
-        }
-
-        .boss-card {
-            background: rgba(20, 4, 12, 0.9);
-            border: 1px solid var(--system-red);
-            padding: 12px;
-            margin-bottom: 12px;
+        /* CAIXA DE ARMAZENAMENTO FIXA NO CANTO DA TELA */
+        .storage-floating-trigger {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            background: rgba(6, 18, 38, 0.95);
+            border: 2px solid var(--god-gold);
+            color: var(--god-gold);
             display: flex;
-            flex-direction: column;
-            gap: 8px;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 0 20px var(--god-gold-glow);
+            z-index: 99999;
         }
 
-        .boss-hp-outer { width: 100%; height: 10px; background: #100206; border: 1px solid var(--system-red); }
-        .boss-hp-inner { height: 100%; background: linear-gradient(90deg, #ff2a6d, #ff758c); width: 100%; }
-
-        .btn-attack-boss {
-            background: var(--system-red); color: #fff; border: none; padding: 10px; font-weight: bold; font-family: monospace; cursor: pointer;
+        .storage-modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(1, 3, 10, 0.94);
+            backdrop-filter: blur(10px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 999999;
+            padding: 16px;
         }
 
-        .equip-grid { display: flex; flex-direction: column; gap: 14px; }
-        .equip-card { background: rgba(3, 10, 24, 0.9); border: 1px solid var(--system-cyan); padding: 14px; text-align: center; }
-        .digital-clock-display { font-family: monospace; font-size: 2rem; color: var(--system-cyan); text-shadow: 0 0 12px var(--system-cyan); font-weight: bold; }
+        .storage-modal-card {
+            background: linear-gradient(180deg, #06152d 0%, #020712 100%);
+            border: 2px solid var(--god-gold);
+            padding: 20px;
+            width: 100%;
+            max-width: 440px;
+            box-shadow: 0 0 35px var(--god-gold-glow);
+            text-align: center;
+        }
 
-        /* OVERLAY QUESTÕES GAME */
+        .digital-clock-display {
+            font-family: monospace;
+            font-size: 2rem;
+            color: var(--system-cyan);
+            text-shadow: 0 0 12px var(--system-cyan);
+            font-weight: bold;
+        }
+
+        .stats-trigger-btn {
+            background: rgba(0, 240, 255, 0.12);
+            border: 1px solid var(--system-cyan);
+            color: var(--system-cyan);
+            padding: 6px 12px;
+            font-size: 0.72rem;
+            font-family: monospace;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 6px;
+        }
+
+        /* BANCO DE QUESTÕES OBRIGATÓRIO E SEM BOTÃO DE PULAR */
         .game-modal-overlay {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(2, 5, 14, 0.95);
             display: none; justify-content: center; align-items: center; z-index: 99999; padding: 16px;
         }
+
         .game-modal-card {
-            background: #07152b; border: 2px solid var(--system-cyan); padding: 20px; width: 100%; max-width: 580px; display: flex; flex-direction: column; gap: 12px;
+            background: #07152b; border: 2px solid var(--system-cyan); padding: 20px; width: 100%; max-width: 580px; max-height: 90vh; overflow-y: auto; display: flex; flex-direction: column; gap: 12px;
         }
 
-        /* OVERLAY LOGIN */
+        .game-options-grid button {
+            width: 100%; text-align: left; background: rgba(4, 14, 30, 0.9); border: 1px solid rgba(0, 240, 255, 0.3); color: #fff; padding: 12px; font-size: 0.88rem; margin-top: 8px; cursor: pointer; white-space: normal; word-wrap: break-word; line-height: 1.4;
+        }
+
         .login-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(2, 5, 14, 0.96);
             display: flex; justify-content: center; align-items: center; z-index: 999999;
         }
+
         .login-caixa {
             background: #07152b; border: 2px solid var(--system-cyan); padding: 28px; text-align: center; width: 90%; max-width: 380px;
         }
+
         .login-caixa input {
             width: 100%; padding: 10px 12px; background: #030a16; border: 1px solid var(--system-cyan); color: #fff; text-align: center; font-weight: bold; margin-bottom: 10px; outline: none;
         }
@@ -627,46 +579,63 @@
 </head>
 <body>
 
-    <!-- BOLHA FLUTUANTE DE STATS -->
-    <div class="floating-avatar-bubble" title="Ver Status Completo" onclick="abrirModalEstatisticas()">
-        <img id="bubbleAvatarImg" src="https://images.unsplash.com/photo-1563089145-599997674d42?w=150&auto=format&fit=crop&q=80" alt="Avatar">
+    <!-- CAIXA FLUTUANTE DE ARMAZENAMENTO -->
+    <div class="storage-floating-trigger" title="Armazenamento Dimensional" onclick="abrirModalArmazenamento()">
+        <i class="fa-solid fa-box-archive"></i>
     </div>
 
-    <!-- MODAL DE ESTATÍSTICAS DA BOLHA -->
-    <div id="modalEstatisticas" class="stats-modal-overlay">
-        <div class="stats-modal-card">
+    <!-- POP-UP ARMAZENAMENTO DIMENSIONAL -->
+    <div id="storageModal" class="storage-modal-overlay">
+        <div class="storage-modal-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--god-gold); padding-bottom: 8px; margin-bottom: 14px;">
+                <h3 style="color: var(--god-gold); font-family: monospace;"><i class="fa-solid fa-box-archive"></i> ARMAZENAMENTO DIMENSIONAL</h3>
+                <button onclick="fecharModalArmazenamento()" style="background: none; border: none; color: #ff2a6d; font-size: 1.3rem; cursor: pointer;">✕</button>
+            </div>
+
+            <div style="background: rgba(3, 10, 24, 0.9); border: 1px solid var(--system-cyan); padding: 14px; text-align: center; margin-bottom: 12px;">
+                <div style="font-family: monospace; font-size: 0.8rem; color: var(--text-sub); margin-bottom: 6px;">HORÁRIO MUNDIAL DO SISTEMA</div>
+                <div id="real-time-clock" class="digital-clock-display">00:00:00</div>
+            </div>
+
+            <div style="background: rgba(3, 10, 24, 0.9); border: 1px solid var(--god-gold); padding: 14px; text-align: center;">
+                <div style="font-family: monospace; font-size: 0.8rem; color: var(--god-gold); margin-bottom: 6px;">CRONÔMETRO DE TREINO / ESTUDO</div>
+                <div id="stopwatch-display" class="digital-clock-display" style="color: var(--god-gold);">00:00:00</div>
+                <div style="display: flex; gap: 6px; justify-content: center; margin-top: 10px;">
+                    <button onclick="iniciarCronometro()" style="background: var(--system-cyan); color: #000; border: none; padding: 6px 14px; font-weight: bold; cursor: pointer;">INICIAR</button>
+                    <button onclick="pausarCronometro()" style="background: rgba(255, 42, 109, 0.3); border: 1px solid var(--system-red); color: #fff; padding: 6px 14px; font-weight: bold; cursor: pointer;">PAUSAR</button>
+                    <button onclick="zerarCronometro()" style="background: rgba(2, 6, 16, 0.9); border: 1px solid var(--system-cyan); color: var(--system-cyan); padding: 6px 14px; font-weight: bold; cursor: pointer;">ZERAR</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JANELA EXTRA FLUTUANTE DE STATS -->
+    <div id="modalEstatisticas" class="storage-modal-overlay">
+        <div class="storage-modal-card" style="border-color: var(--system-cyan);">
             <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--system-cyan); padding-bottom: 8px; margin-bottom: 12px;">
-                <h3 style="color: var(--system-cyan); font-family: monospace;"><i class="fa-solid fa-chart-line"></i> PAINEL DE STATUS</h3>
+                <h3 style="color: var(--system-cyan); font-family: monospace;"><i class="fa-solid fa-chart-line"></i> JANELA EXTRA DE STATUS</h3>
                 <button onclick="fecharModalEstatisticas()" style="background: none; border: none; color: #ff2a6d; font-size: 1.3rem; cursor: pointer;">✕</button>
             </div>
             <h2 id="modalNomeUser" style="color: #fff; font-family: monospace;">CAÇADOR: GOD</h2>
-            <div id="modalClasseUser" style="color: var(--god-gold); font-family: monospace; font-size: 0.85rem; margin-top: 4px;">CLASSE: SOMBRA</div>
-            
+            <div id="modalClasseUser" style="color: var(--god-gold); font-family: monospace; font-size: 0.85rem; margin-top: 4px;">CLASSE: MONARCA DAS SOMBRAS</div>
             <div class="xp-bar-outer" style="margin-top: 14px;">
                 <div id="modalBarraXp" class="xp-bar-inner"></div>
             </div>
-            <div style="font-size: 0.8rem; color: var(--text-sub); font-family: monospace;">
+            <div style="font-size: 0.8rem; color: var(--text-sub); font-family: monospace; margin-top: 6px;">
                 XP: <span id="modalXpAtual">0</span> / <span id="modalXpProx">200</span> (LVL <span id="modalLvl">1</span>)
-            </div>
-
-            <div style="display: flex; gap: 6px; margin-top: 14px;">
-                <button onclick="document.getElementById('avatarFileInput').click()" style="flex: 1; padding: 8px; background: rgba(0,240,255,0.15); border: 1px solid var(--system-cyan); color: #fff; font-size: 0.75rem; cursor: pointer;">
-                    <i class="fa-solid fa-camera"></i> ALTERAR FOTO
-                </button>
-                <input type="file" id="avatarFileInput" accept="image/*" style="display: none;" onchange="uploadFotoCaçador(event)">
             </div>
         </div>
     </div>
 
-    <!-- 1. TELA TIPO ABISMO UNIVERSO COM OLHO OBSERVADOR -->
-    <div id="abyss-screen" class="abyss-screen" onclick="despertarSistema()">
-        <div class="abyss-eye-portal">
-            <div class="abyss-eye-lens">
-                <div class="abyss-pupil"></div>
-            </div>
+    <!-- 1. TELA DO ABISMO UNIVERSO COM OLHOS PROFUNDOS DE SUPERNOVA E RACHADURA -->
+    <div id="abyss-screen" class="abyss-screen" onclick="executarImpactoRachadura()">
+        <div class="supernova-eye-stage">
+            <div class="supernova-eye"><div class="supernova-core"></div></div>
+            <div class="supernova-eye"><div class="supernova-core"></div></div>
         </div>
         <h1 class="abyss-title">[O ABISMO DO CAÇADOR]</h1>
-        <p class="abyss-sub">TOQUE EM QUALQUER LUGAR PARA CONECTAR</p>
+        <p class="abyss-sub">TENHA CORAGEM! (TOQUE NA TELA PARA DESPERTAR)</p>
+        <div class="mr-stamp-subtle">(MR)</div>
     </div>
 
     <!-- LOGIN -->
@@ -679,10 +648,10 @@
         </form>
     </div>
 
-    <!-- HEADER DO SISTEMA COM MENU 3 PONTOS -->
+    <!-- HEADER DO SISTEMA -->
     <header>
         <div class="header-top-bar">
-            <button class="btn-notify-small" onclick="solicitarPermissaoNotificacao()"><i class="fa-solid fa-bell"></i></button>
+            <button class="stats-trigger-btn" onclick="abrirModalEstatisticas()"><i class="fa-solid fa-chart-line"></i> JANELA EXTRA</button>
             <div class="header-sub-tag">PAINEL PESSOAL</div>
             <button class="btn-options-dots" onclick="toggleOptionsMenu()">⋮</button>
         </div>
@@ -690,26 +659,22 @@
 
         <div id="optionsDropdown" class="options-dropdown-panel">
             <button class="options-btn-item" onclick="promptMudarSenha()"><i class="fa-solid fa-key"></i> MUDAR SENHA</button>
-            <button class="options-btn-item" onclick="solicitarPermissaoNotificacao()"><i class="fa-solid fa-bell"></i> NOTIFICAÇÕES</button>
-            <button class="options-btn-item" style="color: #ff4757; border-color: #ff4757;" onclick="fazerLogout()"><i class="fa-solid fa-right-from-bracket"></i> SAIR DA SESSÃO</button>
+            <button class="options-btn-item" style="color: #ff4757;" onclick="fazerLogout()"><i class="fa-solid fa-right-from-bracket"></i> SAIR DA SESSÃO</button>
         </div>
     </header>
 
-    <!-- MENU DE NAVEGAÇÃO SUPERIOR IGUAL IMAGEM 2 -->
+    <!-- NAVEGAÇÃO SUPERIOR -->
     <div class="window-selector-floating-grid">
         <button id="btn-win-status" class="btn-floating-node active" onclick="exibirJanela('status')"><i class="fa-solid fa-bolt"></i> STATUS</button>
         <button id="btn-win-taf" class="btn-floating-node" onclick="exibirJanela('taf')"><i class="fa-solid fa-fire"></i> TAF</button>
         <button id="btn-win-missoes" class="btn-floating-node" onclick="exibirJanela('missoes')"><i class="fa-solid fa-scroll"></i> MISSÕES</button>
         <button id="btn-win-banco" class="btn-floating-node" onclick="exibirJanela('banco')"><i class="fa-solid fa-crosshairs"></i> QUESTÕES</button>
-        <button id="btn-win-chat" class="btn-floating-node" onclick="exibirJanela('chat')"><i class="fa-solid fa-comments"></i> CHAT</button>
-        <button id="btn-win-bosses" class="btn-floating-node" onclick="exibirJanela('bosses')"><i class="fa-solid fa-skull"></i> BOSSES</button>
-        <button id="btn-win-equip" class="btn-floating-node" onclick="exibirJanela('equip')"><i class="fa-solid fa-box-archive"></i> EQUIP</button>
     </div>
 
     <!-- MAIN VIEWPORT -->
-    <main class="single-window-viewport">
+    <main class="single-window-viewport" id="viewportMain">
 
-        <!-- JANELA 1: STATUS -->
+        <!-- JANELA 1: STATUS DO CAÇADOR -->
         <div id="win-status" class="system-window">
             <div class="anime-limit-quote">🔥 "Mesmo que você seja o Caçador mais fraco, o Sistema não permite fraqueza. Erga-se!"</div>
             <div class="window-header">
@@ -731,96 +696,94 @@
                 <strong id="display-pontos-disponiveis" style="color: var(--god-gold); font-size: 0.95rem;">5</strong>
             </div>
 
-            <!-- DIAGRAMA DOS PECADOS DO CAÇADOR (IMAGEM 3 INTEGRADA) -->
+            <!-- 2. DIAGRAMA COM O EMBLEMA DO PECADO NO CENTRO E ATRIBUTOS DA CLASSE EM VOLTA -->
             <div class="sins-diagram-stage">
                 <div class="sins-ring-line"></div>
 
-                <div class="sin-node-center">
-                    <div id="center-char-name" class="center-char-title">GOD</div>
-                    <div id="center-char-class" class="center-class-sub">SOMBRA</div>
+                <!-- NÓ CENTRAL EXIBINDO O EMBLEMA DA CLASSE ESCOLHIDA -->
+                <div class="sin-node-center-chosen" id="centerEmblemContainer">
+                    <i id="centerEmblemIcon" class="fa-solid fa-dragon"></i>
+                    <span id="centerEmblemTitle">SOMBRAS</span>
                 </div>
 
-                <div class="sin-node-icon node-top"><i class="fa-solid fa-dragon"></i></div>
-                <div class="sin-node-icon node-top-right"><i class="fa-solid fa-staff"></i></div>
-                <div class="sin-node-icon node-bottom-right"><i class="fa-solid fa-dog"></i></div>
-                <div class="sin-node-icon node-bottom"><i class="fa-solid fa-paw"></i></div>
-                <div class="sin-node-icon node-bottom-left"><i class="fa-solid fa-head-side-virus"></i></div>
-                <div class="sin-node-icon node-top-left"><i class="fa-solid fa-crown"></i></div>
+                <!-- CÍRCULOS DE ATRIBUTOS DA CLASSE AO REDOR -->
+                <div class="class-stat-circle node-pos-top"><span class="stat-name" id="lbl-st1">FOR</span><span class="stat-num" id="val-st1">10</span></div>
+                <div class="class-stat-circle node-pos-right-top"><span class="stat-name" id="lbl-st2">INT</span><span class="stat-num" id="val-st2">10</span></div>
+                <div class="class-stat-circle node-pos-right-bot"><span class="stat-name" id="lbl-st3">AGI</span><span class="stat-num" id="val-st3">10</span></div>
+                <div class="class-stat-circle node-pos-left-bot"><span class="stat-name" id="lbl-st4">VIT</span><span class="stat-num" id="val-st4">10</span></div>
+                <div class="class-stat-circle node-pos-left-top"><span class="stat-name" id="lbl-st5">DES</span><span class="stat-num" id="val-st5">10</span></div>
             </div>
 
-            <!-- ATRIBUTOS ENQUADRADOS ESTILO IMAGEM 2 -->
+            <!-- BOTÕES PARA ADICIONAR ATRIBUTOS -->
             <div class="attributes-grid-hud">
                 <div class="stat-hud-box">
-                    <div class="stat-hud-label">ENT</div>
-                    <div id="atrib-ent" class="stat-hud-val">10</div>
-                    <button class="btn-add-stat" onclick="adicionarPontoManual('ent')">+</button>
+                    <div class="stat-hud-label" id="btn-lbl-st1">FOR</div>
+                    <div id="atrib-st1" class="stat-hud-val">10</div>
+                    <button class="btn-add-stat" onclick="adicionarPontoClasse('st1')">+</button>
                 </div>
                 <div class="stat-hud-box">
-                    <div class="stat-hud-label">OFE</div>
-                    <div id="atrib-ofe" class="stat-hud-val">10</div>
-                    <button class="btn-add-stat" onclick="adicionarPontoManual('ofe')">+</button>
+                    <div class="stat-hud-label" id="btn-lbl-st2">INT</div>
+                    <div id="atrib-st2" class="stat-hud-val">10</div>
+                    <button class="btn-add-stat" onclick="adicionarPontoClasse('st2')">+</button>
                 </div>
                 <div class="stat-hud-box">
-                    <div class="stat-hud-label">DEF</div>
-                    <div id="atrib-def" class="stat-hud-val">10</div>
-                    <button class="btn-add-stat" onclick="adicionarPontoManual('def')">+</button>
+                    <div class="stat-hud-label" id="btn-lbl-st3">AGI</div>
+                    <div id="atrib-st3" class="stat-hud-val">10</div>
+                    <button class="btn-add-stat" onclick="adicionarPontoClasse('st3')">+</button>
                 </div>
                 <div class="stat-hud-box">
-                    <div class="stat-hud-label">VEL</div>
-                    <div id="atrib-vel" class="stat-hud-val">10</div>
-                    <button class="btn-add-stat" onclick="adicionarPontoManual('vel')">+</button>
+                    <div class="stat-hud-label" id="btn-lbl-st4">VIT</div>
+                    <div id="atrib-st4" class="stat-hud-val">10</div>
+                    <button class="btn-add-stat" onclick="adicionarPontoClasse('st4')">+</button>
                 </div>
                 <div class="stat-hud-box">
-                    <div class="stat-hud-label">TEC</div>
-                    <div id="atrib-tec" class="stat-hud-val">10</div>
-                    <button class="btn-add-stat" onclick="adicionarPontoManual('tec')">+</button>
+                    <div class="stat-hud-label" id="btn-lbl-st5">DES</div>
+                    <div id="atrib-st5" class="stat-hud-val">10</div>
+                    <button class="btn-add-stat" onclick="adicionarPontoClasse('st5')">+</button>
                 </div>
             </div>
 
-            <!-- GRADE DE CLASSES EMBLEMAS -->
+            <!-- GRADE DE ESCOLHA ÚNICA DE CLASSE -->
             <div class="class-selection-grid">
-                <div class="class-select-card" onclick="selecionarClasse('DESCONHECIDA / SOMBRA')">
-                    <i class="fa-solid fa-circle-question"></i>
-                    <span>MISTÉRIO (?)</span>
-                </div>
-                <div class="class-select-card" onclick="selecionarClasse('MONARCA DA MORTE')">
-                    <i class="fa-solid fa-skull" style="color: var(--system-red);"></i>
-                    <span>CAVEIRA</span>
-                </div>
-                <div class="class-select-card" onclick="selecionarClasse('DRAGÃO DA IRA')">
+                <div class="class-select-card selected" id="card-sombras" onclick="selecionarClasse('MONARCA DAS SOMBRAS', 'fa-dragon', 'DRAGÃO DA IRA')">
                     <i class="fa-solid fa-dragon"></i>
-                    <span>DRAGÃO</span>
+                    <span>MONARCA SOMBRAS</span>
                 </div>
-                <div class="class-select-card" onclick="selecionarClasse('SERPENTE DA INVEJA')">
+                <div class="class-select-card" id="card-mago" onclick="selecionarClasse('MAGO SUPREMO', 'fa-staff', 'SERPENTE DA INVEJA')">
                     <i class="fa-solid fa-staff"></i>
-                    <span>SERPENTE</span>
+                    <span>MAGO SUPREMO</span>
                 </div>
-                <div class="class-select-card" onclick="selecionarClasse('RAPOSA DA GANÂNCIA')">
+                <div class="class-select-card" id="card-assassino" onclick="selecionarClasse('ASSASSINO VELOZ', 'fa-dog', 'RAPOSA GANÂNCIA')">
                     <i class="fa-solid fa-dog"></i>
-                    <span>RAPOSA</span>
+                    <span>ASSASSINO VELOZ</span>
                 </div>
-                <div class="class-select-card" onclick="selecionarClasse('LEÃO DO ORGULHO')">
+                <div class="class-select-card" id="card-tanque" onclick="selecionarClasse('TANQUE INTIMIDADOR', 'fa-paw', 'URSO PREGUIÇA')">
+                    <i class="fa-solid fa-paw"></i>
+                    <span>TANQUE HEAVY</span>
+                </div>
+                <div class="class-select-card" id="card-curandeiro" onclick="selecionarClasse('CURANDEIRO MÍSTICO', 'fa-head-side-virus', 'BODE LUXÚRIA')">
+                    <i class="fa-solid fa-head-side-virus"></i>
+                    <span>CURANDEIRO</span>
+                </div>
+                <div class="class-select-card" id="card-guerreiro" onclick="selecionarClasse('GUERREIRO LENDÁRIO', 'fa-crown', 'LEÃO ORGULHO')">
                     <i class="fa-solid fa-crown" style="color: var(--god-gold);"></i>
-                    <span>LEÃO</span>
+                    <span>GUERREIRO REI</span>
                 </div>
             </div>
         </div>
 
-        <!-- JANELA 2: TAF -->
+        <!-- JANELA TAF -->
         <div id="win-taf" class="system-window system-window-red" style="display: none;">
-            <div class="anime-limit-quote" style="border-left-color: var(--system-red);">⚡ "A dor de hoje é a força do amanhã!"</div>
-            <div class="window-header"><span class="window-title" style="color: var(--system-red);"><i class="fa-solid fa-person-running"></i> MISSÕES FÍSICAS (TAF)</span></div>
+            <div class="window-header"><span class="window-title" style="color: var(--system-red);"><i class="fa-solid fa-person-running"></i> TAF</span></div>
             <div class="taf-grid">
-                <div><span>🏃 CORRIDA</span><strong id="meta-distancia-km" style="font-size: 1.1rem; color: #fff;">1</strong> km</div>
-                <div><span>💪 FLEXÕES</span><strong id="meta-qtd-flexao" style="font-size: 1.1rem; color: #fff;">10</strong> rep</div>
-                <div><span>🧘 ABDOMINAIS</span><strong id="meta-qtd-abdominal" style="font-size: 1.1rem; color: #fff;">10</strong> rep</div>
+                <div><span>🏃 CORRIDA</span><strong id="meta-distancia-km">1</strong> km</div>
+                <div><span>💪 FLEXÕES</span><strong id="meta-qtd-flexao">10</strong> rep</div>
+                <div><span>🧘 ABDOMINAIS</span><strong id="meta-qtd-abdominal">10</strong> rep</div>
             </div>
             <button onclick="concluirMetaFisica('corrida', 120, 4)" class="btn-taf">CUMPRIR CORRIDA (+120 XP)</button>
-            <button onclick="concluirMetaFisica('flexao', 90, 3)" class="btn-taf">CUMPRIR FLEXÃO (+90 XP)</button>
-            <button onclick="concluirMetaFisica('abdominal', 90, 3)" class="btn-taf">CUMPRIR ABDOMINAL (+90 XP)</button>
         </div>
 
-        <!-- JANELA 3: MISSÕES -->
+        <!-- JANELA MISSÕES -->
         <div id="win-missoes" class="system-window" style="display: none;">
             <div class="window-header"><span class="window-title"><i class="fa-solid fa-scroll"></i> MISSÕES DIÁRIAS</span></div>
             <div class="task-input-box">
@@ -830,103 +793,66 @@
             <ul class="task-list" id="customTaskList"></ul>
         </div>
 
-        <!-- JANELA 4: QUESTÕES -->
+        <!-- JANELA QUESTÕES -->
         <div id="win-banco" class="system-window" style="display: none;">
-            <div class="window-header"><span class="window-title"><i class="fa-solid fa-book"></i> BANCO DE QUESTÕES PMPE</span></div>
-            <p style="font-size: 0.8rem; color: var(--text-sub); text-align: center; margin-bottom: 12px;">35 Questões por Disciplina no estilo Game.</p>
-            <button onclick="abrirModalQuestao()" style="width: 100%; padding: 14px; background: var(--system-cyan); color: #000; font-weight: bold; cursor: pointer; border: none;">⚔️ ABRIR POP-UP DO BANCO</button>
-        </div>
-
-        <!-- JANELA 5: CHAT -->
-        <div id="win-chat" class="system-window" style="display: none;">
-            <div class="window-header"><span class="window-title"><i class="fa-solid fa-comments"></i> CHAT DOS CAÇADORES</span></div>
-            <div id="chat-messages-list" style="height: 200px; overflow-y: auto; background: rgba(2,6,16,0.9); padding: 10px; margin-bottom: 10px;"></div>
-            <div class="task-input-box">
-                <input type="text" id="chatInputMessage" placeholder="Enviar mensagem...">
-                <button onclick="enviarMensagemChat()" style="background: var(--system-cyan); color: #000; border: none; font-weight: bold; padding: 0 14px; cursor: pointer;">ENVIAR</button>
-            </div>
-        </div>
-
-        <!-- JANELA 6: BOSSES -->
-        <div id="win-bosses" class="system-window system-window-red" style="display: none;">
-            <div class="window-header"><span class="window-title" style="color: var(--system-red);"><i class="fa-solid fa-skull"></i> MASMORRAS DE BOSSES</span></div>
-            <div id="bossesFeedContainer"></div>
-        </div>
-
-        <!-- JANELA 7: EQUIP -->
-        <div id="win-equip" class="system-window" style="display: none;">
-            <div class="window-header"><span class="window-title"><i class="fa-solid fa-box-archive"></i> ARMAZENAMENTO DIMENSIONAL</span></div>
-            <div class="equip-grid">
-                <div class="equip-card">
-                    <div style="font-family: monospace; font-size: 0.8rem; color: var(--text-sub); margin-bottom: 6px;">HORÁRIO MUNDIAL DO SISTEMA</div>
-                    <div id="real-time-clock" class="digital-clock-display">00:00:00</div>
-                </div>
-            </div>
+            <div class="window-header"><span class="window-title"><i class="fa-solid fa-book"></i> QUESTÕES PMPE</span></div>
+            <p style="font-size: 0.8rem; color: var(--text-sub); text-align: center; margin-bottom: 12px;">Responda obrigatoriamente sem opção de pular. Erros permitem tentar novamente sem travar seu XP!</p>
+            <button onclick="abrirModalQuestao()" style="width: 100%; padding: 14px; background: var(--system-cyan); color: #000; font-weight: bold; cursor: pointer; border: none;">⚔️ INICIAR BANCO DE QUESTÕES</button>
         </div>
 
     </main>
 
-    <!-- POP-UP GAME QUESTÕES PMPE -->
+    <!-- POP-UP GAME QUESTÕES PMPE CONTINUO -->
     <div id="game-quest-overlay" class="game-modal-overlay">
         <div class="game-modal-card">
             <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--system-cyan); padding-bottom: 8px;">
-                <h3 id="pop-materia-titulo" style="color: var(--system-cyan); font-family: monospace;">PORTUGUÊS - QUESTÃO #1</h3>
+                <h3 id="pop-materia-titulo" style="color: var(--system-cyan); font-family: monospace;">PORTUGUÊS - QUESTÃO OBRIGATÓRIA</h3>
                 <button onclick="fecharModalQuestao()" style="background: none; border: none; color: #ff2a6d; font-size: 1.3rem; cursor: pointer;">✕</button>
             </div>
-            <div id="pop-pergunta-texto" style="background: rgba(2,6,16,0.9); border: 1px solid var(--system-cyan); padding: 12px; font-size: 0.9rem;">Carregando pergunta...</div>
-            <div id="pop-opcoes-container"></div>
+            <div id="pop-pergunta-texto" style="background: rgba(2,6,16,0.9); border: 1px solid var(--system-cyan); padding: 14px; font-size: 0.92rem; line-height: 1.5; white-space: normal; word-wrap: break-word;">
+                Assinale a opção em que a regência verbal atende integralmente à norma-padrão:
+            </div>
+            <div id="pop-opcoes-container" class="game-options-grid"></div>
+            <div id="pop-feedback-status" style="font-family: monospace; font-size: 0.85rem; text-align: center; margin-top: 6px;"></div>
         </div>
     </div>
 
     <script>
-        const memoriaLocal = {};
-        function getSafeStorage(key) {
-            try { return localStorage.getItem(key) || memoriaLocal[key] || null; } catch(e) { return memoriaLocal[key] || null; }
-        }
-        function setSafeStorage(key, value) {
-            try { localStorage.setItem(key, value); } catch(e) {}
-            memoriaLocal[key] = value;
-        }
-
         let dadosCacador = {
             nome: 'GOD',
-            classe: 'SOMBRA',
+            classe: 'MONARCA DAS SOMBRAS',
+            iconClass: 'fa-dragon',
+            pecadoName: 'DRAGÃO DA IRA',
             xp: 0, nivel: 1, pontos: 5,
-            ent: 10, ofe: 10, def: 10, vel: 10, tec: 10,
-            avatarVal: 'https://images.unsplash.com/photo-1563089145-599997674d42?w=150&auto=format&fit=crop&q=80'
+            stats: { st1: 10, st2: 10, st3: 10, st4: 10, st5: 10 }
         };
 
-        function tocarSomEntrada() {
-            try {
-                const ctx = new (window.AudioContext || window.webkitAudioContext)();
-                const osc = ctx.createOscillator();
-                const gain = ctx.createGain();
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(587.33, ctx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.3);
-                gain.gain.setValueAtTime(0.3, ctx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
-                osc.connect(gain);
-                gain.connect(ctx.destination);
-                osc.start();
-                osc.stop(ctx.currentTime + 0.3);
-            } catch(e) {}
-        }
+        const definicaoClasses = {
+            'MONARCA DAS SOMBRAS': { icon: 'fa-dragon', pecado: 'DRAGÃO DA IRA', labels: ['FOR', 'INT', 'AGI', 'VIT', 'DES'] },
+            'MAGO SUPREMO': { icon: 'fa-staff', pecado: 'SERPENTE DA INVEJA', labels: ['INT', 'SAB', 'MAN', 'VIT', 'DES'] },
+            'ASSASSINO VELOZ': { icon: 'fa-dog', pecado: 'RAPOSA GANÂNCIA', labels: ['AGI', 'DES', 'FOR', 'ESQ', 'VIT'] },
+            'TANQUE HEAVY': { icon: 'fa-paw', pecado: 'URSO PREGUIÇA', labels: ['VIT', 'DEF', 'FOR', 'RES', 'DES'] },
+            'CURANDEIRO': { icon: 'fa-head-side-virus', pecado: 'BODE LUXÚRIA', labels: ['ESP', 'INT', 'VIT', 'REG', 'DES'] },
+            'GUERREIRO REI': { icon: 'fa-crown', pecado: 'LEÃO ORGULHO', labels: ['FOR', 'VIT', 'AGI', 'COR', 'DES'] }
+        };
 
-        function despertarSistema() {
-            tocarSomEntrada();
-            document.getElementById('abyss-screen').style.display = 'none';
-            const aut = sessionStorage.getItem('cacador_autenticado');
-            if (aut === 'true') {
-                renderizarPainel();
-            } else {
-                document.getElementById('modal-login').style.display = 'flex';
-            }
+        /* IMPACTO E RACHADURA DA TELA DE ENTRADA */
+        function executarImpactoRachadura() {
+            const abyss = document.getElementById('abyss-screen');
+            abyss.classList.add('cracking');
+            setTimeout(() => {
+                abyss.style.display = 'none';
+                const aut = sessionStorage.getItem('cacador_autenticado');
+                if (aut === 'true') {
+                    renderizarPainel();
+                } else {
+                    document.getElementById('modal-login').style.display = 'flex';
+                }
+            }, 550);
         }
 
         function autenticarUsuario() {
             const u = document.getElementById('input-login-user').value.trim();
-            const p = document.getElementById('input-login-pass').value.trim();
             if (u.length > 0) {
                 dadosCacador.nome = u.toUpperCase();
                 sessionStorage.setItem('cacador_autenticado', 'true');
@@ -937,6 +863,7 @@
 
         function fazerLogout() {
             sessionStorage.removeItem('cacador_autenticado');
+            document.getElementById('abyss-screen').classList.remove('cracking');
             document.getElementById('abyss-screen').style.display = 'flex';
             document.getElementById('optionsDropdown').style.display = 'none';
         }
@@ -946,43 +873,32 @@
             drp.style.display = (drp.style.display === 'flex') ? 'none' : 'flex';
         }
 
+        function abrirModalArmazenamento() { document.getElementById('storageModal').style.display = 'flex'; }
+        function fecharModalArmazenamento() { document.getElementById('storageModal').style.display = 'none'; }
         function abrirModalEstatisticas() {
             document.getElementById('modalEstatisticas').style.display = 'flex';
             document.getElementById('modalNomeUser').innerText = `CAÇADOR: ${dadosCacador.nome}`;
             document.getElementById('modalClasseUser').innerText = `CLASSE: ${dadosCacador.classe}`;
             document.getElementById('modalLvl').innerText = dadosCacador.nivel;
             document.getElementById('modalXpAtual').innerText = dadosCacador.xp;
-            let req = dadosCacador.nivel * 200;
-            document.getElementById('modalXpProx').innerText = req;
-            document.getElementById('modalBarraXp').style.width = `${Math.min((dadosCacador.xp / req) * 100, 100)}%`;
+            document.getElementById('modalXpProx').innerText = dadosCacador.nivel * 200;
+            document.getElementById('modalBarraXp').style.width = `${Math.min((dadosCacador.xp / (dadosCacador.nivel * 200)) * 100, 100)}%`;
         }
+        function fecharModalEstatisticas() { document.getElementById('modalEstatisticas').style.display = 'none'; }
 
-        function fecharModalEstatisticas() {
-            document.getElementById('modalEstatisticas').style.display = 'none';
-        }
-
-        function uploadFotoCaçador(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    dadosCacador.avatarVal = e.target.result;
-                    document.getElementById('bubbleAvatarImg').src = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        function selecionarClasse(nomeClasse) {
+        /* SELEÇÃO ÚNICA DA CLASSE E ATUALIZAÇÃO DO CENTRO DO DIAGRAMA */
+        function selecionarClasse(nomeClasse, iconClass, pecadoName) {
             dadosCacador.classe = nomeClasse;
+            dadosCacador.iconClass = iconClass;
+            dadosCacador.pecadoName = pecadoName;
             renderizarPainel();
-            if (typeof confetti === 'function') confetti({ particleCount: 60, spread: 60 });
+            if (typeof confetti === 'function') confetti({ particleCount: 70, spread: 70 });
         }
 
-        function adicionarPontoManual(atrib) {
+        function adicionarPontoClasse(stKey) {
             if (dadosCacador.pontos > 0) {
                 dadosCacador.pontos -= 1;
-                dadosCacador[atrib] += 1;
+                dadosCacador.stats[stKey] += 1;
                 renderizarPainel();
             }
         }
@@ -994,66 +910,91 @@
             let xpReq = dadosCacador.nivel * 200;
             document.getElementById('display-xp-proximo').innerText = xpReq;
             document.getElementById('barra-progresso-xp').style.width = `${Math.min((dadosCacador.xp / xpReq) * 100, 100)}%`;
-
             document.getElementById('display-pontos-disponiveis').innerText = dadosCacador.pontos;
-            document.getElementById('center-char-name').innerText = dadosCacador.nome;
-            document.getElementById('center-char-class').innerText = dadosCacador.classe;
 
-            document.getElementById('atrib-ent').innerText = dadosCacador.ent;
-            document.getElementById('atrib-ofe').innerText = dadosCacador.ofe;
-            document.getElementById('atrib-def').innerText = dadosCacador.def;
-            document.getElementById('atrib-vel').innerText = dadosCacador.vel;
-            document.getElementById('atrib-tec').innerText = dadosCacador.tec;
+            // ATUALIZA O CENTRO DO DIAGRAMA COM O ÍCONE DO PECADO ESCOLHIDO
+            const iconEl = document.getElementById('centerEmblemIcon');
+            iconEl.className = `fa-solid ${dadosCacador.iconClass}`;
+            document.getElementById('centerEmblemTitle').innerText = dadosCacador.pecadoName.split(' ')[0];
+
+            // ATUALIZA OS RÓTULOS E VALORES DOS ATRIBUTOS AO REDOR
+            const def = definicaoClasses[dadosCacador.classe] || definicaoClasses['MONARCA DAS SOMBRAS'];
+            for (let i = 1; i <= 5; i++) {
+                let lbl = def.labels[i - 1];
+                let val = dadosCacador.stats[`st${i}`];
+                document.getElementById(`lbl-st${i}`).innerText = lbl;
+                document.getElementById(`val-st${i}`).innerText = val;
+                document.getElementById(`btn-lbl-st${i}`).innerText = lbl;
+                document.getElementById(`atrib-st${i}`).innerText = val;
+            }
         }
 
         function exibirJanela(nomeJanela) {
-            const janelas = ['status', 'taf', 'missoes', 'banco', 'chat', 'bosses', 'equip'];
-            janelas.forEach(j => {
+            ['status', 'taf', 'missoes', 'banco'].forEach(j => {
                 const win = document.getElementById(`win-${j}`);
                 const btn = document.getElementById(`btn-win-${j}`);
                 if (win) win.style.display = (j === nomeJanela) ? 'block' : 'none';
                 if (btn) btn.classList.toggle('active', j === nomeJanela);
             });
-            if (nomeJanela === 'bosses') renderizarBosses();
         }
 
-        let bossesData = [
-            { id: 1, name: "IGRIS O COMANDANTE VERMELHO", hp: 500, maxHp: 500, xpReward: 300, defeated: false },
-            { id: 2, name: "BERU O REI DAS FORMIGAS", hp: 1500, maxHp: 1500, xpReward: 800, defeated: false }
-        ];
-
-        function renderizarBosses() {
-            const container = document.getElementById('bossesFeedContainer');
-            if (!container) return;
-            container.innerHTML = '';
-            bossesData.forEach(b => {
-                let pct = (b.hp / b.maxHp) * 100;
-                container.innerHTML += `
-                    <div class="boss-card">
-                        <div style="display:flex; justify-content:space-between; color:var(--system-red); font-family:monospace;">
-                            <span>👹 ${b.name}</span><span>HP: ${b.hp}/${b.maxHp}</span>
-                        </div>
-                        <div class="boss-hp-outer"><div class="boss-hp-inner" style="width:${Math.max(0, pct)}%;"></div></div>
-                        <button class="btn-attack-boss" ${b.defeated ? 'disabled' : ''} onclick="atacarBoss(${b.id})">
-                            ${b.defeated ? 'DERROTADO ✅' : '⚔️ GOLPEAR BOSS (-50 HP)'}
-                        </button>
-                    </div>
-                `;
-            });
+        /* BANCO DE QUESTÕES: CONTINUAR SEM PULAR E COM CHANCE DE TENTAR NOVAMENTE */
+        function abrirModalQuestao() {
+            document.getElementById('game-quest-overlay').style.display = 'flex';
+            document.getElementById('pop-feedback-status').innerText = "";
+            renderizarPerguntaAtual();
         }
 
-        function atacarBoss(id) {
-            const b = bossesData.find(x => x.id === id);
-            if (b && !b.defeated) {
-                b.hp -= 50;
-                if (b.hp <= 0) { b.hp = 0; b.defeated = true; dadosCacador.xp += b.xpReward; }
-                renderizarBosses();
+        function renderizarPerguntaAtual() {
+            const container = document.getElementById('pop-opcoes-container');
+            container.innerHTML = `
+                <button onclick="responderQuestao(true)">A) Aspirava ao cargo de oficial com extrema determinação.</button>
+                <button onclick="responderQuestao(false)">B) Assistiu o filme sem prestar atenção aos detalhes.</button>
+                <button onclick="responderQuestao(false)">C) Prefiro mais a teoria do que a prática intensa.</button>
+                <button onclick="responderQuestao(false)">D) Esqueci do documento em cima da mesa de trabalho.</button>
+            `;
+        }
+
+        function responderQuestao(correta) {
+            const feedback = document.getElementById('pop-feedback-status');
+            if (correta) {
+                dadosCacador.xp += 25;
+                feedback.style.color = "#10b981";
+                feedback.innerText = "✅ CORRETO! +25 XP ADICIONADOS ao seu Status.";
                 renderizarPainel();
+                setTimeout(() => { fecharModalQuestao(); }, 1200);
+            } else {
+                feedback.style.color = "#ff2a6d";
+                feedback.innerText = "❌ RESPOSTA INCORRETA! Tente novamente para avançar.";
             }
         }
 
-        function abrirModalQuestao() { document.getElementById('game-quest-overlay').style.display = 'flex'; }
         function fecharModalQuestao() { document.getElementById('game-quest-overlay').style.display = 'none'; }
+
+        /* CRONÔMETRO DO ARMAZENAMENTO */
+        let cronometroSegundos = 0;
+        let cronometroInterval = null;
+
+        function iniciarCronometro() {
+            if (cronometroInterval) return;
+            cronometroInterval = setInterval(() => {
+                cronometroSegundos++;
+                const h = Math.floor(cronometroSegundos / 3600).toString().padStart(2, '0');
+                const m = Math.floor((cronometroSegundos % 3600) / 60).toString().padStart(2, '0');
+                const s = (cronometroSegundos % 60).toString().padStart(2, '0');
+                document.getElementById('stopwatch-display').innerText = `${h}:${m}:${s}`;
+            }, 1000);
+        }
+
+        function pausarCronometro() {
+            if (cronometroInterval) { clearInterval(cronometroInterval); cronometroInterval = null; }
+        }
+
+        function zerarCronometro() {
+            pausarCronometro();
+            cronometroSegundos = 0;
+            document.getElementById('stopwatch-display').innerText = "00:00:00";
+        }
 
         setInterval(() => {
             const clock = document.getElementById('real-time-clock');
