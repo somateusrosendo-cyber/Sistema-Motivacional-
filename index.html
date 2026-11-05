@@ -11,14 +11,14 @@
 
     <style>
         :root {
-            --bg-dark: #010308;
+            --bg-dark: #000206;
             --system-cyan: #00f0ff;
-            --system-cyan-glow: rgba(0, 240, 255, 0.6);
-            --system-blue-card: rgba(4, 14, 30, 0.92);
+            --system-cyan-glow: rgba(0, 240, 255, 0.7);
+            --system-blue-card: rgba(3, 12, 28, 0.94);
             --system-red: #ff2a6d;
-            --system-red-glow: rgba(255, 42, 109, 0.75);
+            --system-red-glow: rgba(255, 42, 109, 0.8);
             --god-gold: #ffd700;
-            --god-gold-glow: rgba(255, 215, 0, 0.65);
+            --god-gold-glow: rgba(255, 215, 0, 0.7);
             --text-main: #f8fafc;
             --text-sub: #7dd3fc;
         }
@@ -41,9 +41,9 @@
             flex-direction: column;
             align-items: center;
             background-image: 
-                radial-gradient(circle at 50% 25%, rgba(0, 240, 255, 0.15) 0%, transparent 70%),
-                radial-gradient(circle at 80% 80%, rgba(255, 42, 109, 0.08) 0%, transparent 50%),
-                linear-gradient(180deg, #010205 0%, #030816 100%);
+                radial-gradient(circle at 50% 30%, rgba(0, 240, 255, 0.16) 0%, transparent 70%),
+                radial-gradient(circle at 50% 80%, rgba(255, 42, 109, 0.1) 0%, transparent 60%),
+                linear-gradient(180deg, #000104 0%, #030712 100%);
             background-attachment: fixed;
             overflow-x: hidden;
             perspective: 1200px;
@@ -54,18 +54,18 @@
             content: "";
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 240, 255, 0.05) 50%);
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 240, 255, 0.04) 50%);
             background-size: 100% 4px;
             z-index: 999;
             pointer-events: none;
-            opacity: 0.3;
+            opacity: 0.35;
         }
 
-        /* ================= TELA DO ABISMO & OLHO CÓSMICO DE TINTA A ÓLEO ================= */
+        /* ================= TELA DO ABISMO & OLHO BURACO NEGRO TINTA A ÓLEO ================= */
         .abyss-screen {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
-            background: #000206;
+            background: #000002;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -75,94 +75,96 @@
             text-align: center;
             padding: 24px;
             overflow: hidden;
-            transition: opacity 0.4s ease;
+            transition: opacity 0.5s ease;
         }
 
-        /* Efeito de Olho com Tinta a Óleo Espacial / Supernova */
-        .oil-painting-eye-container {
+        .blackhole-vortex-container {
             position: relative;
-            width: 220px;
-            height: 220px;
+            width: 240px;
+            height: 240px;
             margin-bottom: 28px;
             display: flex;
             justify-content: center;
             align-items: center;
-            filter: drop-shadow(0 0 35px var(--system-cyan-glow));
+            filter: drop-shadow(0 0 45px rgba(0, 240, 255, 0.8));
         }
 
-        .eye-outer-oil {
+        /* Órbita de Tinta a Óleo Estilizada como Buraco Negro */
+        .oil-blackhole-eye {
             width: 100%;
-            height: 65%;
-            border-radius: 100% 0%;
-            transform: rotate(45deg);
-            background: radial-gradient(circle, #00d2ff 0%, #002b4d 40%, #080014 85%, #000 100%);
-            border: 3px solid rgba(0, 240, 255, 0.8);
+            height: 68%;
+            border-radius: 100% 20% / 80% 20%;
+            transform: rotate(35deg);
+            background: radial-gradient(circle at 50% 50%, #000 20%, #02162e 45%, #00f0ff 70%, #ff2a6d 90%, #000 100%);
+            border: 3px solid rgba(0, 240, 255, 0.9);
             box-shadow: 
-                inset 0 0 30px rgba(0, 240, 255, 0.8),
-                inset 0 0 60px rgba(255, 42, 109, 0.5),
-                0 0 40px rgba(0, 240, 255, 0.5);
+                inset 0 0 40px rgba(0, 240, 255, 0.9),
+                inset 0 0 80px rgba(255, 42, 109, 0.7),
+                0 0 50px rgba(0, 240, 255, 0.6);
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
-            animation: eyePulse 4s infinite ease-in-out;
-        }
-
-        @keyframes eyePulse {
-            0%, 100% { transform: rotate(45deg) scale(0.98); }
-            50% { transform: rotate(45deg) scale(1.05); filter: brightness(1.2); }
-        }
-
-        /* Órbita e Supernova do Olho */
-        .pupil-supernova {
-            width: 75px;
-            height: 75px;
-            border-radius: 50%;
-            background: radial-gradient(circle, #000 35%, #020b18 55%, var(--system-cyan) 85%, #fff 100%);
-            box-shadow: 
-                0 0 25px #000, 
-                0 0 50px var(--system-cyan), 
-                inset 0 0 20px #000;
             position: relative;
-            animation: supernovaRotate 8s linear infinite;
+            overflow: hidden;
+            animation: vortexPulse 4s infinite ease-in-out;
         }
 
-        .pupil-supernova::after {
+        @keyframes vortexPulse {
+            0%, 100% { transform: rotate(35deg) scale(0.96); filter: brightness(1); }
+            50% { transform: rotate(35deg) scale(1.06); filter: brightness(1.3); }
+        }
+
+        /* Supernova Event Horizon */
+        .supernova-singularity {
+            width: 85px;
+            height: 85px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #000 30%, #010814 55%, var(--system-cyan) 85%, #ffffff 100%);
+            box-shadow: 
+                0 0 30px #000, 
+                0 0 60px var(--system-cyan), 
+                0 0 90px var(--system-red),
+                inset 0 0 25px #000;
+            position: relative;
+            animation: singularitySpin 6s linear infinite;
+        }
+
+        .supernova-singularity::before {
             content: "";
             position: absolute;
-            top: 15%; left: 15%; width: 70%; height: 70%;
+            top: -10px; left: -10px; right: -10px; bottom: -10px;
             border-radius: 50%;
-            border: 2px dashed rgba(0, 240, 255, 0.9);
-            animation: spinFast 3s linear infinite reverse;
+            border: 2px dashed rgba(255, 255, 255, 0.8);
+            animation: spinReverse 4s linear infinite;
         }
 
-        @keyframes supernovaRotate {
+        @keyframes singularitySpin {
             0% { transform: rotate(0deg) scale(1); }
-            50% { transform: rotate(180deg) scale(1.15); }
+            50% { transform: rotate(180deg) scale(1.2); }
             100% { transform: rotate(360deg) scale(1); }
         }
 
-        @keyframes spinFast {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        @keyframes spinReverse {
+            0% { transform: rotate(360deg); }
+            100% { transform: rotate(0deg); }
         }
 
         .abyss-title {
             color: var(--system-cyan);
             font-family: monospace;
             letter-spacing: 4px;
-            font-size: 1.2rem;
-            text-shadow: 0 0 15px var(--system-cyan-glow);
+            font-size: 1.25rem;
+            text-shadow: 0 0 20px var(--system-cyan-glow);
             margin-bottom: 8px;
             font-weight: 900;
         }
 
         .abyss-sub {
             color: var(--text-sub);
-            font-size: 0.8rem;
+            font-size: 0.82rem;
             font-family: monospace;
             opacity: 0.85;
-            animation: blinkText 1.8s infinite;
+            animation: blinkText 1.6s infinite;
         }
 
         @keyframes blinkText {
@@ -170,66 +172,77 @@
             50% { opacity: 1; }
         }
 
-        /* ANIMAÇÃO DE VIDA/TELA QUEBRADA (SHATTER EFFECT) */
+        /* EFEITO DE QUEBRA DE TELA (SHATTER) E LUZ NO FIM DO TÚNEL */
         .shatter-overlay {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
             pointer-events: none;
             z-index: 99999999;
             display: none;
-            background: rgba(0,0,0,0.6);
+            background: #000;
         }
 
-        .glass-crack {
+        .glass-crack-lines {
             position: absolute;
             width: 100%; height: 100%;
             background: 
-                radial-gradient(circle at 50% 50%, transparent 20%, rgba(255,42,109,0.3) 21%, transparent 22%),
-                linear-gradient(45deg, transparent 48%, var(--system-cyan) 50%, transparent 52%),
-                linear-gradient(-45deg, transparent 48%, var(--system-red) 50%, transparent 52%);
-            opacity: 0.9;
-            animation: shatterFlash 0.6s cubic-bezier(0.1, 0.9, 0.2, 1) forwards;
+                radial-gradient(circle at 50% 50%, rgba(255,255,255,0.9) 2%, rgba(0,240,255,0.4) 15%, transparent 40%),
+                linear-gradient(30deg, transparent 48%, var(--system-cyan) 50%, transparent 52%),
+                linear-gradient(120deg, transparent 48%, var(--system-red) 50%, transparent 52%),
+                linear-gradient(210deg, transparent 48%, #fff 50%, transparent 52%);
+            opacity: 0.95;
+            animation: shatterAnim 0.7s cubic-bezier(0.1, 0.9, 0.2, 1) forwards;
         }
 
-        @keyframes shatterFlash {
-            0% { transform: scale(0.8); opacity: 0; }
-            50% { opacity: 1; transform: scale(1.05); }
-            100% { opacity: 0; transform: scale(1.2); }
+        @keyframes shatterAnim {
+            0% { transform: scale(0.7); opacity: 0; filter: blur(4px); }
+            50% { opacity: 1; transform: scale(1.03); filter: blur(0px); }
+            100% { opacity: 0; transform: scale(1.3); }
         }
 
-        /* PAINEL DE ALERTA EMERGÊNCIA */
-        .emergency-banner {
+        /* AVISO DE EMERGÊNCIA EM TELA PRETA (LUZ NO FIM DO TÚNEL) */
+        .tunnel-light-emergency {
             position: fixed;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%) scale(0.7);
-            background: rgba(255, 42, 109, 0.95);
-            border: 4px solid #fff;
-            box-shadow: 0 0 80px var(--system-red-glow), inset 0 0 30px #000;
-            padding: 30px 40px;
-            z-index: 99999999;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 240, 255, 0.25) 0%, rgba(0, 0, 0, 0.98) 75%);
+            z-index: 99999998;
             display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
+            padding: 20px;
+        }
+
+        .emergency-banner-box {
+            background: rgba(2, 6, 16, 0.92);
+            border: 3px solid var(--system-red);
+            box-shadow: 0 0 60px var(--system-red-glow), inset 0 0 30px rgba(255, 42, 109, 0.4);
+            padding: 35px 30px;
+            max-width: 500px;
+            width: 90%;
             clip-path: polygon(0 15px, 15px 0, calc(100% - 15px) 0, 100% 15px, 100% calc(100% - 15px), calc(100% - 15px) 100%, 15px 100%, 0 calc(100% - 15px));
-            animation: emergencyPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            animation: emergencyPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
 
         @keyframes emergencyPop {
-            to { transform: translate(-50%, -50%) scale(1); }
+            0% { transform: scale(0.6); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
         }
 
         .emergency-title {
             color: #fff;
             font-family: monospace;
-            font-size: 2.2rem;
+            font-size: 2.1rem;
             font-weight: 900;
-            letter-spacing: 4px;
-            text-shadow: 0 0 20px #000;
+            letter-spacing: 3px;
+            text-shadow: 0 0 20px var(--system-red), 0 0 40px var(--system-red-glow);
             animation: pulseAlert 0.4s infinite alternate;
         }
 
         @keyframes pulseAlert {
             from { text-shadow: 0 0 10px #fff; }
-            to { text-shadow: 0 0 30px #fff, 0 0 50px var(--god-gold); }
+            to { text-shadow: 0 0 35px #fff, 0 0 60px var(--system-red); }
         }
 
         /* HEADER PRINCIPAL */
@@ -333,7 +346,7 @@
             gap: 8px;
         }
 
-        /* REDE DE ÍCONES FLUTUANTES DA NAVEGAÇÃO */
+        /* NAVEGAÇÃO FLUTUANTE */
         .window-selector-floating-grid {
             width: 100%;
             max-width: 600px;
@@ -400,7 +413,7 @@
             box-shadow: 0 20px 45px rgba(255, 42, 109, 0.4);
         }
 
-        /* PAINEL DINÂMICO DE FRASES MOTIVACIONAIS ROTATIVAS (A CADA 2 DIAS) */
+        /* FRASES MOTIVACIONAIS ROTATIVAS A CADA 2 DIAS */
         .dynamic-quote-banner {
             background: rgba(0, 240, 255, 0.08);
             border-left: 4px solid var(--system-cyan);
@@ -414,11 +427,153 @@
             align-items: center;
             gap: 10px;
             box-shadow: inset 0 0 10px rgba(0, 240, 255, 0.1);
+        /* REDE DE ÍCONES FLUTUANTES (SEM EQUIP) */
+        .window-selector-floating-grid {
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 16px;
         }
 
-        .dynamic-quote-banner i {
+        .btn-floating-node {
+            background: rgba(4, 14, 32, 0.85);
+            border: 1px solid var(--system-cyan);
+            color: var(--text-sub);
+            padding: 8px 11px;
+            font-size: 0.62rem;
+            font-weight: bold;
+            font-family: monospace;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 240, 255, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            backdrop-filter: blur(8px);
+            transition: transform 0.2s ease, background 0.2s;
+        }
+
+        .btn-floating-node.active {
+            background: var(--system-cyan);
+            color: #000;
+            border-color: #fff;
+            box-shadow: 0 0 20px var(--system-cyan-glow);
+            transform: translateY(-3px) scale(1.03);
+        }
+
+        .btn-floating-node.active i { color: #000; }
+
+        /* BALÃO FLUTUANTE DE ARMAZENAMENTO (EQUIP) */
+        .floating-storage-bubble {
+            position: fixed;
+            bottom: 24px;
+            right: 20px;
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            background: rgba(6, 18, 38, 0.95);
+            border: 2px solid var(--god-gold);
             color: var(--god-gold);
-            font-size: 1.1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.3rem;
+            cursor: pointer;
+            box-shadow: 0 0 20px var(--god-gold-glow);
+            z-index: 99999;
+            transition: transform 0.2s;
+        }
+        .floating-storage-bubble:hover { transform: scale(1.1); }
+
+        /* NUVEM / BALÃO FLUTUANTE DE PERSONAGEM */
+        .floating-character-cloud {
+            position: fixed;
+            bottom: 24px;
+            left: 20px;
+            width: 54px;
+            height: 54px;
+            border-radius: 35px 35px 10px 35px;
+            background: rgba(0, 240, 255, 0.15);
+            border: 2px solid var(--system-cyan);
+            color: var(--system-cyan);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.3rem;
+            cursor: pointer;
+            box-shadow: 0 0 20px var(--system-cyan-glow);
+            z-index: 99999;
+            transition: transform 0.2s;
+        }
+        .floating-character-cloud:hover { transform: scale(1.1); background: rgba(0, 240, 255, 0.3); }
+
+        /* MODAL NUVEM DE PERSONAGEM */
+        .cloud-profile-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(2, 5, 14, 0.92);
+            backdrop-filter: blur(8px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999999;
+            padding: 16px;
+        }
+        .cloud-profile-card {
+            background: linear-gradient(135deg, rgba(6, 18, 38, 0.98) 0%, rgba(2, 6, 16, 0.98) 100%);
+            border: 2px solid var(--system-cyan);
+            box-shadow: 0 0 35px var(--system-cyan-glow);
+            padding: 24px;
+            width: 100%;
+            max-width: 400px;
+            border-radius: 30px 30px 10px 30px;
+            text-align: center;
+            font-family: monospace;
+        }
+
+        /* VIEWPORT DAS JANELAS */
+        .single-window-viewport {
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            justify-content: center;
+            touch-action: pan-y;
+        }
+
+        .system-window {
+            width: 100%;
+            background: var(--system-blue-card);
+            border: 2px solid var(--system-cyan);
+            box-shadow: 0 20px 45px rgba(0, 240, 255, 0.35), inset 0 0 25px rgba(0, 240, 255, 0.1);
+            padding: 20px;
+            position: relative;
+            backdrop-filter: blur(14px);
+            clip-path: polygon(0 15px, 15px 0, calc(100% - 15px) 0, 100% 15px, 100% calc(100% - 15px), calc(100% - 15px) 100%, 15px 100%, 0 calc(100% - 15px));
+        }
+
+        .system-window-red {
+            background: rgba(26, 8, 16, 0.95);
+            border: 2px solid var(--system-red);
+            box-shadow: 0 20px 45px rgba(255, 42, 109, 0.4);
+        }
+
+        .dynamic-quote-banner {
+            background: rgba(0, 240, 255, 0.08);
+            border-left: 4px solid var(--system-cyan);
+            border-right: 1px solid rgba(0, 240, 255, 0.3);
+            padding: 10px 14px;
+            font-size: 0.76rem;
+            font-family: monospace;
+            color: var(--text-sub);
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .window-header {
@@ -458,10 +613,10 @@
             transition: width 0.4s ease;
         }
 
-        /* ================= CONSTRUÇÃO HOLOGRÁFICA INSPIRADA NA FOTO (7 PECADOS) ================= */
+        /* CONSTELAÇÃO HOLOGRÁFICA COM ESTRELA GIRATÓRIA NO AVATAR */
         .constellation-stage {
             width: 100%;
-            height: 380px;
+            height: 390px;
             position: relative;
             display: flex;
             justify-content: center;
@@ -470,7 +625,6 @@
             background: radial-gradient(circle at 50% 50%, rgba(0, 240, 255, 0.08) 0%, transparent 75%);
         }
 
-        /* SVG de Conexão em Teia Hexagonal */
         .constellation-svg {
             position: absolute;
             top: 0; left: 0;
@@ -480,23 +634,18 @@
         }
 
         .constellation-svg line {
-            stroke: rgba(0, 240, 255, 0.55);
-            stroke-width: 2.5;
+            stroke: rgba(0, 240, 255, 0.6);
+            stroke-width: 3;
             stroke-dasharray: 6 3;
-            animation: dashMove 20s linear infinite;
         }
 
-        @keyframes dashMove {
-            to { stroke-dashoffset: -100; }
-        }
-
-        /* Avatar Central Holográfico Sempre Vivo */
+        /* Avatar Central Holográfico com Estrela Giratória Constante */
         .center-hologram-avatar {
             width: 115px;
             height: 115px;
             border-radius: 50%;
             border: 3px solid var(--system-cyan);
-            box-shadow: 0 0 35px var(--system-cyan-glow), inset 0 0 25px var(--system-cyan-glow);
+            box-shadow: 0 0 40px var(--system-cyan-glow), inset 0 0 25px var(--system-cyan-glow);
             z-index: 5;
             display: flex;
             justify-content: center;
@@ -505,26 +654,33 @@
             background: #020813;
             position: absolute;
             cursor: pointer;
-            animation: holoPulse 3s infinite ease-in-out;
         }
 
-        .center-hologram-avatar::before {
-            content: "";
+        /* Estrela Giratória ao Redor do Avatar */
+        .rotating-star-ring {
             position: absolute;
-            width: 100%; height: 100%;
-            background: linear-gradient(180deg, transparent 40%, rgba(0, 240, 255, 0.4) 50%, transparent 60%);
-            animation: scanline 2.5s linear infinite;
+            width: 145px;
+            height: 145px;
+            border-radius: 50%;
+            border: 1px dashed rgba(255, 215, 0, 0.5);
+            animation: starRotateRing 12s linear infinite;
             pointer-events: none;
+            z-index: 6;
         }
 
-        @keyframes holoPulse {
-            0%, 100% { box-shadow: 0 0 25px var(--system-cyan-glow), inset 0 0 20px var(--system-cyan-glow); transform: scale(1); }
-            50% { box-shadow: 0 0 45px var(--system-cyan-glow), inset 0 0 30px var(--system-cyan-glow); transform: scale(1.04); }
+        .rotating-star-ring::after {
+            content: "★";
+            position: absolute;
+            top: -8px;
+            left: calc(50% - 8px);
+            color: var(--god-gold);
+            font-size: 1.1rem;
+            text-shadow: 0 0 10px var(--god-gold);
         }
 
-        @keyframes scanline {
-            0% { transform: translateY(-100%); }
-            100% { transform: translateY(100%); }
+        @keyframes starRotateRing {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         .avatar-circle-img {
@@ -533,20 +689,19 @@
             object-fit: cover;
         }
 
-        .avatar-circle-icon {
-            font-size: 3.6rem;
-            color: var(--system-cyan);
-            filter: drop-shadow(0 0 12px var(--system-cyan));
+        .hologram-animal-svg {
+            width: 65%;
+            height: 65%;
+            filter: drop-shadow(0 0 10px var(--system-cyan)) brightness(1.3);
         }
 
-        /* NÓS DE ATRIBUTOS (INSPIRADOS NOS CÍRCULOS EXTERNOS DA FOTO) */
         .stat-node-circle {
-            width: 72px;
-            height: 72px;
+            width: 78px;
+            height: 78px;
             border-radius: 50%;
-            background: rgba(3, 10, 24, 0.95);
+            background: radial-gradient(circle, rgba(6,18,38,0.95) 0%, rgba(2,6,16,0.98) 100%);
             border: 2px solid var(--system-cyan);
-            box-shadow: 0 0 18px var(--system-cyan-glow);
+            box-shadow: 0 0 20px var(--system-cyan-glow);
             position: absolute;
             display: flex;
             flex-direction: column;
@@ -554,257 +709,209 @@
             align-items: center;
             z-index: 6;
             font-family: monospace;
+            cursor: pointer;
             transition: transform 0.2s;
         }
 
-        .stat-node-circle:hover { transform: scale(1.08); }
+        .stat-node-circle:hover { transform: scale(1.1); border-color: var(--god-gold); }
 
-        .stat-node-label {
-            font-size: 0.62rem;
-            color: var(--system-cyan);
-            font-weight: bold;
-        }
-
-        .stat-node-val {
-            font-size: 0.88rem;
-            color: #fff;
-            font-weight: bold;
-        }
+        .stat-node-label { font-size: 0.58rem; color: var(--system-cyan); font-weight: bold; margin-top: 2px; }
+        .stat-node-val { font-size: 0.8rem; color: #fff; font-weight: bold; }
 
         .btn-stat-plus-inside {
             background: var(--system-cyan);
             color: #000;
             border: none;
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             border-radius: 50%;
             font-weight: 900;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             cursor: pointer;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-top: 2px;
-            box-shadow: 0 0 8px var(--system-cyan-glow);
+            position: absolute;
+            top: 2px;
+            right: 2px;
         }
 
-        .btn-stat-plus-inside:active { transform: scale(0.85); }
+        .node-pos-1 { top: 12px; }
+        .node-pos-2 { top: 85px; right: 18px; }
+        .node-pos-3 { bottom: 35px; right: 48px; }
+        .node-pos-4 { bottom: 35px; left: 48px; }
+        .node-pos-5 { top: 85px; left: 18px; }
+        .node-pos-bottom-extra { bottom: -2px; left: calc(50% - 39px); }
 
-        /* Posicionamento Hexagonal dos Nós de Atributos */
-        .node-pos-1 { top: 10px; }
-        .node-pos-2 { top: 80px; right: 20px; }
-        .node-pos-3 { bottom: 40px; right: 50px; }
-        .node-pos-4 { bottom: 40px; left: 50px; }
-        .node-pos-5 { top: 80px; left: 20px; }
-
-        /* PAINEL DE NOME E CLASSE EM DESTAQUE PRINCIPAL */
         .hunter-profile-badge {
-            background: linear-gradient(135deg, rgba(0, 240, 255, 0.12) 0%, rgba(6, 18, 38, 0.8) 100%);
+            background: linear-gradient(135deg, rgba(0, 240, 255, 0.12) 0%, rgba(6, 18, 38, 0.85) 100%);
             border: 1px solid var(--system-cyan);
-            padding: 10px 16px;
+            padding: 12px 16px;
             margin-top: 14px;
             text-align: center;
             font-family: monospace;
-            box-shadow: inset 0 0 15px rgba(0, 240, 255, 0.15);
         }
 
-        .hunter-name-main {
-            color: #fff;
-            font-size: 1.15rem;
-            font-weight: 900;
-            letter-spacing: 2px;
-            text-shadow: 0 0 10px var(--system-cyan);
-        }
+        .hunter-name-main { color: #fff; font-size: 1.15rem; font-weight: 900; letter-spacing: 2px; text-shadow: 0 0 12px var(--system-cyan); }
+        .hunter-class-sub { color: var(--god-gold); font-size: 0.82rem; font-weight: bold; letter-spacing: 2px; margin-top: 3px; }
 
-        .hunter-class-sub {
+        /* MENSAGEM SUTIL DE PONTOS DISPONÍVEIS */
+        .subtle-points-notification {
+            background: rgba(255, 215, 0, 0.12);
+            border: 1px dashed var(--god-gold);
             color: var(--god-gold);
-            font-size: 0.82rem;
-            font-weight: bold;
-            letter-spacing: 2px;
-            margin-top: 3px;
-        }
-
-        /* MODAL MÍSTICO DE SELEÇÃO DE AVATAR / CLASSE DO CAÇADOR */
-        .avatar-modal-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(2, 5, 14, 0.94);
-            backdrop-filter: blur(10px);
-            display: none;
-            justify-content: center;
+            padding: 4px 10px;
+            font-family: monospace;
+            font-size: 0.72rem;
+            display: inline-flex;
             align-items: center;
-            z-index: 999999;
-            padding: 16px;
+            gap: 6px;
+            border-radius: 6px;
+            margin-top: 6px;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
         }
 
+        /* BOSSES ESCONDIDOS NO FLUXO DO JOGO */
+        .hidden-boss-trigger-card {
+            background: rgba(2, 6, 16, 0.85);
+            border: 1px dashed rgba(255, 42, 109, 0.5);
+            padding: 12px;
+            text-align: center;
+            margin-top: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .hidden-boss-trigger-card:hover {
+            border-color: var(--system-red);
+            background: rgba(26, 8, 16, 0.9);
+            box-shadow: 0 0 15px rgba(255, 42, 109, 0.3);
+        }
+
+        /* MODAL MÍSTICO DE AVATAR */
+        .avatar-modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(2, 5, 14, 0.94); backdrop-filter: blur(10px);
+            display: none; justify-content: center; align-items: center; z-index: 999999; padding: 16px;
+        }
         .avatar-modal-card {
             background: linear-gradient(180deg, #07152b 0%, #030a16 100%);
-            border: 2px solid var(--system-cyan);
-            box-shadow: 0 0 40px var(--system-cyan-glow);
-            padding: 20px;
-            width: 100%;
-            max-width: 480px;
-            clip-path: polygon(0 12px, 12px 0, calc(100% - 12px) 0, 100% 12px, 100% calc(100% - 12px), calc(100% - 12px) 100%, 12px 100%, 0 calc(100% - 12px));
+            border: 2px solid var(--system-cyan); box-shadow: 0 0 40px var(--system-cyan-glow);
+            padding: 20px; width: 100%; max-width: 480px;
         }
-
-        .sins-picker-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
-            margin: 16px 0;
-        }
-
+        .sins-picker-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 16px 0; }
         .sin-avatar-card {
-            background: rgba(3, 10, 24, 0.9);
-            border: 1px solid var(--system-cyan);
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            margin: 0 auto;
-            box-shadow: 0 0 12px rgba(0, 240, 255, 0.2);
-            transition: transform 0.2s, border-color 0.2s;
+            background: rgba(3, 10, 24, 0.9); border: 1px solid var(--system-cyan); border-radius: 50%;
+            width: 60px; height: 60px; display: flex; justify-content: center; align-items: center;
+            cursor: pointer; margin: 0 auto; transition: transform 0.2s;
         }
+        .sin-avatar-card:hover { transform: scale(1.15); border-color: var(--god-gold); }
 
-        .sin-avatar-card:hover {
-            transform: scale(1.15);
-            border-color: var(--god-gold);
-            box-shadow: 0 0 20px var(--god-gold);
-        }
-
-        .sin-avatar-card i {
-            font-size: 1.8rem;
-            color: var(--system-cyan);
-        }
-
-        /* BOSSES */
-        .boss-card {
-            background: rgba(20, 4, 12, 0.9);
-            border: 1px solid var(--system-red);
-            padding: 12px;
-            margin-bottom: 12px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .boss-header {
-            display: flex;
-            justify-content: space-between;
-            color: var(--system-red);
-            font-family: monospace;
-            font-weight: bold;
-            font-size: 0.85rem;
-        }
-
-        .boss-hp-outer {
-            width: 100%;
-            height: 10px;
-            background: #100206;
-            border: 1px solid var(--system-red);
-        }
-
-        .boss-hp-inner {
-            height: 100%;
-            background: linear-gradient(90deg, #ff2a6d, #ff758c);
-            width: 100%;
-        }
-
-        .btn-attack-boss {
-            background: var(--system-red);
-            color: #fff;
-            border: none;
-            padding: 10px;
-            font-weight: bold;
-            font-family: monospace;
-            font-size: 0.8rem;
-            cursor: pointer;
-        }
-
-        /* ARMAZENAMENTO & RELÓGIO */
+        /* OUTRAS COMPONENTES */
         .equip-grid { display: flex; flex-direction: column; gap: 14px; }
         .equip-card { background: rgba(3, 10, 24, 0.9); border: 1px solid var(--system-cyan); padding: 14px; text-align: center; }
         .digital-clock-display { font-family: monospace; font-size: 2rem; color: var(--system-cyan); text-shadow: 0 0 12px var(--system-cyan); font-weight: bold; }
 
-        .floating-storage-trigger {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 58px;
-            height: 58px;
-            border-radius: 50%;
-            background: rgba(6, 18, 38, 0.95);
-            border: 2px solid var(--god-gold);
-            color: var(--god-gold);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.5rem;
-            cursor: pointer;
-            box-shadow: 0 0 20px var(--god-gold-glow);
-            z-index: 99999;
-        }
-
-        /* CHAT E TAF */
-        .chat-subtabs { display: flex; gap: 6px; margin-bottom: 12px; }
-        .chat-subtab-btn { flex: 1; background: rgba(2, 6, 16, 0.9); border: 1px solid var(--system-cyan); color: var(--text-sub); padding: 8px; font-family: monospace; font-size: 0.72rem; cursor: pointer; text-align: center; }
-        .chat-subtab-btn.active { background: var(--system-cyan); color: #000; }
-        .chat-messages-container { height: 240px; background: rgba(2, 6, 16, 0.9); border: 1px solid rgba(0, 240, 255, 0.3); padding: 10px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px; font-size: 0.82rem; }
-        .chat-msg-item { background: rgba(8, 22, 44, 0.8); border-left: 3px solid var(--system-cyan); padding: 6px 10px; }
-        
-        .taf-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 6px; background: rgba(0, 0, 0, 0.4); border: 1px solid var(--system-red); padding: 10px; text-align: center; margin-bottom: 12px; font-family: monospace; }
+        .taf-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; background: rgba(0, 0, 0, 0.4); border: 1px solid var(--system-red); padding: 10px; text-align: center; margin-bottom: 12px; font-family: monospace; }
         .btn-taf { width: 100%; padding: 10px; background: rgba(255, 42, 109, 0.2); border: 1px solid var(--system-red); color: #fff; font-weight: bold; font-size: 0.78rem; cursor: pointer; margin-bottom: 6px; }
-        
-        .task-input-box { display: flex; gap: 6px; margin-bottom: 12px; }
-        .task-input-box input, .task-input-box select { background: rgba(2, 6, 16, 0.9); border: 1px solid var(--system-cyan); color: #fff; padding: 8px 12px; outline: none; }
-        .task-list { list-style: none; display: flex; flex-direction: column; gap: 8px; max-height: 250px; overflow-y: auto; }
-        .task-item { background: rgba(2, 6, 16, 0.8); border: 1px solid rgba(0, 240, 255, 0.3); border-left: 4px solid var(--system-cyan); padding: 10px 12px; display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; }
 
-        /* BANCO DE QUESTÕES */
         .nav-tabs { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 12px; }
         .tab-btn { background: rgba(2, 6, 16, 0.9); border: 1px solid var(--system-cyan); color: var(--text-sub); padding: 8px 12px; font-weight: bold; font-size: 0.75rem; cursor: pointer; white-space: nowrap; }
         .tab-btn.active { background: var(--system-cyan); color: #000; }
         .btn-abrir-pop { background: linear-gradient(135deg, var(--system-cyan), #0077ff); color: #000; border: none; padding: 14px 24px; font-weight: 900; font-size: 0.9rem; cursor: pointer; width: 100%; margin-top: 10px; }
-        
+
         .game-modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(2, 5, 14, 0.95); backdrop-filter: blur(10px); display: none; justify-content: center; align-items: center; z-index: 99999; padding: 16px; }
         .game-modal-card { background: linear-gradient(180deg, #07152b 0%, #030a16 100%); border: 2px solid var(--system-cyan); padding: 20px; width: 100%; max-width: 580px; max-height: 90vh; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
-        .game-options-grid button { width: 100%; text-align: left; background: rgba(4, 14, 30, 0.9); border: 1px solid rgba(0, 240, 255, 0.3); color: #fff; padding: 12px; font-size: 0.88rem; margin-top: 8px; cursor: pointer; white-space: normal; word-wrap: break-word; line-height: 1.4; }
+        .game-options-grid button { width: 100%; text-align: left; background: rgba(4, 14, 30, 0.9); border: 1px solid rgba(0, 240, 255, 0.3); color: #fff; padding: 12px; font-size: 0.88rem; margin-top: 8px; cursor: pointer; }
         .game-options-grid button.correct { background: rgba(16, 185, 129, 0.3) !important; border-color: #10b981 !important; }
         .game-options-grid button.wrong { background: rgba(239, 68, 68, 0.3) !important; border-color: #ef4444 !important; }
 
         .login-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(2, 5, 14, 0.96); display: flex; justify-content: center; align-items: center; z-index: 999999; }
-        .login-caixa { background: #07152b; border: 2px solid var(--system-cyan); padding: 28px; text-align: center; width: 90%; max-width: 380px; clip-path: polygon(0 12px, 12px 0, calc(100% - 12px) 0, 100% 12px, 100% calc(100% - 12px), calc(100% - 12px) 100%, 12px 100%, 0 calc(100% - 12px)); }
+        .login-caixa { background: #07152b; border: 2px solid var(--system-cyan); padding: 28px; text-align: center; width: 90%; max-width: 380px; }
         .login-caixa input { width: 100%; padding: 10px 12px; background: #030a16; border: 1px solid var(--system-cyan); color: #fff; text-align: center; font-weight: bold; margin-bottom: 10px; outline: none; }
     </style>
 </head>
 <body>
 
-    <!-- ÍCONE PERMANENTE DE ARMAZENAMENTO -->
-    <div class="floating-storage-trigger" title="Armazenamento Dimensional" onclick="exibirJanela('equip')">
+    <!-- BALÃO FLUTUANTE DE ARMAZENAMENTO (EQUIP) -->
+    <div class="floating-storage-bubble" title="Armazenamento Dimensional" onclick="abrirModalEquip()">
         <i class="fa-solid fa-box-archive"></i>
     </div>
 
-    <!-- EFEITOS DE QUEBRA DE TELA E ALERTA DE EMERGÊNCIA -->
-    <div id="shatter-overlay" class="shatter-overlay">
-        <div class="glass-crack"></div>
+    <!-- NUVEM FLUTUANTE DE PERSONAGEM -->
+    <div class="floating-character-cloud" title="Perfil do Caçador" onclick="abrirNuvemPersonagem()">
+        <i class="fa-solid fa-cloud"></i>
     </div>
 
-    <div id="emergency-banner" class="emergency-banner">
-        <div class="emergency-title">VOCÊ PRECISA LUTAR!</div>
+    <!-- MODAL NUVEM DE PERSONAGEM -->
+    <div id="cloudProfileOverlay" class="cloud-profile-overlay" onclick="fecharNuvemPersonagem()">
+        <div class="cloud-profile-card" onclick="event.stopPropagation()">
+            <div class="window-header">
+                <span class="window-title"><i class="fa-solid fa-cloud"></i> IDENTIDADE DO CAÇADOR</span>
+                <button onclick="fecharNuvemPersonagem()" style="background: none; border: none; color: #ff4757; font-size: 1.2rem; cursor: pointer;">✕</button>
+            </div>
+            <div style="margin: 16px 0;">
+                <div id="cloud-char-name" style="color: #fff; font-size: 1.1rem; font-weight: bold; margin-bottom: 4px;">CAÇADOR</div>
+                <div id="cloud-char-class" style="color: var(--god-gold); font-size: 0.85rem; font-weight: bold; margin-bottom: 14px;">DRAGÃO DA IRA</div>
+                <div style="background: rgba(0,240,255,0.08); border: 1px solid var(--system-cyan); padding: 10px; font-size: 0.78rem; text-align: left; display: flex; flex-direction: column; gap: 4px;">
+                    <div>NÍVEL: <strong id="cloud-val-lvl" style="color:var(--system-cyan)">1</strong></div>
+                    <div>XP ATUAL: <strong id="cloud-val-xp" style="color:#fff">0</strong></div>
+                    <div>ENTENDRIMENTO (ENT): <strong id="cloud-val-ent" style="color:#fff">10</strong></div>
+                    <div>OFENSIVA (OFE): <strong id="cloud-val-ofe" style="color:#fff">10</strong></div>
+                    <div>DEFESA (DEF): <strong id="cloud-val-def" style="color:#fff">10</strong></div>
+                    <div>VELOCIDADE (VEL): <strong id="cloud-val-vel" style="color:#fff">10</strong></div>
+                    <div>TÉCNICA (TEC): <strong id="cloud-val-tec" style="color:#fff">10</strong></div>
+                </div>
+            </div>
+            <button onclick="abrirModalAvatar(); fecharNuvemPersonagem();" style="width: 100%; padding: 10px; background: var(--system-cyan); color: #000; border: none; font-weight: bold; cursor: pointer; font-size: 0.8rem;">ALTERAR CLASSE / AVATAR</button>
+        </div>
     </div>
 
-    <!-- TELA DO ABISMO COM OLHO CÓSMICO DE TINTA A ÓLEO -->
-    <div id="abyss-screen" class="abyss-screen" onclick="despertarSistemaComQuebra()">
-        <div class="oil-painting-eye-container">
-            <div class="eye-outer-oil">
-                <div class="pupil-supernova"></div>
+    <!-- MODAL ARMAZENAMENTO DIMENSIONAL (EQUIP) -->
+    <div id="equipModalOverlay" class="game-modal-overlay" style="display: none;">
+        <div class="game-modal-card">
+            <div class="window-header">
+                <span class="window-title"><i class="fa-solid fa-box-archive"></i> ARMAZENAMENTO DIMENSIONAL</span>
+                <button onclick="fecharModalEquip()" style="background: none; border: none; color: #ff4757; font-size: 1.3rem; font-weight: bold; cursor: pointer;">✕</button>
+            </div>
+            <div class="equip-grid">
+                <div class="equip-card">
+                    <div style="font-size: 0.75rem; color: var(--system-cyan); font-family: monospace; margin-bottom: 6px;"><i class="fa-solid fa-clock"></i> HORÁRIO MUNDIAL DO SISTEMA</div>
+                    <div id="real-time-clock" class="digital-clock-display">00:00:00</div>
+                </div>
+                <div class="equip-card">
+                    <div style="font-size: 0.75rem; color: var(--god-gold); font-family: monospace; margin-bottom: 6px;"><i class="fa-solid fa-stopwatch"></i> CRONÔMETRO DE ESTUDO & TREINO</div>
+                    <div id="stopwatch-display" class="digital-clock-display" style="color: var(--god-gold); text-shadow: 0 0 10px var(--god-gold);">00:00:00</div>
+                    <div style="display: flex; gap: 6px; justify-content: center; margin-top: 10px;">
+                        <button onclick="iniciarCronometro()" style="background: var(--system-cyan); color: #000; border: none; padding: 6px 14px; font-weight: bold; cursor: pointer; font-size: 0.75rem;">INICIAR</button>
+                        <button onclick="pausarCronometro()" style="background: rgba(255, 42, 109, 0.3); border: 1px solid var(--system-red); color: #fff; padding: 6px 14px; font-weight: bold; cursor: pointer; font-size: 0.75rem;">PAUSAR</button>
+                        <button onclick="zerarCronometro()" style="background: rgba(2, 6, 16, 0.9); border: 1px solid var(--system-cyan); color: var(--system-cyan); padding: 6px 14px; font-weight: bold; cursor: pointer; font-size: 0.75rem;">ZERAR</button>
+                    </div>
+                </div>
             </div>
         </div>
-        <h1 class="abyss-title">[O OLHO DO ABISMO]</h1>
-        <p class="abyss-sub">TOQUE NA TELA PARA QUEBRAR O SELO E LUTAR</p>
+    </div>
+
+    <!-- MODAL BOSSES INTEGRADO DE FORMA SUTIL (COMO UMA ANOMALIA / FENÔMENO DE PORTAL) -->
+    <div id="bossModalOverlay" class="game-modal-overlay" style="display: none;">
+        <div class="game-modal-card" style="border-color: var(--system-red); background: linear-gradient(180deg, #16040b 0%, #030a16 100%);">
+            <div class="window-header" style="border-bottom-color: var(--system-red);">
+                <span class="window-title" style="color: var(--system-red);"><i class="fa-solid fa-triangle-exclamation"></i> ANOMALIA DE PORTAL DETECTADA</span>
+                <button onclick="fecharModalBoss()" style="background: none; border: none; color: #ff4757; font-size: 1.3rem; font-weight: bold; cursor: pointer;">✕</button>
+            </div>
+            <p style="font-size: 0.78rem; color: #ddd; margin-bottom: 8px;">Uma fenda dimensional instável se abriu no ecossistema do Caçador. Derrote o Guardião:</p>
+            <div id="bossesFeedContainer"></div>
+        </div>
+    </div>
+
+    <!-- TELA DO ABISMO -->
+    <div id="abyss-screen" class="abyss-screen" onclick="despertarSistemaComPortal()">
+        <div class="blackhole-vortex-container">
+            <div class="oil-blackhole-eye">
+                <div class="supernova-singularity"></div>
+            </div>
+        </div>
+        <h1 class="abyss-title">[VORTEX DO ABISMO]</h1>
+        <p class="abyss-sub">TOQUE PARA SER SUGADO PELO HORIZONTE DE EVENTOS</p>
     </div>
 
     <!-- LOGIN SESSÃO -->
@@ -821,7 +928,7 @@
         </form>
     </div>
 
-    <!-- MODAL MÍSTICO SELETOR DE AVATAR & FOTO -->
+    <!-- MODAL MÍSTICO SELETOR DE AVATAR & CLASSE -->
     <div id="avatarModalOverlay" class="avatar-modal-overlay">
         <div class="avatar-modal-card">
             <div class="window-header">
@@ -829,32 +936,32 @@
                 <button onclick="fecharModalAvatar()" style="background: none; border: none; color: #ff4757; font-size: 1.2rem; cursor: pointer;">✕</button>
             </div>
             
-            <p style="font-size: 0.78rem; color: var(--text-sub); font-family: monospace; text-align: center;">Escolha um dos 7 Pecados Capitais ou carregue sua própria foto:</p>
+            <p style="font-size: 0.78rem; color: var(--text-sub); font-family: monospace; text-align: center;">Escolha um dos Pecados Capitais da referência ou carregue sua foto:</p>
 
             <div class="sins-picker-grid">
                 <div class="sin-avatar-card" title="Dragão da Ira" onclick="selecionarSinIcon('fa-dragon', 'MELIODAS', 'DRAGÃO DA IRA')">
-                    <i class="fa-solid fa-dragon"></i>
+                    <i class="fa-solid fa-dragon" style="font-size: 1.6rem; color: var(--system-cyan);"></i>
                 </div>
                 <div class="sin-avatar-card" title="Serpente da Inveja" onclick="selecionarSinIcon('fa-staff-snake', 'DIANE', 'SERPENTE DA INVEJA')">
-                    <i class="fa-solid fa-staff-snake"></i>
+                    <i class="fa-solid fa-staff-snake" style="font-size: 1.6rem; color: var(--system-cyan);"></i>
                 </div>
                 <div class="sin-avatar-card" title="Raposa da Ganância" onclick="selecionarSinIcon('fa-dog', 'BAN', 'RAPOSA DA GANÂNCIA')">
-                    <i class="fa-solid fa-dog"></i>
+                    <i class="fa-solid fa-dog" style="font-size: 1.6rem; color: var(--system-cyan);"></i>
                 </div>
                 <div class="sin-avatar-card" title="Urso da Preguiça" onclick="selecionarSinIcon('fa-paw', 'KING', 'URSO DA PREGUIÇA')">
-                    <i class="fa-solid fa-paw"></i>
+                    <i class="fa-solid fa-paw" style="font-size: 1.6rem; color: var(--system-cyan);"></i>
                 </div>
                 <div class="sin-avatar-card" title="Cabra da Luxúria" onclick="selecionarSinIcon('fa-glasses', 'GOWTHER', 'CABRA DA LUXÚRIA')">
-                    <i class="fa-solid fa-glasses"></i>
+                    <i class="fa-solid fa-glasses" style="font-size: 1.6rem; color: var(--system-cyan);"></i>
                 </div>
                 <div class="sin-avatar-card" title="Leão do Orgulho" onclick="selecionarSinIcon('fa-sun', 'ESCANOR', 'LEÃO DO ORGULHO')">
-                    <i class="fa-solid fa-sun"></i>
+                    <i class="fa-solid fa-sun" style="font-size: 1.6rem; color: var(--system-cyan);"></i>
                 </div>
                 <div class="sin-avatar-card" title="Javali da Gula" onclick="selecionarSinIcon('fa-hat-wizard', 'MERLIN', 'JAVALI DA GULA')">
-                    <i class="fa-solid fa-hat-wizard"></i>
+                    <i class="fa-solid fa-hat-wizard" style="font-size: 1.6rem; color: var(--system-cyan);"></i>
                 </div>
                 <div class="sin-avatar-card" title="Caveira Obscura" onclick="selecionarSinIcon('fa-skull', 'CAVEIRA SOLITÁRIA', 'PECADO DA MORTE')">
-                    <i class="fa-solid fa-skull"></i>
+                    <i class="fa-solid fa-skull" style="font-size: 1.6rem; color: var(--system-cyan);"></i>
                 </div>
             </div>
 
@@ -876,7 +983,7 @@
                 <button onclick="fecharModalQuestao()" style="background: none; border: none; color: #ff4757; font-size: 1.3rem; font-weight: bold; cursor: pointer;">✕</button>
             </div>
 
-            <div id="pop-pergunta-texto" style="background: rgba(2, 6, 16, 0.9); border: 1px solid rgba(0, 240, 255, 0.4); border-left: 4px solid var(--system-cyan); padding: 14px; font-size: 0.95rem; line-height: 1.5; max-height: 250px; overflow-y: auto; white-space: normal; word-wrap: break-word;">
+            <div id="pop-pergunta-texto" style="background: rgba(2, 6, 16, 0.9); border: 1px solid rgba(0, 240, 255, 0.4); border-left: 4px solid var(--system-cyan); padding: 14px; font-size: 0.95rem; line-height: 1.5; max-height: 250px; overflow-y: auto;">
                 Carregando pergunta...
             </div>
 
@@ -892,23 +999,23 @@
         </div>
     </div>
 
-    <!-- HEADER DO SISTEMA -->
+    <!-- HEADER DO SISTEMA COM MENU LATERAL ESTILIZADO -->
     <header>
         <div class="header-top-bar">
-            <button class="btn-notify-small" title="Ativar Notificações" onclick="solicitarPermissaoNotificacao()"><i class="fa-solid fa-bell"></i></button>
+            <button class="btn-notify-small" title="Notificações" onclick="solicitarPermissaoNotificacao()"><i class="fa-solid fa-bell"></i></button>
             <div class="header-sub-tag">PAINEL PESSOAL</div>
-            <button class="btn-options-dots" title="Opções" onclick="toggleOptionsMenu()">⋮</button>
+            <button class="btn-options-dots" title="Menu" onclick="toggleOptionsMenu()">⋮</button>
         </div>
         <h1 class="header-title-glow">[SISTEMA DO CAÇADOR]</h1>
 
         <div id="optionsDropdown" class="options-dropdown-panel">
             <button class="options-btn-item" onclick="promptMudarSenha()"><i class="fa-solid fa-key"></i> MUDAR SENHA</button>
-            <button class="options-btn-item" onclick="solicitarPermissaoNotificacao()"><i class="fa-solid fa-bell"></i> NOTIFICAÇÕES</button>
+            <button class="options-btn-item" onclick="solicitarPermissaoNotificacao()"><i class="fa-solid fa-bell"></i> NOTIFICAÇÕES PUSH</button>
             <button class="options-btn-item" style="color: #ff4757; border-color: #ff4757;" onclick="fazerLogout()"><i class="fa-solid fa-right-from-bracket"></i> SAIR DA SESSÃO</button>
         </div>
     </header>
 
-    <!-- REDE DE ÍCONES FLUTUANTES DA NAVEGAÇÃO -->
+    <!-- NAVEGAÇÃO FLUTUANTE (SEM O EQUIP) -->
     <div class="window-selector-floating-grid">
         <button id="btn-win-status" class="btn-floating-node active" onclick="exibirJanela('status')">
             <i class="fa-solid fa-bolt"></i> <span>STATUS</span>
@@ -925,12 +1032,6 @@
         <button id="btn-win-chat" class="btn-floating-node" onclick="exibirJanela('chat')">
             <i class="fa-solid fa-comments"></i> <span>CHAT</span>
         </button>
-        <button id="btn-win-bosses" class="btn-floating-node" onclick="exibirJanela('bosses')">
-            <i class="fa-solid fa-skull"></i> <span>BOSSES</span>
-        </button>
-        <button id="btn-win-equip" class="btn-floating-node" onclick="exibirJanela('equip')">
-            <i class="fa-solid fa-box-archive"></i> <span>EQUIP</span>
-        </button>
     </div>
 
     <!-- VIEWPORT DE JANELAS -->
@@ -939,7 +1040,6 @@
         <!-- JANELA 1: STATUS DO CAÇADOR -->
         <div id="win-status" class="system-window">
             
-            <!-- PAINEL DE FRASES MOTIVACIONAIS DINÂMICAS (ROTACIONA A CADA 2 DIAS) -->
             <div class="dynamic-quote-banner">
                 <i class="fa-solid fa-quote-left"></i>
                 <span id="display-quote-rotativa">Carregando diretriz diária...</span>
@@ -953,121 +1053,115 @@
             <div class="xp-bar-outer">
                 <div id="barra-progresso-xp" class="xp-bar-inner"></div>
             </div>
-            <div style="font-size: 0.78rem; color: var(--text-sub); text-align: right; font-family: monospace; margin-bottom: 10px;">
+            <div style="font-size: 0.78rem; color: var(--text-sub); text-align: right; font-family: monospace; margin-bottom: 6px;">
                 XP: <span id="display-xp-usuario">0</span> / <span id="display-xp-proximo">200</span>
             </div>
 
-            <div style="background: rgba(0, 240, 255, 0.1); border: 1px solid var(--system-cyan); padding: 8px; font-size: 0.8rem; font-family: monospace; display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                <span>PONTOS DISPONÍVEIS:</span>
-                <strong id="display-pontos-disponiveis" style="color: var(--god-gold); font-size: 0.95rem;">5</strong>
+            <!-- MENSAGEM SUTIL DE PONTOS DISPONÍVEIS -->
+            <div style="text-align: right; margin-bottom: 8px;">
+                <div id="subtle-pts-badge" class="subtle-points-notification" style="display: none;">
+                    <i class="fa-solid fa-circle-exclamation"></i> Você possui <span id="display-pontos-disponiveis" style="color:#fff;">5</span> pontos para gastar!
+                </div>
             </div>
 
-            <!-- ESTRUTURA CIRCULAR HOLOGRÁFICA INSPIRADA NA FOTO (7 PECADOS) -->
+            <!-- CONSTELAÇÃO COM ÍCONES 3D E ESTRELA GIRATÓRIA -->
             <div class="constellation-stage">
-                
-                <!-- SVG de Conexões/Linhas da Teia -->
                 <svg class="constellation-svg">
                     <line x1="50%" y1="50%" x2="50%" y2="12%" />
                     <line x1="50%" y1="50%" x2="88%" y2="28%" />
-                    <line x1="50%" y1="50%" x2="78%" y2="80%" />
-                    <line x1="50%" y1="50%" x2="22%" y2="80%" />
+                    <line x1="50%" y1="50%" x2="78%" y2="82%" />
+                    <line x1="50%" y1="50%" x2="22%" y2="82%" />
                     <line x1="50%" y1="50%" x2="12%" y2="28%" />
-                    <line x1="50%" y1="12%" x2="88%" y2="28%" />
-                    <line x1="88%" y1="28%" x2="78%" y2="80%" />
-                    <line x1="78%" y1="80%" x2="22%" y2="80%" />
-                    <line x1="22%" y1="80%" x2="12%" y2="28%" />
-                    <line x1="12%" y1="28%" x2="50%" y2="12%" />
+                    <line x1="50%" y1="50%" x2="50%" y2="92%" />
                 </svg>
 
-                <!-- AVATAR CENTRAL HOLOGRÁFICO (CLIQUE PARA ALTERAR CLASSE E FOTO) -->
+                <!-- ANEL DA ESTRELA GIRATÓRIA CONSTANTE AO REDOR DO AVATAR -->
+                <div class="rotating-star-ring"></div>
+
                 <div class="center-hologram-avatar" id="avatarContainer" onclick="abrirModalAvatar()" title="Clique para alterar Avatar e Classe">
-                    <i id="defaultAvatarIcon" class="fa-solid fa-dragon avatar-circle-icon"></i>
-                    <img id="customAvatarImg" class="avatar-circle-img" style="display: none;" alt="Avatar Caçador">
+                    <i id="defaultAvatarIcon" class="fa-solid fa-dragon avatar-circle-icon" style="font-size: 3rem; color: var(--system-cyan);"></i>
+                    <img id="customAvatarImg" class="avatar-circle-img" style="display: none;" alt="Avatar">
                 </div>
 
-                <!-- NÓS CIRCULARES DE ATRIBUTOS COM ADIÇÃO INTERNA -->
-                <div class="stat-node-circle node-pos-1">
+                <!-- NÓS DE ANIMAIS 3D -->
+                <div class="stat-node-circle node-pos-1" onclick="adicionarPontoManual('ent')">
+                    <svg class="hologram-animal-svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 32c14.2 0 27.3 7.8 34 20.4l32 60c8.5 16 2.5 35.8-13.5 44.3s-35.8 2.5-44.3-13.5L256 89.9 233.8 143.2c-8.5 16-28.3 22-44.3 13.5s-22-28.3-13.5-44.3l32-60C228.7 39.8 241.8 32 256 32z"/></svg>
                     <span class="stat-node-label">ENT</span>
                     <span id="atrib-ent" class="stat-node-val">10</span>
-                    <button class="btn-stat-plus-inside" onclick="adicionarPontoManual('ent')">+</button>
+                    <button class="btn-stat-plus-inside" onclick="event.stopPropagation(); adicionarPontoManual('ent')">+</button>
                 </div>
-
-                <div class="stat-node-circle node-pos-2">
+                <div class="stat-node-circle node-pos-2" onclick="adicionarPontoManual('ofe')">
+                    <svg class="hologram-animal-svg" viewBox="0 0 512 512"><path fill="currentColor" d="M226.5 92.9c14.3-4.2 29.7-1.4 41.3 7.6l45.2 35.3c15 11.7 23.7 29.8 23.7 48.8v22.7c35.4 12.1 61.2 45.4 61.2 84.7 0 35.3-21.7 65.6-53.1 78.4l11.4 68.3c3.4 20.3-10.4 39.6-30.7 43-20.3 3.4-39.6-10.4-43-30.7L265.4 360h-18.8l-15.6 93.3c-3.4 20.3-22.7 34.1-43 30.7s-34.1-22.7-30.7-30.7l14.4-86.4C140.7 377.3 128 351.4 128 322c0-39.3 25.8-72.6 61.2-84.7V214.6c0-19 8.7-37.1 23.7-48.8l45.2-35.3c3.4-2.7 7.5-4.2 11.8-3.9z"/></svg>
                     <span class="stat-node-label">OFE</span>
                     <span id="atrib-ofe" class="stat-node-val">10</span>
-                    <button class="btn-stat-plus-inside" onclick="adicionarPontoManual('ofe')">+</button>
+                    <button class="btn-stat-plus-inside" onclick="event.stopPropagation(); adicionarPontoManual('ofe')">+</button>
                 </div>
-
-                <div class="stat-node-circle node-pos-3">
+                <div class="stat-node-circle node-pos-3" onclick="adicionarPontoManual('def')">
+                    <svg class="hologram-animal-svg" viewBox="0 0 512 512"><path fill="currentColor" d="M160 96c17.7 0 32 14.3 32 32s-14.3 32-32 32c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64 17.7 0 32 14.3 32 32s-14.3 32-32 32c-70.7 0-128-57.3-128-128v-32c0-70.7 57.3-128 128-128zm192 64c53 0 96 43 96 96v64c0 53-43 96-96 96H256c-17.7 0-32-14.3-32-32s14.3-32 32-32h96c17.7 0 32-14.3 32-32v-64c0-17.7-14.3-32-32-32H256c-17.7 0-32-14.3-32-32s14.3-32 32-32h96z"/></svg>
                     <span class="stat-node-label">DEF</span>
                     <span id="atrib-def" class="stat-node-val">10</span>
-                    <button class="btn-stat-plus-inside" onclick="adicionarPontoManual('def')">+</button>
+                    <button class="btn-stat-plus-inside" onclick="event.stopPropagation(); adicionarPontoManual('def')">+</button>
                 </div>
-
-                <div class="stat-node-circle node-pos-4">
+                <div class="stat-node-circle node-pos-4" onclick="adicionarPontoManual('vel')">
+                    <svg class="hologram-animal-svg" viewBox="0 0 512 512"><path fill="currentColor" d="M128 160c0-35.3 28.7-64 64-64h128c35.3 0 64 28.7 64 64v32c0 35.3-28.7 64-64 64H192c-35.3 0-64-28.7-64-64v-32zm0 128c0 35.3 28.7 64 64 64h128c35.3 0 64-28.7 64-64v-32c0-35.3-28.7-64-64-64H192c-35.3 0-64 28.7-64 64v32z"/></svg>
                     <span class="stat-node-label">VEL</span>
                     <span id="atrib-vel" class="stat-node-val">10</span>
-                    <button class="btn-stat-plus-inside" onclick="adicionarPontoManual('vel')">+</button>
+                    <button class="btn-stat-plus-inside" onclick="event.stopPropagation(); adicionarPontoManual('vel')">+</button>
                 </div>
-
-                <div class="stat-node-circle node-pos-5">
+                <div class="stat-node-circle node-pos-5" onclick="adicionarPontoManual('tec')">
+                    <svg class="hologram-animal-svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 32c14.2 0 27.3 7.8 34 20.4l24 45.5c12.2 23.2 38.6 34.3 63.8 26.2l50.4-16.1c15.2-4.9 31.4 3.3 36.9 18.2l19.5 53.6c5.5 15.1-.9 32-15.1 40.1l-44.2 26c-22.1 13-30.8 40.4-19.8 63.4l23.5 48.7c7.4 15.3 1.2 33.6-13.8 42.1l-48 27c-21.5 12.1-29.5 39-18.4 61.2l25.3 50.7c7.1 14.1 2.2 31.5-10.9 40.3l-44.4 29.6c-13.9 9.3-32.3 6.9-43.5-5.6l-35.2-38.9c-16.8-18.6-45.2-18.6-62 0l-35.2 38.9c-11.2 12.5-29.6 14.9-43.5 5.6l-44.4-29.6c-13.1-8.8-18-26.2-10.9-40.3l25.3-50.7c11.1-22.2 3.1-49.1-18.4-61.2l-48-27c-15-8.5-21.2-26.8-13.8-42.1l23.5-48.7c11-23 2.3-50.4-19.8-63.4l-44.2-26c-14.2-8.3-20.6-25-15.1-40.1l19.5-53.6c5.5-14.9 21.7-23.1 36.9-18.2l50.4 16.1c25.2 8.1 51.6-3 63.8-26.2l24-45.5C228.7 39.8 241.8 32 256 32z"/></svg>
                     <span class="stat-node-label">TEC</span>
                     <span id="atrib-tec" class="stat-node-val">10</span>
-                    <button class="btn-stat-plus-inside" onclick="adicionarPontoManual('tec')">+</button>
+                    <button class="btn-stat-plus-inside" onclick="event.stopPropagation(); adicionarPontoManual('tec')">+</button>
+                </div>
+                <div class="stat-node-circle node-pos-bottom-extra" onclick="adicionarPontoManual('ent')">
+                    <svg class="hologram-animal-svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 64c53 0 96 43 96 96v32c0 35.3-28.7 64-64 64h-64c-35.3 0-64-28.7-64-64v-32c0-53 43-96 96-96z"/></svg>
+                    <span class="stat-node-label">RES</span>
+                    <span id="atrib-res" class="stat-node-val">10</span>
                 </div>
             </div>
 
-            <!-- EXIBIÇÃO DO NOME DO CAÇADOR E DA CLASSE ESCOLHIDA -->
             <div class="hunter-profile-badge">
                 <div id="character-name-display" class="hunter-name-main">CAÇADOR</div>
                 <div id="character-class-display" class="hunter-class-sub">DRAGÃO DA IRA</div>
             </div>
+
+            <!-- BOSS ESCONDIDO DE FORMA MISTERIOSA E ESTRATÉGICA -->
+            <div class="hidden-boss-trigger-card" onclick="abrirModalBoss()">
+                <div style="font-size: 0.72rem; color: var(--system-red); font-family: monospace; font-weight: bold;"><i class="fa-solid fa-triangle-exclamation"></i> FLUTUAÇÃO DIMENSIONAL DETECTADA</div>
+                <div style="font-size: 0.7rem; color: var(--text-sub); margin-top: 2px;">Toque aqui para investigar a fenda dos Guardiões de Portal...</div>
+            </div>
         </div>
 
-        <!-- JANELA 2: TAF COM BARRA FIXA -->
+        <!-- JANELA 2: TAF -->
         <div id="win-taf" class="system-window system-window-red" style="display: none;">
             <div class="window-header" style="border-bottom-color: var(--system-red);">
                 <span class="window-title" style="color: var(--system-red);"><i class="fa-solid fa-person-running"></i> MISSÕES FÍSICAS (TAF)</span>
             </div>
-            <p style="font-size: 0.78rem; color: #ddd; margin-bottom: 12px;">Cumpra suas metas diárias de preparação física para evoluir seus atributos:</p>
-
+            <p style="font-size: 0.78rem; color: #ddd; margin-bottom: 12px;">Cumpra suas metas diárias de preparação física para evoluir:</p>
             <div class="taf-grid">
-                <div>
-                    <span style="font-size: 0.65rem; color: #aaa; display: block;">🏃 CORRIDA</span>
-                    <strong id="meta-distancia-km" style="font-size: 1rem; color: #fff;">1</strong> km
-                </div>
-                <div>
-                    <span style="font-size: 0.65rem; color: #aaa; display: block;">💪 FLEXÕES</span>
-                    <strong id="meta-qtd-flexao" style="font-size: 1rem; color: #fff;">10</strong> rep
-                </div>
-                <div>
-                    <span style="font-size: 0.65rem; color: #aaa; display: block;">🧘 ABDOMINAIS</span>
-                    <strong id="meta-qtd-abdominal" style="font-size: 1rem; color: #fff;">10</strong> rep
-                </div>
-                <div>
-                    <span style="font-size: 0.65rem; color: #aaa; display: block;">🏋️ BARRA FIXA</span>
-                    <strong id="meta-qtd-barra" style="font-size: 1rem; color: #fff;">3</strong> rep
-                </div>
+                <div><span style="font-size: 0.62rem; color: #aaa;">🏃 CORRIDA</span><strong id="meta-distancia-km" style="font-size: 0.95rem; color: #fff;">1</strong> km</div>
+                <div><span style="font-size: 0.62rem; color: #aaa;">💪 FLEXÕES</span><strong id="meta-qtd-flexao" style="font-size: 0.95rem; color: #fff;">10</strong> rep</div>
+                <div><span style="font-size: 0.62rem; color: #aaa;">🧘 ABDOMINAL</span><strong id="meta-qtd-abdominal" style="font-size: 0.95rem; color: #fff;">10</strong> rep</div>
+                <div><span style="font-size: 0.62rem; color: #aaa;">🏋️ BARRA</span><strong id="meta-qtd-barra" style="font-size: 0.95rem; color: #fff;">3</strong> rep</div>
             </div>
-
             <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 10px;">
-                <button onclick="concluirMetaFisica('corrida', 120, 4)" class="btn-taf" id="btn-meta-corrida">CUMPRIR CORRIDA (+120 XP)</button>
-                <button onclick="concluirMetaFisica('flexao', 90, 3)" class="btn-taf" id="btn-meta-flexao">CUMPRIR FLEXÃO (+90 XP)</button>
-                <button onclick="concluirMetaFisica('abdominal', 90, 3)" class="btn-taf" id="btn-meta-abdominal">CUMPRIR ABDOMINAL (+90 XP)</button>
-                <button onclick="concluirMetaFisica('barra', 150, 5)" class="btn-taf" id="btn-meta-barra">CUMPRIR BARRA FIXA (+150 XP / +5 PTS)</button>
+                <button onclick="concluirMetaFisica('corrida', 120, 4)" class="btn-taf">CUMPRIR CORRIDA (+120 XP)</button>
+                <button onclick="concluirMetaFisica('flexao', 90, 3)" class="btn-taf">CUMPRIR FLEXÃO (+90 XP)</button>
+                <button onclick="concluirMetaFisica('abdominal', 90, 3)" class="btn-taf">CUMPRIR ABDOMINAL (+90 XP)</button>
+                <button onclick="concluirMetaFisica('barra', 150, 5)" class="btn-taf">CUMPRIR BARRA FIXA (+150 XP / +5 PTS)</button>
             </div>
         </div>
 
-        <!-- JANELA 3: MISSÕES DIÁRIAS E MATÉRIA ESPECÍFICA -->
+        <!-- JANELA 3: MISSÕES DIÁRIAS & ESTUDO -->
         <div id="win-missoes" class="system-window" style="display: none;">
             <div class="window-header">
                 <span class="window-title"><i class="fa-solid fa-scroll"></i> MISSÕES DIÁRIAS DE ESTUDO</span>
             </div>
-            
             <div style="background: rgba(0, 240, 255, 0.08); border: 1px solid var(--system-cyan); padding: 12px; margin-bottom: 14px;">
-                <h4 style="color: var(--system-cyan); font-size: 0.82rem; font-family: monospace; margin-bottom: 6px;">📚 CUMPRIR ESTUDO DE 1 MATÉRIA ESPECÍFICA:</h4>
-                <div style="display: flex; gap: 6px; margin-bottom: 8px;">
-                    <select id="select-materia-estudo" style="flex: 1;">
+                <h4 style="color: var(--system-cyan); font-size: 0.8rem; font-family: monospace; margin-bottom: 6px;">📚 ESTUDAR 1 MATÉRIA ESPECÍFICA:</h4>
+                <div style="display: flex; gap: 6px;">
+                    <select id="select-materia-estudo" style="flex:1; background:#030a16; color:#fff; border:1px solid var(--system-cyan); padding:6px;">
                         <option value="Português">Português</option>
                         <option value="Raciocínio Lógico">Raciocínio Lógico</option>
                         <option value="Direito Constitucional">Direito Constitucional</option>
@@ -1075,13 +1169,12 @@
                         <option value="História de PE">História de PE</option>
                         <option value="Informática">Informática</option>
                     </select>
-                    <button onclick="cumprirMissaoEstudo()" style="background: var(--system-cyan); color: #000; border: none; font-weight: bold; font-size: 0.75rem; padding: 0 12px; cursor: pointer;">CUMPRIR (+100 XP)</button>
+                    <button onclick="cumprirMissaoEstudo()" style="background:var(--system-cyan); color:#000; font-weight:bold; border:none; padding:0 12px; cursor:pointer; font-size:0.75rem;">CUMPRIR</button>
                 </div>
             </div>
-
-            <div class="task-input-box">
-                <input type="text" id="customTaskInput" placeholder="Nova missão customizada...">
-                <button onclick="addCustomTask()" style="background: var(--system-cyan); color: #000; border: none; font-weight: bold; padding: 0 14px; cursor: pointer;">ADD</button>
+            <div class="task-input-box" style="display:flex; gap:6px; margin-bottom:12px;">
+                <input type="text" id="customTaskInput" placeholder="Nova missão..." style="flex:1; background:#030a16; color:#fff; border:1px solid var(--system-cyan); padding:8px; outline:none;">
+                <button onclick="addCustomTask()" style="background:var(--system-cyan); color:#000; font-weight:bold; padding:0 14px; border:none; cursor:pointer;">ADD</button>
             </div>
             <ul class="task-list" id="customTaskList"></ul>
         </div>
@@ -1099,79 +1192,38 @@
                 <button class="tab-btn" onclick="switchTab('historia', event)">História PE (35)</button>
                 <button class="tab-btn" onclick="switchTab('informatica', event)">Informática (35)</button>
             </nav>
-
             <div style="background: rgba(2, 6, 16, 0.8); border: 1px dashed var(--system-cyan); padding: 20px; text-align: center; margin-top: 10px;">
-                <h3 id="titulo-materia-ativa" style="color: var(--system-cyan); font-family: monospace; font-size: 0.9rem; letter-spacing: 1px; margin-bottom: 6px;">DISCIPLINA ATIVA: PORTUGUÊS</h3>
-                <p style="font-size: 0.8rem; color: var(--text-sub); margin-bottom: 12px;">Abra a Janela Mística para responder questão por questão no estilo game.</p>
+                <h3 id="titulo-materia-ativa" style="color: var(--system-cyan); font-family: monospace; font-size: 0.9rem; margin-bottom: 6px;">DISCIPLINA ATIVA: PORTUGUÊS</h3>
                 <button class="btn-abrir-pop" onclick="abrirModalQuestao()">⚔️ ABRIR JANELA DO SISTEMA</button>
             </div>
         </div>
 
-        <!-- JANELA 5: CHAT & OFERTAS -->
+        <!-- JANELA 5: CHAT -->
         <div id="win-chat" class="system-window" style="display: none;">
             <div class="window-header">
                 <span class="window-title"><i class="fa-solid fa-comments"></i> COMUNIDADE DE CAÇADORES</span>
             </div>
-
-            <div class="chat-subtabs">
-                <button id="btn-chat-sub-global" class="chat-subtab-btn active" onclick="switchChatSubtab('global')">💬 CHAT GLOBAL</button>
-                <button id="btn-chat-sub-ofertas" class="chat-subtab-btn" onclick="switchChatSubtab('ofertas')">📜 OFERTAR MISSÃO</button>
+            <div class="chat-subtabs" style="display:flex; gap:6px; margin-bottom:12px;">
+                <button id="btn-chat-sub-global" class="chat-subtab-btn active" onclick="switchChatSubtab('global')" style="flex:1; background:var(--system-cyan); color:#000; border:1px solid var(--system-cyan); padding:8px; font-family:monospace; font-size:0.75rem; font-weight:bold; cursor:pointer;">💬 CHAT GLOBAL</button>
+                <button id="btn-chat-sub-ofertas" class="chat-subtab-btn" onclick="switchChatSubtab('ofertas')" style="flex:1; background:rgba(2,6,16,0.9); color:var(--text-sub); border:1px solid var(--system-cyan); padding:8px; font-family:monospace; font-size:0.75rem; font-weight:bold; cursor:pointer;">📜 OFERTAR MISSÃO</button>
             </div>
-
             <div id="chat-sec-global">
                 <div id="chat-messages-list" class="chat-messages-container"></div>
-                <div class="task-input-box">
-                    <input type="text" id="chatInputMessage" placeholder="Transmitir mensagem aos caçadores...">
-                    <button onclick="enviarMensagemChat()" style="background: var(--system-cyan); color: #000; border: none; font-weight: bold; padding: 0 14px; cursor: pointer;">ENVIAR</button>
+                <div class="task-input-box" style="display:flex; gap:6px;">
+                    <input type="text" id="chatInputMessage" placeholder="Transmitir mensagem..." style="flex:1; background:#030a16; color:#fff; border:1px solid var(--system-cyan); padding:8px; outline:none;">
+                    <button onclick="enviarMensagemChat()" style="background:var(--system-cyan); color:#000; font-weight:bold; padding:0 14px; border:none; cursor:pointer;">ENVIAR</button>
                 </div>
             </div>
-
             <div id="chat-sec-ofertas" style="display: none;">
                 <div style="background: rgba(16, 8, 24, 0.8); border: 1px solid var(--god-gold); padding: 10px; margin-bottom: 10px;">
-                    <div style="font-size: 0.75rem; color: var(--god-gold); font-family: monospace; font-weight: bold; margin-bottom: 6px;">CRIAR OFERTA DE MISSÃO PARA OUTRO CAÇADOR:</div>
-                    <input type="text" id="offerTitleInput" placeholder="Título da Missão..." style="width: 100%; padding: 6px; background: #030a16; border: 1px solid var(--god-gold); color: #fff; font-size: 0.8rem; margin-bottom: 6px; outline: none;">
-                    <div style="display: flex; gap: 6px; margin-bottom: 6px;">
-                        <input type="number" id="offerXpInput" placeholder="Recompensa XP..." style="flex: 1; padding: 6px; background: #030a16; border: 1px solid var(--god-gold); color: #fff; font-size: 0.8rem; outline: none;">
-                        <input type="number" id="offerPtsInput" placeholder="Recompensa Pts..." style="flex: 1; padding: 6px; background: #030a16; border: 1px solid var(--god-gold); color: #fff; font-size: 0.8rem; outline: none;">
+                    <input type="text" id="offerTitleInput" placeholder="Título da Missão..." style="width:100%; padding:6px; background:#030a16; border:1px solid var(--god-gold); color:#fff; font-size:0.8rem; margin-bottom:6px; outline:none;">
+                    <div style="display:flex; gap:6px; margin-bottom:6px;">
+                        <input type="number" id="offerXpInput" placeholder="XP..." style="flex:1; padding:6px; background:#030a16; border:1px solid var(--god-gold); color:#fff; font-size:0.8rem; outline:none;">
+                        <input type="number" id="offerPtsInput" placeholder="Pts..." style="flex:1; padding:6px; background:#030a16; border:1px solid var(--god-gold); color:#fff; font-size:0.8rem; outline:none;">
                     </div>
-                    <button onclick="publicarOfertaMissao()" style="width: 100%; padding: 8px; background: var(--god-gold); color: #000; border: none; font-weight: bold; cursor: pointer; font-size: 0.75rem; text-transform: uppercase;">PUBLICAR NO MURAL</button>
+                    <button onclick="publicarOfertaMissao()" style="width:100%; padding:8px; background:var(--god-gold); color:#000; font-weight:bold; cursor:pointer; font-size:0.75rem;">PUBLICAR NO MURAL</button>
                 </div>
-
-                <div id="offers-feed-list" style="max-height: 200px; overflow-y: auto;"></div>
-            </div>
-        </div>
-
-        <!-- JANELA 6: BOSSES -->
-        <div id="win-bosses" class="system-window system-window-red" style="display: none;">
-            <div class="window-header" style="border-bottom-color: var(--system-red);">
-                <span class="window-title" style="color: var(--system-red);"><i class="fa-solid fa-skull"></i> MASMORRAS & BOSSES</span>
-            </div>
-            <p style="font-size: 0.78rem; color: #ddd; margin-bottom: 12px;">Enfrente os Guardiões de Portal para obter recompensas supremas!</p>
-
-            <div id="bossesFeedContainer"></div>
-        </div>
-
-        <!-- JANELA 7: ARMAZENAMENTO DIMENSIONAL -->
-        <div id="win-equip" class="system-window" style="display: none;">
-            <div class="window-header">
-                <span class="window-title"><i class="fa-solid fa-box-archive"></i> ARMAZENAMENTO DIMENSIONAL</span>
-            </div>
-
-            <div class="equip-grid">
-                <div class="equip-card">
-                    <div class="equip-card-title"><i class="fa-solid fa-clock"></i> HORÁRIO MUNDIAL DO SISTEMA</div>
-                    <div id="real-time-clock" class="digital-clock-display">00:00:00</div>
-                </div>
-
-                <div class="equip-card">
-                    <div class="equip-card-title"><i class="fa-solid fa-stopwatch"></i> CRONÔMETRO DE ESTUDO & TREINO</div>
-                    <div id="stopwatch-display" class="digital-clock-display" style="color: var(--god-gold); text-shadow: 0 0 10px var(--god-gold);">00:00:00</div>
-                    <div style="display: flex; gap: 6px; justify-content: center; margin-top: 10px;">
-                        <button onclick="iniciarCronometro()" style="background: var(--system-cyan); color: #000; border: none; padding: 6px 14px; font-weight: bold; cursor: pointer; font-size: 0.75rem;">INICIAR</button>
-                        <button onclick="pausarCronometro()" style="background: rgba(255, 42, 109, 0.3); border: 1px solid var(--system-red); color: #fff; padding: 6px 14px; font-weight: bold; cursor: pointer; font-size: 0.75rem;">PAUSAR</button>
-                        <button onclick="zerarCronometro()" style="background: rgba(2, 6, 16, 0.9); border: 1px solid var(--system-cyan); color: var(--system-cyan); padding: 6px 14px; font-weight: bold; cursor: pointer; font-size: 0.75rem;">ZERAR</button>
-                    </div>
-                </div>
+                <div id="offers-feed-list" style="max-height:200px; overflow-y:auto;"></div>
             </div>
         </div>
 
@@ -1188,29 +1240,31 @@
             memoriaLocal[key] = value;
         }
 
-        /* ANIMAÇÃO DA TELA DO ABISMO -> QUEBRA DE TELA -> EMERGÊNCIA -> LOGIN */
-        function despertarSistemaComQuebra() {
+        /* TRANSIÇÃO DA TELA DO ABISMO -> QUEBRA DE TELA -> AVISO DE EMERGÊNCIA (LUZ NO FIM DO TÚNEL) -> LOGIN */
+        function despertarSistemaComPortal() {
             const overlayCrack = document.getElementById('shatter-overlay');
-            const banner = document.getElementById('emergency-banner');
+            const tunnelScreen = document.getElementById('tunnel-emergency-screen');
 
             overlayCrack.style.display = 'block';
-            banner.style.display = 'block';
+            tunnelScreen.style.display = 'flex';
 
             setTimeout(() => {
                 document.getElementById('abyss-screen').style.display = 'none';
                 overlayCrack.style.display = 'none';
-                banner.style.display = 'none';
+            }, 800);
 
+            setTimeout(() => {
+                tunnelScreen.style.display = 'none';
                 const autenticado = sessionStorage.getItem('cacador_autenticado');
                 if (autenticado === 'true') {
                     renderizarTudo();
                 } else {
                     document.getElementById('modal-login').style.display = 'flex';
                 }
-            }, 1800);
+            }, 2300);
         }
 
-        /* BANCO DE FRASES MOTIVACIONAIS DIÁRIAS (ROTAÇÃO A CADA 2 DIAS) */
+        /* BANCO DE FRASES MOTIVACIONAIS DIÁRIAS (ROTAÇÃO EXATA A CADA 2 DIAS) */
         const listaFrasesMotivacionais = [
             "🔥 'Mesmo que você seja o Caçador mais fraco, o Sistema não permite fraqueza. Erga-se!'",
             "🧠 'O conhecimento é a lâmina mais afiada do Caçador. Domine o edital!'",
@@ -1234,7 +1288,7 @@
             nome: 'CAÇADOR', xp: 0, nivel: 1, pontosDisponiveis: 5, 
             ent: 10, ofe: 10, def: 10, vel: 10, tec: 10, 
             avatarType: 'icon', avatarVal: 'fa-dragon',
-            charName: 'MELIODAS', charClass: 'DRAGÃO DA IRA'
+            charName: 'CAÇADOR', charClass: 'DRAGÃO DA IRA'
         };
 
         function autenticarUsuario() {
@@ -1319,7 +1373,6 @@
         function selecionarSinIcon(iconClass, charName, charClass) {
             dadosCacadorRPG.avatarType = 'icon';
             dadosCacadorRPG.avatarVal = iconClass;
-            dadosCacadorRPG.charName = charName;
             dadosCacadorRPG.charClass = charClass;
             salvarDadosUsuario();
             renderizarAvatar();
@@ -1435,7 +1488,7 @@
             }
         }
 
-        /* MISSÕES DE ESTUDO DE MATÉRIA ESPECÍFICA & CUSTOMIZADAS */
+        /* MISSÕES DE ESTUDO & CUSTOMIZADAS */
         let customTasks = JSON.parse(getSafeStorage('sistema_cacador_custom_tasks')) || [
             { id: 1, text: "Resolver simulado da PMPE", completed: false }
         ];
@@ -1763,48 +1816,42 @@
 
         function iniciarCronometro() {
             if (cronometroInterval) return;
-            cronometroInterval = setInterval(() => {
-                cronometroSegundos++;
-                const h = Math.floor(cronometroSegundos / 3600).toString().padStart(2, '0');
-                const m = Math.floor((cronometroSegundos % 3600) / 60).toString().padStart(2, '0');
-                const s = (cronometroSegundos % 60).toString().padStart(2, '0');
-                const el = document.getElementById('stopwatch-display');
-                if (el) el.innerText = `${h}:${m}:${s}`;
-            }, 1000);
+        function abrirModalEquip() { document.getElementById('equipModalOverlay').style.display = 'flex'; }
+        function fecharModalEquip() { document.getElementById('equipModalOverlay').style.display = 'none'; }
+        
+        function abrirModalBoss() { document.getElementById('bossModalOverlay').style.display = 'flex'; renderizarBosses(); }
+        function fecharModalBoss() { document.getElementById('bossModalOverlay').style.display = 'none'; }
+
+        function abrirNuvemPersonagem() {
+            document.getElementById('cloud-char-name').innerText = dadosCacadorRPG.nome || "CAÇADOR";
+            document.getElementById('cloud-char-class').innerText = dadosCacadorRPG.charClass || "DRAGÃO DA IRA";
+            document.getElementById('cloud-val-lvl').innerText = dadosCacadorRPG.nivel || 1;
+            document.getElementById('cloud-val-xp').innerText = dadosCacadorRPG.xp || 0;
+            document.getElementById('cloud-val-ent').innerText = dadosCacadorRPG.ent || 10;
+            document.getElementById('cloud-val-ofe').innerText = dadosCacadorRPG.ofe || 10;
+            document.getElementById('cloud-val-def').innerText = dadosCacadorRPG.def || 10;
+            document.getElementById('cloud-val-vel').innerText = dadosCacadorRPG.vel || 10;
+            document.getElementById('cloud-val-tec').innerText = dadosCacadorRPG.tec || 10;
+            document.getElementById('cloudProfileOverlay').style.display = 'flex';
         }
+        function fecharNuvemPersonagem() { document.getElementById('cloudProfileOverlay').style.display = 'none'; }
 
-        function pausarCronometro() { if (cronometroInterval) { clearInterval(cronometroInterval); cronometroInterval = null; } }
-        function zerarCronometro() { pausarCronometro(); cronometroSegundos = 0; const el = document.getElementById('stopwatch-display'); if (el) el.innerText = "00:00:00"; }
+        /* NAVEGAÇÃO ENTRE JANELAS ATUALIZADA (SEM EQUIP) */
+        const listaJanelasOrder = ['status', 'taf', 'missoes', 'banco', 'chat'];
+        let janelaAtualIndex = 0;
 
-        /* INICIALIZAÇÃO DOS HUDs */
-        function renderizarTudo() {
-            const userKey = sessionStorage.getItem('cacador_usuario_ativo');
-            if (userKey) {
-                const saved = JSON.parse(getSafeStorage(userKey));
-                if (saved) {
-                    if (saved.ent === undefined) saved.ent = 10;
-                    if (saved.ofe === undefined) saved.ofe = 10;
-                    if (saved.def === undefined) saved.def = 10;
-                    if (saved.vel === undefined) saved.vel = 10;
-                    if (saved.tec === undefined) saved.tec = 10;
-                    if (saved.avatarType === undefined) saved.avatarType = 'icon';
-                    if (saved.avatarVal === undefined) saved.avatarVal = 'fa-dragon';
-                    if (saved.charClass === undefined) saved.charClass = 'DRAGÃO DA IRA';
-                    dadosCacadorRPG = saved;
+        function exibirJanela(nomeJanela) {
+            janelaAtualIndex = listaJanelasOrder.indexOf(nomeJanela);
+            listaJanelasOrder.forEach(j => {
+                const elWin = document.getElementById(`win-${j}`);
+                const elBtn = document.getElementById(`btn-win-${j}`);
+                if (elWin) elWin.style.display = (j === nomeJanela) ? 'block' : 'none';
+                if (elBtn) {
+                    if (j === nomeJanela) elBtn.classList.add('active');
+                    else elBtn.classList.remove('active');
                 }
-            }
-            calcularMetasDoNivel();
-            renderizarHUDRPG();
-            renderizarAvatar();
-            renderizarCustomTasks();
-            atualizarFraseMotivacionalRotativa();
-        }
-
-        function salvarDadosUsuario() {
-            const userKey = sessionStorage.getItem('cacador_usuario_ativo');
-            if (userKey) {
-                setSafeStorage(userKey, JSON.stringify(dadosCacadorRPG));
-            }
+            });
+            if (nomeJanela === 'chat') renderizarChatMessages();
         }
 
         function renderizarHUDRPG() {
@@ -1820,7 +1867,13 @@
                 barra.style.width = `${Math.min(percentual, 100)}%`;
             }
 
-            document.getElementById('display-pontos-disponiveis').innerText = dadosCacadorRPG.pontosDisponiveis;
+            const ptsBadge = document.getElementById('subtle-pts-badge');
+            if (dadosCacadorRPG.pontosDisponiveis > 0) {
+                ptsBadge.style.display = 'inline-flex';
+                document.getElementById('display-pontos-disponiveis').innerText = dadosCacadorRPG.pontosDisponiveis;
+            } else {
+                ptsBadge.style.display = 'none';
+            }
             
             document.getElementById('atrib-ent').innerText = dadosCacadorRPG.ent !== undefined ? dadosCacadorRPG.ent : 10;
             document.getElementById('atrib-ofe').innerText = dadosCacadorRPG.ofe !== undefined ? dadosCacadorRPG.ofe : 10;
