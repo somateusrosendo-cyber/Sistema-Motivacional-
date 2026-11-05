@@ -41,7 +41,7 @@
             flex-direction: column;
             align-items: center;
             background-image: 
-                radial-gradient(circle at 50% 30%, rgba(0, 240, 255, 0.18) 0%, transparent 75%),
+                radial-gradient(circle at 50% 30%, rgba(0, 240, 255, 0.15) 0%, transparent 75%),
                 linear-gradient(180deg, #010206 0%, #050c1e 100%);
             background-attachment: fixed;
             overflow-x: hidden;
@@ -131,7 +131,7 @@
             pointer-events: none;
         }
 
-        /* TELA DE EMERGÊNCIA */
+        /* TELA DE ATENÇÃO (DOMÍNIO) */
         .shatter-overlay {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
@@ -193,7 +193,7 @@
         .btn-floating-node.active { background: var(--system-cyan); color: #000; border-color: #fff; box-shadow: 0 0 20px var(--system-cyan-glow); transform: translateY(-2px) scale(1.04); }
 
         .single-window-viewport { width: 100%; max-width: 600px; display: flex; justify-content: center; }
-        .system-window { width: 100%; background: var(--system-blue-card); border: 2px solid var(--system-cyan); box-shadow: 0 20px 45px rgba(0, 240, 255, 0.4), inset 0 0 25px rgba(0, 240, 255, 0.15); padding: 22px; position: relative; backdrop-filter: blur(14px); clip-path: polygon(0 15px, 15px 0, calc(100% - 15px) 0, 100% 15px, 100% calc(100% - 15px), calc(100% - 15px) 100%, 15px 100%, 0 calc(100% - 15px)); }
+        .system-window { width: 100%; background: var(--system-blue-card); border: 2px solid var(--system-cyan); box-shadow: 0 20px 45px rgba(0, 240, 255, 0.4), inset 0 0 25px rgba(0, 240, 255, 0.15); padding: 22px; position: relative; backdrop-filter: blur(14px); clip-path: polygon(0 15px, 15px 0, calc(100% - 15px) 0, 100% 15px, 100% calc(100% - 15px), calc(100% - 15px) 100%, 15px 100%, 0 calc(100% - 15px)); transition: transform 0.3s ease; }
         .system-window-red { background: rgba(26, 8, 16, 0.95); border: 2px solid var(--system-red); box-shadow: 0 20px 45px rgba(255, 42, 109, 0.45); }
 
         .anime-limit-quote { background: rgba(0, 240, 255, 0.08); border-left: 3px solid var(--system-cyan); padding: 6px 10px; font-size: 0.72rem; font-family: monospace; color: var(--text-sub); margin-bottom: 14px; font-style: italic; }
@@ -203,15 +203,13 @@
         .xp-bar-outer { width: 100%; height: 12px; background: #060d1a; border: 1px solid var(--system-cyan); margin: 8px 0; padding: 1px; }
         .xp-bar-inner { height: 100%; background: linear-gradient(90deg, var(--system-cyan), #9d4edd); box-shadow: 0 0 12px var(--system-cyan); width: 0%; transition: width 0.4s ease; }
 
-        /* CONSTELLATION STAGE (STATUS) */
-        .constellation-stage { width: 100%; min-height: 330px; position: relative; display: flex; justify-content: center; align-items: center; margin-top: 10px; background: radial-gradient(circle at 50% 50%, rgba(0, 240, 255, 0.1) 0%, transparent 80%); }
-        .rotating-star-ring { position: absolute; width: 140px; height: 140px; border-radius: 50%; border: 1px dashed var(--system-cyan); animation: rotateStar 15s linear infinite; z-index: 4; pointer-events: none; opacity: 0.7; }
-        .rotating-star-ring::before { content: "★"; position: absolute; top: -8px; left: 50%; transform: translateX(-50%); color: var(--god-gold); font-size: 1rem; text-shadow: 0 0 8px var(--god-gold); }
-        @keyframes rotateStar { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-        .center-avatar-circle { width: 95px; height: 95px; border-radius: 50%; border: 3px solid var(--system-cyan); box-shadow: 0 0 30px var(--system-cyan-glow), inset 0 0 20px var(--system-cyan-glow); z-index: 5; display: flex; justify-content: center; align-items: center; overflow: hidden; background: #030a16; position: absolute; cursor: pointer; }
+        /* STATUS / AVATAR CENTRAL (SEM ROTAÇÃO, ESCURIDÃO COM LUZ HOLOGRÁFICA) */
+        .constellation-stage { width: 100%; min-height: 330px; position: relative; display: flex; justify-content: center; align-items: center; margin-top: 10px; background: radial-gradient(circle at 50% 50%, rgba(0, 240, 255, 0.15) 0%, rgba(2, 4, 10, 0.95) 75%); }
+        
+        .center-avatar-circle { width: 105px; height: 105px; border-radius: 50%; border: 3px solid var(--system-cyan); box-shadow: 0 0 40px var(--system-cyan-glow), inset 0 0 30px var(--system-cyan-glow); z-index: 5; display: flex; justify-content: center; align-items: center; overflow: hidden; background: radial-gradient(circle, #061833 0%, #01040a 85%); position: absolute; cursor: pointer; transition: transform 0.2s; }
+        .center-avatar-circle:active { transform: scale(0.95); }
         .avatar-circle-img { width: 100%; height: 100%; object-fit: cover; }
-        .avatar-circle-icon { font-size: 2.5rem; color: var(--system-cyan); filter: drop-shadow(0 0 10px var(--system-cyan)); }
+        .avatar-circle-icon { font-size: 2.8rem; color: var(--system-cyan); filter: drop-shadow(0 0 15px var(--system-cyan)); }
 
         .stat-node-circle { width: 68px; height: 68px; border-radius: 50%; background: rgba(3, 10, 24, 0.95); border: 2px solid var(--system-cyan); box-shadow: 0 0 18px var(--system-cyan-glow); position: absolute; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 6; font-family: monospace; }
         .stat-node-label { font-size: 0.55rem; color: var(--system-cyan); font-weight: bold; display: flex; align-items: center; gap: 3px; }
@@ -229,19 +227,24 @@
         .character-class-sub { color: #fff; font-size: 0.72rem; font-weight: bold; letter-spacing: 1.5px; margin-top: 2px; }
         .subtle-points-badge { display: inline-block; background: rgba(255, 215, 0, 0.15); border: 1px solid var(--god-gold); color: var(--god-gold); font-family: monospace; font-size: 0.7rem; padding: 2px 8px; border-radius: 10px; margin-top: 6px; }
 
-        /* ESTILOS DE PAINÉIS CUSTOMIZÁVEIS */
+        /* PAINÉIS CUSTOMIZÁVEIS */
         .dash-card { background: rgba(2, 6, 16, 0.85); border: 1px solid rgba(0, 240, 255, 0.3); padding: 12px; border-radius: 6px; margin-bottom: 10px; }
-        .user-input-field { width: 100%; background: #030a16; border: 1px solid var(--system-cyan); color: #fff; padding: 7px; font-size: 0.8rem; font-family: monospace; margin-top: 4px; outline: none; }
+        .user-input-field { width: 100%; background: #030a16; border: 1px solid var(--system-cyan); color: #fff; padding: 8px; font-size: 0.85rem; font-family: monospace; margin-top: 4px; outline: none; border-radius: 4px; }
         .difficulty-row { display: flex; justify-content: space-between; align-items: center; background: rgba(3, 10, 24, 0.9); border: 1px solid rgba(0,240,255,0.2); padding: 8px 10px; margin-bottom: 6px; border-radius: 4px; font-size: 0.75rem; font-family: monospace; }
 
-        /* MODAIS */
+        /* MODAIS E POP-UPS */
         .game-modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(2, 5, 14, 0.96); backdrop-filter: blur(10px); display: none; justify-content: center; align-items: center; z-index: 999999; padding: 12px; }
-        .game-modal-card { background: linear-gradient(180deg, #07152b 0%, #030a16 100%); border: 2px solid var(--system-cyan); padding: 16px; width: 100%; max-width: 580px; max-height: 94vh; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 0 35px rgba(0, 240, 255, 0.3); }
+        .game-modal-card { background: linear-gradient(180deg, #07152b 0%, #030a16 100%); border: 2px solid var(--system-cyan); padding: 16px; width: 100%; max-width: 580px; max-height: 94vh; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 0 35px rgba(0, 240, 255, 0.3); animation: popUpWindow 0.25s ease-out; }
 
-        .question-text-box { background: rgba(2, 8, 20, 0.95); border: 1px solid rgba(0, 240, 255, 0.5); border-left: 5px solid var(--system-cyan); padding: 14px; font-size: 1.05rem; color: #f8fafc; line-height: 1.6; max-height: 180px; overflow-y: auto; border-radius: 4px; }
-        .game-options-grid button { width: 100%; text-align: left; background: rgba(4, 14, 30, 0.95); border: 1px solid rgba(0, 240, 255, 0.4); color: #fff; padding: 12px 14px; font-size: 0.95rem; margin-top: 6px; cursor: pointer; border-radius: 6px; line-height: 1.5; }
+        @keyframes popUpWindow {
+            0% { transform: scale(0.9); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .question-text-box { background: rgba(2, 8, 20, 0.95); border: 1px solid rgba(0, 240, 255, 0.5); border-left: 5px solid var(--system-cyan); padding: 12px; font-size: 0.95rem; color: #f8fafc; line-height: 1.5; max-height: 200px; overflow-y: auto; border-radius: 4px; }
+        .game-options-grid button { width: 100%; text-align: left; background: rgba(4, 14, 30, 0.95); border: 1px solid rgba(0, 240, 255, 0.4); color: #fff; padding: 10px 12px; font-size: 0.88rem; margin-top: 6px; cursor: pointer; border-radius: 6px; line-height: 1.4; }
         
-        .class-option-card { background: rgba(3, 10, 24, 0.9); border: 1px solid var(--system-cyan); padding: 10px; margin-bottom: 6px; cursor: pointer; display: flex; align-items: center; gap: 10px; }
+        .class-option-card { background: rgba(3, 10, 24, 0.9); border: 1px solid var(--system-cyan); padding: 10px; margin-bottom: 6px; cursor: pointer; display: flex; align-items: center; gap: 10px; border-radius: 4px; }
         .login-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(2, 5, 14, 0.98); display: flex; justify-content: center; align-items: center; z-index: 999999; }
         .login-caixa { background: #07152b; border: 2px solid var(--system-cyan); padding: 28px; text-align: center; width: 90%; max-width: 380px; }
         .login-caixa input { width: 100%; padding: 10px 12px; background: #030a16; border: 1px solid var(--system-cyan); color: #fff; text-align: center; font-weight: bold; margin-bottom: 10px; outline: none; }
@@ -249,7 +252,7 @@
         .nav-tabs { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 12px; }
         .tab-btn { background: rgba(2, 6, 16, 0.9); border: 1px solid var(--system-cyan); color: var(--text-sub); padding: 8px 12px; font-weight: bold; font-size: 0.75rem; cursor: pointer; white-space: nowrap; }
         .tab-btn.active { background: var(--system-cyan); color: #000; }
-        .btn-abrir-pop { background: linear-gradient(135deg, var(--system-cyan), #0077ff); color: #000; border: none; padding: 12px; font-weight: 900; font-size: 0.85rem; cursor: pointer; width: 100%; margin-top: 8px; }
+        .btn-abrir-pop { background: linear-gradient(135deg, var(--system-cyan), #0077ff); color: #000; border: none; padding: 12px; font-weight: 900; font-size: 0.85rem; cursor: pointer; width: 100%; margin-top: 8px; border-radius: 4px; }
         
         .chat-subtabs { display: flex; gap: 6px; margin-bottom: 10px; }
         .chat-subtab-btn { flex: 1; background: rgba(2,6,16,0.9); border: 1px solid var(--system-cyan); color: var(--text-sub); padding: 6px; font-size: 0.7rem; font-family: monospace; cursor: pointer; text-align: center; }
@@ -258,33 +261,32 @@
         .chat-msg-item { background: rgba(8, 22, 44, 0.8); border-left: 3px solid var(--system-cyan); padding: 6px 10px; }
     </style>
 </head>
-<body>
+<body ontouchstart="handleTouchStart(event)" ontouchend="handleTouchEnd(event)">
 
     <!-- BOLHA FLUTUANTE DE PERFIL (ESQUERDA) -->
     <div class="floating-bubble-profile" onclick="abrirPerfilNuvem()" title="Perfil do Caçador">
         <i class="fa-solid fa-cloud"></i>
     </div>
 
-    <!-- BOLHA FLUTUANTE DE ARMAZENAMENTO / BOLSA DIMENSIONAL COM CRONÔMETRO (DIREITA) -->
-    <div class="floating-bubble-storage" title="Bolsa Dimensional & Cronômetro" onclick="exibirJanela('equip')">
+    <!-- BOLHA FLUTUANTE DE ARMAZENAMENTO / BOLSA DIMENSIONAL COM CRONÔMETRO E BÚSSOLA -->
+    <div class="floating-bubble-storage" title="Bolsa Dimensional" onclick="exibirJanela('equip')">
         <i class="fa-solid fa-box-archive"></i>
     </div>
 
-    <!-- TELA ABISMO (COM EFEITO DE NUVENS E TOQUE DESBLOQUEADO) -->
-    <div id="abyss-screen" class="abyss-screen" onclick="ativarEfeitoQuebra()" ontouchend="ativarEfeitoQuebra(); event.preventDefault();">
+    <!-- TELA ABISMO (COM NUVENS E TOQUE DESBLOQUEADO) -->
+    <div id="abyss-screen" class="abyss-screen" onclick="ativarEfeitoAtencao()" ontouchend="ativarEfeitoAtencao(); event.preventDefault();">
         <div class="abyss-portal">
             <i class="fa-solid fa-eye" style="font-size: 3.5rem; color: var(--system-cyan); filter: drop-shadow(0 0 15px var(--system-cyan));"></i>
         </div>
         <h1 class="abyss-title">[VORTEX DO ABISMO]</h1>
-        <p class="abyss-sub">TOQUE PARA SER SUGADO PELO HORIZONTE DE EVENTOS</p>
+        <p class="abyss-sub">TOQUE PARA ENTRAR NO DOMÍNIO</p>
     </div>
 
-    <!-- TELA DE EMERGÊNCIA -->
+    <!-- TELA DE ATENÇÃO (DOMÍNIO) -->
     <div id="shatter-screen" class="shatter-overlay">
         <div class="emergency-warning-box">
-            <h1 style="color: var(--system-red); font-family: monospace; font-size: 1.8rem; letter-spacing: 3px; margin-bottom: 12px; text-shadow: 0 0 20px var(--system-red);">⚠️ EMERGÊNCIA ⚠️</h1>
-            <p style="color: #fff; font-family: monospace; font-size: 1.1rem; font-weight: bold; line-height: 1.4; margin-bottom: 16px;">"VOCÊ PRECISA LUTAR!"</p>
-            <p style="color: var(--text-sub); font-size: 0.78rem; font-family: monospace; margin-bottom: 20px;">O Sistema detectou instabilidade dimensional. Sincronize suas credenciais.</p>
+            <h1 style="color: var(--system-red); font-family: monospace; font-size: 1.6rem; letter-spacing: 2px; margin-bottom: 12px; text-shadow: 0 0 20px var(--system-red);">⚠️ ATENÇÃO ⚠️</h1>
+            <p style="color: #fff; font-family: monospace; font-size: 1.05rem; font-weight: bold; line-height: 1.4; margin-bottom: 16px;">"Você não pode voltar, lute e sobreviva"</p>
             <button onclick="prosseguirParaLogin()" style="width: 100%; padding: 12px; background: var(--system-cyan); color: #000; border: none; font-weight: bold; cursor: pointer; text-transform: uppercase; font-family: monospace;">ENTRAR NO SISTEMA</button>
         </div>
     </div>
@@ -293,26 +295,26 @@
     <div id="modal-login" class="login-overlay" style="display: none;">
         <form class="login-caixa" onsubmit="event.preventDefault(); autenticarUsuario();">
             <h2 style="color: var(--system-cyan); letter-spacing: 2px; font-family: monospace; margin-bottom: 8px;">⚡ SESSÃO DO CAÇADOR</h2>
-            <p style="color: var(--text-sub); font-size: 0.75rem; margin-bottom: 12px;">Escolha um codinome único (Ex: GOD):</p>
+            <p style="color: var(--text-sub); font-size: 0.75rem; margin-bottom: 12px;">Codinome Único (Ex: GOD):</p>
             
-            <input type="text" id="input-login-user" placeholder="Codinome Único..." autocomplete="off">
+            <input type="text" id="input-login-user" placeholder="Codinome..." autocomplete="off">
             <input type="password" id="input-login-pass" placeholder="Senha..." autocomplete="off">
             
-            <button type="submit" style="width: 100%; padding: 12px; background: var(--system-cyan); color: #000; border: none; font-weight: bold; cursor: pointer; text-transform: uppercase; margin-top: 4px;">REGISTRAR / ENTRAR</button>
-            <div id="login-erro" style="color: #ff4757; font-size: 0.75rem; margin-top: 8px; display: none;">Preencha o codinome e a senha corretamente!</div>
+            <button type="submit" style="width: 100%; padding: 12px; background: var(--system-cyan); color: #000; border: none; font-weight: bold; cursor: pointer; text-transform: uppercase; margin-top: 4px;">SINCRONIZAR</button>
+            <div id="login-erro" style="color: #ff4757; font-size: 0.75rem; margin-top: 8px; display: none;">Preencha os campos!</div>
         </form>
     </div>
 
-    <!-- MENU SECRETO DE CLASSE & AVATARES EXPANDIDOS -->
+    <!-- MENU DE CONFIGURAÇÕES / AVATARES EXPANDIDOS (AO CLICAR NO ÍCONE DO CENTRO) -->
     <div id="modal-menu-secreto" class="game-modal-overlay">
         <div class="game-modal-card">
             <div class="window-header">
-                <span class="window-title"><i class="fa-solid fa-crown"></i> DESPERTAR DE CLASSE & AVATARES</span>
+                <span class="window-title"><i class="fa-solid fa-crown"></i> PAINEL DE CONFIGURAÇÕES & AVATARES</span>
                 <button onclick="fecharMenuSecreto()" style="background: none; border: none; color: #ff4757; font-size: 1.3rem; font-weight: bold; cursor: pointer;">✕</button>
             </div>
-            <p style="font-size: 0.75rem; color: var(--god-gold); font-family: monospace; margin-bottom: 6px;">Escolha seu arquétipo de caçador:</p>
+            <p style="font-size: 0.75rem; color: var(--god-gold); font-family: monospace; margin-bottom: 6px;">Escolha seu ícone de Caçador (Sem rotação holográfica):</p>
 
-            <div style="max-height: 180px; overflow-y: auto; display: flex; flex-direction: column; gap: 6px;">
+            <div style="max-height: 200px; overflow-y: auto; display: flex; flex-direction: column; gap: 6px;">
                 <div class="class-option-card" onclick="escolherClasseDefinitiva('fa-skull-crossbones', 'MONARCA DAS SOMBRAS')">
                     <i class="fa-solid fa-skull-crossbones" style="font-size: 1.6rem; color: var(--system-cyan);"></i>
                     <div><div style="font-weight: bold; color: #fff; font-size: 0.8rem;">MONARCA DAS SOMBRAS</div></div>
@@ -333,10 +335,14 @@
                     <i class="fa-solid fa-ghost" style="font-size: 1.6rem; color: #a855f7;"></i>
                     <div><div style="font-weight: bold; color: #fff; font-size: 0.8rem;">ASSASSINO ESPECTRAL</div></div>
                 </div>
+                <div class="class-option-card" onclick="escolherClasseDefinitiva('fa-fire', 'PYROMANCER SUPREMO')">
+                    <i class="fa-solid fa-fire" style="font-size: 1.6rem; color: #f97316;"></i>
+                    <div><div style="font-weight: bold; color: #fff; font-size: 0.8rem;">PYROMANCER SUPREMO</div></div>
+                </div>
             </div>
 
             <div style="border-top: 1px solid rgba(0,240,255,0.3); padding-top: 8px; margin-top: 4px;">
-                <button onclick="document.getElementById('avatarFileInput').click()" style="width: 100%; padding: 10px; background: rgba(0,240,255,0.1); border: 1px solid var(--system-cyan); color: var(--system-cyan); font-weight: bold; cursor: pointer; font-size: 0.75rem;">📸 CARREGAR FOTO PESSOAL</button>
+                <button onclick="document.getElementById('avatarFileInput').click()" style="width: 100%; padding: 10px; background: rgba(0,240,255,0.1); border: 1px solid var(--system-cyan); color: var(--system-cyan); font-weight: bold; cursor: pointer; font-size: 0.75rem;">📸 CARREGAR FOTO DA GALERIA</button>
                 <input type="file" id="avatarFileInput" accept="image/*" style="display: none;" onchange="uploadFotoCaçador(event)">
             </div>
         </div>
@@ -364,16 +370,16 @@
         </div>
     </div>
 
-    <!-- MODAL DE QUESTÕES / TORRE MÁGICA (35 POR MATÉRIA, RESPOSTAS EMBARALHADAS) -->
+    <!-- MODAL DE QUESTÕES / TORRE MÁGICA (LEGÍVEL NO CELULAR, 35 POR MATÉRIA, RESPOSTAS EMBARALHADAS) -->
     <div id="game-quest-overlay" class="game-modal-overlay">
         <div class="game-modal-card">
             <div class="window-header">
-                <h3 id="pop-materia-titulo" class="window-title">PORTUGUÊS - QUESTÃO #1</h3>
+                <h3 id="pop-materia-titulo" class="window-title" style="font-size: 0.85rem;">QUESTÃO</h3>
                 <button onclick="fecharModalQuestao()" style="background: none; border: none; color: #ff4757; font-size: 1.3rem; font-weight: bold; cursor: pointer;">✕</button>
             </div>
             <div id="pop-pergunta-texto" class="question-text-box">Carregando pergunta...</div>
             <div id="pop-opcoes-container" class="game-options-grid"></div>
-            <div id="pop-explicacao-container" style="display: none; background: rgba(0, 240, 255, 0.08); border: 1px solid var(--system-cyan); padding: 10px; font-size: 0.85rem; color: var(--text-sub);"></div>
+            <div id="pop-explicacao-container" style="display: none; background: rgba(0, 240, 255, 0.08); border: 1px solid var(--system-cyan); padding: 10px; font-size: 0.8rem; color: var(--text-sub);"></div>
         </div>
     </div>
 
@@ -397,16 +403,16 @@
         <button id="btn-win-dieta" class="btn-floating-node" onclick="exibirJanela('dieta')"><i class="fa-solid fa-apple-whole"></i><span>DIETA</span></button>
         <button id="btn-win-treino" class="btn-floating-node" onclick="exibirJanela('treino')"><i class="fa-solid fa-dumbbell"></i><span>TREINOS</span></button>
         <button id="btn-win-financas" class="btn-floating-node" onclick="exibirJanela('financas')"><i class="fa-solid fa-wallet"></i><span>FINANÇAS</span></button>
-        <button id="btn-win-chefao" class="btn-floating-node" onclick="exibirJanela('chefao')"><i class="fa-solid fa-skull"></i><span>CHEFÕES</span></button>
+        <button id="btn-win-chefao" class="btn-floating-node" onclick="exibirJanela('chefao')"><i class="fa-solid fa-skull"></i><span>DUNGEON</span></button>
         <button id="btn-win-missoes" class="btn-floating-node" onclick="exibirJanela('missoes')"><i class="fa-solid fa-scroll"></i><span>MISSÕES</span></button>
         <button id="btn-win-banco" class="btn-floating-node" onclick="exibirJanela('banco')"><i class="fa-solid fa-book"></i><span>ESTUDOS</span></button>
         <button id="btn-win-chat" class="btn-floating-node" onclick="exibirJanela('chat')"><i class="fa-solid fa-comments"></i><span>CHAT</span></button>
     </div>
 
-    <!-- VIEWPORT DE JANELAS -->
+    <!-- VIEWPORT DE JANELAS (DESLIZÁVEL / POP-UP) -->
     <main class="single-window-viewport">
 
-        <!-- 1. STATUS -->
+        <!-- 1. STATUS (COM AVATAR CENTRAL QUE ABRE CONFIGURAÇÕES) -->
         <div id="win-status" class="system-window">
             <div id="fraseMotivacionalDinamica" class="anime-limit-quote">🔥 "Mesmo que você seja o Caçador mais fraco, o Sistema não permite fraqueza."</div>
             <div class="window-header">
@@ -418,8 +424,8 @@
             <div style="text-align: center; margin-bottom: 8px;"><div class="subtle-points-badge">⚡ Pontos: <span id="display-pontos-disponiveis">5</span></div></div>
 
             <div class="constellation-stage">
-                <div class="rotating-star-ring"></div>
-                <div class="center-avatar-circle" onclick="abrirMenuSecreto()">
+                <!-- ÍCONE DO CENTRO: Clicar abre o painel de configurações/avatares, sem rotação holográfica -->
+                <div class="center-avatar-circle" onclick="abrirMenuSecreto()" title="Configurações & Avatares">
                     <i id="defaultAvatarIcon" class="fa-solid fa-skull-crossbones avatar-circle-icon"></i>
                     <img id="customAvatarImg" class="avatar-circle-img" style="display: none;" alt="Avatar">
                 </div>
@@ -435,52 +441,51 @@
             </div>
         </div>
 
-        <!-- 2. DIETA & MACROS (100% USUAL / EDITÁVEL PELO USUÁRIO) -->
+        <!-- 2. DIETA (CÁLCULO AUTOMÁTICO DE MACROS) -->
         <div id="win-dieta" class="system-window" style="display: none;">
-            <div class="window-header"><span class="window-title"><i class="fa-solid fa-apple-whole"></i> SUA DIETA</span></div>
+            <div class="window-header"><span class="window-title"><i class="fa-solid fa-apple-whole"></i> SUA DIETA (CÁLCULO AUTOMÁTICO)</span></div>
+            <div class="dash-card">
+                <div style="font-size: 0.7rem; color: var(--text-sub); font-family: monospace;">INSIRA SUA META CALÓRICA DIÁRIA (KCAL):</div>
+                <input type="number" id="metaKcalInput" class="user-input-field" placeholder="Ex: 2500" oninput="calcularMacrosAutomatico()">
+            </div>
+            <div class="dash-card">
+                <div style="font-size: 0.7rem; color: var(--text-sub); font-family: monospace;">INSIRA CALORIAS CONSUMIDAS HOJE:</div>
+                <input type="number" id="consumidoKcalInput" class="user-input-field" placeholder="Ex: 1800" oninput="calcularMacrosAutomatico()">
+            </div>
             <div class="dash-card" style="text-align: center;">
-                <div style="font-size: 0.68rem; color: var(--text-sub); font-family: monospace;">CONSUMO DE CALORIAS (DIGITE SEU VALOR)</div>
-                <input type="text" id="inputKcal" class="user-input-field" placeholder="Ex: 2500 / 3000 kcal" oninput="salvarDadosDieta()">
-            </div>
-            <div class="dash-card">
-                <div style="font-size: 0.75rem; font-weight: bold; color: var(--god-gold); margin-bottom: 6px;">METAS DIÁRIAS (EDITE ABAIXO)</div>
-                <div style="font-size: 0.72rem; font-family: monospace;">Carboidratos:</div>
-                <input type="text" id="inputCarbo" class="user-input-field" placeholder="Ex: 300g / 400g" oninput="salvarDadosDieta()">
-                
-                <div style="font-size: 0.72rem; font-family: monospace; margin-top: 6px;">Proteínas:</div>
-                <input type="text" id="inputProt" class="user-input-field" placeholder="Ex: 150g / 180g" oninput="salvarDadosDieta()">
-
-                <div style="font-size: 0.72rem; font-family: monospace; margin-top: 6px;">Gorduras:</div>
-                <input type="text" id="inputGord" class="user-input-field" placeholder="Ex: 70g / 80g" oninput="salvarDadosDieta()">
+                <div style="font-size: 0.75rem; color: var(--god-gold); font-family: monospace;">RESULTADO DA GESTÃO NUTRICIONAL</div>
+                <div id="displayCalculoResultado" style="font-size: 1.1rem; font-weight: bold; color: #fff; margin-top: 6px;">Insira os valores acima...</div>
             </div>
         </div>
 
-        <!-- 3. TREINOS (100% USUAL / EDITÁVEL) -->
+        <!-- 3. TREINOS (ATUALIZADOS CONFORME O DIA DA SEMANA) -->
         <div id="win-treino" class="system-window" style="display: none;">
-            <div class="window-header"><span class="window-title"><i class="fa-solid fa-dumbbell"></i> SEUS TREINOS</span></div>
-            <div class="dash-card" style="display: flex; gap: 10px; align-items: center;">
-                <div style="width: 50px; height: 50px; background: #030a16; border: 1px solid var(--system-cyan); display: flex; justify-content: center; align-items: center; font-size: 1.5rem; color: var(--system-cyan);">⚔️</div>
-                <div style="font-size: 0.75rem; font-family: monospace;"><strong style="color: var(--god-gold);" id="treino-user-name">GOD</strong><br><span style="color: var(--text-sub);">Plano Personalizado</span></div>
+            <div class="window-header"><span class="window-title"><i class="fa-solid fa-dumbbell"></i> SEUS TREINOS (DIA ATUAL)</span></div>
+            <div class="dash-card" style="text-align: center; border-color: var(--god-gold);">
+                <div style="font-size: 0.75rem; color: var(--god-gold); font-family: monospace;" id="hojeDiaLabel">HOJE É: -</div>
+                <div id="treinoDoDiaBox" style="font-size: 0.95rem; font-weight: bold; color: #fff; margin-top: 6px;">Carregando treino...</div>
             </div>
             <div class="dash-card">
-                <div style="font-size: 0.75rem; font-weight: bold; color: var(--system-cyan); margin-bottom: 8px;">EDITAR DIAS DE TREINO</div>
-                <input type="text" id="inputTreinoSeg" class="user-input-field" placeholder="Segunda: Ex: Peito e Tríceps" oninput="salvarDadosTreino()">
-                <input type="text" id="inputTreinoTer" class="user-input-field" placeholder="Terça: Ex: Costas e Bíceps" oninput="salvarDadosTreino()">
-                <input type="text" id="inputTreinoQua" class="user-input-field" placeholder="Quarta: Ex: Pernas" oninput="salvarDadosTreino()">
+                <div style="font-size: 0.75rem; font-weight: bold; color: var(--system-cyan); margin-bottom: 8px;">CRONograma SEMANAL</div>
+                <div class="difficulty-row"><span>Segunda: Peito, Tríceps</span><span>⚔️</span></div>
+                <div class="difficulty-row"><span>Terça: Costas, Bíceps</span><span>⚔️</span></div>
+                <div class="difficulty-row"><span>Quarta: Pernas, Panturrilhas</span><span>⚔️</span></div>
+                <div class="difficulty-row"><span>Quinta: Ombros, Abdômen</span><span>⚔️</span></div>
+                <div class="difficulty-row"><span>Sexta: Fullbody / Força</span><span>⚔️</span></div>
             </div>
         </div>
 
-        <!-- 4. FINANÇAS (100% USUAL / EDITÁVEL) -->
+        <!-- 4. FINANÇAS -->
         <div id="win-financas" class="system-window" style="display: none;">
             <div class="window-header"><span class="window-title"><i class="fa-solid fa-wallet"></i> FINANÇAS</span></div>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px;">
                 <div class="dash-card" style="margin-bottom:0; text-align:center;">
                     <span style="font-size:0.65rem; color:#10b981;">ENTRADAS (R$)</span>
-                    <input type="text" id="inputFinEntrada" class="user-input-field" placeholder="0.00" oninput="salvarDadosFinancas()">
+                    <input type="number" id="inputFinEntrada" class="user-input-field" placeholder="0" oninput="salvarDadosFinancas()">
                 </div>
                 <div class="dash-card" style="margin-bottom:0; text-align:center;">
                     <span style="font-size:0.65rem; color:var(--system-red);">SAÍDAS (R$)</span>
-                    <input type="text" id="inputFinSaida" class="user-input-field" placeholder="0.00" oninput="salvarDadosFinancas()">
+                    <input type="number" id="inputFinSaida" class="user-input-field" placeholder="0" oninput="salvarDadosFinancas()">
                 </div>
             </div>
             <div class="dash-card" style="text-align: center;">
@@ -489,29 +494,33 @@
             </div>
         </div>
 
-        <!-- 5. CHEFÕES -->
-        <div id="win-chefao" class="system-window" style="display: none;">
-            <div class="window-header"><span class="window-title"><i class="fa-solid fa-skull"></i> BATALHA DE CHEFÕES</span></div>
+        <!-- 5. CHEFÕES / DUNGEON VERMELHA -->
+        <div id="win-chefao" class="system-window system-window-red" style="display: none;">
+            <div class="window-header"><span class="window-title" style="color:var(--system-red);"><i class="fa-solid fa-skull"></i> DUNGEON VERMELHA</span></div>
             <div class="dash-card" style="text-align: center; border-color: var(--system-red);">
-                <h3 style="color: var(--system-red); font-family: monospace; font-size: 1rem;">MORTH'ZUL</h3>
-                <p style="font-size: 0.68rem; color: var(--text-sub);">O Devorador de Vícios</p>
+                <h3 style="color: var(--system-red); font-family: monospace; font-size: 1.1rem;">MORTH'ZUL</h3>
+                <p style="font-size: 0.68rem; color: var(--text-sub);">O Devorador de Vícios e Portais</p>
                 <div style="margin: 10px 0; font-size: 0.72rem; font-family: monospace;">Recompensa: <span style="color: var(--god-gold);">+1500 XP</span></div>
-                <button onclick="alert('Batalha iniciada contra Morth\'zul!')" style="background: var(--system-red); color: #fff; border:none; padding:10px; width:100%; font-weight:bold; cursor:pointer; font-family:monospace;">ATACAR BOSS</button>
+                <button onclick="alert('DUNGEON VERMELHA INICIADA! Prepare sua mente e seu corpo.')" style="background: var(--system-red); color: #fff; border:none; padding:12px; width:100%; font-weight:bold; cursor:pointer; font-family:monospace; text-transform:uppercase;">DUNGEON VERMELHA</button>
             </div>
         </div>
 
-        <!-- 6. MISSÕES -->
+        <!-- 6. MISSÕES & DESAFIO CONTRA VÍCIOS -->
         <div id="win-missoes" class="system-window" style="display: none;">
-            <div class="window-header"><span class="window-title"><i class="fa-solid fa-scroll"></i> QUADRO DE MISSÕES</span></div>
-            <div class="difficulty-row" style="border-left: 4px solid var(--system-red);"><span>🔴 INSANA</span><span>1 / 1</span></div>
-            <div class="difficulty-row" style="border-left: 4px solid #ff8800;"><span>🟠 DIFÍCIL</span><span>1 / 2</span></div>
-            <div class="difficulty-row" style="border-left: 4px solid var(--god-gold);"><span>🟡 MÉDIA</span><span>2 / 4</span></div>
-            <div class="difficulty-row" style="border-left: 4px solid #10b981;"><span>🟢 FÁCIL</span><span>3 / 6</span></div>
+            <div class="window-header"><span class="window-title"><i class="fa-solid fa-scroll"></i> QUADRO DE MISSÕES (VÍCIOS)</span></div>
+            <div class="dash-card">
+                <div style="font-size: 0.72rem; color: var(--god-gold); font-family: monospace; margin-bottom: 4px;">🎯 DIGITE SEU VÍCIO / HÁBITO A COMBATER:</div>
+                <div style="display:flex; gap:6px;">
+                    <input type="text" id="inputVicioUsuario" class="user-input-field" placeholder="Ex: Pornografia, Cigarro, Açúcar..." style="margin-top:0;">
+                    <button onclick="criarMissaoVicio()" style="background:var(--system-cyan); color:#000; border:none; padding:0 12px; font-weight:bold; cursor:pointer; font-size:0.75rem;">CRIAR</button>
+                </div>
+            </div>
+            <div id="listaMissoesViciosContainer"></div>
         </div>
 
         <!-- 7. ESTUDOS & TORRE MÁGICA -->
         <div id="win-banco" class="system-window" style="display: none;">
-            <div class="window-header"><span class="window-title"><i class="fa-solid fa-book"></i> BANCO DE QUESTÕES (35 POR MATÉRIA)</span></div>
+            <div class="window-header"><span class="window-title"><i class="fa-solid fa-book"></i> QUESTÕES & TORRE MÁGICA</span></div>
             <nav class="nav-tabs">
                 <button class="tab-btn active" onclick="switchTab('portugues', event)">Português</button>
                 <button class="tab-btn" onclick="switchTab('racioc_logico', event)">Raciocínio</button>
@@ -520,11 +529,11 @@
                 <button class="tab-btn" onclick="switchTab('historia', event)">História</button>
                 <button class="tab-btn" onclick="switchTab('informatica', event)">Informática</button>
             </nav>
-            <button class="btn-abrir-pop" onclick="abrirModalQuestao('normal')">⚔️ ESTUDAR QUESTÕES</button>
-            <button class="btn-abrir-pop" onclick="abrirModalQuestao('torre')" style="background: linear-gradient(135deg, var(--god-gold), #ff8800); color:#000; margin-top:6px;">🏰 TORRE MÁGICA (100 ANDARES MISTURADOS)</button>
+            <button class="btn-abrir-pop" onclick="abrirModalQuestao('normal')">⚔️ ESTUDAR QUESTÕES (35 POR MATÉRIA)</button>
+            <button class="btn-abrir-pop" onclick="abrirModalQuestao('torre')" style="background: linear-gradient(135deg, var(--god-gold), #ff8800); color:#000; margin-top:6px;">🏰 TORRE MÁGICA (100 ANDARES)</button>
         </div>
 
-        <!-- 8. CHAT GLOBAL & PRIVADO CORRIGIDO -->
+        <!-- 8. CHAT GLOBAL & PRIVADO -->
         <div id="win-chat" class="system-window" style="display: none;">
             <div class="window-header"><span class="window-title"><i class="fa-solid fa-comments"></i> COMUNICAÇÃO DA GUILDA</span></div>
             <div class="chat-subtabs">
@@ -557,12 +566,18 @@
             </div>
         </div>
 
-        <!-- BOLSA DIMENSIONAL / CRONÔMETRO -->
+        <!-- 9. BOLSA DIMENSIONAL (COM CRONÔMETRO E BÚSSOLA) -->
         <div id="win-equip" class="system-window" style="display: none;">
-            <div class="window-header"><span class="window-title">BOLSA DIMENSIONAL</span><button onclick="exibirJanela('status')" style="background:none; border:none; color:var(--system-cyan); font-weight:bold; cursor:pointer;">✕</button></div>
-            <div style="text-align:center; padding:15px; font-family:monospace;">
-                <div style="font-size:0.7rem; color:var(--text-sub);">CRONÔMETRO DE FOCO</div>
-                <div id="stopwatch-display" style="font-size:1.8rem; color:var(--god-gold); font-weight:bold; margin:8px 0;">00:00:00</div>
+            <div class="window-header"><span class="window-title"><i class="fa-solid fa-box-archive"></i> BOLSA DIMENSIONAL</span><button onclick="exibirJanela('status')" style="background:none; border:none; color:var(--system-cyan); font-weight:bold; cursor:pointer;">✕</button></div>
+            
+            <div style="text-align:center; padding:12px; font-family:monospace; border-bottom:1px solid rgba(0,240,255,0.2); margin-bottom:10px;">
+                <div style="font-size:0.7rem; color:var(--text-sub);">🧭 BÚSSOLA DIMENSIONAL</div>
+                <div style="font-size:0.85rem; color:var(--god-gold); margin-top:4px;">Coordenadas: Setor Alfa - Nível 1</div>
+            </div>
+
+            <div style="text-align:center; padding:10px; font-family:monospace;">
+                <div style="font-size:0.7rem; color:var(--text-sub);">⏱️ CRONÔMETRO DE FOCO</div>
+                <div id="stopwatch-display" style="font-size:1.8rem; color:var(--god-gold); font-weight:bold; margin:6px 0;">00:00:00</div>
                 <div style="display:flex; gap:6px; justify-content:center;">
                     <button onclick="iniciarCronometro()" style="background:var(--system-cyan); color:#000; border:none; padding:5px 10px; font-weight:bold; cursor:pointer; font-size:0.7rem;">INICIAR</button>
                     <button onclick="pausarCronometro()" style="background:var(--system-red); color:#fff; border:none; padding:5px 10px; font-weight:bold; cursor:pointer; font-size:0.7rem;">PAUSAR</button>
@@ -577,7 +592,8 @@
         function getSafeStorage(key) { try { return localStorage.getItem(key) || memoriaLocal[key] || null; } catch(e) { return memoriaLocal[key] || null; } }
         function setSafeStorage(key, value) { try { localStorage.setItem(key, value); } catch(e) {} memoriaLocal[key] = value; }
 
-        function ativarEfeitoQuebra() {
+        /* FLUXO DE TELA INICIAL & ATENÇÃO */
+        function ativarEfeitoAtencao() {
             const abyss = document.getElementById('abyss-screen');
             if(abyss) {
                 abyss.style.opacity = '0';
@@ -597,7 +613,7 @@
             }
         }
 
-        let dadosCacadorRPG = { nome: 'GOD', xp: 0, nivel: 1, pontosDisponiveis: 5, ent: 10, ofe: 10, def: 10, vel: 10, tec: 10, avatarType: 'icon', avatarVal: 'fa-skull-crossbones', charClass: 'MONARCA DAS SOMBRAS', amigos: [], conversasAmigos: {} };
+        let dadosCacadorRPG = { nome: 'GOD', xp: 0, nivel: 1, pontosDisponiveis: 5, ent: 10, ofe: 10, def: 10, vel: 10, tec: 10, avatarType: 'icon', avatarVal: 'fa-skull-crossbones', charClass: 'MONARCA DAS SOMBRAS', missoesVicio: [], amigos: [], conversasAmigos: {} };
 
         function autenticarUsuario() {
             let u = document.getElementById('input-login-user').value.trim().toUpperCase();
@@ -648,7 +664,6 @@
             document.getElementById('character-class-display').innerText = dadosCacadorRPG.charClass;
             document.getElementById('cloud-nome-txt').innerText = dadosCacadorRPG.nome || 'GOD';
             document.getElementById('cloud-classe-txt').innerText = dadosCacadorRPG.charClass;
-            document.getElementById('treino-user-name').innerText = dadosCacadorRPG.nome || 'GOD';
 
             if(dadosCacadorRPG.avatarType === 'img') {
                 iconEl.style.display = 'none';
@@ -661,108 +676,118 @@
             }
         }
 
+        /* NAVEGAÇÃO DE ABAS E SWIPE (POP-UP) */
+        const listaAbasIds = ['status', 'dieta', 'treino', 'financas', 'chefao', 'missoes', 'banco', 'chat', 'equip'];
+        let indiceAbaAtual = 0;
+
         function exibirJanela(nomeJanela) {
-            ['status', 'dieta', 'treino', 'financas', 'chefao', 'missoes', 'banco', 'chat', 'equip'].forEach(j => {
+            listaAbasIds.forEach((j, idx) => {
                 const win = document.getElementById(`win-${j}`);
                 const btn = document.getElementById(`btn-win-${j}`);
-                if(win) win.style.display = (j === nomeJanela) ? 'block' : 'none';
-                if(btn) btn.classList.toggle('active', j === nomeJanela);
+                if(j === nomeJanela) {
+                    indiceAbaAtual = idx;
+                    if(win) win.style.display = 'block';
+                    if(btn) btn.classList.add('active');
+                } else {
+                    if(win) win.style.display = 'none';
+                    if(btn) btn.classList.remove('active');
+                }
             });
             if(nomeJanela === 'chat') { renderizarChatMessages(); renderizarListaAmigos(); }
+            if(nomeJanela === 'treino') { atualizarTreinoDoDia(); }
         }
 
-        function switchChatSub(sub) {
-            document.getElementById('btn-sub-global').classList.remove('active');
-            document.getElementById('btn-sub-amigos').classList.remove('active');
-            document.getElementById('chat-sec-global').style.display = 'none';
-            document.getElementById('chat-sec-amigos').style.display = 'none';
-            if(sub === 'global') {
-                document.getElementById('btn-sub-global').classList.add('active');
-                document.getElementById('chat-sec-global').style.display = 'block';
-                renderizarChatMessages();
+        /* GESTO DE ARRASTAR DEDOS (SWIPE / POP-UP) */
+        let touchStartX = 0;
+        function handleTouchStart(e) { touchStartX = e.changedTouches[0].screenX; }
+        function handleTouchEnd(e) {
+            let touchEndX = e.changedTouches[0].screenX;
+            let diff = touchEndX - touchStartX;
+            if(Math.abs(diff) > 70) {
+                if(diff < 0) {
+                    indiceAbaAtual = (indiceAbaAtual + 1) % listaAbasIds.length;
+                } else {
+                    indiceAbaAtual = (indiceAbaAtual - 1 + listaAbasIds.length) % listaAbasIds.length;
+                }
+                exibirJanela(listaAbasIds[indiceAbaAtual]);
+            }
+        }
+
+        /* TREINO ATUALIZADO POR DIA DA SEMANA */
+        function atualizarTreinoDoDia() {
+            const dias = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
+            let hojeIndex = new Date().getDay();
+            let nomeDia = dias[hojeIndex];
+            document.getElementById('hojeDiaLabel').innerText = `HOJE É: ${nomeDia.toUpperCase()}`;
+
+            let rotina = "";
+            if(hojeIndex === 1) rotina = "Segunda: Peito, Tríceps & Abdômen";
+            else if(hojeIndex === 2) rotina = "Terça: Costas, Bíceps & Antebraço";
+            else if(hojeIndex === 3) rotina = "Quarta: Pernas (Quadríceps e Panturrilhas)";
+            else if(hojeIndex === 4) rotina = "Quinta: Ombros, Trapézio & Abdômen";
+            else if(hojeIndex === 5) rotina = "Sexta: Fullbody / Hipertrofia Extrema";
+            else rotina = "Fim de Semana: Descanso Ativo / Recuperação de Mana";
+
+            document.getElementById('treinoDoDiaBox').innerText = rotina;
+        }
+
+        /* GESTÃO DE DIETA & CÁLCULO AUTOMÁTICO */
+        function calcularMacrosAutomatico() {
+            let meta = parseFloat(document.getElementById('metaKcalInput').value) || 0;
+            let cons = parseFloat(document.getElementById('consumidoKcalInput').value) || 0;
+            let resto = meta - cons;
+            let resBox = document.getElementById('displayCalculoResultado');
+            if(meta === 0) { resBox.innerText = "Insira sua meta calórica."; return; }
+            if(cons <= meta) {
+                resBox.innerHTML = `Consumido: ${cons} kcal | Restam: <span style="color:var(--system-cyan);">${resto} kcal</span> para bater a meta.`;
             } else {
-                document.getElementById('btn-sub-amigos').classList.add('active');
-                document.getElementById('chat-sec-amigos').style.display = 'block';
-                renderizarListaAmigos();
+                resBox.innerHTML = `Meta ultrapassada em <span style="color:var(--system-red);">${Math.abs(resto)} kcal</span>!`;
             }
         }
 
-        function adicionarAmigo() {
-            const nomeAmigo = document.getElementById('inputAmigoCodinome').value.trim().toUpperCase();
-            if(!nomeAmigo) return;
-            if(!dadosCacadorRPG.amigos) dadosCacadorRPG.amigos = [];
-            if(!dadosCacadorRPG.amigos.includes(nomeAmigo)) dadosCacadorRPG.amigos.push(nomeAmigo);
-            document.getElementById('inputAmigoCodinome').value = '';
-            renderizarListaAmigos();
-        }
-
-        function renderizarListaAmigos() {
-            const container = document.getElementById('lista-amigos-chips');
-            if(!container) return;
-            container.innerHTML = '';
-            if(!dadosCacadorRPG.amigos || dadosCacadorRPG.amigos.length === 0) {
-                container.innerHTML = '<span style="font-size:0.68rem; color:var(--text-sub);">Nenhum amigo.</span>';
-                return;
-            }
-            dadosCacadorRPG.amigos.forEach(amigo => {
-                const btn = document.createElement('button');
-                btn.style.cssText = "background:rgba(0,240,255,0.1); border:1px solid var(--system-cyan); color:#fff; padding:3px 6px; font-size:0.68rem; font-family:monospace; cursor:pointer;";
-                btn.innerText = amigo;
-                btn.onclick = () => abrirConversaPrivada(amigo);
-                container.appendChild(btn);
-            });
-        }
-
-        let amigoAtivoChat = null;
-        function abrirConversaPrivada(amigo) {
-            amigoAtivoChat = amigo;
-            document.getElementById('chat-privado-box').style.display = 'block';
-            document.getElementById('chat-privado-titulo').innerText = `CHAT COM: ${amigo}`;
-            renderizarMsgsPrivadas();
-        }
-
-        function renderizarMsgsPrivadas() {
-            const container = document.getElementById('chat-privado-msgs');
-            if(!container || !amigoAtivoChat) return;
-            container.innerHTML = '';
-            if(!dadosCacadorRPG.conversasAmigos) dadosCacadorRPG.conversasAmigos = {};
-            const hist = dadosCacadorRPG.conversasAmigos[amigoAtivoChat] || [];
-            hist.forEach(m => {
-                container.innerHTML += `<div class="chat-msg-item"><strong>[${m.remetente}]</strong>: ${m.texto}</div>`;
-            });
-            container.scrollTop = container.scrollHeight;
-        }
-
-        function enviarMensagemPrivada() {
-            const txt = document.getElementById('chatInputPrivado').value.trim();
-            if(!txt || !amigoAtivoChat) return;
-            if(!dadosCacadorRPG.conversasAmigos[amigoAtivoChat]) dadosCacadorRPG.conversasAmigos[amigoAtivoChat] = [];
-            dadosCacadorRPG.conversasAmigos[amigoAtivoChat].push({ remetente: dadosCacadorRPG.nome, texto: txt });
-            document.getElementById('chatInputPrivado').value = '';
-            renderizarMsgsPrivadas();
-        }
-
-        /* DADOS USUAIS DE DIETA, TREINO E FINANÇAS SALVOS */
-        function salvarDadosDieta() {
-            setSafeStorage('user_kcal', document.getElementById('inputKcal').value);
-            setSafeStorage('user_carbo', document.getElementById('inputCarbo').value);
-            setSafeStorage('user_prot', document.getElementById('inputProt').value);
-            setSafeStorage('user_gord', document.getElementById('inputGord').value);
-        }
-
-        function salvarDadosTreino() {
-            setSafeStorage('treino_seg', document.getElementById('inputTreinoSeg').value);
-            setSafeStorage('treino_ter', document.getElementById('inputTreinoTer').value);
-            setSafeStorage('treino_qua', document.getElementById('inputTreinoQua').value);
-        }
-
+        /* FINANÇAS */
         function salvarDadosFinancas() {
             let ent = parseFloat(document.getElementById('inputFinEntrada').value) || 0;
             let saida = parseFloat(document.getElementById('inputFinSaida').value) || 0;
             let saldo = ent - saida;
             document.getElementById('displaySaldoLiquido').innerText = `R$ ${saldo.toFixed(2)}`;
-            setSafeStorage('fin_ent', ent);
-            setSafeStorage('fin_saida', saida);
+        }
+
+        /* QUADRO DE MISSÕES CONTRA VÍCIOS (BASEADO NO NÍVEL) */
+        function criarMissaoVicio() {
+            let vicio = document.getElementById('inputVicioUsuario').value.trim();
+            if(!vicio) return;
+            let diasMeta = dadosCacadorRPG.nivel * 3; // Nível aumenta os dias do desafio
+            dadosCacadorRPG.missoesVicio.push({ vicio: vicio, dias: diasMeta, concluido: false });
+            document.getElementById('inputVicioUsuario').value = '';
+            renderizarMissoesVicios();
+        }
+
+        function renderizarMissoesVicios() {
+            const container = document.getElementById('listaMissoesViciosContainer');
+            if(!container) return;
+            container.innerHTML = '';
+            if(dadosCacadorRPG.missoesVicio.length === 0) {
+                container.innerHTML = '<div class="dash-card" style="font-size:0.75rem; color:var(--text-sub); text-align:center;">Nenhum vicio cadastrado. Escreva acima para criar sua missão!</div>';
+                return;
+            }
+            dadosCacadorRPG.missoesVicio.forEach((m, idx) => {
+                container.innerHTML += `
+                    <div class="dash-card" style="border-left:4px solid var(--system-cyan); font-family:monospace;">
+                        <div style="font-size:0.8rem; font-weight:bold; color:var(--god-gold);">🎯 Desafio: Ficar longe de "${m.vicio}"</div>
+                        <div style="font-size:0.7rem; color:#fff; margin:4px 0;">Meta do Nível ${dadosCacadorRPG.nivel}: Fique ${m.dias} dias limpo.</div>
+                        <button onclick="completarMissaoVicio(${idx})" style="background:var(--system-cyan); color:#000; border:none; padding:6px; font-weight:bold; font-size:0.7rem; cursor:pointer; width:100%; margin-top:4px;">CONCLUIR (+100 XP)</button>
+                    </div>`;
+            });
+        }
+
+        function completarMissaoVicio(idx) {
+            dadosCacadorRPG.xp += 100;
+            dadosCacadorRPG.pontosDisponiveis += 2;
+            dadosCacadorRPG.missoesVicio.splice(idx, 1);
+            renderizarHUDRPG();
+            renderizarMissoesVicios();
+            if(typeof confetti === 'function') confetti({ particleCount: 80 });
         }
 
         /* BANCO DE QUESTÕES (35 POR MATÉRIA, RESPOSTAS EMBARALHADAS) */
@@ -781,10 +806,10 @@
         materiasList.forEach(mat => {
             for(let i = 1; i <= 35; i++) {
                 let opcoesBrutas = [
-                    { texto: `A) Resposta correta e fundamentada para a questão #${i} de ${mat}.`, correta: true },
-                    { texto: `B) Incorreto. Falha conceitual na premissa.`, correta: false },
-                    { texto: `C) Incorreto. Diverge da jurisprudência atual.`, correta: false },
-                    { texto: `D) Incorreto. Sem amparo normativo.`, correta: false }
+                    { texto: `A) Resposta técnica correta para o enunciado #${i}.`, correta: true },
+                    { texto: `B) Incorreto. Falha na premissa conceitual.`, correta: false },
+                    { texto: `C) Incorreto. Diverge da norma padrão.`, correta: false },
+                    { texto: `D) Incorreto. Alternativa distorcida.`, correta: false }
                 ];
                 let opcoesEmbaralhadas = embaralharArray(opcoesBrutas);
                 let idxCorreta = opcoesEmbaralhadas.findIndex(o => o.correta);
@@ -793,12 +818,12 @@
                     pergunta: `[${mat.toUpperCase()}] Questão #${i}: Analise o enunciado técnico e assinale a alternativa correta:`,
                     opcoes: opcoesEmbaralhadas.map(o => o.texto),
                     correta: idxCorreta,
-                    explicacao: `A alternativa correta estava na posição aleatória gerada pelo Sistema.`
+                    explicacao: `Fundamentação técnica validada pelo Sistema.`
                 });
             }
         });
 
-        /* TORRE MÁGICA 100 ANDARES MISTURADAS */
+        /* TORRE MÁGICA 100 ANDARES MISTURADOS */
         let torre100Andares = [];
         for(let andar = 1; andar <= 100; andar++) {
             let matRand = materiasList[Math.floor(Math.random() * materiasList.length)];
@@ -853,7 +878,7 @@
                         setTimeout(() => {
                             questaoIndexAtual++;
                             renderizarBalaoQuestao();
-                        }, 900);
+                        }, 800);
                     } else {
                         alert("Incorreto! Tente novamente.");
                     }
@@ -862,6 +887,7 @@
             });
         }
 
+        /* CRONÔMETRO */
         let cronometroSegundos = 0, cronometroInterval = null;
         function iniciarCronometro() {
             if(cronometroInterval) return;
@@ -876,6 +902,7 @@
         function pausarCronometro() { clearInterval(cronometroInterval); cronometroInterval = null; }
         function zerarCronometro() { pausarCronometro(); cronometroSegundos = 0; document.getElementById('stopwatch-display').innerText = "00:00:00"; }
 
+        /* CHAT GLOBAL & PRIVADO */
         let chatMessages = [{ user: "SYSTEM", text: "Bem-vindo ao Sistema Supremo!" }];
         function renderizarChatMessages() {
             const list = document.getElementById('chat-messages-list');
@@ -894,7 +921,73 @@
             renderizarChatMessages();
         }
 
-        function renderizarTudo() { renderizarHUDRPG(); renderizarAvatar(); }
+        function switchChatSub(sub) {
+            document.getElementById('btn-sub-global').classList.remove('active');
+            document.getElementById('btn-sub-amigos').classList.remove('active');
+            document.getElementById('chat-sec-global').style.display = 'none';
+            document.getElementById('chat-sec-amigos').style.display = 'none';
+            if(sub === 'global') {
+                document.getElementById('btn-sub-global').classList.add('active');
+                document.getElementById('chat-sec-global').style.display = 'block';
+                renderizarChatMessages();
+            } else {
+                document.getElementById('btn-sub-amigos').classList.add('active');
+                document.getElementById('chat-sec-amigos').style.display = 'block';
+                renderizarListaAmigos();
+            }
+        }
+
+        function adicionarAmigo() {
+            let nomeAmigo = document.getElementById('inputAmigoCodinome').value.trim().toUpperCase();
+            if(!nomeAmigo) return;
+            if(!dadosCacadorRPG.amigos.includes(nomeAmigo)) dadosCacadorRPG.amigos.push(nomeAmigo);
+            document.getElementById('inputAmigoCodinome').value = '';
+            renderizarListaAmigos();
+        }
+
+        function renderizarListaAmigos() {
+            const container = document.getElementById('lista-amigos-chips');
+            if(!container) return;
+            container.innerHTML = '';
+            dadosCacadorRPG.amigos.forEach(amigo => {
+                const btn = document.createElement('button');
+                btn.style.cssText = "background:rgba(0,240,255,0.1); border:1px solid var(--system-cyan); color:#fff; padding:3px 6px; font-size:0.68rem; font-family:monospace; cursor:pointer;";
+                btn.innerText = amigo;
+                btn.onclick = () => abrirConversaPrivada(amigo);
+                container.appendChild(btn);
+            });
+        }
+
+        let amigoAtivoChat = null;
+        function abrirConversaPrivada(amigo) {
+            amigoAtivoChat = amigo;
+            document.getElementById('chat-privado-box').style.display = 'block';
+            document.getElementById('chat-privado-titulo').innerText = `CHAT COM: ${amigo}`;
+            renderizarMsgsPrivadas();
+        }
+
+        function renderizarMsgsPrivadas() {
+            const container = document.getElementById('chat-privado-msgs');
+            if(!container || !amigoAtivoChat) return;
+            container.innerHTML = '';
+            if(!dadosCacadorRPG.conversasAmigos[amigoAtivoChat]) dadosCacadorRPG.conversasAmigos[amigoAtivoChat] = [];
+            dadosCacadorRPG.conversasAmigos[amigoAtivoChat].forEach(m => {
+                container.innerHTML += `<div class="chat-msg-item"><strong>[${m.remetente}]</strong>: ${m.texto}</div>`;
+            });
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function enviarMensagemPrivada() {
+            const txt = document.getElementById('chatInputPrivado').value.trim();
+            if(!txt || !amigoAtivoChat) return;
+            if(!dadosCacadorRPG.conversasAmigos[amigoAtivoChat]) dadosCacadorRPG.conversasAmigos[amigoAtivoChat] = [];
+            dadosCacadorRPG.conversasAmigos[amigoAtivoChat].push({ remetente: dadosCacadorRPG.nome, texto: txt });
+            document.getElementById('chatInputPrivado').value = '';
+            renderizarMsgsPrivadas();
+        }
+
+        /* RENDER GERAL DE DADOS */
+        function renderizarTudo() { renderizarHUDRPG(); renderizarAvatar(); renderizarMissoesVicios(); atualizarTreinoDoDia(); }
         function renderizarHUDRPG() {
             document.getElementById('display-nivel-usuario').innerText = dadosCacadorRPG.nivel;
             document.getElementById('display-xp-usuario').innerText = dadosCacadorRPG.xp;
