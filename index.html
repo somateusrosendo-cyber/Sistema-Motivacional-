@@ -11,10 +11,10 @@
 
     <style>
         :root {
-            --bg-dark: #02040a;
+            --bg-dark: #010308;
             --system-cyan: #00f0ff;
-            --system-cyan-glow: rgba(0, 240, 255, 0.55);
-            --system-blue-card: rgba(6, 18, 38, 0.9);
+            --system-cyan-glow: rgba(0, 240, 255, 0.6);
+            --system-blue-card: rgba(4, 14, 30, 0.92);
             --system-red: #ff2a6d;
             --system-red-glow: rgba(255, 42, 109, 0.65);
             --god-gold: #ffd700;
@@ -41,8 +41,8 @@
             flex-direction: column;
             align-items: center;
             background-image: 
-                radial-gradient(circle at 50% 30%, rgba(0, 240, 255, 0.18) 0%, transparent 75%),
-                linear-gradient(180deg, #010206 0%, #050c1e 100%);
+                radial-gradient(circle at 50% 30%, rgba(0, 240, 255, 0.15) 0%, transparent 75%),
+                linear-gradient(180deg, #010205 0%, #030a1c 100%);
             background-attachment: fixed;
             overflow-x: hidden;
             perspective: 1200px;
@@ -59,11 +59,11 @@
             opacity: 0.2;
         }
 
-        /* TELA DE INÍCIO: ABISMO */
+        /* 1. TELA TIPO ABISMO UNIVERSO COM OLHO OBSERVADOR DO ABISMO */
         .abyss-screen {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
-            background: #010205;
+            background: #000206;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -72,41 +72,92 @@
             cursor: pointer;
             text-align: center;
             padding: 24px;
+            overflow: hidden;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 40px 70px, var(--system-cyan), rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 90px 40px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 160px 120px, var(--system-cyan), rgba(0,0,0,0));
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            animation: cosmicStars 20s linear infinite;
         }
 
-        .abyss-portal {
-            width: 140px;
-            height: 140px;
+        @keyframes cosmicStars {
+            0% { background-position: 0 0; }
+            100% { background-position: 200px 400px; }
+        }
+
+        .abyss-eye-portal {
+            width: 170px;
+            height: 170px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(0,240,255,0.4) 0%, rgba(0,0,0,0.9) 70%);
-            box-shadow: 0 0 50px var(--system-cyan), inset 0 0 30px var(--system-cyan);
+            background: radial-gradient(circle, rgba(0,240,255,0.2) 0%, rgba(0,0,0,0.95) 75%);
+            border: 2px solid var(--system-cyan);
+            box-shadow: 0 0 60px var(--system-cyan-glow), inset 0 0 40px var(--system-cyan-glow);
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 24px;
-            animation: pulseAbyss 2.5s infinite ease-in-out;
+            margin-bottom: 28px;
+            position: relative;
+            animation: pulseEyeStage 3s infinite ease-in-out;
         }
 
-        @keyframes pulseAbyss {
-            0%, 100% { transform: scale(0.95); box-shadow: 0 0 30px var(--system-cyan); }
-            50% { transform: scale(1.08); box-shadow: 0 0 60px var(--system-cyan), 0 0 100px var(--system-cyan-glow); }
+        @keyframes pulseEyeStage {
+            0%, 100% { transform: scale(0.96); box-shadow: 0 0 40px var(--system-cyan-glow); }
+            50% { transform: scale(1.06); box-shadow: 0 0 80px var(--system-cyan), 0 0 120px rgba(0,240,255,0.4); }
+        }
+
+        .abyss-eye-lens {
+            width: 110px;
+            height: 65px;
+            border-radius: 100% 0%;
+            transform: rotate(-45deg);
+            border: 3px solid var(--system-cyan);
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            box-shadow: 0 0 20px var(--system-cyan);
+            animation: eyeBlink 5s infinite;
+        }
+
+        @keyframes eyeBlink {
+            0%, 90%, 100% { transform: rotate(-45deg) scaleY(1); }
+            95% { transform: rotate(-45deg) scaleY(0.1); }
+        }
+
+        .abyss-pupil {
+            width: 18px;
+            height: 48px;
+            background: var(--system-cyan);
+            border-radius: 50%;
+            box-shadow: 0 0 15px var(--system-cyan), 0 0 30px #fff;
+            animation: pupilLook 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes pupilLook {
+            0% { transform: translateX(-12px); }
+            50% { transform: translateX(12px); }
+            100% { transform: translateX(0px); }
         }
 
         .abyss-title {
             color: var(--system-cyan);
             font-family: monospace;
-            letter-spacing: 3px;
-            font-size: 1.1rem;
-            text-shadow: 0 0 10px var(--system-cyan-glow);
-            margin-bottom: 8px;
+            letter-spacing: 4px;
+            font-size: 1.2rem;
+            text-shadow: 0 0 15px var(--system-cyan);
+            margin-bottom: 10px;
         }
 
         .abyss-sub {
             color: var(--text-sub);
             font-size: 0.8rem;
             font-family: monospace;
-            opacity: 0.8;
-            animation: blinkText 2s infinite;
+            letter-spacing: 1.5px;
+            animation: blinkText 1.8s infinite;
         }
 
         @keyframes blinkText {
@@ -114,7 +165,51 @@
             50% { opacity: 1; }
         }
 
-        /* HEADER LEVITANDO COM MENU DE 3 PONTOS (⋮) */
+        /* BOLHA FLUTUANTE EXTRA DE PERFIL */
+        .floating-avatar-bubble {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            border: 2px solid var(--system-cyan);
+            box-shadow: 0 0 20px var(--system-cyan-glow);
+            background: rgba(2, 6, 16, 0.95);
+            z-index: 99999;
+            cursor: pointer;
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+
+        .floating-avatar-bubble:active { transform: scale(0.9); }
+        .floating-avatar-bubble img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* MODAL ESTATÍSTICAS DO CAÇADOR */
+        .stats-modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(1, 3, 10, 0.94);
+            backdrop-filter: blur(10px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 999999;
+            padding: 16px;
+        }
+
+        .stats-modal-card {
+            background: linear-gradient(180deg, #06152d 0%, #020712 100%);
+            border: 2px solid var(--system-cyan);
+            padding: 22px;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 0 35px var(--system-cyan-glow);
+            clip-path: polygon(0 15px, 15px 0, calc(100% - 15px) 0, 100% 15px, 100% calc(100% - 15px), calc(100% - 15px) 100%, 15px 100%, 0 calc(100% - 15px));
+            text-align: center;
+        }
+
+        /* HEADER DO SISTEMA */
         header {
             width: 100%;
             max-width: 600px;
@@ -130,12 +225,6 @@
             align-items: center;
             gap: 4px;
             position: relative;
-            animation: floatHeader 5s infinite ease-in-out;
-        }
-
-        @keyframes floatHeader {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-4px); }
         }
 
         .header-top-bar {
@@ -152,7 +241,7 @@
             font-weight: 900;
             letter-spacing: 2px;
             text-transform: uppercase;
-            text-shadow: 0 0 15px var(--system-cyan), 0 0 30px var(--system-cyan-glow);
+            text-shadow: 0 0 15px var(--system-cyan);
         }
 
         .header-sub-tag {
@@ -165,7 +254,6 @@
             padding: 2px 8px;
             border: 1px solid var(--system-cyan);
             border-radius: 8px;
-            text-shadow: 0 0 8px var(--system-cyan);
         }
 
         .btn-notify-small {
@@ -180,11 +268,7 @@
             align-items: center;
             cursor: pointer;
             font-size: 0.8rem;
-            box-shadow: 0 0 8px var(--system-cyan-glow);
-            transition: transform 0.2s;
         }
-
-        .btn-notify-small:active { transform: scale(0.85); }
 
         .btn-options-dots {
             background: none;
@@ -193,12 +277,8 @@
             font-size: 1.3rem;
             cursor: pointer;
             padding: 0 4px;
-            transition: transform 0.2s;
         }
 
-        .btn-options-dots:active { transform: scale(0.85); }
-
-        /* MENU SUSPENSO DE CONFIGURAÇÕES (3 PONTOS) */
         .options-dropdown-panel {
             position: absolute;
             top: 45px;
@@ -212,7 +292,6 @@
             display: none;
             flex-direction: column;
             gap: 8px;
-            clip-path: polygon(0 10px, 10px 0, calc(100% - 10px) 0, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px));
         }
 
         .options-btn-item {
@@ -230,19 +309,14 @@
             gap: 8px;
         }
 
-        .options-btn-item:hover {
-            background: var(--system-cyan);
-            color: #000;
-        }
-
-        /* REDE DE ÍCONES FLUTUANTES COM TOUCH TÁTIL INTERATIVO */
+        /* NAVEGAÇÃO SUPERIOR IGUAL IMAGEM 2 */
         .window-selector-floating-grid {
             width: 100%;
             max-width: 600px;
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 12px;
+            gap: 8px;
             margin-bottom: 18px;
         }
 
@@ -250,92 +324,49 @@
             background: rgba(4, 14, 32, 0.85);
             border: 1px solid var(--system-cyan);
             color: var(--text-sub);
-            padding: 9px 13px;
-            font-size: 0.65rem;
+            padding: 8px 12px;
+            font-size: 0.68rem;
             font-weight: bold;
             font-family: monospace;
             cursor: pointer;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 240, 255, 0.2);
+            border-radius: 6px;
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
             display: flex;
             align-items: center;
             gap: 6px;
-            backdrop-filter: blur(8px);
-            transition: transform 0.2s ease, background-color 0.2s, box-shadow 0.2s;
-            animation: floatNode 4s infinite ease-in-out;
-        }
-
-        .btn-floating-node:nth-child(even) { animation-delay: 0.6s; }
-        .btn-floating-node:nth-child(3n) { animation-delay: 1.2s; }
-
-        @keyframes floatNode {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-5px); }
-        }
-
-        .btn-floating-node:active {
-            transform: scale(0.92) rotate(2deg) !important;
-            box-shadow: 0 0 25px var(--system-cyan);
-        }
-
-        .btn-floating-node i {
-            font-size: 0.9rem;
-            color: var(--system-cyan);
         }
 
         .btn-floating-node.active {
             background: var(--system-cyan);
             color: #000;
-            border-color: #fff;
-            box-shadow: 0 0 20px var(--system-cyan-glow);
-            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 0 18px var(--system-cyan-glow);
         }
 
-        .btn-floating-node.active i { color: #000; }
-
-        /* JANELA FLUTUANTE HOLOGRÁFICA COM SUPERATIVIDADE DE ANIME */
+        /* VIEWPORT E JANELA DO SISTEMA IGUAL IMAGEM 2 */
         .single-window-viewport {
             width: 100%;
             max-width: 600px;
             display: flex;
             justify-content: center;
-            touch-action: pan-y;
         }
 
         .system-window {
             width: 100%;
             background: var(--system-blue-card);
             border: 2px solid var(--system-cyan);
-            box-shadow: 0 20px 45px rgba(0, 240, 255, 0.4), inset 0 0 25px rgba(0, 240, 255, 0.15);
-            padding: 22px;
+            box-shadow: 0 0 35px rgba(0, 240, 255, 0.35), inset 0 0 20px rgba(0, 240, 255, 0.1);
+            padding: 20px;
+            border-radius: 12px;
             position: relative;
-            backdrop-filter: blur(14px);
-            clip-path: polygon(0 15px, 15px 0, calc(100% - 15px) 0, 100% 15px, 100% calc(100% - 15px), calc(100% - 15px) 100%, 15px 100%, 0 calc(100% - 15px));
-            transition: transform 0.2s ease-out, opacity 0.3s ease-out;
-            transform-style: preserve-3d;
-            animation: floatPage 5s infinite ease-in-out;
-        }
-
-        @keyframes floatPage {
-            0%, 100% { transform: translateY(0px) rotateX(0deg); box-shadow: 0 20px 40px rgba(0, 240, 255, 0.35); }
-            50% { transform: translateY(-8px) rotateX(1deg); box-shadow: 0 30px 55px rgba(0, 240, 255, 0.55); }
         }
 
         .system-window-red {
             background: rgba(26, 8, 16, 0.95);
             border: 2px solid var(--system-red);
-            box-shadow: 0 20px 45px rgba(255, 42, 109, 0.45);
-            animation: floatPageRed 5s infinite ease-in-out;
+            box-shadow: 0 0 35px rgba(255, 42, 109, 0.45);
         }
 
-        @keyframes floatPageRed {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-8px); }
-        }
-
-        /* MENSAGEM DE SUPERAÇÃO DE LIMITES EM CADA PÁGINA */
         .anime-limit-quote {
             background: rgba(0, 240, 255, 0.08);
             border-left: 3px solid var(--system-cyan);
@@ -345,7 +376,6 @@
             color: var(--text-sub);
             margin-bottom: 14px;
             font-style: italic;
-            letter-spacing: 0.5px;
         }
 
         .window-header {
@@ -364,15 +394,12 @@
             letter-spacing: 2px;
             text-transform: uppercase;
             text-shadow: 0 0 10px var(--system-cyan-glow);
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
 
         .xp-bar-outer {
             width: 100%;
             height: 12px;
-            background: #060d1a;
+            background: #030814;
             border: 1px solid var(--system-cyan);
             margin: 8px 0;
             padding: 1px;
@@ -380,398 +407,148 @@
 
         .xp-bar-inner {
             height: 100%;
-            background: linear-gradient(90deg, var(--system-cyan), #9d4edd);
+            background: linear-gradient(90deg, var(--system-cyan), #0077ff);
             box-shadow: 0 0 12px var(--system-cyan);
             width: 0%;
             transition: width 0.4s ease;
         }
 
-        /* RADAR PENTAGONAL COM HOLOGRAMAS EM ROTAÇÃO CONSTANTE */
-        .radar-status-stage {
+        /* DIAGRAMA CIRCULAR DOS PECADOS (IMAGEM 3) */
+        .sins-diagram-stage {
             width: 100%;
-            padding: 20px 10px;
-            background: radial-gradient(circle at 50% 50%, rgba(0, 240, 255, 0.18) 0%, rgba(2, 6, 16, 0.95) 80%);
-            border: 1px solid rgba(0, 240, 255, 0.4);
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            box-shadow: inset 0 0 25px rgba(0, 240, 255, 0.2);
-            margin-top: 10px;
-            transform-style: preserve-3d;
-        }
-
-        .pentagon-frame {
-            width: 170px;
-            height: 170px;
+            height: 290px;
             position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 35px 0;
-            transform-style: preserve-3d;
+            margin: 15px 0;
         }
 
-        /* ANEL HOLOGRÁFICO EM ROTAÇÃO CONSTANTE */
-        .pentagon-border-rotating {
+        .sins-ring-line {
             position: absolute;
-            width: 100%;
-            height: 100%;
-            border: 2px dashed var(--system-cyan);
-            clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
-            box-shadow: 0 0 25px var(--system-cyan-glow);
-            background: rgba(0, 240, 255, 0.04);
-            animation: spinHolo 12s linear infinite;
+            width: 210px;
+            height: 210px;
+            border: 2px dashed rgba(0, 240, 255, 0.4);
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+            animation: rotateDiagram 25s linear infinite;
         }
 
-        @keyframes spinHolo {
+        @keyframes rotateDiagram {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
 
-        .avatar-display-box {
-            z-index: 2;
-            width: 95px;
-            height: 95px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
+        .sin-node-icon {
+            position: absolute;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
-            background: rgba(2, 6, 16, 0.85);
+            background: rgba(2, 6, 16, 0.95);
             border: 2px solid var(--system-cyan);
-            box-shadow: 0 0 20px var(--system-cyan-glow);
-        }
-
-        .avatar-custom-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: drop-shadow(0 0 10px var(--system-cyan));
-        }
-
-        .avatar-controls-bar {
-            display: flex;
-            gap: 6px;
-            width: 100%;
-            margin-top: 10px;
-        }
-
-        .btn-avatar-opt {
-            flex: 1;
-            background: rgba(2, 6, 16, 0.9);
-            border: 1px solid var(--system-cyan);
-            color: var(--text-sub);
-            padding: 8px;
-            font-size: 0.72rem;
-            font-weight: bold;
-            font-family: monospace;
-            cursor: pointer;
-            text-align: center;
-            transition: transform 0.2s;
-        }
-
-        .btn-avatar-opt:active { transform: scale(0.92); }
-
-        /* SELETOR DE AVATARES DE FERAS MEIO-HUMANAS EM FORMATO HEXAGONAL HOLOGRÁFICO */
-        .beast-picker-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 10px;
-            margin-top: 12px;
-            background: rgba(0, 240, 255, 0.05);
-            border: 1px dashed var(--system-cyan);
-            padding: 10px;
-        }
-
-        .beast-avatar-card {
-            width: 50px;
-            height: 50px;
-            background: rgba(2, 6, 16, 0.9);
-            border: 1.5px solid var(--system-cyan);
-            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .beast-avatar-card:hover, .beast-avatar-card:active {
-            transform: scale(1.15);
-            box-shadow: 0 0 15px var(--system-cyan);
-        }
-
-        .beast-avatar-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* BLOCOS DE ATRIBUTOS */
-        .radar-stat-box {
-            background: rgba(4, 14, 30, 0.95);
-            border: 1px solid var(--system-cyan);
-            padding: 4px 8px;
-            font-family: monospace;
-            text-align: center;
             box-shadow: 0 0 12px var(--system-cyan-glow);
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            min-width: 72px;
-        }
-
-        .radar-stat-label {
-            font-size: 0.75rem;
             color: var(--system-cyan);
-            font-weight: bold;
-            letter-spacing: 1px;
+            font-size: 1.1rem;
         }
 
-        .radar-stat-val {
-            font-size: 0.95rem;
+        .node-top { top: 0px; }
+        .node-top-right { top: 40px; right: 25px; }
+        .node-bottom-right { bottom: 40px; right: 25px; }
+        .node-bottom { bottom: 0px; }
+        .node-bottom-left { bottom: 40px; left: 25px; }
+        .node-top-left { top: 40px; left: 25px; }
+
+        .sin-node-center {
+            z-index: 10;
+            width: 105px;
+            height: 105px;
+            border-radius: 50%;
+            background: rgba(3, 12, 30, 0.95);
+            border: 2px solid var(--system-cyan);
+            box-shadow: 0 0 25px var(--system-cyan-glow);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 8px;
+        }
+
+        .center-char-title {
+            font-family: monospace;
+            font-size: 0.85rem;
+            font-weight: bold;
             color: #fff;
-            font-weight: bold;
-            margin: 2px 0;
+            text-shadow: 0 0 8px var(--system-cyan);
         }
 
-        .btn-stat-add-small {
-            background: var(--system-cyan);
-            color: #000;
-            border: none;
-            font-weight: bold;
-            font-size: 0.75rem;
-            padding: 1px 8px;
-            cursor: pointer;
-            width: 100%;
+        .center-class-sub {
+            font-family: monospace;
+            font-size: 0.65rem;
+            color: var(--god-gold);
             margin-top: 2px;
         }
 
-        .pos-top { position: absolute; top: -38px; }
-        .pos-left-top { position: absolute; left: -38px; top: 38px; }
-        .pos-right-top { position: absolute; right: -38px; top: 38px; }
-        .pos-left-bottom { position: absolute; left: -28px; bottom: -38px; }
-        .pos-right-bottom { position: absolute; right: -28px; bottom: -38px; }
-
-        /* BOSSES */
-        .boss-card {
-            background: rgba(20, 4, 12, 0.9);
-            border: 1px solid var(--system-red);
-            padding: 12px;
-            margin-bottom: 12px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            box-shadow: inset 0 0 15px rgba(255, 42, 109, 0.2);
+        /* ATRIBUTOS IMAGEM 2 */
+        .attributes-grid-hud {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 15px;
         }
 
-        .boss-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: var(--system-red);
-            font-family: monospace;
-            font-weight: bold;
-            font-size: 0.85rem;
-        }
-
-        .boss-hp-outer {
-            width: 100%;
-            height: 10px;
-            background: #100206;
-            border: 1px solid var(--system-red);
-        }
-
-        .boss-hp-inner {
-            height: 100%;
-            background: linear-gradient(90deg, #ff2a6d, #ff758c);
-            width: 100%;
-            transition: width 0.3s;
-        }
-
-        .btn-attack-boss {
-            background: var(--system-red);
-            color: #fff;
-            border: none;
-            padding: 10px;
-            font-weight: bold;
-            font-family: monospace;
-            font-size: 0.8rem;
-            cursor: pointer;
-            text-transform: uppercase;
-            box-shadow: 0 0 12px var(--system-red-glow);
-        }
-
-        /* ARMAZENAMENTO */
-        .equip-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-        }
-
-        .equip-card {
-            background: rgba(3, 10, 24, 0.9);
+        .stat-hud-box {
+            background: rgba(3, 10, 24, 0.95);
             border: 1px solid var(--system-cyan);
-            padding: 14px;
-            text-align: center;
-            box-shadow: inset 0 0 10px rgba(0,240,255,0.1);
-        }
-
-        .equip-card-title {
-            font-family: monospace;
-            font-size: 0.8rem;
-            color: var(--text-sub);
-            letter-spacing: 1px;
-            margin-bottom: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-        }
-
-        .digital-clock-display {
-            font-family: monospace;
-            font-size: 2rem;
-            color: var(--system-cyan);
-            text-shadow: 0 0 12px var(--system-cyan);
-            font-weight: bold;
-            letter-spacing: 2px;
-        }
-
-        /* BÚSSOLA */
-        .compass-dial-container {
-            width: 140px;
-            height: 140px;
-            border-radius: 50%;
-            border: 2px solid var(--system-cyan);
-            box-shadow: 0 0 15px var(--system-cyan-glow), inset 0 0 15px var(--system-cyan-glow);
-            margin: 10px auto;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: radial-gradient(circle, rgba(0,240,255,0.1) 0%, rgba(2,6,16,0.95) 80%);
-        }
-
-        .compass-needle {
-            width: 4px;
-            height: 110px;
-            background: linear-gradient(180deg, var(--system-red) 50%, var(--system-cyan) 50%);
-            position: absolute;
-            transition: transform 0.2s ease-out;
-            box-shadow: 0 0 8px var(--system-cyan);
-            clip-path: polygon(50% 0%, 100% 25%, 60% 100%, 40% 100%, 0% 25%);
-        }
-
-        .compass-heading-text {
-            font-family: monospace;
-            color: var(--god-gold);
-            font-size: 0.9rem;
-            font-weight: bold;
-        }
-
-        /* BOTÃO FLUTUANTE DE ARMAZENAMENTO PERMANENTE */
-        .floating-storage-trigger {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 58px;
-            height: 58px;
-            border-radius: 50%;
-            background: rgba(6, 18, 38, 0.95);
-            border: 2px solid var(--god-gold);
-            color: var(--god-gold);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.5rem;
-            cursor: pointer;
-            box-shadow: 0 0 20px var(--god-gold-glow), 0 0 35px rgba(0, 0, 0, 0.8);
-            z-index: 99999;
-            animation: pulseStorage 3s infinite ease-in-out;
-        }
-
-        @keyframes pulseStorage {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 15px var(--god-gold-glow); }
-            50% { transform: scale(1.08); box-shadow: 0 0 30px var(--god-gold); }
-        }
-
-        /* CHAT E OFERTAS */
-        .chat-subtabs {
-            display: flex;
-            gap: 6px;
-            margin-bottom: 12px;
-        }
-
-        .chat-subtab-btn {
-            flex: 1;
-            background: rgba(2, 6, 16, 0.9);
-            border: 1px solid var(--system-cyan);
-            color: var(--text-sub);
             padding: 8px;
-            font-family: monospace;
-            font-size: 0.72rem;
-            font-weight: bold;
-            cursor: pointer;
             text-align: center;
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+            font-family: monospace;
         }
 
-        .chat-subtab-btn.active {
+        .stat-hud-label { font-size: 0.72rem; color: var(--system-cyan); font-weight: bold; }
+        .stat-hud-val { font-size: 1.1rem; color: #fff; font-weight: bold; margin: 4px 0; }
+        .btn-add-stat {
+            width: 100%;
             background: var(--system-cyan);
             color: #000;
+            border: none;
+            font-weight: bold;
+            padding: 2px 0;
+            cursor: pointer;
         }
 
-        .chat-messages-container {
-            height: 240px;
-            background: rgba(2, 6, 16, 0.9);
-            border: 1px solid rgba(0, 240, 255, 0.3);
+        /* CLASSES SELETORAS */
+        .class-selection-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-top: 15px;
+            background: rgba(0, 240, 255, 0.05);
+            border: 1px dashed var(--system-cyan);
             padding: 10px;
-            overflow-y: auto;
+            border-radius: 8px;
+        }
+
+        .class-select-card {
+            background: rgba(2, 6, 16, 0.9);
+            border: 1px solid var(--system-cyan);
+            padding: 8px;
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            margin-bottom: 10px;
-            font-size: 0.82rem;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            border-radius: 6px;
         }
 
-        .chat-msg-item {
-            background: rgba(8, 22, 44, 0.8);
-            border-left: 3px solid var(--system-cyan);
-            padding: 6px 10px;
-            border-radius: 2px;
-        }
+        .class-select-card i { font-size: 1.4rem; color: var(--system-cyan); }
+        .class-select-card span { font-size: 0.65rem; font-family: monospace; color: #fff; text-align: center; }
 
-        .chat-msg-header {
-            display: flex;
-            justify-content: space-between;
-            font-family: monospace;
-            font-size: 0.7rem;
-            color: var(--system-cyan);
-            margin-bottom: 2px;
-        }
-
-        .offer-item {
-            background: rgba(16, 8, 24, 0.9);
-            border: 1px solid var(--god-gold);
-            padding: 10px;
-            border-left: 4px solid var(--god-gold);
-            margin-bottom: 8px;
-            font-size: 0.82rem;
-        }
-
-        .offer-header {
-            display: flex;
-            justify-content: space-between;
-            font-family: monospace;
-            color: var(--god-gold);
-            font-weight: bold;
-            font-size: 0.75rem;
-            margin-bottom: 4px;
-        }
-
-        /* TAF */
+        /* OUTROS MÓDULOS (TAF, MISSÕES, QUESTÕES, CHAT, BOSSES, EQUIP) */
         .taf-grid {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
@@ -793,269 +570,124 @@
             font-weight: bold;
             font-size: 0.8rem;
             cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 1px;
             margin-bottom: 8px;
-            transition: all 0.2s;
         }
 
-        .btn-taf:hover {
-            background: var(--system-red);
-            box-shadow: 0 0 15px var(--system-red-glow);
-        }
-
-        /* CUSTOM TASKS */
-        .task-input-box {
-            display: flex;
-            gap: 6px;
-            margin-bottom: 12px;
-        }
-
+        .task-input-box { display: flex; gap: 6px; margin-bottom: 12px; }
         .task-input-box input {
-            flex: 1;
-            background: rgba(2, 6, 16, 0.9);
-            border: 1px solid var(--system-cyan);
-            color: #fff;
-            padding: 8px 12px;
-            font-size: 0.85rem;
-            outline: none;
+            flex: 1; background: rgba(2, 6, 16, 0.9); border: 1px solid var(--system-cyan); color: #fff; padding: 8px 12px; outline: none;
+        }
+        .task-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+        .task-item {
+            background: rgba(2, 6, 16, 0.8); border: 1px solid rgba(0, 240, 255, 0.3); border-left: 4px solid var(--system-cyan); padding: 10px 12px; display: flex; justify-content: space-between; align-items: center;
         }
 
-        .task-list {
-            list-style: none;
+        .boss-card {
+            background: rgba(20, 4, 12, 0.9);
+            border: 1px solid var(--system-red);
+            padding: 12px;
+            margin-bottom: 12px;
             display: flex;
             flex-direction: column;
             gap: 8px;
-            max-height: 250px;
-            overflow-y: auto;
         }
 
-        .task-item {
-            background: rgba(2, 6, 16, 0.8);
-            border: 1px solid rgba(0, 240, 255, 0.3);
-            border-left: 4px solid var(--system-cyan);
-            padding: 10px 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.85rem;
+        .boss-hp-outer { width: 100%; height: 10px; background: #100206; border: 1px solid var(--system-red); }
+        .boss-hp-inner { height: 100%; background: linear-gradient(90deg, #ff2a6d, #ff758c); width: 100%; }
+
+        .btn-attack-boss {
+            background: var(--system-red); color: #fff; border: none; padding: 10px; font-weight: bold; font-family: monospace; cursor: pointer;
         }
 
-        .task-item.completed {
-            border-left-color: #10b981;
-            opacity: 0.6;
-            text-decoration: line-through;
-        }
+        .equip-grid { display: flex; flex-direction: column; gap: 14px; }
+        .equip-card { background: rgba(3, 10, 24, 0.9); border: 1px solid var(--system-cyan); padding: 14px; text-align: center; }
+        .digital-clock-display { font-family: monospace; font-size: 2rem; color: var(--system-cyan); text-shadow: 0 0 12px var(--system-cyan); font-weight: bold; }
 
-        /* QUESTÕES - ENUNCIADOS TOTALMENTE VISÍVEIS E LEGÍVEIS */
-        .nav-tabs {
-            display: flex;
-            gap: 6px;
-            overflow-x: auto;
-            padding-bottom: 8px;
-            margin-bottom: 12px;
-        }
-
-        .tab-btn {
-            background: rgba(2, 6, 16, 0.9);
-            border: 1px solid var(--system-cyan);
-            color: var(--text-sub);
-            padding: 8px 12px;
-            font-weight: bold;
-            font-size: 0.75rem;
-            cursor: pointer;
-            white-space: nowrap;
-        }
-
-        .tab-btn.active {
-            background: var(--system-cyan);
-            color: #000;
-        }
-
-        .btn-abrir-pop {
-            background: linear-gradient(135deg, var(--system-cyan), #0077ff);
-            color: #000;
-            border: none;
-            padding: 14px 24px;
-            font-weight: 900;
-            font-size: 0.9rem;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 0 20px var(--system-cyan-glow);
-            width: 100%;
-            margin-top: 10px;
-        }
-
-        /* POP-UP QUESTÕES */
+        /* OVERLAY QUESTÕES GAME */
         .game-modal-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(2, 5, 14, 0.95);
-            backdrop-filter: blur(10px);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 99999;
-            padding: 16px;
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(2, 5, 14, 0.95);
+            display: none; justify-content: center; align-items: center; z-index: 99999; padding: 16px;
         }
-
         .game-modal-card {
-            background: linear-gradient(180deg, #07152b 0%, #030a16 100%);
-            border: 2px solid var(--system-cyan);
-            padding: 20px;
-            width: 100%;
-            max-width: 580px;
-            max-height: 90vh;
-            overflow-y: auto;
-            box-shadow: 0 0 35px var(--system-cyan-glow);
-            clip-path: polygon(0 15px, 15px 0, calc(100% - 15px) 0, 100% 15px, 100% calc(100% - 15px), calc(100% - 15px) 100%, 15px 100%, 0 calc(100% - 15px));
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .timer-badge {
-            background: rgba(255, 42, 109, 0.2);
-            border: 1px solid var(--system-red);
-            color: var(--system-red);
-            padding: 4px 10px;
-            font-family: monospace;
-            font-size: 0.8rem;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .game-options-grid button {
-            width: 100%;
-            text-align: left;
-            background: rgba(4, 14, 30, 0.9);
-            border: 1px solid rgba(0, 240, 255, 0.3);
-            color: #fff;
-            padding: 12px;
-            font-size: 0.88rem;
-            margin-top: 8px;
-            cursor: pointer;
-            white-space: normal;
-            word-wrap: break-word;
-            line-height: 1.4;
-        }
-
-        .game-options-grid button.correct {
-            background: rgba(16, 185, 129, 0.3) !important;
-            border-color: #10b981 !important;
-        }
-
-        .game-options-grid button.wrong {
-            background: rgba(239, 68, 68, 0.3) !important;
-            border-color: #ef4444 !important;
+            background: #07152b; border: 2px solid var(--system-cyan); padding: 20px; width: 100%; max-width: 580px; display: flex; flex-direction: column; gap: 12px;
         }
 
         /* OVERLAY LOGIN */
         .login-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(2, 5, 14, 0.96);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 999999;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(2, 5, 14, 0.96);
+            display: flex; justify-content: center; align-items: center; z-index: 999999;
         }
-
         .login-caixa {
-            background: #07152b;
-            border: 2px solid var(--system-cyan);
-            padding: 28px;
-            text-align: center;
-            width: 90%;
-            max-width: 380px;
-            box-shadow: 0 0 30px var(--system-cyan-glow);
-            clip-path: polygon(0 15px, 15px 0, calc(100% - 15px) 0, 100% 15px, 100% calc(100% - 15px), calc(100% - 15px) 100%, 15px 100%, 0 calc(100% - 15px));
+            background: #07152b; border: 2px solid var(--system-cyan); padding: 28px; text-align: center; width: 90%; max-width: 380px;
         }
-
         .login-caixa input {
-            width: 100%;
-            padding: 10px 12px;
-            background: #030a16;
-            border: 1px solid var(--system-cyan);
-            color: #fff;
-            text-align: center;
-            font-weight: bold;
-            margin-bottom: 10px;
-            outline: none;
+            width: 100%; padding: 10px 12px; background: #030a16; border: 1px solid var(--system-cyan); color: #fff; text-align: center; font-weight: bold; margin-bottom: 10px; outline: none;
         }
     </style>
 </head>
 <body>
 
-    <!-- ÍCONE FLUTUANTE PERMANENTE DE ARMAZENAMENTO -->
-    <div class="floating-storage-trigger" title="Armazenamento Dimensional" onclick="exibirJanela('equip')">
-        <i class="fa-solid fa-box-archive"></i>
+    <!-- BOLHA FLUTUANTE DE STATS -->
+    <div class="floating-avatar-bubble" title="Ver Status Completo" onclick="abrirModalEstatisticas()">
+        <img id="bubbleAvatarImg" src="https://images.unsplash.com/photo-1563089145-599997674d42?w=150&auto=format&fit=crop&q=80" alt="Avatar">
     </div>
 
-    <!-- 1. TELA TIPO ABISMO DO SISTEMA -->
+    <!-- MODAL DE ESTATÍSTICAS DA BOLHA -->
+    <div id="modalEstatisticas" class="stats-modal-overlay">
+        <div class="stats-modal-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--system-cyan); padding-bottom: 8px; margin-bottom: 12px;">
+                <h3 style="color: var(--system-cyan); font-family: monospace;"><i class="fa-solid fa-chart-line"></i> PAINEL DE STATUS</h3>
+                <button onclick="fecharModalEstatisticas()" style="background: none; border: none; color: #ff2a6d; font-size: 1.3rem; cursor: pointer;">✕</button>
+            </div>
+            <h2 id="modalNomeUser" style="color: #fff; font-family: monospace;">CAÇADOR: GOD</h2>
+            <div id="modalClasseUser" style="color: var(--god-gold); font-family: monospace; font-size: 0.85rem; margin-top: 4px;">CLASSE: SOMBRA</div>
+            
+            <div class="xp-bar-outer" style="margin-top: 14px;">
+                <div id="modalBarraXp" class="xp-bar-inner"></div>
+            </div>
+            <div style="font-size: 0.8rem; color: var(--text-sub); font-family: monospace;">
+                XP: <span id="modalXpAtual">0</span> / <span id="modalXpProx">200</span> (LVL <span id="modalLvl">1</span>)
+            </div>
+
+            <div style="display: flex; gap: 6px; margin-top: 14px;">
+                <button onclick="document.getElementById('avatarFileInput').click()" style="flex: 1; padding: 8px; background: rgba(0,240,255,0.15); border: 1px solid var(--system-cyan); color: #fff; font-size: 0.75rem; cursor: pointer;">
+                    <i class="fa-solid fa-camera"></i> ALTERAR FOTO
+                </button>
+                <input type="file" id="avatarFileInput" accept="image/*" style="display: none;" onchange="uploadFotoCaçador(event)">
+            </div>
+        </div>
+    </div>
+
+    <!-- 1. TELA TIPO ABISMO UNIVERSO COM OLHO OBSERVADOR -->
     <div id="abyss-screen" class="abyss-screen" onclick="despertarSistema()">
-        <div class="abyss-portal">
-            <i class="fa-solid fa-eye" style="font-size: 3.5rem; color: var(--system-cyan);"></i>
+        <div class="abyss-eye-portal">
+            <div class="abyss-eye-lens">
+                <div class="abyss-pupil"></div>
+            </div>
         </div>
         <h1 class="abyss-title">[O ABISMO DO CAÇADOR]</h1>
-        <p class="abyss-sub">TOQUE / ARRASTE NA TELA PARA DESPERTAR O SISTEMA</p>
+        <p class="abyss-sub">TOQUE EM QUALQUER LUGAR PARA CONECTAR</p>
     </div>
 
-    <!-- 2. LOGIN ÚNICO INDIVIDUAL COM SENHA -->
+    <!-- LOGIN -->
     <div id="modal-login" class="login-overlay" style="display: none;">
         <form class="login-caixa" onsubmit="event.preventDefault(); autenticarUsuario();">
             <h2 style="color: var(--system-cyan); letter-spacing: 2px; font-family: monospace; margin-bottom: 8px;">⚡ SESSÃO DO CAÇADOR</h2>
-            <p style="color: var(--text-sub); font-size: 0.78rem; margin-bottom: 14px;">Entre com suas credenciais para sincronizar:</p>
-            
             <input type="text" id="input-login-user" placeholder="Codinome do Caçador..." autocomplete="off">
             <input type="password" id="input-login-pass" placeholder="Senha do Sistema..." autocomplete="off">
-            
-            <button type="submit" style="width: 100%; padding: 12px; background: var(--system-cyan); color: #000; border: none; font-weight: bold; cursor: pointer; text-transform: uppercase; margin-top: 4px;">ACESSAR SISTEMA</button>
-            <div id="login-erro" style="color: #ff4757; font-size: 0.75rem; margin-top: 8px; display: none;">Preencha o codinome e a senha corretamente!</div>
+            <button type="submit" style="width: 100%; padding: 12px; background: var(--system-cyan); color: #000; border: none; font-weight: bold; cursor: pointer; text-transform: uppercase;">ACESSAR SISTEMA</button>
         </form>
     </div>
 
-    <!-- 3. BALÃO MÍSTICO DE QUESTÕES DA PMPE COM TEMPORIZADOR DE 10 MIN -->
-    <div id="game-quest-overlay" class="game-modal-overlay">
-        <div class="game-modal-card">
-            <div class="window-header">
-                <h3 id="pop-materia-titulo" class="window-title">PORTUGUÊS - QUESTÃO #1</h3>
-                <div class="timer-badge">
-                    <i class="fa-solid fa-clock"></i>
-                    <span id="pop-timer-display">10:00</span>
-                </div>
-                <button onclick="fecharModalQuestao()" style="background: none; border: none; color: #ff4757; font-size: 1.3rem; font-weight: bold; cursor: pointer;">✕</button>
-            </div>
-
-            <div id="pop-pergunta-texto" style="background: rgba(2, 6, 16, 0.9); border: 1px solid rgba(0, 240, 255, 0.4); border-left: 4px solid var(--system-cyan); padding: 14px; font-size: 0.95rem; line-height: 1.5; max-height: 250px; overflow-y: auto; white-space: normal; word-wrap: break-word;">
-                Carregando pergunta...
-            </div>
-
-            <div id="pop-opcoes-container" class="game-options-grid"></div>
-
-            <div id="pop-explicacao-container" style="display: none; background: rgba(0, 240, 255, 0.08); border: 1px solid var(--system-cyan); border-left: 4px solid var(--god-gold); padding: 10px; font-size: 0.82rem; color: var(--text-sub);"></div>
-
-            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(0, 240, 255, 0.3); padding-top: 12px;">
-                <button onclick="navegarQuestao(-1)" style="background: rgba(2, 6, 16, 0.8); border: 1px solid var(--system-cyan); color: var(--system-cyan); padding: 6px 14px; font-weight: bold; cursor: pointer;">◄ ANTERIOR</button>
-                <span id="pop-contador-index" style="font-size: 0.85rem; color: var(--text-sub); font-family: monospace;">1 / 35</span>
-                <button onclick="navegarQuestao(1)" style="background: rgba(2, 6, 16, 0.8); border: 1px solid var(--system-cyan); color: var(--system-cyan); padding: 6px 14px; font-weight: bold; cursor: pointer;">PRÓXIMA ►</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- HEADER DO SISTEMA COM MENU DE 3 PONTOS E NOTIFICAÇÃO COMPACTA -->
+    <!-- HEADER DO SISTEMA COM MENU 3 PONTOS -->
     <header>
         <div class="header-top-bar">
-            <button class="btn-notify-small" title="Ativar Notificações" onclick="solicitarPermissaoNotificacao()"><i class="fa-solid fa-bell"></i></button>
+            <button class="btn-notify-small" onclick="solicitarPermissaoNotificacao()"><i class="fa-solid fa-bell"></i></button>
             <div class="header-sub-tag">PAINEL PESSOAL</div>
-            <button class="btn-options-dots" title="Opções" onclick="toggleOptionsMenu()">⋮</button>
+            <button class="btn-options-dots" onclick="toggleOptionsMenu()">⋮</button>
         </div>
         <h1 class="header-title-glow">[SISTEMA DO CAÇADOR]</h1>
 
-        <!-- MENU DE OPÇÕES HOLOGRÁFICO -->
         <div id="optionsDropdown" class="options-dropdown-panel">
             <button class="options-btn-item" onclick="promptMudarSenha()"><i class="fa-solid fa-key"></i> MUDAR SENHA</button>
             <button class="options-btn-item" onclick="solicitarPermissaoNotificacao()"><i class="fa-solid fa-bell"></i> NOTIFICAÇÕES</button>
@@ -1063,50 +695,29 @@
         </div>
     </header>
 
-    <!-- REDE DE ÍCONES FLUTUANTES PELO ESPAÇO -->
+    <!-- MENU DE NAVEGAÇÃO SUPERIOR IGUAL IMAGEM 2 -->
     <div class="window-selector-floating-grid">
-        <button id="btn-win-status" class="btn-floating-node active" onclick="exibirJanela('status')">
-            <i class="fa-solid fa-bolt"></i>
-            <span>STATUS</span>
-        </button>
-        <button id="btn-win-taf" class="btn-floating-node" onclick="exibirJanela('taf')">
-            <i class="fa-solid fa-fire"></i>
-            <span>TAF</span>
-        </button>
-        <button id="btn-win-missoes" class="btn-floating-node" onclick="exibirJanela('missoes')">
-            <i class="fa-solid fa-scroll"></i>
-            <span>MISSÕES</span>
-        </button>
-        <button id="btn-win-banco" class="btn-floating-node" onclick="exibirJanela('banco')">
-            <i class="fa-solid fa-crosshairs"></i>
-            <span>QUESTÕES</span>
-        </button>
-        <button id="btn-win-chat" class="btn-floating-node" onclick="exibirJanela('chat')">
-            <i class="fa-solid fa-comments"></i>
-            <span>CHAT</span>
-        </button>
-        <button id="btn-win-bosses" class="btn-floating-node" onclick="exibirJanela('bosses')">
-            <i class="fa-solid fa-skull"></i>
-            <span>BOSSES</span>
-        </button>
-        <button id="btn-win-equip" class="btn-floating-node" onclick="exibirJanela('equip')">
-            <i class="fa-solid fa-box-archive"></i>
-            <span>EQUIP</span>
-        </button>
+        <button id="btn-win-status" class="btn-floating-node active" onclick="exibirJanela('status')"><i class="fa-solid fa-bolt"></i> STATUS</button>
+        <button id="btn-win-taf" class="btn-floating-node" onclick="exibirJanela('taf')"><i class="fa-solid fa-fire"></i> TAF</button>
+        <button id="btn-win-missoes" class="btn-floating-node" onclick="exibirJanela('missoes')"><i class="fa-solid fa-scroll"></i> MISSÕES</button>
+        <button id="btn-win-banco" class="btn-floating-node" onclick="exibirJanela('banco')"><i class="fa-solid fa-crosshairs"></i> QUESTÕES</button>
+        <button id="btn-win-chat" class="btn-floating-node" onclick="exibirJanela('chat')"><i class="fa-solid fa-comments"></i> CHAT</button>
+        <button id="btn-win-bosses" class="btn-floating-node" onclick="exibirJanela('bosses')"><i class="fa-solid fa-skull"></i> BOSSES</button>
+        <button id="btn-win-equip" class="btn-floating-node" onclick="exibirJanela('equip')"><i class="fa-solid fa-box-archive"></i> EQUIP</button>
     </div>
 
-    <!-- VIEWPORT COM PÁGINAS FLUTUANTES -->
-    <main class="single-window-viewport" id="viewportMain">
+    <!-- MAIN VIEWPORT -->
+    <main class="single-window-viewport">
 
-        <!-- JANELA 1: STATUS DO CAÇADOR -->
+        <!-- JANELA 1: STATUS -->
         <div id="win-status" class="system-window">
-            <div class="anime-limit-quote">🔥 "Mesmo que você seja o Caçador mais fraco, o Sistema não permite fraqueza. Erga-se e supere seus limites!"</div>
+            <div class="anime-limit-quote">🔥 "Mesmo que você seja o Caçador mais fraco, o Sistema não permite fraqueza. Erga-se!"</div>
             <div class="window-header">
                 <span class="window-title"><i class="fa-solid fa-user-ninja"></i> JANELA DE STATUS</span>
                 <span style="background: var(--system-cyan); color: #000; padding: 2px 8px; font-size: 0.8rem; font-weight: bold; font-family: monospace;">LVL <span id="display-nivel-usuario">1</span></span>
             </div>
 
-            <h3 id="display-nome-usuario" style="color: #fff; font-size: 1rem; margin-bottom: 6px;">CAÇADOR: USER</h3>
+            <h3 id="display-nome-usuario" style="color: #fff; font-family: monospace; font-size: 1rem; margin-bottom: 6px;">CAÇADOR: GOD</h3>
 
             <div class="xp-bar-outer">
                 <div id="barra-progresso-xp" class="xp-bar-inner"></div>
@@ -1115,114 +726,103 @@
                 XP: <span id="display-xp-usuario">0</span> / <span id="display-xp-proximo">200</span>
             </div>
 
-            <div style="background: rgba(0, 240, 255, 0.1); border: 1px solid var(--system-cyan); padding: 8px; font-size: 0.8rem; font-family: monospace; display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+            <div style="border: 1px solid var(--system-cyan); background: rgba(0,240,255,0.08); padding: 8px; font-family: monospace; font-size: 0.8rem; display: flex; justify-content: space-between; margin-bottom: 10px;">
                 <span>PONTOS DISPONÍVEIS:</span>
                 <strong id="display-pontos-disponiveis" style="color: var(--god-gold); font-size: 0.95rem;">5</strong>
             </div>
 
-            <div class="radar-status-stage" id="radarStage3D">
-                <div class="pentagon-frame">
-                    <!-- ROTAÇÃO CONSTANTE HOLOGRÁFICA DO ANEL -->
-                    <div class="pentagon-border-rotating"></div>
-                    
-                    <div class="avatar-display-box" id="avatarContainer">
-                        <img id="customAvatarImg" class="avatar-custom-img" src="https://images.unsplash.com/photo-1563089145-599997674d42?w=150&auto=format&fit=crop&q=80" alt="Avatar Caçador">
-                    </div>
+            <!-- DIAGRAMA DOS PECADOS DO CAÇADOR (IMAGEM 3 INTEGRADA) -->
+            <div class="sins-diagram-stage">
+                <div class="sins-ring-line"></div>
 
-                    <div class="radar-stat-box pos-top">
-                        <span class="radar-stat-label">ENT</span>
-                        <span id="atrib-ent" class="radar-stat-val">10</span>
-                        <button class="btn-stat-add-small" onclick="adicionarPontoManual('ent')">+</button>
-                    </div>
-
-                    <div class="radar-stat-box pos-left-top">
-                        <span class="radar-stat-label">OFE</span>
-                        <span id="atrib-ofe" class="radar-stat-val">10</span>
-                        <button class="btn-stat-add-small" onclick="adicionarPontoManual('ofe')">+</button>
-                    </div>
-
-                    <div class="radar-stat-box pos-right-top">
-                        <span class="radar-stat-label">DEF</span>
-                        <span id="atrib-def" class="radar-stat-val">10</span>
-                        <button class="btn-stat-add-small" onclick="adicionarPontoManual('def')">+</button>
-                    </div>
-
-                    <div class="radar-stat-box pos-left-bottom">
-                        <span class="radar-stat-label">VEL</span>
-                        <span id="atrib-vel" class="radar-stat-val">10</span>
-                        <button class="btn-stat-add-small" onclick="adicionarPontoManual('vel')">+</button>
-                    </div>
-
-                    <div class="radar-stat-box pos-right-bottom">
-                        <span class="radar-stat-label">TEC</span>
-                        <span id="atrib-tec" class="radar-stat-val">10</span>
-                        <button class="btn-stat-add-small" onclick="adicionarPontoManual('tec')">+</button>
-                    </div>
+                <div class="sin-node-center">
+                    <div id="center-char-name" class="center-char-title">GOD</div>
+                    <div id="center-char-class" class="center-class-sub">SOMBRA</div>
                 </div>
 
-                <div class="avatar-controls-bar">
-                    <button class="btn-avatar-opt" onclick="document.getElementById('avatarFileInput').click()"><i class="fa-solid fa-camera"></i> CARREGAR SUA FOTO</button>
-                    <button class="btn-avatar-opt" onclick="toggleBeastPicker()"><i class="fa-solid fa-wand-magic-sparkles"></i> FERAS MEIO-HUMANAS</button>
-                    <input type="file" id="avatarFileInput" accept="image/*" style="display: none;" onchange="uploadFotoCaçador(event)">
-                </div>
+                <div class="sin-node-icon node-top"><i class="fa-solid fa-dragon"></i></div>
+                <div class="sin-node-icon node-top-right"><i class="fa-solid fa-staff"></i></div>
+                <div class="sin-node-icon node-bottom-right"><i class="fa-solid fa-dog"></i></div>
+                <div class="sin-node-icon node-bottom"><i class="fa-solid fa-paw"></i></div>
+                <div class="sin-node-icon node-bottom-left"><i class="fa-solid fa-head-side-virus"></i></div>
+                <div class="sin-node-icon node-top-left"><i class="fa-solid fa-crown"></i></div>
+            </div>
 
-                <!-- SELETOR DE AVATARES DE BESTAS MEIO-HUMANAS (FORMATO HEXAGONAL HOLOGRÁFICO) -->
-                <div id="beastPickerGrid" class="beast-picker-grid" style="display: none;">
-                    <div class="beast-avatar-card" title="Lobo Bestial" onclick="selecionarBeastImg('https://images.unsplash.com/photo-1563089145-599997674d42?w=150&auto=format&fit=crop&q=80')">
-                        <img src="https://images.unsplash.com/photo-1563089145-599997674d42?w=150&auto=format&fit=crop&q=80" alt="Lobo">
-                    </div>
-                    <div class="beast-avatar-card" title="Dragão Guerreiro" onclick="selecionarBeastImg('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=150&auto=format&fit=crop&q=80')">
-                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=150&auto=format&fit=crop&q=80" alt="Dragão">
-                    </div>
-                    <div class="beast-avatar-card" title="Leão Humanoide" onclick="selecionarBeastImg('https://images.unsplash.com/photo-1534447677768-be436bb09401?w=150&auto=format&fit=crop&q=80')">
-                        <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?w=150&auto=format&fit=crop&q=80" alt="Leão">
-                    </div>
-                    <div class="beast-avatar-card" title="Demônio de Solo" onclick="selecionarBeastImg('https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=150&auto=format&fit=crop&q=80')">
-                        <img src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=150&auto=format&fit=crop&q=80" alt="Demônio">
-                    </div>
-                    <div class="beast-avatar-card" title="Cavaleiro Obscuro" onclick="selecionarBeastImg('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=150&auto=format&fit=crop&q=80')">
-                        <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=150&auto=format&fit=crop&q=80" alt="Cavaleiro">
-                    </div>
+            <!-- ATRIBUTOS ENQUADRADOS ESTILO IMAGEM 2 -->
+            <div class="attributes-grid-hud">
+                <div class="stat-hud-box">
+                    <div class="stat-hud-label">ENT</div>
+                    <div id="atrib-ent" class="stat-hud-val">10</div>
+                    <button class="btn-add-stat" onclick="adicionarPontoManual('ent')">+</button>
+                </div>
+                <div class="stat-hud-box">
+                    <div class="stat-hud-label">OFE</div>
+                    <div id="atrib-ofe" class="stat-hud-val">10</div>
+                    <button class="btn-add-stat" onclick="adicionarPontoManual('ofe')">+</button>
+                </div>
+                <div class="stat-hud-box">
+                    <div class="stat-hud-label">DEF</div>
+                    <div id="atrib-def" class="stat-hud-val">10</div>
+                    <button class="btn-add-stat" onclick="adicionarPontoManual('def')">+</button>
+                </div>
+                <div class="stat-hud-box">
+                    <div class="stat-hud-label">VEL</div>
+                    <div id="atrib-vel" class="stat-hud-val">10</div>
+                    <button class="btn-add-stat" onclick="adicionarPontoManual('vel')">+</button>
+                </div>
+                <div class="stat-hud-box">
+                    <div class="stat-hud-label">TEC</div>
+                    <div id="atrib-tec" class="stat-hud-val">10</div>
+                    <button class="btn-add-stat" onclick="adicionarPontoManual('tec')">+</button>
+                </div>
+            </div>
+
+            <!-- GRADE DE CLASSES EMBLEMAS -->
+            <div class="class-selection-grid">
+                <div class="class-select-card" onclick="selecionarClasse('DESCONHECIDA / SOMBRA')">
+                    <i class="fa-solid fa-circle-question"></i>
+                    <span>MISTÉRIO (?)</span>
+                </div>
+                <div class="class-select-card" onclick="selecionarClasse('MONARCA DA MORTE')">
+                    <i class="fa-solid fa-skull" style="color: var(--system-red);"></i>
+                    <span>CAVEIRA</span>
+                </div>
+                <div class="class-select-card" onclick="selecionarClasse('DRAGÃO DA IRA')">
+                    <i class="fa-solid fa-dragon"></i>
+                    <span>DRAGÃO</span>
+                </div>
+                <div class="class-select-card" onclick="selecionarClasse('SERPENTE DA INVEJA')">
+                    <i class="fa-solid fa-staff"></i>
+                    <span>SERPENTE</span>
+                </div>
+                <div class="class-select-card" onclick="selecionarClasse('RAPOSA DA GANÂNCIA')">
+                    <i class="fa-solid fa-dog"></i>
+                    <span>RAPOSA</span>
+                </div>
+                <div class="class-select-card" onclick="selecionarClasse('LEÃO DO ORGULHO')">
+                    <i class="fa-solid fa-crown" style="color: var(--god-gold);"></i>
+                    <span>LEÃO</span>
                 </div>
             </div>
         </div>
 
         <!-- JANELA 2: TAF -->
         <div id="win-taf" class="system-window system-window-red" style="display: none;">
-            <div class="anime-limit-quote" style="border-left-color: var(--system-red);">⚡ "A dor de hoje é a força que quebrará qualquer inimigo amanhã. Não pare!"</div>
-            <div class="window-header" style="border-bottom-color: var(--system-red);">
-                <span class="window-title" style="color: var(--system-red);"><i class="fa-solid fa-person-running"></i> MISSÕES FÍSICAS (TAF)</span>
-            </div>
-            <p style="font-size: 0.78rem; color: #ddd; margin-bottom: 12px;">Cumpra suas metas de treino hoje para evoluir o Caçador!</p>
-
+            <div class="anime-limit-quote" style="border-left-color: var(--system-red);">⚡ "A dor de hoje é a força do amanhã!"</div>
+            <div class="window-header"><span class="window-title" style="color: var(--system-red);"><i class="fa-solid fa-person-running"></i> MISSÕES FÍSICAS (TAF)</span></div>
             <div class="taf-grid">
-                <div>
-                    <span style="font-size: 0.68rem; color: #aaa; display: block;">🏃 CORRIDA</span>
-                    <strong id="meta-distancia-km" style="font-size: 1.1rem; color: #fff;">1</strong> km
-                </div>
-                <div>
-                    <span style="font-size: 0.68rem; color: #aaa; display: block;">💪 FLEXÕES</span>
-                    <strong id="meta-qtd-flexao" style="font-size: 1.1rem; color: #fff;">10</strong> rep
-                </div>
-                <div>
-                    <span style="font-size: 0.68rem; color: #aaa; display: block;">🧘 ABDOMINAIS</span>
-                    <strong id="meta-qtd-abdominal" style="font-size: 1.1rem; color: #fff;">10</strong> rep
-                </div>
+                <div><span>🏃 CORRIDA</span><strong id="meta-distancia-km" style="font-size: 1.1rem; color: #fff;">1</strong> km</div>
+                <div><span>💪 FLEXÕES</span><strong id="meta-qtd-flexao" style="font-size: 1.1rem; color: #fff;">10</strong> rep</div>
+                <div><span>🧘 ABDOMINAIS</span><strong id="meta-qtd-abdominal" style="font-size: 1.1rem; color: #fff;">10</strong> rep</div>
             </div>
-
-            <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 10px;">
-                <button onclick="concluirMetaFisica('corrida', 120, 4)" class="btn-taf" id="btn-meta-corrida">CUMPRIR CORRIDA (+120 XP)</button>
-                <button onclick="concluirMetaFisica('flexao', 90, 3)" class="btn-taf" id="btn-meta-flexao">CUMPRIR FLEXÃO (+90 XP)</button>
-                <button onclick="concluirMetaFisica('abdominal', 90, 3)" class="btn-taf" id="btn-meta-abdominal">CUMPRIR ABDOMINAL (+90 XP)</button>
-            </div>
+            <button onclick="concluirMetaFisica('corrida', 120, 4)" class="btn-taf">CUMPRIR CORRIDA (+120 XP)</button>
+            <button onclick="concluirMetaFisica('flexao', 90, 3)" class="btn-taf">CUMPRIR FLEXÃO (+90 XP)</button>
+            <button onclick="concluirMetaFisica('abdominal', 90, 3)" class="btn-taf">CUMPRIR ABDOMINAL (+90 XP)</button>
         </div>
 
-        <!-- JANELA 3: MISSÕES CUSTOMIZADAS -->
+        <!-- JANELA 3: MISSÕES -->
         <div id="win-missoes" class="system-window" style="display: none;">
-            <div class="anime-limit-quote">📜 "Se você não lutar pelo seu futuro diário, ninguém o fará. Conclua cada missão como se dependesse disso!"</div>
-            <div class="window-header">
-                <span class="window-title"><i class="fa-solid fa-scroll"></i> MISSÕES DIÁRIAS</span>
-            </div>
+            <div class="window-header"><span class="window-title"><i class="fa-solid fa-scroll"></i> MISSÕES DIÁRIAS</span></div>
             <div class="task-input-box">
                 <input type="text" id="customTaskInput" placeholder="Adicionar nova missão...">
                 <button onclick="addCustomTask()" style="background: var(--system-cyan); color: #000; border: none; font-weight: bold; padding: 0 14px; cursor: pointer;">ADD</button>
@@ -1230,109 +830,53 @@
             <ul class="task-list" id="customTaskList"></ul>
         </div>
 
-        <!-- JANELA 4: BANCO DE QUESTÕES -->
+        <!-- JANELA 4: QUESTÕES -->
         <div id="win-banco" class="system-window" style="display: none;">
-            <div class="anime-limit-quote">🧠 "O conhecimento é a lâmina mais afiada do Caçador. Domine o edital e alcance o topo!"</div>
-            <div class="window-header">
-                <span class="window-title"><i class="fa-solid fa-book"></i> BANCO DE QUESTÕES</span>
-            </div>
-            <nav class="nav-tabs">
-                <button class="tab-btn active" onclick="switchTab('portugues', event)">Português (35)</button>
-                <button class="tab-btn" onclick="switchTab('racioc_logico', event)">Raciocínio Lógico (35)</button>
-                <button class="tab-btn" onclick="switchTab('constitucional', event)">Constitucional (35)</button>
-                <button class="tab-btn" onclick="switchTab('direitos_humanos', event)">Direitos Humanos (35)</button>
-                <button class="tab-btn" onclick="switchTab('historia', event)">História PE (35)</button>
-                <button class="tab-btn" onclick="switchTab('informatica', event)">Informática (35)</button>
-            </nav>
-
-            <div style="background: rgba(2, 6, 16, 0.8); border: 1px dashed var(--system-cyan); padding: 20px; text-align: center; margin-top: 10px;">
-                <h3 id="titulo-materia-ativa" style="color: var(--system-cyan); font-family: monospace; font-size: 0.9rem; letter-spacing: 1px; margin-bottom: 6px;">DISCIPLINA ATIVA: PORTUGUÊS</h3>
-                <p style="font-size: 0.8rem; color: var(--text-sub); margin-bottom: 12px;">Abra a Janela Mística para responder questão por questão no estilo game.</p>
-                <button class="btn-abrir-pop" onclick="abrirModalQuestao()">⚔️ ABRIR JANELA DO SISTEMA</button>
-            </div>
+            <div class="window-header"><span class="window-title"><i class="fa-solid fa-book"></i> BANCO DE QUESTÕES PMPE</span></div>
+            <p style="font-size: 0.8rem; color: var(--text-sub); text-align: center; margin-bottom: 12px;">35 Questões por Disciplina no estilo Game.</p>
+            <button onclick="abrirModalQuestao()" style="width: 100%; padding: 14px; background: var(--system-cyan); color: #000; font-weight: bold; cursor: pointer; border: none;">⚔️ ABRIR POP-UP DO BANCO</button>
         </div>
 
-        <!-- JANELA 5: CHAT & OFERTAS -->
+        <!-- JANELA 5: CHAT -->
         <div id="win-chat" class="system-window" style="display: none;">
-            <div class="anime-limit-quote">🛡️ "Sozinhos somos fortes, mas juntos formamos uma Guilda imbatível!"</div>
-            <div class="window-header">
-                <span class="window-title"><i class="fa-solid fa-comments"></i> COMUNIDADE DE CAÇADORES</span>
-            </div>
-
-            <div class="chat-subtabs">
-                <button id="btn-chat-sub-global" class="chat-subtab-btn active" onclick="switchChatSubtab('global')">💬 CHAT GLOBAL</button>
-                <button id="btn-chat-sub-ofertas" class="chat-subtab-btn" onclick="switchChatSubtab('ofertas')">📜 OFERTAR MISSÃO</button>
-            </div>
-
-            <div id="chat-sec-global">
-                <div id="chat-messages-list" class="chat-messages-container"></div>
-                <div class="task-input-box">
-                    <input type="text" id="chatInputMessage" placeholder="Transmitir mensagem aos caçadores...">
-                    <button onclick="enviarMensagemChat()" style="background: var(--system-cyan); color: #000; border: none; font-weight: bold; padding: 0 14px; cursor: pointer;">ENVIAR</button>
-                </div>
-            </div>
-
-            <div id="chat-sec-ofertas" style="display: none;">
-                <div style="background: rgba(16, 8, 24, 0.8); border: 1px solid var(--god-gold); padding: 10px; margin-bottom: 10px;">
-                    <div style="font-size: 0.75rem; color: var(--god-gold); font-family: monospace; font-weight: bold; margin-bottom: 6px;">CRIAR OFERTA DE MISSÃO PARA OUTRO CAÇADOR:</div>
-                    <input type="text" id="offerTitleInput" placeholder="Título da Missão..." style="width: 100%; padding: 6px; background: #030a16; border: 1px solid var(--god-gold); color: #fff; font-size: 0.8rem; margin-bottom: 6px; outline: none;">
-                    <div style="display: flex; gap: 6px; margin-bottom: 6px;">
-                        <input type="number" id="offerXpInput" placeholder="Recompensa XP..." style="flex: 1; padding: 6px; background: #030a16; border: 1px solid var(--god-gold); color: #fff; font-size: 0.8rem; outline: none;">
-                        <input type="number" id="offerPtsInput" placeholder="Recompensa Pts..." style="flex: 1; padding: 6px; background: #030a16; border: 1px solid var(--god-gold); color: #fff; font-size: 0.8rem; outline: none;">
-                    </div>
-                    <button onclick="publicarOfertaMissao()" style="width: 100%; padding: 8px; background: var(--god-gold); color: #000; border: none; font-weight: bold; cursor: pointer; font-size: 0.75rem; text-transform: uppercase;">PUBLICAR NO MURAL</button>
-                </div>
-
-                <div id="offers-feed-list" style="max-height: 200px; overflow-y: auto;"></div>
+            <div class="window-header"><span class="window-title"><i class="fa-solid fa-comments"></i> CHAT DOS CAÇADORES</span></div>
+            <div id="chat-messages-list" style="height: 200px; overflow-y: auto; background: rgba(2,6,16,0.9); padding: 10px; margin-bottom: 10px;"></div>
+            <div class="task-input-box">
+                <input type="text" id="chatInputMessage" placeholder="Enviar mensagem...">
+                <button onclick="enviarMensagemChat()" style="background: var(--system-cyan); color: #000; border: none; font-weight: bold; padding: 0 14px; cursor: pointer;">ENVIAR</button>
             </div>
         </div>
 
         <!-- JANELA 6: BOSSES -->
         <div id="win-bosses" class="system-window system-window-red" style="display: none;">
-            <div class="anime-limit-quote" style="border-left-color: var(--system-red);">👹 "Diante de um inimigo devastador, apenas a determinação absoluta traz a vitória!"</div>
-            <div class="window-header" style="border-bottom-color: var(--system-red);">
-                <span class="window-title" style="color: var(--system-red);"><i class="fa-solid fa-skull"></i> MASMORRAS & BOSSES</span>
-            </div>
-            <p style="font-size: 0.78rem; color: #ddd; margin-bottom: 12px;">Enfrente os Guardiões de Portal para obter itens e status lendários!</p>
-
+            <div class="window-header"><span class="window-title" style="color: var(--system-red);"><i class="fa-solid fa-skull"></i> MASMORRAS DE BOSSES</span></div>
             <div id="bossesFeedContainer"></div>
         </div>
 
-        <!-- JANELA 7: EQUIP / ARMAZENAMENTO -->
+        <!-- JANELA 7: EQUIP -->
         <div id="win-equip" class="system-window" style="display: none;">
-            <div class="anime-limit-quote">🎒 "Seus recursos e o controle do tempo são as armas supremas para a evolução continua."</div>
-            <div class="window-header">
-                <span class="window-title"><i class="fa-solid fa-box-archive"></i> ARMAZENAMENTO DIMENSIONAL</span>
-            </div>
-
+            <div class="window-header"><span class="window-title"><i class="fa-solid fa-box-archive"></i> ARMAZENAMENTO DIMENSIONAL</span></div>
             <div class="equip-grid">
                 <div class="equip-card">
-                    <div class="equip-card-title"><i class="fa-solid fa-clock"></i> HORÁRIO MUNDIAL DO SISTEMA</div>
+                    <div style="font-family: monospace; font-size: 0.8rem; color: var(--text-sub); margin-bottom: 6px;">HORÁRIO MUNDIAL DO SISTEMA</div>
                     <div id="real-time-clock" class="digital-clock-display">00:00:00</div>
-                </div>
-
-                <div class="equip-card">
-                    <div class="equip-card-title"><i class="fa-solid fa-stopwatch"></i> CRONÔMETRO DE TREINO / ESTUDO</div>
-                    <div id="stopwatch-display" class="digital-clock-display" style="color: var(--god-gold); text-shadow: 0 0 10px var(--god-gold);">00:00:00</div>
-                    <div style="display: flex; gap: 6px; justify-content: center; margin-top: 10px;">
-                        <button onclick="iniciarCronometro()" style="background: var(--system-cyan); color: #000; border: none; padding: 6px 14px; font-weight: bold; cursor: pointer; font-size: 0.75rem;">INICIAR</button>
-                        <button onclick="pausarCronometro()" style="background: rgba(255, 42, 109, 0.3); border: 1px solid var(--system-red); color: #fff; padding: 6px 14px; font-weight: bold; cursor: pointer; font-size: 0.75rem;">PAUSAR</button>
-                        <button onclick="zerarCronometro()" style="background: rgba(2, 6, 16, 0.9); border: 1px solid var(--system-cyan); color: var(--system-cyan); padding: 6px 14px; font-weight: bold; cursor: pointer; font-size: 0.75rem;">ZERAR</button>
-                    </div>
-                </div>
-
-                <div class="equip-card">
-                    <div class="equip-card-title"><i class="fa-solid fa-compass"></i> BÚSSOLA TÁTICA HOLOGRÁFICA</div>
-                    <div class="compass-dial-container">
-                        <div id="compass-needle-el" class="compass-needle"></div>
-                        <i class="fa-solid fa-crosshairs" style="position: absolute; color: var(--system-cyan); opacity: 0.4; font-size: 6rem;"></i>
-                    </div>
-                    <div id="compass-heading-val" class="compass-heading-text">0° NORTE</div>
                 </div>
             </div>
         </div>
 
     </main>
+
+    <!-- POP-UP GAME QUESTÕES PMPE -->
+    <div id="game-quest-overlay" class="game-modal-overlay">
+        <div class="game-modal-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--system-cyan); padding-bottom: 8px;">
+                <h3 id="pop-materia-titulo" style="color: var(--system-cyan); font-family: monospace;">PORTUGUÊS - QUESTÃO #1</h3>
+                <button onclick="fecharModalQuestao()" style="background: none; border: none; color: #ff2a6d; font-size: 1.3rem; cursor: pointer;">✕</button>
+            </div>
+            <div id="pop-pergunta-texto" style="background: rgba(2,6,16,0.9); border: 1px solid var(--system-cyan); padding: 12px; font-size: 0.9rem;">Carregando pergunta...</div>
+            <div id="pop-opcoes-container"></div>
+        </div>
+    </div>
 
     <script>
         const memoriaLocal = {};
@@ -1344,693 +888,177 @@
             memoriaLocal[key] = value;
         }
 
+        let dadosCacador = {
+            nome: 'GOD',
+            classe: 'SOMBRA',
+            xp: 0, nivel: 1, pontos: 5,
+            ent: 10, ofe: 10, def: 10, vel: 10, tec: 10,
+            avatarVal: 'https://images.unsplash.com/photo-1563089145-599997674d42?w=150&auto=format&fit=crop&q=80'
+        };
+
+        function tocarSomEntrada() {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(587.33, ctx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.3);
+                gain.gain.setValueAtTime(0.3, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start();
+                osc.stop(ctx.currentTime + 0.3);
+            } catch(e) {}
+        }
+
         function despertarSistema() {
+            tocarSomEntrada();
             document.getElementById('abyss-screen').style.display = 'none';
-            const autenticado = sessionStorage.getItem('cacador_autenticado');
-            if (autenticado === 'true') {
-                renderizarTudo();
+            const aut = sessionStorage.getItem('cacador_autenticado');
+            if (aut === 'true') {
+                renderizarPainel();
             } else {
                 document.getElementById('modal-login').style.display = 'flex';
             }
         }
 
-        let dadosCacadorRPG = { nome: 'CAÇADOR', xp: 0, nivel: 1, pontosDisponiveis: 5, ent: 10, ofe: 10, def: 10, vel: 10, tec: 10, avatarType: 'img', avatarVal: 'https://images.unsplash.com/photo-1563089145-599997674d42?w=150&auto=format&fit=crop&q=80' };
-
         function autenticarUsuario() {
             const u = document.getElementById('input-login-user').value.trim();
             const p = document.getElementById('input-login-pass').value.trim();
-
-            if (u.length > 0 && p.length > 0) {
-                const userKey = `cacador_user_data_${u.toLowerCase()}`;
-                let saved = JSON.parse(getSafeStorage(userKey));
-
-                if (saved && saved.senha && saved.senha !== p) {
-                    alert('Senha incorreta para este Caçador!');
-                    return;
-                }
-
-                if (!saved) {
-                    saved = {
-                        nome: u.toUpperCase(),
-                        senha: p,
-                        xp: 0, nivel: 1, pontosDisponiveis: 5, ent: 10, ofe: 10, def: 10, vel: 10, tec: 10,
-                        avatarType: 'img', avatarVal: 'https://images.unsplash.com/photo-1563089145-599997674d42?w=150&auto=format&fit=crop&q=80'
-                    };
-                }
-
-                dadosCacadorRPG = saved;
-                setSafeStorage(userKey, JSON.stringify(dadosCacadorRPG));
-                sessionStorage.setItem('cacador_usuario_ativo', userKey);
+            if (u.length > 0) {
+                dadosCacador.nome = u.toUpperCase();
                 sessionStorage.setItem('cacador_autenticado', 'true');
-
                 document.getElementById('modal-login').style.display = 'none';
-                renderizarTudo();
-            } else {
-                document.getElementById('login-erro').style.display = 'block';
+                renderizarPainel();
             }
         }
 
         function fazerLogout() {
             sessionStorage.removeItem('cacador_autenticado');
-            sessionStorage.removeItem('cacador_usuario_ativo');
             document.getElementById('abyss-screen').style.display = 'flex';
-            document.getElementById('modal-login').style.display = 'none';
             document.getElementById('optionsDropdown').style.display = 'none';
         }
 
-        /* MENU DE CONFIGURAÇÕES (3 PONTOS) */
         function toggleOptionsMenu() {
-            const dropdown = document.getElementById('optionsDropdown');
-            dropdown.style.display = (dropdown.style.display === 'flex') ? 'none' : 'flex';
+            const drp = document.getElementById('optionsDropdown');
+            drp.style.display = (drp.style.display === 'flex') ? 'none' : 'flex';
         }
 
-        function promptMudarSenha() {
-            const novaSenha = prompt("Digite a sua nova senha do Sistema:");
-            if (novaSenha && novaSenha.trim().length > 0) {
-                dadosCacadorRPG.senha = novaSenha.trim();
-                salvarDadosUsuario();
-                alert("Senha alterada com sucesso!");
-                document.getElementById('optionsDropdown').style.display = 'none';
+        function abrirModalEstatisticas() {
+            document.getElementById('modalEstatisticas').style.display = 'flex';
+            document.getElementById('modalNomeUser').innerText = `CAÇADOR: ${dadosCacador.nome}`;
+            document.getElementById('modalClasseUser').innerText = `CLASSE: ${dadosCacador.classe}`;
+            document.getElementById('modalLvl').innerText = dadosCacador.nivel;
+            document.getElementById('modalXpAtual').innerText = dadosCacador.xp;
+            let req = dadosCacador.nivel * 200;
+            document.getElementById('modalXpProx').innerText = req;
+            document.getElementById('modalBarraXp').style.width = `${Math.min((dadosCacador.xp / req) * 100, 100)}%`;
+        }
+
+        function fecharModalEstatisticas() {
+            document.getElementById('modalEstatisticas').style.display = 'none';
+        }
+
+        function uploadFotoCaçador(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    dadosCacador.avatarVal = e.target.result;
+                    document.getElementById('bubbleAvatarImg').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
             }
         }
 
-        /* NOTIFICAÇÕES */
-        function solicitarPermissaoNotificacao() {
-            if ("Notification" in window) {
-                Notification.requestPermission().then(permission => {
-                    if (permission === "granted") {
-                        new Notification("[SISTEMA DO CAÇADOR]", {
-                            body: "Notificações de Masmorra e Treino ativas!",
-                            icon: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/svgs/solid/bell.svg"
-                        });
-                    }
-                });
-            } else {
-                alert("Este navegador não suporta Notificações Push.");
+        function selecionarClasse(nomeClasse) {
+            dadosCacador.classe = nomeClasse;
+            renderizarPainel();
+            if (typeof confetti === 'function') confetti({ particleCount: 60, spread: 60 });
+        }
+
+        function adicionarPontoManual(atrib) {
+            if (dadosCacador.pontos > 0) {
+                dadosCacador.pontos -= 1;
+                dadosCacador[atrib] += 1;
+                renderizarPainel();
             }
         }
 
-        /* NAVEGAÇÃO TOUCH / SWIPE */
-        const listaJanelasOrder = ['status', 'taf', 'missoes', 'banco', 'chat', 'bosses', 'equip'];
-        let janelaAtualIndex = 0;
-        let startX = 0;
+        function renderizarPainel() {
+            document.getElementById('display-nome-usuario').innerText = `CAÇADOR: ${dadosCacador.nome}`;
+            document.getElementById('display-nivel-usuario').innerText = dadosCacador.nivel;
+            document.getElementById('display-xp-usuario').innerText = dadosCacador.xp;
+            let xpReq = dadosCacador.nivel * 200;
+            document.getElementById('display-xp-proximo').innerText = xpReq;
+            document.getElementById('barra-progresso-xp').style.width = `${Math.min((dadosCacador.xp / xpReq) * 100, 100)}%`;
 
-        const viewportEl = document.getElementById('viewportMain');
-        viewportEl.addEventListener('touchstart', e => {
-            startX = e.changedTouches[0].screenX;
-        }, {passive: true});
+            document.getElementById('display-pontos-disponiveis').innerText = dadosCacador.pontos;
+            document.getElementById('center-char-name').innerText = dadosCacador.nome;
+            document.getElementById('center-char-class').innerText = dadosCacador.classe;
 
-        viewportEl.addEventListener('touchend', e => {
-            let endX = e.changedTouches[0].screenX;
-            if (startX - endX > 50) {
-                if (janelaAtualIndex < listaJanelasOrder.length - 1) {
-                    exibirJanela(listaJanelasOrder[janelaAtualIndex + 1]);
-                }
-            } else if (endX - startX > 50) {
-                if (janelaAtualIndex > 0) {
-                    exibirJanela(listaJanelasOrder[janelaAtualIndex - 1]);
-                }
-            }
-        }, {passive: true});
+            document.getElementById('atrib-ent').innerText = dadosCacador.ent;
+            document.getElementById('atrib-ofe').innerText = dadosCacador.ofe;
+            document.getElementById('atrib-def').innerText = dadosCacador.def;
+            document.getElementById('atrib-vel').innerText = dadosCacador.vel;
+            document.getElementById('atrib-tec').innerText = dadosCacador.tec;
+        }
 
-        /* EFEITO TILT 3D */
-        window.addEventListener('deviceorientation', e => {
-            const stage = document.getElementById('radarStage3D');
-            if (stage && e.beta && e.gamma) {
-                let rotX = Math.min(15, Math.max(-15, e.beta / 4));
-                let rotY = Math.min(15, Math.max(-15, e.gamma / 4));
-                stage.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
-            }
-        });
+        function exibirJanela(nomeJanela) {
+            const janelas = ['status', 'taf', 'missoes', 'banco', 'chat', 'bosses', 'equip'];
+            janelas.forEach(j => {
+                const win = document.getElementById(`win-${j}`);
+                const btn = document.getElementById(`btn-win-${j}`);
+                if (win) win.style.display = (j === nomeJanela) ? 'block' : 'none';
+                if (btn) btn.classList.toggle('active', j === nomeJanela);
+            });
+            if (nomeJanela === 'bosses') renderizarBosses();
+        }
 
-        /* BOSSES DE SOLO LEVELING */
-        let bossesData = JSON.parse(getSafeStorage('sistema_cacador_bosses')) || [
-            { id: 1, name: "IGRIS O COMANDANTE VERMELHO", hp: 500, maxHp: 500, xpReward: 300, ptsReward: 3, defeated: false },
-            { id: 2, name: "KARGALGAN O MAGO ORC", hp: 1000, maxHp: 1000, xpReward: 600, ptsReward: 5, defeated: false },
-            { id: 3, name: "BERU O REI DAS FORMIGAS", hp: 2000, maxHp: 2000, xpReward: 1200, ptsReward: 8, defeated: false }
+        let bossesData = [
+            { id: 1, name: "IGRIS O COMANDANTE VERMELHO", hp: 500, maxHp: 500, xpReward: 300, defeated: false },
+            { id: 2, name: "BERU O REI DAS FORMIGAS", hp: 1500, maxHp: 1500, xpReward: 800, defeated: false }
         ];
 
         function renderizarBosses() {
             const container = document.getElementById('bossesFeedContainer');
             if (!container) return;
             container.innerHTML = '';
-
             bossesData.forEach(b => {
                 let pct = (b.hp / b.maxHp) * 100;
-                const card = document.createElement('div');
-                card.className = 'boss-card';
-                card.innerHTML = `
-                    <div class="boss-header">
-                        <span>👹 ${b.name}</span>
-                        <span>HP: ${b.hp}/${b.maxHp}</span>
+                container.innerHTML += `
+                    <div class="boss-card">
+                        <div style="display:flex; justify-content:space-between; color:var(--system-red); font-family:monospace;">
+                            <span>👹 ${b.name}</span><span>HP: ${b.hp}/${b.maxHp}</span>
+                        </div>
+                        <div class="boss-hp-outer"><div class="boss-hp-inner" style="width:${Math.max(0, pct)}%;"></div></div>
+                        <button class="btn-attack-boss" ${b.defeated ? 'disabled' : ''} onclick="atacarBoss(${b.id})">
+                            ${b.defeated ? 'DERROTADO ✅' : '⚔️ GOLPEAR BOSS (-50 HP)'}
+                        </button>
                     </div>
-                    <div class="boss-hp-outer">
-                        <div class="boss-hp-inner" style="width: ${Math.max(0, pct)}%;"></div>
-                    </div>
-                    <div style="font-size: 0.72rem; color: var(--god-gold); font-family: monospace;">RECOMPENSA: +${b.xpReward} XP / +${b.ptsReward} PONTOS STATUS</div>
-                    <button class="btn-attack-boss" ${b.defeated ? 'disabled' : ''} onclick="atacarBoss(${b.id})">
-                        ${b.defeated ? 'DERROTADO (COMPLETO)' : '⚔️ GOLPEAR BOSS (-50 HP)'}
-                    </button>
                 `;
-                container.appendChild(card);
             });
         }
 
         function atacarBoss(id) {
-            const boss = bossesData.find(b => b.id === id);
-            if (boss && !boss.defeated) {
-                let dano = (dadosCacadorRPG.ofe || 10) * 3;
-                boss.hp -= dano;
-                if (boss.hp <= 0) {
-                    boss.hp = 0;
-                    boss.defeated = true;
-                    dadosCacadorRPG.xp += boss.xpReward;
-                    dadosCacadorRPG.pontosDisponiveis += boss.ptsReward;
-                    if (typeof confetti === 'function') confetti({ particleCount: 150, spread: 90 });
-                    if ("Notification" in window && Notification.permission === "granted") {
-                        new Notification("[SISTEMA DO CAÇADOR]", { body: `Você derrotou ${boss.name}! Recompensas adicionadas ao Status.` });
-                    }
-                }
-                setSafeStorage('sistema_cacador_bosses', JSON.stringify(bossesData));
-                salvarDadosUsuario();
-                renderizarHUDRPG();
+            const b = bossesData.find(x => x.id === id);
+            if (b && !b.defeated) {
+                b.hp -= 50;
+                if (b.hp <= 0) { b.hp = 0; b.defeated = true; dadosCacador.xp += b.xpReward; }
                 renderizarBosses();
+                renderizarPainel();
             }
         }
 
-        /* AVATAR DO CAÇADOR */
-        function uploadFotoCaçador(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    dadosCacadorRPG.avatarType = 'img';
-                    dadosCacadorRPG.avatarVal = e.target.result;
-                    salvarDadosUsuario();
-                    renderizarAvatar();
-                };
-                reader.readAsDataURL(file);
-            }
-        }
+        function abrirModalQuestao() { document.getElementById('game-quest-overlay').style.display = 'flex'; }
+        function fecharModalQuestao() { document.getElementById('game-quest-overlay').style.display = 'none'; }
 
-        function toggleBeastPicker() {
-            const grid = document.getElementById('beastPickerGrid');
-            if (grid) grid.style.display = (grid.style.display === 'none') ? 'grid' : 'none';
-        }
-
-        function selecionarBeastImg(urlImg) {
-            dadosCacadorRPG.avatarType = 'img';
-            dadosCacadorRPG.avatarVal = urlImg;
-            salvarDadosUsuario();
-            renderizarAvatar();
-            document.getElementById('beastPickerGrid').style.display = 'none';
-        }
-
-        function renderizarAvatar() {
-            const imgEl = document.getElementById('customAvatarImg');
-            if (imgEl) {
-                imgEl.src = dadosCacadorRPG.avatarVal || 'https://images.unsplash.com/photo-1563089145-599997674d42?w=150&auto=format&fit=crop&q=80';
-            }
-        }
-
-        let customTasks = JSON.parse(getSafeStorage('sistema_cacador_custom_tasks')) || [
-            { id: 1, text: "Estudar 2 horas do Edital", completed: false },
-            { id: 2, text: "Treino Físico Intenso", completed: false }
-        ];
-
-        let metasFisicasStatus = JSON.parse(getSafeStorage('sistema_cacador_metas_god')) || { ultimaData: '', concluidas: [] };
-        let respostasRespondidas = JSON.parse(getSafeStorage('sistema_cacador_respostas')) || {};
-        let abaAtual = 'portugues';
-        let questaoIndexAtual = 0;
-
-        let chatMessages = JSON.parse(getSafeStorage('sistema_cacador_chat_msg')) || [
-            { user: "SYSTEM", text: "Bem-vindo ao Chat dos Caçadores!", time: "12:00" },
-            { user: "SHADOW", text: "Prontos para o certame da PMPE?", time: "12:05" }
-        ];
-
-        let missionOffers = JSON.parse(getSafeStorage('sistema_cacador_mission_offers')) || [
-            { id: 1, author: "GUILDA ALFA", title: "Resolver 50 questões de Direito Constitucional", xp: 150, pts: 2, active: true }
-        ];
-
-        function switchChatSubtab(tab) {
-            document.getElementById('btn-chat-sub-global').classList.remove('active');
-            document.getElementById('btn-chat-sub-ofertas').classList.remove('active');
-            document.getElementById('chat-sec-global').style.display = 'none';
-            document.getElementById('chat-sec-ofertas').style.display = 'none';
-
-            if (tab === 'global') {
-                document.getElementById('btn-chat-sub-global').classList.add('active');
-                document.getElementById('chat-sec-global').style.display = 'block';
-                renderizarChatMessages();
-            } else {
-                document.getElementById('btn-chat-sub-ofertas').classList.add('active');
-                document.getElementById('chat-sec-ofertas').style.display = 'block';
-                renderizarMissionOffers();
-            }
-        }
-
-        function renderizarChatMessages() {
-            const list = document.getElementById('chat-messages-list');
-            if (!list) return;
-            list.innerHTML = '';
-            chatMessages.forEach(m => {
-                const item = document.createElement('div');
-                item.className = 'chat-msg-item';
-                item.innerHTML = `
-                    <div class="chat-msg-header">
-                        <span>[CAÇADOR: ${m.user}]</span>
-                        <span>${m.time}</span>
-                    </div>
-                    <div>${m.text}</div>
-                `;
-                list.appendChild(item);
-            });
-            list.scrollTop = list.scrollHeight;
-        }
-
-        function enviarMensagemChat() {
-            const input = document.getElementById('chatInputMessage');
-            const txt = input.value.trim();
-            if (!txt) return;
-
-            const ag = new Date();
-            const timeStr = `${ag.getHours().toString().padStart(2,'0')}:${ag.getMinutes().toString().padStart(2,'0')}`;
-
-            chatMessages.push({ user: dadosCacadorRPG.nome || "DESCONHECIDO", text: txt, time: timeStr });
-            setSafeStorage('sistema_cacador_chat_msg', JSON.stringify(chatMessages));
-            input.value = '';
-            renderizarChatMessages();
-        }
-
-        function renderizarMissionOffers() {
-            const list = document.getElementById('offers-feed-list');
-            if (!list) return;
-            list.innerHTML = '';
-            missionOffers.forEach(o => {
-                const div = document.createElement('div');
-                div.className = 'offer-item';
-                div.innerHTML = `
-                    <div class="offer-header">
-                        <span>OFERTADA POR: ${o.author}</span>
-                        <span>RECOMPENSA: +${o.xp} XP / +${o.pts} PTS</span>
-                    </div>
-                    <div style="color: #fff; margin-bottom: 6px;">${o.title}</div>
-                    <button onclick="aceitarOfertaMissao(${o.id})" style="background: ${o.active ? 'var(--god-gold)' : 'rgba(255,215,0,0.2)'}; color: ${o.active ? '#000' : '#ffd700'}; border: none; padding: 4px 10px; font-weight: bold; font-size: 0.7rem; cursor: pointer;" ${o.active ? '' : 'disabled'}>
-                        ${o.active ? 'ACEITAR E CUMPRIR' : 'CONCLUÍDA ✅'}
-                    </button>
-                `;
-                list.appendChild(div);
-            });
-        }
-
-        function publicarOfertaMissao() {
-            const title = document.getElementById('offerTitleInput').value.trim();
-            const xp = parseInt(document.getElementById('offerXpInput').value) || 100;
-            const pts = parseInt(document.getElementById('offerPtsInput').value) || 1;
-
-            if (!title) return;
-
-            missionOffers.push({ id: Date.now(), author: dadosCacadorRPG.nome || "DESCONHECIDO", title: title, xp: xp, pts: pts, active: true });
-            setSafeStorage('sistema_cacador_mission_offers', JSON.stringify(missionOffers));
-            
-            document.getElementById('offerTitleInput').value = '';
-            document.getElementById('offerXpInput').value = '';
-            document.getElementById('offerPtsInput').value = '';
-
-            renderizarMissionOffers();
-        }
-
-        function aceitarOfertaMissao(id) {
-            const offer = missionOffers.find(o => o.id === id);
-            if (offer && offer.active) {
-                offer.active = false;
-                setSafeStorage('sistema_cacador_mission_offers', JSON.stringify(missionOffers));
-                dadosCacadorRPG.xp += offer.xp;
-                dadosCacadorRPG.pontosDisponiveis += offer.pts;
-                salvarDadosUsuario();
-                renderizarHUDRPG();
-                renderizarMissionOffers();
-                if (typeof confetti === 'function') confetti({ particleCount: 90, spread: 70 });
-            }
-        }
-
-        // TIMER QUESTÕES
-        let tempoQuestaoSegundos = 600;
-        let timerQuestaoInterval = null;
-
-        function iniciarTimerQuestao() {
-            pararTimerQuestao();
-            tempoQuestaoSegundos = 600;
-            atualizarDisplayTimer();
-
-            timerQuestaoInterval = setInterval(() => {
-                tempoQuestaoSegundos--;
-                atualizarDisplayTimer();
-
-                if (tempoQuestaoSegundos <= 0) {
-                    pararTimerQuestao();
-                    navegarQuestao(1);
-                }
-            }, 1000);
-        }
-
-        function pararTimerQuestao() {
-            if (timerQuestaoInterval) clearInterval(timerQuestaoInterval);
-        }
-
-        function atualizarDisplayTimer() {
-            const m = Math.floor(tempoQuestaoSegundos / 60).toString().padStart(2, '0');
-            const s = (tempoQuestaoSegundos % 60).toString().padStart(2, '0');
-            const el = document.getElementById('pop-timer-display');
-            if (el) el.innerText = `${m}:${s}`;
-        }
-
-        // RELÓGIO & CRONÔMETRO
         setInterval(() => {
-            const ag = new Date();
-            const h = ag.getHours().toString().padStart(2, '0');
-            const m = ag.getMinutes().toString().padStart(2, '0');
-            const s = ag.getSeconds().toString().padStart(2, '0');
-            const elClock = document.getElementById('real-time-clock');
-            if (elClock) elClock.innerText = `${h}:${m}:${s}`;
+            const clock = document.getElementById('real-time-clock');
+            if (clock) clock.innerText = new Date().toTimeString().split(' ')[0];
         }, 1000);
-
-        let cronometroSegundos = 0;
-        let cronometroInterval = null;
-
-        function iniciarCronometro() {
-            if (cronometroInterval) return;
-            cronometroInterval = setInterval(() => {
-                cronometroSegundos++;
-                const h = Math.floor(cronometroSegundos / 3600).toString().padStart(2, '0');
-                const m = Math.floor((cronometroSegundos % 3600) / 60).toString().padStart(2, '0');
-                const s = (cronometroSegundos % 60).toString().padStart(2, '0');
-                const el = document.getElementById('stopwatch-display');
-                if (el) el.innerText = `${h}:${m}:${s}`;
-            }, 1000);
-        }
-
-        function pausarCronometro() {
-            if (cronometroInterval) {
-                clearInterval(cronometroInterval);
-                cronometroInterval = null;
-            }
-        }
-
-        function zerarCronometro() {
-            pausarCronometro();
-            cronometroSegundos = 0;
-            const el = document.getElementById('stopwatch-display');
-            if (el) el.innerText = "00:00:00";
-        }
-
-        // BÚSSOLA
-        if (window.DeviceOrientationEvent) {
-            window.addEventListener('deviceorientation', function(e) {
-                let compassHeading = e.alpha || 0;
-                if (e.webkitCompassHeading) compassHeading = e.webkitCompassHeading;
-                
-                const needle = document.getElementById('compass-needle-el');
-                const valText = document.getElementById('compass-heading-val');
-                
-                if (needle) needle.style.transform = `rotate(${compassHeading}deg)`;
-                
-                let dir = "NORTE";
-                if (compassHeading > 45 && compassHeading <= 135) dir = "LESTE";
-                else if (compassHeading > 135 && compassHeading <= 225) dir = "SUL";
-                else if (compassHeading > 225 && compassHeading <= 315) dir = "OESTE";
-
-                if (valText) valText.innerText = `${Math.round(compassHeading)}° ${dir}`;
-            });
-        }
-
-        function exibirJanela(nomeJanela) {
-            const janelas = ['status', 'taf', 'missoes', 'banco', 'chat', 'bosses', 'equip'];
-            janelaAtualIndex = janelas.indexOf(nomeJanela);
-
-            janelas.forEach(j => {
-                const elWin = document.getElementById(`win-${j}`);
-                const elBtn = document.getElementById(`btn-win-${j}`);
-                if (elWin) elWin.style.display = (j === nomeJanela) ? 'block' : 'none';
-                if (elBtn) {
-                    if (j === nomeJanela) elBtn.classList.add('active');
-                    else elBtn.classList.remove('active');
-                }
-            });
-            if (nomeJanela === 'chat') {
-                renderizarChatMessages();
-            } else if (nomeJanela === 'bosses') {
-                renderizarBosses();
-            }
-        }
-
-        const bancoQuestoes = {
-            portugues: [
-                { id: "p1", pergunta: "Assinale a opção em que a regência verbal está em conformidade integral com a norma-padrão da língua portuguesa:", opcoes: ["Aspirava ao cargo de oficial com extrema determinação e foco.", "Assistiu o filme até o final sem piscar os olhos.", "Prefiro mais a teoria do que a prática intensiva.", "Esqueci do documento importante em cima da mesa."], correta: 0, explicacao: "O verbo 'aspirar' no sentido de desejar exige preposição 'a'." },
-                { id: "p2", pergunta: "Qual das alternativas a seguir apresenta o emprego estritamente correto do sinal indicativo de crase?", opcoes: ["Refiro-me à todas as candidatas presentes no recinto.", "Chegamos à uma conclusão lógica após a análise dos fatos.", "Entregou a documentação oficial à diretora da instituição.", "Ele foi à pé para a sede do batalhão central."], correta: 2, explicacao: "Antes de palavra feminina determinada exige a fusão da preposição 'a' com artigo 'a'." }
-            ],
-            racioc_logico: [
-                { id: "rl1", pergunta: "Considerando as proposições lógicas puras, se a proposição p é Verdadeira e a proposição q é Falsa, qual o valor lógico final da expressão (p ∧ ~q)?", opcoes: ["Falso", "Verdadeiro", "Inconclusivo", "Nulo"], correta: 1, explicacao: "p (V) e ~q (V) resulta em Verdadeiro no operador lógico E (∧)." }
-            ],
-            constitucional: [
-                { id: "c1", pergunta: "São considerados remédios constitucionais fundamentais previstos na Carta Magna, EXCETO:", opcoes: ["Habeas Corpus", "Habeas Data", "Mandado de Segurança", "Ação Penal Privada"], correta: 3, explicacao: "Ação penal privada é instituto de Direito Processual Penal." }
-            ],
-            direitos_humanos: [
-                { id: "dh1", pergunta: "A Declaração Universal dos Direitos Humanos (DUDH) foi historicamente proclamada pela ONU no ano de:", opcoes: ["1948", "1988", "1945", "1950"], correta: 0, explicacao: "Proclamada pela Assembleia Geral da ONU em 1948." }
-            ],
-            historia: [
-                { id: "h1", pergunta: "A famosa Revolução Pernambucana eclodiu no estado no ano histórico de:", opcoes: ["1817", "1824", "1848", "1710"], correta: 0, explicacao: "A Revolução Pernambucana ocorreu em 1817." }
-            ],
-            informatica: [
-                { id: "inf1", pergunta: "Qual protocolo da camada de aplicação é utilizado para a transferência segura e criptografada de dados em páginas web?", opcoes: ["HTTP", "HTTPS", "FTP", "SMTP"], correta: 1, explicacao: "HTTPS utiliza criptografia SSL/TLS para segurança." }
-            ]
-        };
-
-        const materiasList = ['portugues', 'racioc_logico', 'constitucional', 'direitos_humanos', 'historia', 'informatica'];
-        materiasList.forEach(mat => {
-            const atual = bancoQuestoes[mat].length;
-            for(let i = atual + 1; i <= 35; i++) {
-                bancoQuestoes[mat].push({
-                    id: `${mat}_${i}`,
-                    pergunta: `[AVALIAÇÃO DO SISTEMA - ${mat.toUpperCase()}] QUESTÃO COMPLETA #${i}: Analise detalhadamente a afirmativa legal, doutrinária ou teórica aplicada a esta questão e assinale a alternativa que apresenta a fundamentação correta em conformidade com o edital do exame:`,
-                    opcoes: [
-                        `A) A afirmação encontra-se em conformidade integral com a doutrina de regência para o item #${i}.`,
-                        `B) Conceito incorreto com violação expressa aos ditames legais e normativos.`,
-                        `C) Inversão de conceito não aceita pela jurisprudência ou banca examinadora.`,
-                        `D) Ausência completa de amparo legal para o caso concreto apresentado.`
-                    ],
-                    correta: 0,
-                    explicacao: `Relatório de Análise do Sistema: A alternativa A apresenta a fundamentação doutrinária correta para o item #${i}.`
-                });
-            }
-        });
-
-        function renderizarTudo() {
-            const userKey = sessionStorage.getItem('cacador_usuario_ativo');
-            if (userKey) {
-                const saved = JSON.parse(getSafeStorage(userKey));
-                if (saved) {
-                    if (saved.ent === undefined) saved.ent = 10;
-                    if (saved.ofe === undefined) saved.ofe = 10;
-                    if (saved.def === undefined) saved.def = 10;
-                    if (saved.vel === undefined) saved.vel = 10;
-                    if (saved.tec === undefined) saved.tec = 10;
-                    if (saved.avatarType === undefined) saved.avatarType = 'img';
-                    if (saved.avatarVal === undefined) saved.avatarVal = 'https://images.unsplash.com/photo-1563089145-599997674d42?w=150&auto=format&fit=crop&q=80';
-                    dadosCacadorRPG = saved;
-                }
-            }
-            calcularMetasDoNivel();
-            renderizarHUDRPG();
-            renderizarAvatar();
-            renderizarCustomTasks();
-        }
-
-        function switchTab(materia, evt) {
-            abaAtual = materia;
-            questaoIndexAtual = 0;
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            if (evt && evt.target) evt.target.classList.add('active');
-            document.getElementById('titulo-materia-ativa').innerText = `DISCIPLINA ATIVA: ${materia.toUpperCase().replace('_', ' ')}`;
-        }
-
-        function abrirModalQuestao() {
-            document.getElementById('game-quest-overlay').style.display = 'flex';
-            renderizarBalaoQuestao();
-        }
-
-        function fecharModalQuestao() {
-            pararTimerQuestao();
-            document.getElementById('game-quest-overlay').style.display = 'none';
-        }
-
-        function renderizarBalaoQuestao() {
-            iniciarTimerQuestao();
-            const lista = bancoQuestoes[abaAtual] || [];
-            if (lista.length === 0) return;
-
-            const q = lista[questaoIndexAtual];
-            document.getElementById('pop-materia-titulo').innerText = `${abaAtual.toUpperCase().replace('_', ' ')} - QUESTÃO #${questaoIndexAtual + 1}`;
-            document.getElementById('pop-pergunta-texto').innerText = q.pergunta;
-            document.getElementById('pop-contador-index').innerText = `${questaoIndexAtual + 1} / ${lista.length}`;
-
-            const containerOpcoes = document.getElementById('pop-opcoes-container');
-            containerOpcoes.innerHTML = '';
-
-            const explDiv = document.getElementById('pop-explicacao-container');
-            const respSalva = respostasRespondidas[q.id];
-
-            q.opcoes.forEach((op, opIdx) => {
-                let classeOp = '';
-                if (respSalva !== undefined) {
-                    if (opIdx === q.correta) classeOp = 'correct';
-                    else if (opIdx === respSalva && respSalva !== q.correta) classeOp = 'wrong';
-                }
-                const btn = document.createElement('button');
-                btn.className = classeOp;
-                if (respSalva !== undefined) btn.disabled = true;
-                btn.innerText = op;
-                btn.onclick = () => responderGameQuestao(q.id, opIdx);
-                containerOpcoes.appendChild(btn);
-            });
-
-            if (respSalva !== undefined) {
-                explDiv.style.display = 'block';
-                explDiv.innerHTML = `💡 <strong>Análise do Sistema:</strong> ${q.explicacao}`;
-            } else {
-                explDiv.style.display = 'none';
-            }
-        }
-
-        function responderGameQuestao(qId, opcaoSelecionada) {
-            if (respostasRespondidas[qId] !== undefined) return;
-            respostasRespondidas[qId] = opcaoSelecionada;
-            setSafeStorage('sistema_cacador_respostas', JSON.stringify(respostasRespondidas));
-
-            let qEncontrada = bancoQuestoes[abaAtual].find(item => item.id === qId);
-
-            if (qEncontrada && opcaoSelecionada === qEncontrada.correta) {
-                dadosCacadorRPG.xp += 25;
-                let xpReq = dadosCacadorRPG.nivel * 200;
-                if (dadosCacadorRPG.xp >= xpReq) {
-                    dadosCacadorRPG.nivel += 1;
-                    dadosCacadorRPG.pontosDisponiveis += 5;
-                    if (typeof confetti === 'function') confetti({ particleCount: 100, spread: 70 });
-                }
-                salvarDadosUsuario();
-            }
-
-            renderizarHUDRPG();
-            renderizarBalaoQuestao();
-        }
-
-        function navegarQuestao(direcao) {
-            const lista = bancoQuestoes[abaAtual] || [];
-            let novoIndex = questaoIndexAtual + direcao;
-            if (novoIndex >= 0 && novoIndex < lista.length) {
-                questaoIndexAtual = novoIndex;
-                renderizarBalaoQuestao();
-            }
-        }
-
-        function salvarDadosUsuario() {
-            const userKey = sessionStorage.getItem('cacador_usuario_ativo');
-            if (userKey) {
-                setSafeStorage(userKey, JSON.stringify(dadosCacadorRPG));
-            }
-        }
-
-        function renderizarHUDRPG() {
-            document.getElementById('display-nome-usuario').innerText = `CAÇADOR: ${dadosCacadorRPG.nome}`;
-            document.getElementById('display-nivel-usuario').innerText = dadosCacadorRPG.nivel;
-            document.getElementById('display-xp-usuario').innerText = dadosCacadorRPG.xp;
-
-            let xpNecessario = dadosCacadorRPG.nivel * 200;
-            document.getElementById('display-xp-proximo').innerText = xpNecessario;
-
-            const barra = document.getElementById('barra-progresso-xp');
-            if (barra) {
-                let percentual = (dadosCacadorRPG.xp / xpNecessario) * 100;
-                barra.style.width = `${Math.min(percentual, 100)}%`;
-            }
-
-            document.getElementById('display-pontos-disponiveis').innerText = dadosCacadorRPG.pontosDisponiveis;
-            
-            document.getElementById('atrib-ent').innerText = dadosCacadorRPG.ent !== undefined ? dadosCacadorRPG.ent : 10;
-            document.getElementById('atrib-ofe').innerText = dadosCacadorRPG.ofe !== undefined ? dadosCacadorRPG.ofe : 10;
-            document.getElementById('atrib-def').innerText = dadosCacadorRPG.def !== undefined ? dadosCacadorRPG.def : 10;
-            document.getElementById('atrib-vel').innerText = dadosCacadorRPG.vel !== undefined ? dadosCacadorRPG.vel : 10;
-            document.getElementById('atrib-tec').innerText = dadosCacadorRPG.tec !== undefined ? dadosCacadorRPG.tec : 10;
-        }
-
-        function adicionarPontoManual(atrib) {
-            if (dadosCacadorRPG.pontosDisponiveis > 0) {
-                dadosCacadorRPG.pontosDisponiveis -= 1;
-                if (dadosCacadorRPG[atrib] === undefined) dadosCacadorRPG[atrib] = 10;
-                dadosCacadorRPG[atrib] += 1;
-                salvarDadosUsuario();
-                renderizarHUDRPG();
-            }
-        }
-
-        function calcularMetasDoNivel() {
-            let nivel = dadosCacadorRPG.nivel || 1;
-            document.getElementById('meta-distancia-km').innerText = Math.min(10, Math.max(1, nivel));
-            document.getElementById('meta-qtd-flexao').innerText = Math.min(50, Math.round(10 + (nivel - 1) * 4.4));
-            document.getElementById('meta-qtd-abdominal').innerText = Math.min(60, Math.round(10 + (nivel - 1) * 5.5));
-        }
-
-        function renderizarCustomTasks() {
-            const list = document.getElementById('customTaskList');
-            if (!list) return;
-            list.innerHTML = '';
-            customTasks.forEach(t => {
-                const li = document.createElement('li');
-                li.className = `task-item ${t.completed ? 'completed' : ''}`;
-                li.innerHTML = `
-                    <span>${t.text}</span>
-                    <button style="background: ${t.completed ? 'rgba(16, 185, 129, 0.2)' : '#10b981'}; color: ${t.completed ? '#10b981' : '#fff'}; border: 1px solid #10b981; padding: 4px 8px; font-weight: bold; cursor: pointer; font-size: 0.7rem;" ${t.completed ? 'disabled' : ''} onclick="cumprirCustomTask(${t.id})">
-                        ${t.completed ? 'CUMPRIDA ✅' : 'CUMPRIR'}
-                    </button>
-                `;
-                list.appendChild(li);
-            });
-        }
-
-        function addCustomTask() {
-            const input = document.getElementById('customTaskInput');
-            const text = input.value.trim();
-            if (!text) return;
-            customTasks.push({ id: Date.now(), text: text, completed: false });
-            setSafeStorage('sistema_cacador_custom_tasks', JSON.stringify(customTasks));
-            input.value = '';
-            renderizarCustomTasks();
-        }
-
-        function cumprirCustomTask(id) {
-            const task = customTasks.find(t => t.id === id);
-            if (task && !task.completed) {
-                task.completed = true;
-                setSafeStorage('sistema_cacador_custom_tasks', JSON.stringify(customTasks));
-                dadosCacadorRPG.pontosDisponiveis += 1;
-                dadosCacadorRPG.xp += 60;
-                salvarDadosUsuario();
-                renderizarCustomTasks();
-                renderizarHUDRPG();
-                if (typeof confetti === 'function') confetti({ particleCount: 80, spread: 60 });
-            }
-        }
-
-        function concluirMetaFisica(tipoMeta, xpBonus, pontoBonus) {
-            if (metasFisicasStatus.concluidas.includes(tipoMeta)) return;
-            metasFisicasStatus.concluidas.push(tipoMeta);
-            setSafeStorage('sistema_cacador_metas_god', JSON.stringify(metasFisicasStatus));
-            dadosCacadorRPG.pontosDisponiveis += pontoBonus;
-            dadosCacadorRPG.xp += xpBonus;
-            salvarDadosUsuario();
-            renderizarHUDRPG();
-            if (typeof confetti === 'function') confetti({ particleCount: 120, spread: 80 });
-        }
     </script>
 </body>
 </html>
