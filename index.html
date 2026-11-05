@@ -129,13 +129,13 @@
             align-items: center;
         }
 
-        /* MENU SELETORES (5 BOTÕES COM ÍCONES) */
+        /* MENU SELETORES DE JANELA */
         .window-selector-bar {
             width: 100%;
             max-width: 600px;
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 4px;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 3px;
             margin-bottom: 16px;
         }
 
@@ -143,23 +143,23 @@
             background: rgba(2, 6, 16, 0.8);
             border: 1px solid var(--system-cyan);
             color: var(--text-sub);
-            padding: 8px 2px;
-            font-size: 0.65rem;
+            padding: 8px 1px;
+            font-size: 0.58rem;
             font-weight: bold;
             font-family: monospace;
             cursor: pointer;
             text-align: center;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
             transition: all 0.2s;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 3px;
+            gap: 2px;
         }
 
         .btn-select-window i {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
         }
 
         .btn-select-window.active {
@@ -237,90 +237,167 @@
             transition: width 0.4s ease;
         }
 
-        /* HUMANO HOLOGRÁFICO */
-        .hologram-status-container {
+        /* RADAR PENTAGONAL DE ATRIBUTOS COM O CAÇADOR */
+        .radar-status-stage {
+            width: 100%;
+            padding: 20px 10px;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 240, 255, 0.15) 0%, rgba(2, 6, 16, 0.95) 80%);
+            border: 1px solid rgba(0, 240, 255, 0.4);
+            position: relative;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 12px;
-            margin-top: 12px;
+            justify-content: center;
+            box-shadow: inset 0 0 20px rgba(0, 240, 255, 0.15);
+            margin-top: 10px;
         }
 
-        .hologram-stage {
-            width: 100%;
-            height: 200px;
-            background: radial-gradient(circle at 50% 50%, rgba(0, 240, 255, 0.18) 0%, rgba(2, 6, 16, 0.95) 75%);
-            border: 1px solid rgba(0, 240, 255, 0.4);
+        .pentagon-frame {
+            width: 160px;
+            height: 160px;
             position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: inset 0 0 20px rgba(0, 240, 255, 0.2);
-            overflow: hidden;
+            margin: 30px 0;
         }
 
-        .hologram-scanner {
+        .pentagon-border {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 3px;
-            background: linear-gradient(90deg, transparent, var(--system-cyan), transparent);
-            box-shadow: 0 0 12px var(--system-cyan);
-            animation: scanAnimation 3.5s infinite linear;
-            z-index: 5;
-        }
-
-        @keyframes scanAnimation {
-            0% { top: 0%; opacity: 0; }
-            15% { opacity: 1; }
-            85% { opacity: 1; }
-            100% { top: 100%; opacity: 0; }
-        }
-
-        .hologram-avatar {
-            font-size: 7.5rem;
-            color: var(--system-cyan);
-            filter: drop-shadow(0 0 18px var(--system-cyan));
-            animation: avatarGlow 3s infinite ease-in-out;
-            z-index: 2;
-        }
-
-        @keyframes avatarGlow {
-            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 15px var(--system-cyan)); opacity: 0.95; }
-            50% { transform: scale(1.02); filter: drop-shadow(0 0 25px var(--system-cyan)); opacity: 1; }
-        }
-
-        .hologram-attrib-grid {
             width: 100%;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
+            height: 100%;
+            border: 2px solid var(--system-cyan);
+            clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+            box-shadow: 0 0 20px var(--system-cyan-glow);
+            background: rgba(0, 240, 255, 0.05);
+            animation: pulsePentagon 3s infinite ease-in-out;
         }
 
-        .attrib-card {
-            background: rgba(3, 10, 22, 0.9);
-            border: 1px solid rgba(0, 240, 255, 0.35);
-            padding: 10px;
+        @keyframes pulsePentagon {
+            0%, 100% { filter: drop-shadow(0 0 8px var(--system-cyan)); }
+            50% { filter: drop-shadow(0 0 18px var(--system-cyan)); }
+        }
+
+        .avatar-display-box {
+            z-index: 2;
+            width: 90px;
+            height: 90px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            border-radius: 50%;
+        }
+
+        .avatar-custom-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: drop-shadow(0 0 8px var(--system-cyan));
+        }
+
+        .pentagon-avatar-icon {
+            font-size: 4.8rem;
+            color: var(--system-cyan);
+            filter: drop-shadow(0 0 12px var(--system-cyan));
+        }
+
+        /* OPÇÃO SELETORA DE ÍCONES HOLOGRÁFICOS */
+        .avatar-controls-bar {
+            display: flex;
+            gap: 6px;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .btn-avatar-opt {
+            flex: 1;
+            background: rgba(2, 6, 16, 0.9);
+            border: 1px solid var(--system-cyan);
+            color: var(--text-sub);
+            padding: 6px;
+            font-size: 0.72rem;
+            font-weight: bold;
+            font-family: monospace;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .holo-picker-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 6px;
+            margin-top: 8px;
+            background: rgba(0, 240, 255, 0.05);
+            border: 1px dashed var(--system-cyan);
+            padding: 8px;
+        }
+
+        .holo-icon-btn {
+            background: rgba(2, 6, 16, 0.9);
+            border: 1px solid var(--system-cyan);
+            color: var(--system-cyan);
+            padding: 8px 0;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.2s;
+        }
+
+        .holo-icon-btn:hover {
+            background: var(--system-cyan);
+            color: #000;
+        }
+
+        /* BLOCOS DE ATRIBUTOS (ENT, OFE, DEF, VEL, TEC) */
+        .radar-stat-box {
+            background: rgba(4, 14, 30, 0.95);
+            border: 1px solid var(--system-cyan);
+            padding: 4px 8px;
+            font-family: monospace;
+            text-align: center;
+            box-shadow: 0 0 10px var(--system-cyan-glow);
             display: flex;
             flex-direction: column;
             align-items: center;
-            position: relative;
-            padding-bottom: 34px;
+            min-width: 70px;
         }
 
-        .btn-add-stat {
-            position: absolute;
-            bottom: 4px;
-            width: 90%;
+        .radar-stat-label {
+            font-size: 0.75rem;
+            color: var(--system-cyan);
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .radar-stat-val {
+            font-size: 0.95rem;
+            color: #fff;
+            font-weight: bold;
+            margin: 2px 0;
+        }
+
+        .btn-stat-add-small {
             background: var(--system-cyan);
             color: #000;
             border: none;
             font-weight: bold;
-            font-size: 0.9rem;
+            font-size: 0.75rem;
+            padding: 1px 8px;
             cursor: pointer;
-            padding: 2px 0;
-            box-shadow: 0 0 8px var(--system-cyan-glow);
+            width: 100%;
+            margin-top: 2px;
         }
 
-        /* SEÇÃO DE ARMAZENAMENTO / INVENTÁRIO (RELÓGIO, CRONÔMETRO E BÚSSOLA) */
+        .pos-top { position: absolute; top: -35px; }
+        .pos-left-top { position: absolute; left: -35px; top: 35px; }
+        .pos-right-top { position: absolute; right: -35px; top: 35px; }
+        .pos-left-bottom { position: absolute; left: -25px; bottom: -35px; }
+        .pos-right-bottom { position: absolute; right: -25px; bottom: -35px; }
+
+        /* ARMAZENAMENTO */
         .equip-grid {
             display: flex;
             flex-direction: column;
@@ -356,7 +433,7 @@
             letter-spacing: 2px;
         }
 
-        /* BÚSSOLA HOLOGRÁFICA */
+        /* BÚSSOLA */
         .compass-dial-container {
             width: 140px;
             height: 140px;
@@ -386,6 +463,79 @@
             color: var(--god-gold);
             font-size: 0.9rem;
             font-weight: bold;
+        }
+
+        /* CHAT E OFERTAS DE MISSÕES */
+        .chat-subtabs {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+
+        .chat-subtab-btn {
+            flex: 1;
+            background: rgba(2, 6, 16, 0.9);
+            border: 1px solid var(--system-cyan);
+            color: var(--text-sub);
+            padding: 8px;
+            font-family: monospace;
+            font-size: 0.72rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .chat-subtab-btn.active {
+            background: var(--system-cyan);
+            color: #000;
+        }
+
+        .chat-messages-container {
+            height: 240px;
+            background: rgba(2, 6, 16, 0.9);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            padding: 10px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 10px;
+            font-size: 0.82rem;
+        }
+
+        .chat-msg-item {
+            background: rgba(8, 22, 44, 0.8);
+            border-left: 3px solid var(--system-cyan);
+            padding: 6px 10px;
+            border-radius: 2px;
+        }
+
+        .chat-msg-header {
+            display: flex;
+            justify-content: space-between;
+            font-family: monospace;
+            font-size: 0.7rem;
+            color: var(--system-cyan);
+            margin-bottom: 2px;
+        }
+
+        .offer-item {
+            background: rgba(16, 8, 24, 0.9);
+            border: 1px solid var(--god-gold);
+            padding: 10px;
+            border-left: 4px solid var(--god-gold);
+            margin-bottom: 8px;
+            font-size: 0.82rem;
+        }
+
+        .offer-header {
+            display: flex;
+            justify-content: space-between;
+            font-family: monospace;
+            color: var(--god-gold);
+            font-weight: bold;
+            font-size: 0.75rem;
+            margin-bottom: 4px;
         }
 
         /* MISSÕES TAF */
@@ -653,18 +803,18 @@
         </div>
     </div>
 
-    <!-- HEADER DO SISTEMA -->
+    <!-- HEADER DO SISTEMA COM SUBTÍTULO "PAINEL PESSOAL" -->
     <header>
         <div class="header-info">
             <div>
                 <h1 style="color: var(--system-cyan); font-family: monospace; font-size: 1.05rem; letter-spacing: 1px;">[SISTEMA DO CAÇADOR]</h1>
-                <p style="color: var(--text-sub); font-size: 0.78rem;">PAINEL GAMIFICADO PMPE 2026</p>
+                <p style="color: var(--text-sub); font-size: 0.78rem; font-family: monospace; letter-spacing: 1px; font-weight: bold; text-transform: uppercase;">PAINEL PESSOAL</p>
             </div>
             <button onclick="fazerLogout()" style="background: rgba(255, 42, 109, 0.2); border: 1px solid var(--system-red); color: var(--system-red); padding: 4px 10px; font-weight: bold; font-size: 0.7rem; cursor: pointer;">SAIR</button>
         </div>
     </header>
 
-    <!-- MENU COM 5 SELETORES (STATUS, TAF, MISSÕES, QUESTÕES, INVENTÁRIO) -->
+    <!-- MENU COM SELETORES DE JANELA -->
     <div class="window-selector-bar">
         <button id="btn-win-status" class="btn-select-window active" onclick="exibirJanela('status')">
             <i class="fa-solid fa-bolt"></i>
@@ -682,6 +832,10 @@
             <i class="fa-solid fa-crosshairs"></i>
             <span>QUESTÕES</span>
         </button>
+        <button id="btn-win-chat" class="btn-select-window" onclick="exibirJanela('chat')">
+            <i class="fa-solid fa-comments"></i>
+            <span>CHAT</span>
+        </button>
         <button id="btn-win-equip" class="btn-select-window" onclick="exibirJanela('equip')">
             <i class="fa-solid fa-box-archive"></i>
             <span>EQUIP</span>
@@ -690,7 +844,7 @@
 
     <main class="single-window-viewport">
 
-        <!-- JANELA 1: STATUS DO CAÇADOR COM HUMANO HOLOGRÁFICO -->
+        <!-- JANELA 1: STATUS DO CAÇADOR COM AVATAR PERSONALIZÁVEL -->
         <div id="win-status" class="system-window">
             <div class="window-header">
                 <span class="window-title"><i class="fa-solid fa-user-ninja"></i> JANELA DE STATUS</span>
@@ -711,33 +865,68 @@
                 <strong id="display-pontos-disponiveis" style="color: var(--god-gold); font-size: 0.95rem;">5</strong>
             </div>
 
-            <div class="hologram-status-container">
-                <div class="hologram-stage">
-                    <div class="hologram-scanner"></div>
-                    <i class="fa-solid fa-user-ninja hologram-avatar"></i>
+            <!-- ESTRUTURA RADAR PENTAGONAL -->
+            <div class="radar-status-stage">
+                <div class="pentagon-frame">
+                    <div class="pentagon-border"></div>
+                    
+                    <!-- AVATAR CENTRAL DO CAÇADOR (FOTO OU ÍCONE HOLOGRÁFICO) -->
+                    <div class="avatar-display-box" id="avatarContainer">
+                        <i id="defaultAvatarIcon" class="fa-solid fa-user-ninja pentagon-avatar-icon"></i>
+                        <img id="customAvatarImg" class="avatar-custom-img" style="display: none;" alt="Foto Caçador">
+                    </div>
+
+                    <!-- ENT (Topo) -->
+                    <div class="radar-stat-box pos-top">
+                        <span class="radar-stat-label">ENT</span>
+                        <span id="atrib-ent" class="radar-stat-val">10</span>
+                        <button class="btn-stat-add-small" onclick="adicionarPontoManual('ent')">+</button>
+                    </div>
+
+                    <!-- OFE (Esquerda Superior) -->
+                    <div class="radar-stat-box pos-left-top">
+                        <span class="radar-stat-label">OFE</span>
+                        <span id="atrib-ofe" class="radar-stat-val">10</span>
+                        <button class="btn-stat-add-small" onclick="adicionarPontoManual('ofe')">+</button>
+                    </div>
+
+                    <!-- DEF (Direita Superior) -->
+                    <div class="radar-stat-box pos-right-top">
+                        <span class="radar-stat-label">DEF</span>
+                        <span id="atrib-def" class="radar-stat-val">10</span>
+                        <button class="btn-stat-add-small" onclick="adicionarPontoManual('def')">+</button>
+                    </div>
+
+                    <!-- VEL (Esquerda Inferior) -->
+                    <div class="radar-stat-box pos-left-bottom">
+                        <span class="radar-stat-label">VEL</span>
+                        <span id="atrib-vel" class="radar-stat-val">10</span>
+                        <button class="btn-stat-add-small" onclick="adicionarPontoManual('vel')">+</button>
+                    </div>
+
+                    <!-- TEC (Direita Inferior) -->
+                    <div class="radar-stat-box pos-right-bottom">
+                        <span class="radar-stat-label">TEC</span>
+                        <span id="atrib-tec" class="radar-stat-val">10</span>
+                        <button class="btn-stat-add-small" onclick="adicionarPontoManual('tec')">+</button>
+                    </div>
                 </div>
 
-                <div class="hologram-attrib-grid">
-                    <div class="attrib-card">
-                        <span style="font-size: 0.7rem; color: var(--text-sub); font-weight: bold;"><i class="fa-solid fa-dumbbell" style="color: #ff4757;"></i> FORÇA</span>
-                        <span id="atrib-forca" style="font-size: 1.1rem; color: #fff; font-weight: bold; margin-top: 2px;">10</span>
-                        <button class="btn-add-stat" onclick="adicionarPontoManual('forca')">+</button>
-                    </div>
-                    <div class="attrib-card">
-                        <span style="font-size: 0.7rem; color: var(--text-sub); font-weight: bold;"><i class="fa-solid fa-bolt" style="color: #ffd700;"></i> VELOCIDADE</span>
-                        <span id="atrib-velocidade" style="font-size: 1.1rem; color: #fff; font-weight: bold; margin-top: 2px;">10</span>
-                        <button class="btn-add-stat" onclick="adicionarPontoManual('velocidade')">+</button>
-                    </div>
-                    <div class="attrib-card">
-                        <span style="font-size: 0.7rem; color: var(--text-sub); font-weight: bold;"><i class="fa-solid fa-brain" style="color: #9d4edd;"></i> MANA</span>
-                        <span id="atrib-mana" style="font-size: 1.1rem; color: #fff; font-weight: bold; margin-top: 2px;">10</span>
-                        <button class="btn-add-stat" onclick="adicionarPontoManual('mana')">+</button>
-                    </div>
-                    <div class="attrib-card">
-                        <span style="font-size: 0.7rem; color: var(--text-sub); font-weight: bold;"><i class="fa-solid fa-fire" style="color: #ff758c;"></i> AURA</span>
-                        <span id="atrib-aura" style="font-size: 1.1rem; color: #fff; font-weight: bold; margin-top: 2px;">10</span>
-                        <button class="btn-add-stat" onclick="adicionarPontoManual('aura')">+</button>
-                    </div>
+                <!-- CONTROLES PARA MUDAR DE FOTO OU SELECIONAR ÍCONES HOLOGRÁFICOS -->
+                <div class="avatar-controls-bar">
+                    <button class="btn-avatar-opt" onclick="document.getElementById('avatarFileInput').click()"><i class="fa-solid fa-camera"></i> CARREGAR SUA FOTO</button>
+                    <button class="btn-avatar-opt" onclick="toggleHoloPicker()"><i class="fa-solid fa-wand-magic-sparkles"></i> ÍCONES HOLOGRÁFICOS</button>
+                    <input type="file" id="avatarFileInput" accept="image/*" style="display: none;" onchange="uploadFotoCaçador(event)">
+                </div>
+
+                <!-- GRADE DE ÍCONES HOLOGRÁFICOS ALEATÓRIOS DO SISTEMA -->
+                <div id="holoPickerGrid" class="holo-picker-grid" style="display: none;">
+                    <button class="holo-icon-btn" onclick="selecionarIconeHolo('fa-user-ninja')"><i class="fa-solid fa-user-ninja"></i></button>
+                    <button class="holo-icon-btn" onclick="selecionarIconeHolo('fa-ghost')"><i class="fa-solid fa-ghost"></i></button>
+                    <button class="holo-icon-btn" onclick="selecionarIconeHolo('fa-dragon')"><i class="fa-solid fa-dragon"></i></button>
+                    <button class="holo-icon-btn" onclick="selecionarIconeHolo('fa-mask')"><i class="fa-solid fa-mask"></i></button>
+                    <button class="holo-icon-btn" onclick="selecionarIconeHolo('fa-shield-halved')"><i class="fa-solid fa-shield-halved"></i></button>
+                    <button class="holo-icon-btn" onclick="selecionarIconeHolo('fa-fire-flame-curved')"><i class="fa-solid fa-fire-flame-curved"></i></button>
                 </div>
             </div>
         </div>
@@ -804,20 +993,52 @@
             </div>
         </div>
 
-        <!-- JANELA 5: INVENTÁRIO / ARMAZENAMENTO (RELÓGIO, CRONÔMETRO E BÚSSOLA) -->
+        <!-- JANELA 5: CHAT DOS CAÇADORES & OFERTAS DE MISSÕES -->
+        <div id="win-chat" class="system-window" style="display: none;">
+            <div class="window-header">
+                <span class="window-title"><i class="fa-solid fa-comments"></i> COMUNIDADE DE CAÇADORES</span>
+            </div>
+
+            <div class="chat-subtabs">
+                <button id="btn-chat-sub-global" class="chat-subtab-btn active" onclick="switchChatSubtab('global')">💬 CHAT GLOBAL</button>
+                <button id="btn-chat-sub-ofertas" class="chat-subtab-btn" onclick="switchChatSubtab('ofertas')">📜 OFERTAR MISSÃO</button>
+            </div>
+
+            <div id="chat-sec-global">
+                <div id="chat-messages-list" class="chat-messages-container"></div>
+                <div class="task-input-box">
+                    <input type="text" id="chatInputMessage" placeholder="Transmitir mensagem aos caçadores...">
+                    <button onclick="enviarMensagemChat()" style="background: var(--system-cyan); color: #000; border: none; font-weight: bold; padding: 0 14px; cursor: pointer;">ENVIAR</button>
+                </div>
+            </div>
+
+            <div id="chat-sec-ofertas" style="display: none;">
+                <div style="background: rgba(16, 8, 24, 0.8); border: 1px solid var(--god-gold); padding: 10px; margin-bottom: 10px;">
+                    <div style="font-size: 0.75rem; color: var(--god-gold); font-family: monospace; font-weight: bold; margin-bottom: 6px;">CRIAR OFERTA DE MISSÃO PARA OUTRO CAÇADOR:</div>
+                    <input type="text" id="offerTitleInput" placeholder="Título da Missão..." style="width: 100%; padding: 6px; background: #030a16; border: 1px solid var(--god-gold); color: #fff; font-size: 0.8rem; margin-bottom: 6px; outline: none;">
+                    <div style="display: flex; gap: 6px; margin-bottom: 6px;">
+                        <input type="number" id="offerXpInput" placeholder="Recompensa XP..." style="flex: 1; padding: 6px; background: #030a16; border: 1px solid var(--god-gold); color: #fff; font-size: 0.8rem; outline: none;">
+                        <input type="number" id="offerPtsInput" placeholder="Recompensa Pts..." style="flex: 1; padding: 6px; background: #030a16; border: 1px solid var(--god-gold); color: #fff; font-size: 0.8rem; outline: none;">
+                    </div>
+                    <button onclick="publicarOfertaMissao()" style="width: 100%; padding: 8px; background: var(--god-gold); color: #000; border: none; font-weight: bold; cursor: pointer; font-size: 0.75rem; text-transform: uppercase;">PUBLICAR NO MURAL</button>
+                </div>
+
+                <div id="offers-feed-list" style="max-height: 200px; overflow-y: auto;"></div>
+            </div>
+        </div>
+
+        <!-- JANELA 6: INVENTÁRIO / ARMAZENAMENTO -->
         <div id="win-equip" class="system-window" style="display: none;">
             <div class="window-header">
                 <span class="window-title"><i class="fa-solid fa-box-archive"></i> ARMAZENAMENTO DIMENSIONAL</span>
             </div>
 
             <div class="equip-grid">
-                <!-- RELÓGIO TEMPO REAL DO MUNDO -->
                 <div class="equip-card">
                     <div class="equip-card-title"><i class="fa-solid fa-clock"></i> HORÁRIO MUNDIAL DO SISTEMA</div>
                     <div id="real-time-clock" class="digital-clock-display">00:00:00</div>
                 </div>
 
-                <!-- CRONÔMETRO DE MEDIÇÃO -->
                 <div class="equip-card">
                     <div class="equip-card-title"><i class="fa-solid fa-stopwatch"></i> CRONÔMETRO DE TREINO / ESTUDO</div>
                     <div id="stopwatch-display" class="digital-clock-display" style="color: var(--god-gold); text-shadow: 0 0 10px var(--god-gold);">00:00:00</div>
@@ -828,7 +1049,6 @@
                     </div>
                 </div>
 
-                <!-- BÚSSOLA TÁTICA HOLOGRÁFICA -->
                 <div class="equip-card">
                     <div class="equip-card-title"><i class="fa-solid fa-compass"></i> BÚSSOLA TÁTICA HOLOGRÁFICA</div>
                     <div class="compass-dial-container">
@@ -852,7 +1072,6 @@
             memoriaLocal[key] = value;
         }
 
-        // DESPERTA O SISTEMA A PARTIR DA TELA DO ABISMO
         function despertarSistema() {
             document.getElementById('abyss-screen').style.display = 'none';
             const autenticado = sessionStorage.getItem('cacador_autenticado');
@@ -863,8 +1082,7 @@
             }
         }
 
-        // AUTENTICAÇÃO ÚNICA DE CADA USUÁRIO COM SENHA
-        let dadosCacadorRPG = { nome: 'CAÇADOR', xp: 0, nivel: 1, pontosDisponiveis: 5, forca: 10, velocidade: 10, mana: 10, aura: 10 };
+        let dadosCacadorRPG = { nome: 'CAÇADOR', xp: 0, nivel: 1, pontosDisponiveis: 5, ent: 10, ofe: 10, def: 10, vel: 10, tec: 10, avatarType: 'icon', avatarVal: 'fa-user-ninja' };
 
         function autenticarUsuario() {
             const u = document.getElementById('input-login-user').value.trim();
@@ -883,7 +1101,8 @@
                     saved = {
                         nome: u.toUpperCase(),
                         senha: p,
-                        xp: 0, nivel: 1, pontosDisponiveis: 5, forca: 10, velocidade: 10, mana: 10, aura: 10
+                        xp: 0, nivel: 1, pontosDisponiveis: 5, ent: 10, ofe: 10, def: 10, vel: 10, tec: 10,
+                        avatarType: 'icon', avatarVal: 'fa-user-ninja'
                     };
                 }
 
@@ -906,6 +1125,49 @@
             document.getElementById('modal-login').style.display = 'none';
         }
 
+        /* UPLOAD E SELEÇÃO DE AVATAR DO CAÇADOR */
+        function uploadFotoCaçador(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    dadosCacadorRPG.avatarType = 'img';
+                    dadosCacadorRPG.avatarVal = e.target.result;
+                    salvarDadosUsuario();
+                    renderizarAvatar();
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function toggleHoloPicker() {
+            const grid = document.getElementById('holoPickerGrid');
+            if (grid) grid.style.display = (grid.style.display === 'none') ? 'grid' : 'none';
+        }
+
+        function selecionarIconeHolo(iconClass) {
+            dadosCacadorRPG.avatarType = 'icon';
+            dadosCacadorRPG.avatarVal = iconClass;
+            salvarDadosUsuario();
+            renderizarAvatar();
+            document.getElementById('holoPickerGrid').style.display = 'none';
+        }
+
+        function renderizarAvatar() {
+            const iconEl = document.getElementById('defaultAvatarIcon');
+            const imgEl = document.getElementById('customAvatarImg');
+
+            if (dadosCacadorRPG.avatarType === 'img' && dadosCacadorRPG.avatarVal) {
+                iconEl.style.display = 'none';
+                imgEl.style.display = 'block';
+                imgEl.src = dadosCacadorRPG.avatarVal;
+            } else {
+                imgEl.style.display = 'none';
+                iconEl.style.display = 'block';
+                iconEl.className = `fa-solid ${dadosCacadorRPG.avatarVal || 'fa-user-ninja'} pentagon-avatar-icon`;
+            }
+        }
+
         let customTasks = JSON.parse(getSafeStorage('sistema_cacador_custom_tasks')) || [
             { id: 1, text: "Estudar 2 horas de Português/RLM", completed: false },
             { id: 2, text: "Treino Físico Intenso", completed: false }
@@ -916,7 +1178,118 @@
         let abaAtual = 'portugues';
         let questaoIndexAtual = 0;
 
-        // CRONÔMETRO DE 10 MINUTOS PARA QUESTÕES
+        let chatMessages = JSON.parse(getSafeStorage('sistema_cacador_chat_msg')) || [
+            { user: "SYSTEM", text: "Bem-vindo ao Chat dos Caçadores!", time: "12:00" },
+            { user: "SHADOW", text: "Prontos para o certame da PMPE 2026?", time: "12:05" }
+        ];
+
+        let missionOffers = JSON.parse(getSafeStorage('sistema_cacador_mission_offers')) || [
+            { id: 1, author: "GUILDA ALFA", title: "Resolver 50 questões de Direito Constitucional", xp: 150, pts: 2, active: true }
+        ];
+
+        function switchChatSubtab(tab) {
+            document.getElementById('btn-chat-sub-global').classList.remove('active');
+            document.getElementById('btn-chat-sub-ofertas').classList.remove('active');
+            document.getElementById('chat-sec-global').style.display = 'none';
+            document.getElementById('chat-sec-ofertas').style.display = 'none';
+
+            if (tab === 'global') {
+                document.getElementById('btn-chat-sub-global').classList.add('active');
+                document.getElementById('chat-sec-global').style.display = 'block';
+                renderizarChatMessages();
+            } else {
+                document.getElementById('btn-chat-sub-ofertas').classList.add('active');
+                document.getElementById('chat-sec-ofertas').style.display = 'block';
+                renderizarMissionOffers();
+            }
+        }
+
+        function renderizarChatMessages() {
+            const list = document.getElementById('chat-messages-list');
+            if (!list) return;
+            list.innerHTML = '';
+            chatMessages.forEach(m => {
+                const item = document.createElement('div');
+                item.className = 'chat-msg-item';
+                item.innerHTML = `
+                    <div class="chat-msg-header">
+                        <span>[CAÇADOR: ${m.user}]</span>
+                        <span>${m.time}</span>
+                    </div>
+                    <div>${m.text}</div>
+                `;
+                list.appendChild(item);
+            });
+            list.scrollTop = list.scrollHeight;
+        }
+
+        function enviarMensagemChat() {
+            const input = document.getElementById('chatInputMessage');
+            const txt = input.value.trim();
+            if (!txt) return;
+
+            const ag = new Date();
+            const timeStr = `${ag.getHours().toString().padStart(2,'0')}:${ag.getMinutes().toString().padStart(2,'0')}`;
+
+            chatMessages.push({ user: dadosCacadorRPG.nome || "DESCONHECIDO", text: txt, time: timeStr });
+            setSafeStorage('sistema_cacador_chat_msg', JSON.stringify(chatMessages));
+            input.value = '';
+            renderizarChatMessages();
+        }
+
+        function renderizarMissionOffers() {
+            const list = document.getElementById('offers-feed-list');
+            if (!list) return;
+            list.innerHTML = '';
+            missionOffers.forEach(o => {
+                const div = document.createElement('div');
+                div.className = 'offer-item';
+                div.innerHTML = `
+                    <div class="offer-header">
+                        <span>OFERTADA POR: ${o.author}</span>
+                        <span>RECOMPENSA: +${o.xp} XP / +${o.pts} PTS</span>
+                    </div>
+                    <div style="color: #fff; margin-bottom: 6px;">${o.title}</div>
+                    <button onclick="aceitarOfertaMissao(${o.id})" style="background: ${o.active ? 'var(--god-gold)' : 'rgba(255,215,0,0.2)'}; color: ${o.active ? '#000' : '#ffd700'}; border: none; padding: 4px 10px; font-weight: bold; font-size: 0.7rem; cursor: pointer;" ${o.active ? '' : 'disabled'}>
+                        ${o.active ? 'ACEITAR E CUMPRIR' : 'CONCLUÍDA ✅'}
+                    </button>
+                `;
+                list.appendChild(div);
+            });
+        }
+
+        function publicarOfertaMissao() {
+            const title = document.getElementById('offerTitleInput').value.trim();
+            const xp = parseInt(document.getElementById('offerXpInput').value) || 100;
+            const pts = parseInt(document.getElementById('offerPtsInput').value) || 1;
+
+            if (!title) return;
+
+            missionOffers.push({ id: Date.now(), author: dadosCacadorRPG.nome || "DESCONHECIDO", title: title, xp: xp, pts: pts, active: true });
+            setSafeStorage('sistema_cacador_mission_offers', JSON.stringify(missionOffers));
+            
+            document.getElementById('offerTitleInput').value = '';
+            document.getElementById('offerXpInput').value = '';
+            document.getElementById('offerPtsInput').value = '';
+
+            renderizarMissionOffers();
+        }
+
+        function aceitarOfertaMissao(id) {
+            const offer = missionOffers.find(o => o.id === id);
+            if (offer && offer.active) {
+                offer.active = false;
+                setSafeStorage('sistema_cacador_mission_offers', JSON.stringify(missionOffers));
+                dadosCacadorRPG.xp += offer.xp;
+                dadosCacadorRPG.pontosDisponiveis += offer.pts;
+                salvarDadosUsuario();
+                renderizarHUDRPG();
+                renderizarMissionOffers();
+                if (typeof confetti === 'function') confetti({ particleCount: 90, spread: 70 });
+            }
+        }
+
+        // TIMER QUESTÕES
         let tempoQuestaoSegundos = 600;
         let timerQuestaoInterval = null;
 
@@ -947,7 +1320,7 @@
             if (el) el.innerText = `${m}:${s}`;
         }
 
-        // RELÓGIO TEMPO REAL E CRONÔMETRO DO ARMAZENAMENTO
+        // RELÓGIO & CRONÔMETRO
         setInterval(() => {
             const ag = new Date();
             const h = ag.getHours().toString().padStart(2, '0');
@@ -986,7 +1359,7 @@
             if (el) el.innerText = "00:00:00";
         }
 
-        // BÚSSOLA TÁTICA COM SENSOR DE ORIENTAÇÃO DO DISPOSITIVO
+        // BÚSSOLA
         if (window.DeviceOrientationEvent) {
             window.addEventListener('deviceorientation', function(e) {
                 let compassHeading = e.alpha || 0;
@@ -1007,7 +1380,7 @@
         }
 
         function exibirJanela(nomeJanela) {
-            const janelas = ['status', 'taf', 'missoes', 'banco', 'equip'];
+            const janelas = ['status', 'taf', 'missoes', 'banco', 'chat', 'equip'];
             janelas.forEach(j => {
                 const elWin = document.getElementById(`win-${j}`);
                 const elBtn = document.getElementById(`btn-win-${j}`);
@@ -1017,6 +1390,9 @@
                     else elBtn.classList.remove('active');
                 }
             });
+            if (nomeJanela === 'chat') {
+                renderizarChatMessages();
+            }
         }
 
         const bancoQuestoes = {
@@ -1064,10 +1440,20 @@
             const userKey = sessionStorage.getItem('cacador_usuario_ativo');
             if (userKey) {
                 const saved = JSON.parse(getSafeStorage(userKey));
-                if (saved) dadosCacadorRPG = saved;
+                if (saved) {
+                    if (saved.ent === undefined) saved.ent = 10;
+                    if (saved.ofe === undefined) saved.ofe = 10;
+                    if (saved.def === undefined) saved.def = 10;
+                    if (saved.vel === undefined) saved.vel = 10;
+                    if (saved.tec === undefined) saved.tec = 10;
+                    if (saved.avatarType === undefined) saved.avatarType = 'icon';
+                    if (saved.avatarVal === undefined) saved.avatarVal = 'fa-user-ninja';
+                    dadosCacadorRPG = saved;
+                }
             }
             calcularMetasDoNivel();
             renderizarHUDRPG();
+            renderizarAvatar();
             renderizarCustomTasks();
         }
 
@@ -1180,15 +1566,18 @@
             }
 
             document.getElementById('display-pontos-disponiveis').innerText = dadosCacadorRPG.pontosDisponiveis;
-            document.getElementById('atrib-forca').innerText = dadosCacadorRPG.forca;
-            document.getElementById('atrib-velocidade').innerText = dadosCacadorRPG.velocidade;
-            document.getElementById('atrib-mana').innerText = dadosCacadorRPG.mana;
-            document.getElementById('atrib-aura').innerText = dadosCacadorRPG.aura;
+            
+            document.getElementById('atrib-ent').innerText = dadosCacadorRPG.ent !== undefined ? dadosCacadorRPG.ent : 10;
+            document.getElementById('atrib-ofe').innerText = dadosCacadorRPG.ofe !== undefined ? dadosCacadorRPG.ofe : 10;
+            document.getElementById('atrib-def').innerText = dadosCacadorRPG.def !== undefined ? dadosCacadorRPG.def : 10;
+            document.getElementById('atrib-vel').innerText = dadosCacadorRPG.vel !== undefined ? dadosCacadorRPG.vel : 10;
+            document.getElementById('atrib-tec').innerText = dadosCacadorRPG.tec !== undefined ? dadosCacadorRPG.tec : 10;
         }
 
         function adicionarPontoManual(atrib) {
             if (dadosCacadorRPG.pontosDisponiveis > 0) {
                 dadosCacadorRPG.pontosDisponiveis -= 1;
+                if (dadosCacadorRPG[atrib] === undefined) dadosCacadorRPG[atrib] = 10;
                 dadosCacadorRPG[atrib] += 1;
                 salvarDadosUsuario();
                 renderizarHUDRPG();
@@ -1256,4 +1645,3 @@
     </script>
 </body>
 </html>
-
