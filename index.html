@@ -14,7 +14,7 @@
             --bg-dark: #02040a;
             --system-cyan: #00f0ff;
             --system-cyan-glow: rgba(0, 240, 255, 0.55);
-            --system-blue-card: rgba(6, 18, 38, 0.95);
+            --system-blue-card: rgba(6, 18, 38, 0.88);
             --system-red: #ff2a6d;
             --system-red-glow: rgba(255, 42, 109, 0.65);
             --god-gold: #ffd700;
@@ -36,16 +36,16 @@
             background-color: var(--bg-dark);
             color: var(--text-main);
             min-height: 100vh;
-            padding: 10px;
+            padding: 12px 10px 80px 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
             background-image: 
-                radial-gradient(circle at 50% 20%, rgba(0, 240, 255, 0.12) 0%, transparent 75%),
+                radial-gradient(circle at 50% 30%, rgba(0, 240, 255, 0.18) 0%, transparent 70%),
                 linear-gradient(180deg, #010206 0%, #050c1e 100%);
             background-attachment: fixed;
             overflow-x: hidden;
-            perspective: 1000px;
+            perspective: 1200px;
         }
 
         body::before {
@@ -114,101 +114,130 @@
             50% { opacity: 1; }
         }
 
-        /* HEADER PRINCIPAL IMPACTANTE */
+        /* HEADER PRINCIPAL LEVITANDO NO TOPO */
         header {
             width: 100%;
             max-width: 600px;
-            background: linear-gradient(135deg, rgba(6, 18, 38, 0.98) 0%, rgba(2, 6, 16, 0.95) 100%);
+            background: linear-gradient(135deg, rgba(6, 18, 38, 0.95) 0%, rgba(2, 6, 16, 0.9) 100%);
             border: 2px solid var(--system-cyan);
-            box-shadow: 0 0 25px var(--system-cyan-glow), inset 0 0 15px rgba(0, 240, 255, 0.2);
-            padding: 16px;
-            margin-bottom: 12px;
-            clip-path: polygon(0 15px, 15px 0, calc(100% - 15px) 0, 100% 15px, 100% calc(100% - 15px), calc(100% - 15px) 100%, 15px 100%, 0 calc(100% - 15px));
+            box-shadow: 0 10px 25px var(--system-cyan-glow);
+            padding: 12px;
+            margin-bottom: 16px;
+            clip-path: polygon(0 12px, 12px 0, calc(100% - 12px) 0, 100% 12px, 100% calc(100% - 12px), calc(100% - 12px) 100%, 12px 100%, 0 calc(100% - 12px));
             text-align: center;
-            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            animation: floatHeader 5s infinite ease-in-out;
+        }
+
+        @keyframes floatHeader {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-4px); }
+        }
+
+        .header-top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 0 4px;
         }
 
         .header-title-glow {
             color: #fff;
             font-family: monospace;
-            font-size: 1.35rem;
+            font-size: 1.25rem;
             font-weight: 900;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             text-transform: uppercase;
             text-shadow: 0 0 15px var(--system-cyan), 0 0 30px var(--system-cyan-glow);
-            margin-bottom: 4px;
         }
 
         .header-sub-tag {
             color: var(--system-cyan);
-            font-size: 0.8rem;
+            font-size: 0.72rem;
             font-family: monospace;
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
             font-weight: bold;
             background: rgba(0, 240, 255, 0.1);
-            display: inline-block;
-            padding: 3px 12px;
+            padding: 3px 10px;
             border: 1px solid var(--system-cyan);
-            border-radius: 12px;
+            border-radius: 10px;
             text-shadow: 0 0 8px var(--system-cyan);
         }
 
         .btn-notify-toggle {
-            position: absolute;
-            right: 12px;
-            top: 12px;
             background: rgba(0, 240, 255, 0.15);
             border: 1px solid var(--system-cyan);
             color: var(--system-cyan);
-            padding: 6px 10px;
-            font-size: 0.75rem;
+            padding: 4px 10px;
+            font-size: 0.68rem;
             font-weight: bold;
             cursor: pointer;
             border-radius: 4px;
             box-shadow: 0 0 10px var(--system-cyan-glow);
         }
 
-        /* MENU SELETORES DE JANELA COM ROLAGEM HORIZONTAL */
-        .window-selector-bar {
+        /* REDE DE ÍCONES FLUTUANTES E ESPALHADOS PELO ESPAÇO */
+        .window-selector-floating-grid {
             width: 100%;
             max-width: 600px;
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 3px;
-            margin-bottom: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 20px;
         }
 
-        .btn-select-window {
-            background: rgba(2, 6, 16, 0.85);
+        .btn-floating-node {
+            background: rgba(4, 14, 32, 0.85);
             border: 1px solid var(--system-cyan);
             color: var(--text-sub);
-            padding: 8px 1px;
-            font-size: 0.55rem;
+            padding: 8px 12px;
+            font-size: 0.65rem;
             font-weight: bold;
             font-family: monospace;
             cursor: pointer;
-            text-align: center;
             text-transform: uppercase;
-            letter-spacing: 0.3px;
-            transition: all 0.25s;
+            letter-spacing: 1px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 240, 255, 0.2);
             display: flex;
-            flex-direction: column;
             align-items: center;
-            gap: 3px;
+            gap: 6px;
+            backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+            animation: floatNode 4s infinite ease-in-out;
         }
 
-        .btn-select-window i {
-            font-size: 0.85rem;
+        .btn-floating-node:nth-child(even) { animation-delay: 0.5s; }
+        .btn-floating-node:nth-child(3n) { animation-delay: 1s; }
+
+        @keyframes floatNode {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-5px) scale(1.03); }
         }
 
-        .btn-select-window.active {
+        .btn-floating-node i {
+            font-size: 0.9rem;
+            color: var(--system-cyan);
+        }
+
+        .btn-floating-node.active {
             background: var(--system-cyan);
             color: #000;
-            box-shadow: 0 0 15px var(--system-cyan-glow);
-            transform: translateY(-2px);
+            border-color: #fff;
+            box-shadow: 0 0 20px var(--system-cyan-glow);
+            transform: translateY(-4px) scale(1.05);
         }
 
-        /* CONTAINER FLUTUANTE 3D COM GESTOS DE TOUCH/SWIPE */
+        .btn-floating-node.active i {
+            color: #000;
+        }
+
+        /* VIEWPORT DAS PÁGINAS SOLTAS / FLUTUANTES NO ESPAÇO */
         .single-window-viewport {
             width: 100%;
             max-width: 600px;
@@ -221,19 +250,31 @@
             width: 100%;
             background: var(--system-blue-card);
             border: 2px solid var(--system-cyan);
-            box-shadow: 0 0 30px var(--system-cyan-glow), inset 0 0 20px rgba(0, 240, 255, 0.15);
-            padding: 20px;
+            box-shadow: 0 20px 45px rgba(0, 240, 255, 0.4), inset 0 0 25px rgba(0, 240, 255, 0.15);
+            padding: 22px;
             position: relative;
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(14px);
             clip-path: polygon(0 15px, 15px 0, calc(100% - 15px) 0, 100% 15px, 100% calc(100% - 15px), calc(100% - 15px) 100%, 15px 100%, 0 calc(100% - 15px));
-            transition: transform 0.15s ease-out, opacity 0.25s ease-out;
+            transition: transform 0.2s ease-out, opacity 0.3s ease-out;
             transform-style: preserve-3d;
+            animation: floatPage 5s infinite ease-in-out;
+        }
+
+        @keyframes floatPage {
+            0%, 100% { transform: translateY(0px) rotateX(0deg); box-shadow: 0 20px 40px rgba(0, 240, 255, 0.35); }
+            50% { transform: translateY(-10px) rotateX(1.2deg); box-shadow: 0 30px 55px rgba(0, 240, 255, 0.55); }
         }
 
         .system-window-red {
             background: rgba(26, 8, 16, 0.95);
             border: 2px solid var(--system-red);
-            box-shadow: 0 0 30px var(--system-red-glow), inset 0 0 20px rgba(255, 42, 109, 0.2);
+            box-shadow: 0 20px 45px rgba(255, 42, 109, 0.45);
+            animation: floatPageRed 5s infinite ease-in-out;
+        }
+
+        @keyframes floatPageRed {
+            0%, 100% { transform: translateY(0px); box-shadow: 0 20px 40px rgba(255, 42, 109, 0.4); }
+            50% { transform: translateY(-10px); box-shadow: 0 30px 55px rgba(255, 42, 109, 0.65); }
         }
 
         .window-header {
@@ -274,7 +315,7 @@
             transition: width 0.4s ease;
         }
 
-        /* RADAR PENTAGONAL MALEÁVEL DE ATRIBUTOS */
+        /* RADAR PENTAGONAL DE ATRIBUTOS */
         .radar-status-stage {
             width: 100%;
             padding: 20px 10px;
@@ -326,6 +367,9 @@
             align-items: center;
             overflow: hidden;
             border-radius: 50%;
+            background: rgba(2, 6, 16, 0.85);
+            border: 2px solid var(--system-cyan);
+            box-shadow: 0 0 20px var(--system-cyan-glow);
         }
 
         .avatar-custom-img {
@@ -336,7 +380,7 @@
         }
 
         .pentagon-avatar-icon {
-            font-size: 5rem;
+            font-size: 3.8rem;
             color: var(--system-cyan);
             filter: drop-shadow(0 0 15px var(--system-cyan));
         }
@@ -376,7 +420,7 @@
             border: 1px solid var(--system-cyan);
             color: var(--system-cyan);
             padding: 8px 0;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             cursor: pointer;
             display: flex;
             justify-content: center;
@@ -389,7 +433,7 @@
             color: #000;
         }
 
-        /* BLOCOS DE ATRIBUTOS (ENT, OFE, DEF, VEL, TEC) */
+        /* ATRIBUTOS DO CAÇADOR */
         .radar-stat-box {
             background: rgba(4, 14, 30, 0.95);
             border: 1px solid var(--system-cyan);
@@ -435,7 +479,7 @@
         .pos-left-bottom { position: absolute; left: -28px; bottom: -38px; }
         .pos-right-bottom { position: absolute; right: -28px; bottom: -38px; }
 
-        /* MÓDULO BOSSES DE SOLO LEVELING */
+        /* MÓDULO BOSSES */
         .boss-card {
             background: rgba(20, 4, 12, 0.9);
             border: 1px solid var(--system-red);
@@ -484,7 +528,7 @@
             box-shadow: 0 0 12px var(--system-red-glow);
         }
 
-        /* ARMAZENAMENTO */
+        /* ARMAZENAMENTO / EQUIP */
         .equip-grid {
             display: flex;
             flex-direction: column;
@@ -552,7 +596,33 @@
             font-weight: bold;
         }
 
-        /* CHAT E OFERTAS DE MISSÕES */
+        /* BOTÃO FLUTUANTE PERMANENTE DE ARMAZENAMENTO (ACCESSÍVEL EM QUALQUER LUGAR) */
+        .floating-storage-trigger {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            background: rgba(6, 18, 38, 0.95);
+            border: 2px solid var(--god-gold);
+            color: var(--god-gold);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 0 20px var(--god-gold-glow), 0 0 35px rgba(0, 0, 0, 0.8);
+            z-index: 99999;
+            animation: pulseStorage 3s infinite ease-in-out;
+        }
+
+        @keyframes pulseStorage {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 15px var(--god-gold-glow); }
+            50% { transform: scale(1.1); box-shadow: 0 0 30px var(--god-gold); }
+        }
+
+        /* CHAT E OFERTAS */
         .chat-subtabs {
             display: flex;
             gap: 6px;
@@ -625,7 +695,7 @@
             margin-bottom: 4px;
         }
 
-        /* MISSÕES TAF */
+        /* TAF */
         .taf-grid {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
@@ -658,7 +728,7 @@
             box-shadow: 0 0 15px var(--system-red-glow);
         }
 
-        /* MISSÕES CUSTOMIZADAS */
+        /* CUSTOM TASKS */
         .task-input-box {
             display: flex;
             gap: 6px;
@@ -741,7 +811,7 @@
             margin-top: 10px;
         }
 
-        /* POP-UP DE QUESTÃO DO JOGO */
+        /* POP-UP QUESTÕES */
         .game-modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
@@ -802,7 +872,7 @@
             border-color: #ef4444 !important;
         }
 
-        /* OVERLAY DE LOGIN */
+        /* OVERLAY LOGIN */
         .login-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -838,6 +908,11 @@
     </style>
 </head>
 <body>
+
+    <!-- ÍCONE FLUTUANTE PERMANENTE DE ARMAZENAMENTO -->
+    <div class="floating-storage-trigger" title="Armazenamento Dimensional" onclick="exibirJanela('equip')">
+        <i class="fa-solid fa-box-archive"></i>
+    </div>
 
     <!-- 1. TELA TIPO ABISMO DO SISTEMA -->
     <div id="abyss-screen" class="abyss-screen" onclick="despertarSistema()">
@@ -890,52 +965,54 @@
         </div>
     </div>
 
-    <!-- HEADER DO SISTEMA DESTACADO -->
+    <!-- HEADER DO SISTEMA COM EFEITO DE FLOATING HOLOGRÁFICO -->
     <header>
-        <button class="btn-notify-toggle" onclick="solicitarPermissaoNotificacao()"><i class="fa-solid fa-bell"></i> NOTIFICAÇÕES</button>
+        <div class="header-top-row">
+            <div class="header-sub-tag">PAINEL PESSOAL - PMPE 2026</div>
+            <button class="btn-notify-toggle" onclick="solicitarPermissaoNotificacao()"><i class="fa-solid fa-bell"></i> NOTIFICAÇÕES</button>
+        </div>
         <h1 class="header-title-glow">[SISTEMA DO CAÇADOR]</h1>
-        <div class="header-sub-tag">PAINEL PESSOAL - PMPE 2026</div>
-        <div style="margin-top: 6px;">
+        <div>
             <button onclick="fazerLogout()" style="background: rgba(255, 42, 109, 0.2); border: 1px solid var(--system-red); color: var(--system-red); padding: 2px 8px; font-weight: bold; font-size: 0.65rem; cursor: pointer;">SAIR DA SESSÃO</button>
         </div>
     </header>
 
-    <!-- MENU COM 7 SELETORES (STATUS, TAF, MISSÕES, QUESTÕES, CHAT, BOSSES, EQUIP) -->
-    <div class="window-selector-bar">
-        <button id="btn-win-status" class="btn-select-window active" onclick="exibirJanela('status')">
+    <!-- REDE DE ÍCONES FLUTUANTES E ESPALHADOS PELO ESPAÇO -->
+    <div class="window-selector-floating-grid">
+        <button id="btn-win-status" class="btn-floating-node active" onclick="exibirJanela('status')">
             <i class="fa-solid fa-bolt"></i>
             <span>STATUS</span>
         </button>
-        <button id="btn-win-taf" class="btn-select-window" onclick="exibirJanela('taf')">
+        <button id="btn-win-taf" class="btn-floating-node" onclick="exibirJanela('taf')">
             <i class="fa-solid fa-fire"></i>
             <span>TAF</span>
         </button>
-        <button id="btn-win-missoes" class="btn-select-window" onclick="exibirJanela('missoes')">
+        <button id="btn-win-missoes" class="btn-floating-node" onclick="exibirJanela('missoes')">
             <i class="fa-solid fa-scroll"></i>
             <span>MISSÕES</span>
         </button>
-        <button id="btn-win-banco" class="btn-select-window" onclick="exibirJanela('banco')">
+        <button id="btn-win-banco" class="btn-floating-node" onclick="exibirJanela('banco')">
             <i class="fa-solid fa-crosshairs"></i>
             <span>QUESTÕES</span>
         </button>
-        <button id="btn-win-chat" class="btn-select-window" onclick="exibirJanela('chat')">
+        <button id="btn-win-chat" class="btn-floating-node" onclick="exibirJanela('chat')">
             <i class="fa-solid fa-comments"></i>
             <span>CHAT</span>
         </button>
-        <button id="btn-win-bosses" class="btn-select-window" onclick="exibirJanela('bosses')">
+        <button id="btn-win-bosses" class="btn-floating-node" onclick="exibirJanela('bosses')">
             <i class="fa-solid fa-skull"></i>
             <span>BOSSES</span>
         </button>
-        <button id="btn-win-equip" class="btn-select-window" onclick="exibirJanela('equip')">
+        <button id="btn-win-equip" class="btn-floating-node" onclick="exibirJanela('equip')">
             <i class="fa-solid fa-box-archive"></i>
             <span>EQUIP</span>
         </button>
     </div>
 
-    <!-- VIEWPORT COM NAVEGAÇÃO FLUIDA POR TOUCH/DESLIZAR DE DEDO -->
+    <!-- VIEWPORT COM PÁGINAS SOLTAS / FLUTUANTES NO ESPAÇO -->
     <main class="single-window-viewport" id="viewportMain">
 
-        <!-- JANELA 1: STATUS DO CAÇADOR COM RADAR 3D -->
+        <!-- JANELA 1: STATUS DO CAÇADOR -->
         <div id="win-status" class="system-window">
             <div class="window-header">
                 <span class="window-title"><i class="fa-solid fa-user-ninja"></i> JANELA DE STATUS</span>
@@ -961,7 +1038,7 @@
                     <div class="pentagon-border"></div>
                     
                     <div class="avatar-display-box" id="avatarContainer">
-                        <i id="defaultAvatarIcon" class="fa-solid fa-user-ninja pentagon-avatar-icon"></i>
+                        <i id="defaultAvatarIcon" class="fa-solid fa-skull-crossbones pentagon-avatar-icon"></i>
                         <img id="customAvatarImg" class="avatar-custom-img" style="display: none;" alt="Foto Caçador">
                     </div>
 
@@ -998,17 +1075,17 @@
 
                 <div class="avatar-controls-bar">
                     <button class="btn-avatar-opt" onclick="document.getElementById('avatarFileInput').click()"><i class="fa-solid fa-camera"></i> CARREGAR SUA FOTO</button>
-                    <button class="btn-avatar-opt" onclick="toggleHoloPicker()"><i class="fa-solid fa-wand-magic-sparkles"></i> ÍCONES HOLOGRÁFICOS</button>
+                    <button class="btn-avatar-opt" onclick="toggleHoloPicker()"><i class="fa-solid fa-wand-magic-sparkles"></i> AVATARES INTIMIDADORES</button>
                     <input type="file" id="avatarFileInput" accept="image/*" style="display: none;" onchange="uploadFotoCaçador(event)">
                 </div>
 
                 <div id="holoPickerGrid" class="holo-picker-grid" style="display: none;">
-                    <button class="holo-icon-btn" onclick="selecionarIconeHolo('fa-user-ninja')"><i class="fa-solid fa-user-ninja"></i></button>
-                    <button class="holo-icon-btn" onclick="selecionarIconeHolo('fa-ghost')"><i class="fa-solid fa-ghost"></i></button>
-                    <button class="holo-icon-btn" onclick="selecionarIconeHolo('fa-dragon')"><i class="fa-solid fa-dragon"></i></button>
-                    <button class="holo-icon-btn" onclick="selecionarIconeHolo('fa-mask')"><i class="fa-solid fa-mask"></i></button>
-                    <button class="holo-icon-btn" onclick="selecionarIconeHolo('fa-shield-halved')"><i class="fa-solid fa-shield-halved"></i></button>
-                    <button class="holo-icon-btn" onclick="selecionarIconeHolo('fa-fire-flame-curved')"><i class="fa-solid fa-fire-flame-curved"></i></button>
+                    <button class="holo-icon-btn" title="Caveira Guerreiro" onclick="selecionarIconeHolo('fa-skull-crossbones')"><i class="fa-solid fa-skull-crossbones"></i></button>
+                    <button class="holo-icon-btn" title="Dragão Humanoide" onclick="selecionarIconeHolo('fa-dragon')"><i class="fa-solid fa-dragon"></i></button>
+                    <button class="holo-icon-btn" title="Leão Tático" onclick="selecionarIconeHolo('fa-cat')"><i class="fa-solid fa-cat"></i></button>
+                    <button class="holo-icon-btn" title="Lobo Solitário" onclick="selecionarIconeHolo('fa-dog')"><i class="fa-solid fa-dog"></i></button>
+                    <button class="holo-icon-btn" title="Sombra de Solo" onclick="selecionarIconeHolo('fa-user-ninja')"><i class="fa-solid fa-user-ninja"></i></button>
+                    <button class="holo-icon-btn" title="Guerreiro Demoníaco" onclick="selecionarIconeHolo('fa-mask-ventilator')"><i class="fa-solid fa-mask-ventilator"></i></button>
                 </div>
             </div>
         </div>
@@ -1114,7 +1191,7 @@
             <div class="window-header" style="border-bottom-color: var(--system-red);">
                 <span class="window-title" style="color: var(--system-red);"><i class="fa-solid fa-skull"></i> MASMORRAS & BOSSES</span>
             </div>
-            <p style="font-size: 0.78rem; color: #ddd; margin-bottom: 12px;">Enfrante os Guardiões de Portal para obter itens e status lendários!</p>
+            <p style="font-size: 0.78rem; color: #ddd; margin-bottom: 12px;">Enfrente os Guardiões de Portal para obter itens e status lendários!</p>
 
             <div id="bossesFeedContainer"></div>
         </div>
@@ -1174,7 +1251,7 @@
             }
         }
 
-        let dadosCacadorRPG = { nome: 'CAÇADOR', xp: 0, nivel: 1, pontosDisponiveis: 5, ent: 10, ofe: 10, def: 10, vel: 10, tec: 10, avatarType: 'icon', avatarVal: 'fa-user-ninja' };
+        let dadosCacadorRPG = { nome: 'CAÇADOR', xp: 0, nivel: 1, pontosDisponiveis: 5, ent: 10, ofe: 10, def: 10, vel: 10, tec: 10, avatarType: 'icon', avatarVal: 'fa-skull-crossbones' };
 
         function autenticarUsuario() {
             const u = document.getElementById('input-login-user').value.trim();
@@ -1194,7 +1271,7 @@
                         nome: u.toUpperCase(),
                         senha: p,
                         xp: 0, nivel: 1, pontosDisponiveis: 5, ent: 10, ofe: 10, def: 10, vel: 10, tec: 10,
-                        avatarType: 'icon', avatarVal: 'fa-user-ninja'
+                        avatarType: 'icon', avatarVal: 'fa-skull-crossbones'
                     };
                 }
 
@@ -1246,12 +1323,10 @@
         viewportEl.addEventListener('touchend', e => {
             let endX = e.changedTouches[0].screenX;
             if (startX - endX > 50) {
-                // Arrastou para a esquerda -> Próxima janela
                 if (janelaAtualIndex < listaJanelasOrder.length - 1) {
                     exibirJanela(listaJanelasOrder[janelaAtualIndex + 1]);
                 }
             } else if (endX - startX > 50) {
-                // Arrastou para a direita -> Janela anterior
                 if (janelaAtualIndex > 0) {
                     exibirJanela(listaJanelasOrder[janelaAtualIndex - 1]);
                 }
@@ -1362,7 +1437,7 @@
             } else {
                 imgEl.style.display = 'none';
                 iconEl.style.display = 'block';
-                iconEl.className = `fa-solid ${dadosCacadorRPG.avatarVal || 'fa-user-ninja'} pentagon-avatar-icon`;
+                iconEl.className = `fa-solid ${dadosCacadorRPG.avatarVal || 'fa-skull-crossbones'} pentagon-avatar-icon`;
             }
         }
 
@@ -1649,7 +1724,7 @@
                     if (saved.vel === undefined) saved.vel = 10;
                     if (saved.tec === undefined) saved.tec = 10;
                     if (saved.avatarType === undefined) saved.avatarType = 'icon';
-                    if (saved.avatarVal === undefined) saved.avatarVal = 'fa-user-ninja';
+                    if (saved.avatarVal === undefined) saved.avatarVal = 'fa-skull-crossbones';
                     dadosCacadorRPG = saved;
                 }
             }
