@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
-    <title>SISTEMA DO CAÇADOR - PAINEL SUPREMO</title>
+    <title>SISTEMA DO CAÇADOR - SUPREMO</title>
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Canvas Confetti -->
@@ -59,7 +59,7 @@
             opacity: 0.2;
         }
 
-        /* TELA DE ENTRADA / ABISMO COM EFEITO DE NUVENS E TOQUE DESBLOQUEADO */
+        /* TELA DE ENTRADA / ABISMO COM NUVENS E TOQUE DESBLOQUEADO */
         .abyss-screen {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
@@ -187,7 +187,7 @@
         .options-dropdown-panel { position: absolute; top: 45px; right: 12px; background: rgba(3, 10, 24, 0.98); border: 2px solid var(--system-cyan); box-shadow: 0 0 25px var(--system-cyan-glow); padding: 12px; width: 200px; z-index: 99999; display: none; flex-direction: column; gap: 8px; }
         .options-btn-item { background: rgba(0, 240, 255, 0.08); border: 1px solid var(--system-cyan); color: #fff; padding: 8px; font-size: 0.75rem; font-family: monospace; font-weight: bold; cursor: pointer; text-align: left; display: flex; align-items: center; gap: 8px; }
 
-        /* NAVEGAÇÃO DE ABAS EXPANDIDA (INCLUINDO AS NOVAS IDEIAS) */
+        /* NAVEGAÇÃO DE ABAS EXPANDIDA */
         .window-selector-floating-grid { width: 100%; max-width: 600px; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin-bottom: 16px; }
         .btn-floating-node { background: rgba(4, 14, 32, 0.85); border: 1px solid var(--system-cyan); color: var(--text-sub); padding: 7px 10px; font-size: 0.58rem; font-weight: bold; font-family: monospace; cursor: pointer; text-transform: uppercase; border-radius: 8px; display: flex; align-items: center; gap: 5px; }
         .btn-floating-node.active { background: var(--system-cyan); color: #000; border-color: #fff; box-shadow: 0 0 20px var(--system-cyan-glow); transform: translateY(-2px) scale(1.04); }
@@ -229,10 +229,9 @@
         .character-class-sub { color: #fff; font-size: 0.72rem; font-weight: bold; letter-spacing: 1.5px; margin-top: 2px; }
         .subtle-points-badge { display: inline-block; background: rgba(255, 215, 0, 0.15); border: 1px solid var(--god-gold); color: var(--god-gold); font-family: monospace; font-size: 0.7rem; padding: 2px 8px; border-radius: 10px; margin-top: 6px; }
 
-        /* ESTILOS DOS PAINÉIS INSPIRADOS NOS PRINTS */
+        /* ESTILOS DE PAINÉIS CUSTOMIZÁVEIS */
         .dash-card { background: rgba(2, 6, 16, 0.85); border: 1px solid rgba(0, 240, 255, 0.3); padding: 12px; border-radius: 6px; margin-bottom: 10px; }
-        .macro-bar-outer { width: 100%; height: 8px; background: #02040a; border-radius: 4px; margin-top: 4px; overflow: hidden; }
-        .macro-bar-inner { height: 100%; border-radius: 4px; }
+        .user-input-field { width: 100%; background: #030a16; border: 1px solid var(--system-cyan); color: #fff; padding: 7px; font-size: 0.8rem; font-family: monospace; margin-top: 4px; outline: none; }
         .difficulty-row { display: flex; justify-content: space-between; align-items: center; background: rgba(3, 10, 24, 0.9); border: 1px solid rgba(0,240,255,0.2); padding: 8px 10px; margin-bottom: 6px; border-radius: 4px; font-size: 0.75rem; font-family: monospace; }
 
         /* MODAIS */
@@ -242,7 +241,7 @@
         .question-text-box { background: rgba(2, 8, 20, 0.95); border: 1px solid rgba(0, 240, 255, 0.5); border-left: 5px solid var(--system-cyan); padding: 14px; font-size: 1.05rem; color: #f8fafc; line-height: 1.6; max-height: 180px; overflow-y: auto; border-radius: 4px; }
         .game-options-grid button { width: 100%; text-align: left; background: rgba(4, 14, 30, 0.95); border: 1px solid rgba(0, 240, 255, 0.4); color: #fff; padding: 12px 14px; font-size: 0.95rem; margin-top: 6px; cursor: pointer; border-radius: 6px; line-height: 1.5; }
         
-        .class-option-card { background: rgba(3, 10, 24, 0.9); border: 1px solid var(--system-cyan); padding: 12px; margin-bottom: 8px; cursor: pointer; display: flex; align-items: center; gap: 12px; }
+        .class-option-card { background: rgba(3, 10, 24, 0.9); border: 1px solid var(--system-cyan); padding: 10px; margin-bottom: 6px; cursor: pointer; display: flex; align-items: center; gap: 10px; }
         .login-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(2, 5, 14, 0.98); display: flex; justify-content: center; align-items: center; z-index: 999999; }
         .login-caixa { background: #07152b; border: 2px solid var(--system-cyan); padding: 28px; text-align: center; width: 90%; max-width: 380px; }
         .login-caixa input { width: 100%; padding: 10px 12px; background: #030a16; border: 1px solid var(--system-cyan); color: #fff; text-align: center; font-weight: bold; margin-bottom: 10px; outline: none; }
@@ -255,7 +254,7 @@
         .chat-subtabs { display: flex; gap: 6px; margin-bottom: 10px; }
         .chat-subtab-btn { flex: 1; background: rgba(2,6,16,0.9); border: 1px solid var(--system-cyan); color: var(--text-sub); padding: 6px; font-size: 0.7rem; font-family: monospace; cursor: pointer; text-align: center; }
         .chat-subtab-btn.active { background: var(--system-cyan); color: #000; font-weight: bold; }
-        .chat-messages-container { height: 200px; background: rgba(2, 6, 16, 0.9); border: 1px solid rgba(0, 240, 255, 0.3); padding: 10px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px; font-size: 0.8rem; }
+        .chat-messages-container { height: 180px; background: rgba(2, 6, 16, 0.9); border: 1px solid rgba(0, 240, 255, 0.3); padding: 10px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px; font-size: 0.8rem; }
         .chat-msg-item { background: rgba(8, 22, 44, 0.8); border-left: 3px solid var(--system-cyan); padding: 6px 10px; }
     </style>
 </head>
@@ -304,33 +303,42 @@
         </form>
     </div>
 
-    <!-- MENU SECRETO DE CLASSE -->
+    <!-- MENU SECRETO DE CLASSE & AVATARES EXPANDIDOS -->
     <div id="modal-menu-secreto" class="game-modal-overlay">
         <div class="game-modal-card">
             <div class="window-header">
-                <span class="window-title"><i class="fa-solid fa-crown"></i> DESPERTAR DE CLASSE</span>
+                <span class="window-title"><i class="fa-solid fa-crown"></i> DESPERTAR DE CLASSE & AVATARES</span>
                 <button onclick="fecharMenuSecreto()" style="background: none; border: none; color: #ff4757; font-size: 1.3rem; font-weight: bold; cursor: pointer;">✕</button>
             </div>
-            <p style="font-size: 0.78rem; color: var(--god-gold); font-family: monospace; margin-bottom: 10px;">⚠️ Escolha sua classe 1 única vez (Definitiva):</p>
+            <p style="font-size: 0.75rem; color: var(--god-gold); font-family: monospace; margin-bottom: 6px;">Escolha seu arquétipo de caçador:</p>
 
-            <div id="lista-classes-container">
+            <div style="max-height: 180px; overflow-y: auto; display: flex; flex-direction: column; gap: 6px;">
                 <div class="class-option-card" onclick="escolherClasseDefinitiva('fa-skull-crossbones', 'MONARCA DAS SOMBRAS')">
-                    <i class="fa-solid fa-skull-crossbones" style="font-size: 2rem; color: var(--system-cyan);"></i>
-                    <div>
-                        <div style="font-weight: bold; color: #fff; font-size: 0.9rem;">MONARCA DAS SOMBRAS</div>
-                        <div style="font-size: 0.72rem; color: var(--text-sub);">Domínio supremo e ceifador de portais.</div>
-                    </div>
+                    <i class="fa-solid fa-skull-crossbones" style="font-size: 1.6rem; color: var(--system-cyan);"></i>
+                    <div><div style="font-weight: bold; color: #fff; font-size: 0.8rem;">MONARCA DAS SOMBRAS</div></div>
                 </div>
                 <div class="class-option-card" onclick="escolherClasseDefinitiva('fa-dragon', 'DRAGÃO DA IRA')">
-                    <i class="fa-solid fa-dragon" style="font-size: 2rem; color: var(--system-red);"></i>
-                    <div>
-                        <div style="font-weight: bold; color: #fff; font-size: 0.9rem;">DRAGÃO DA IRA</div>
-                        <div style="font-size: 0.72rem; color: var(--text-sub);">Poder explosivo e contra-ataque.</div>
-                    </div>
+                    <i class="fa-solid fa-dragon" style="font-size: 1.6rem; color: var(--system-red);"></i>
+                    <div><div style="font-weight: bold; color: #fff; font-size: 0.8rem;">DRAGÃO DA IRA</div></div>
+                </div>
+                <div class="class-option-card" onclick="escolherClasseDefinitiva('fa-sun', 'LEÃO DO ORGULHO')">
+                    <i class="fa-solid fa-sun" style="font-size: 1.6rem; color: var(--god-gold);"></i>
+                    <div><div style="font-weight: bold; color: #fff; font-size: 0.8rem;">LEÃO DO ORGULHO</div></div>
+                </div>
+                <div class="class-option-card" onclick="escolherClasseDefinitiva('fa-shield-halberd', 'CAVALHEIRO DE FERRO')">
+                    <i class="fa-solid fa-shield-halberd" style="font-size: 1.6rem; color: #3b82f6;"></i>
+                    <div><div style="font-weight: bold; color: #fff; font-size: 0.8rem;">CAVALHEIRO DE FERRO</div></div>
+                </div>
+                <div class="class-option-card" onclick="escolherClasseDefinitiva('fa-ghost', 'ASSASSINO ESPECTRAL')">
+                    <i class="fa-solid fa-ghost" style="font-size: 1.6rem; color: #a855f7;"></i>
+                    <div><div style="font-weight: bold; color: #fff; font-size: 0.8rem;">ASSASSINO ESPECTRAL</div></div>
                 </div>
             </div>
-            <button onclick="document.getElementById('avatarFileInput').click()" style="width: 100%; padding: 10px; background: rgba(0,240,255,0.1); border: 1px solid var(--system-cyan); color: var(--system-cyan); font-weight: bold; cursor: pointer; font-size: 0.75rem; margin-top: 6px;">📸 CARREGAR FOTO PESSOAL</button>
-            <input type="file" id="avatarFileInput" accept="image/*" style="display: none;" onchange="uploadFotoCaçador(event)">
+
+            <div style="border-top: 1px solid rgba(0,240,255,0.3); padding-top: 8px; margin-top: 4px;">
+                <button onclick="document.getElementById('avatarFileInput').click()" style="width: 100%; padding: 10px; background: rgba(0,240,255,0.1); border: 1px solid var(--system-cyan); color: var(--system-cyan); font-weight: bold; cursor: pointer; font-size: 0.75rem;">📸 CARREGAR FOTO PESSOAL</button>
+                <input type="file" id="avatarFileInput" accept="image/*" style="display: none;" onchange="uploadFotoCaçador(event)">
+            </div>
         </div>
     </div>
 
@@ -356,7 +364,7 @@
         </div>
     </div>
 
-    <!-- MODAL DE QUESTÕES / TORRE MÁGICA -->
+    <!-- MODAL DE QUESTÕES / TORRE MÁGICA (35 POR MATÉRIA, RESPOSTAS EMBARALHADAS) -->
     <div id="game-quest-overlay" class="game-modal-overlay">
         <div class="game-modal-card">
             <div class="window-header">
@@ -383,7 +391,7 @@
         </div>
     </header>
 
-    <!-- NAVEGAÇÃO / ABAS (INCLUINDI TODAS AS NOVAS SEÇÕES DOS PRINTS) -->
+    <!-- NAVEGAÇÃO DE ABAS EXPANDIDA -->
     <div class="window-selector-floating-grid">
         <button id="btn-win-status" class="btn-floating-node active" onclick="exibirJanela('status')"><i class="fa-solid fa-bolt"></i><span>STATUS</span></button>
         <button id="btn-win-dieta" class="btn-floating-node" onclick="exibirJanela('dieta')"><i class="fa-solid fa-apple-whole"></i><span>DIETA</span></button>
@@ -427,96 +435,125 @@
             </div>
         </div>
 
-        <!-- 2. DIETA & MACROS (Baseado no print de nutrição) -->
+        <!-- 2. DIETA & MACROS (100% USUAL / EDITÁVEL PELO USUÁRIO) -->
         <div id="win-dieta" class="system-window" style="display: none;">
             <div class="window-header"><span class="window-title"><i class="fa-solid fa-apple-whole"></i> SUA DIETA</span></div>
             <div class="dash-card" style="text-align: center;">
-                <div style="font-size: 0.68rem; color: var(--text-sub); font-family: monospace;">CONSUMO DE HOJE</div>
-                <div style="font-size: 1.6rem; font-weight: bold; color: #fff; margin: 4px 0;">2.737 <span style="font-size: 0.75rem; color: var(--system-cyan);">KCAL</span></div>
-                <div style="font-size: 0.65rem; color: #888;">Meta: 2.737 kcal</div>
+                <div style="font-size: 0.68rem; color: var(--text-sub); font-family: monospace;">CONSUMO DE CALORIAS (DIGITE SEU VALOR)</div>
+                <input type="text" id="inputKcal" class="user-input-field" placeholder="Ex: 2500 / 3000 kcal" oninput="salvarDadosDieta()">
             </div>
             <div class="dash-card">
-                <div style="font-size: 0.75rem; font-weight: bold; color: var(--god-gold); margin-bottom: 6px;">METAS DIÁRIAS</div>
-                <div style="font-size: 0.72rem; font-family: monospace;">Carboidratos: <span style="float: right;">375g / 446g</span></div>
-                <div class="macro-bar-outer"><div class="macro-bar-inner" style="width: 84%; background: #00f0ff;"></div></div>
-                <div style="font-size: 0.72rem; font-family: monospace; margin-top: 6px;">Proteínas: <span style="float: right;">165g / 140g</span></div>
-                <div class="macro-bar-outer"><div class="macro-bar-inner" style="width: 100%; background: #10b981;"></div></div>
-                <div style="font-size: 0.72rem; font-family: monospace; margin-top: 6px;">Gorduras: <span style="float: right;">95g / 70g</span></div>
-                <div class="macro-bar-outer"><div class="macro-bar-inner" style="width: 100%; background: #9d4edd;"></div></div>
+                <div style="font-size: 0.75rem; font-weight: bold; color: var(--god-gold); margin-bottom: 6px;">METAS DIÁRIAS (EDITE ABAIXO)</div>
+                <div style="font-size: 0.72rem; font-family: monospace;">Carboidratos:</div>
+                <input type="text" id="inputCarbo" class="user-input-field" placeholder="Ex: 300g / 400g" oninput="salvarDadosDieta()">
+                
+                <div style="font-size: 0.72rem; font-family: monospace; margin-top: 6px;">Proteínas:</div>
+                <input type="text" id="inputProt" class="user-input-field" placeholder="Ex: 150g / 180g" oninput="salvarDadosDieta()">
+
+                <div style="font-size: 0.72rem; font-family: monospace; margin-top: 6px;">Gorduras:</div>
+                <input type="text" id="inputGord" class="user-input-field" placeholder="Ex: 70g / 80g" oninput="salvarDadosDieta()">
             </div>
         </div>
 
-        <!-- 3. TREINOS (Baseado no print de treinos) -->
+        <!-- 3. TREINOS (100% USUAL / EDITÁVEL) -->
         <div id="win-treino" class="system-window" style="display: none;">
             <div class="window-header"><span class="window-title"><i class="fa-solid fa-dumbbell"></i> SEUS TREINOS</span></div>
             <div class="dash-card" style="display: flex; gap: 10px; align-items: center;">
                 <div style="width: 50px; height: 50px; background: #030a16; border: 1px solid var(--system-cyan); display: flex; justify-content: center; align-items: center; font-size: 1.5rem; color: var(--system-cyan);">⚔️</div>
-                <div style="font-size: 0.75rem; font-family: monospace;"><strong style="color: var(--god-gold);" id="treino-user-name">GOD</strong><br><span style="color: var(--text-sub);">Foco: Alta Performance</span></div>
+                <div style="font-size: 0.75rem; font-family: monospace;"><strong style="color: var(--god-gold);" id="treino-user-name">GOD</strong><br><span style="color: var(--text-sub);">Plano Personalizado</span></div>
             </div>
             <div class="dash-card">
-                <div style="font-size: 0.75rem; font-weight: bold; color: var(--system-cyan); margin-bottom: 8px;">PLANO ATUAL (4 DIAS/SEMANA)</div>
-                <div class="difficulty-row"><span>Segunda: Peito, Tríceps</span><span>></span></div>
-                <div class="difficulty-row"><span>Terça: Costas, Bíceps</span><span>></span></div>
-                <div class="difficulty-row"><span>Quinta: Quadríceps, Pernas</span><span>></span></div>
-                <div class="difficulty-row"><span>Sexta: Ombro, Abdômen</span><span>></span></div>
+                <div style="font-size: 0.75rem; font-weight: bold; color: var(--system-cyan); margin-bottom: 8px;">EDITAR DIAS DE TREINO</div>
+                <input type="text" id="inputTreinoSeg" class="user-input-field" placeholder="Segunda: Ex: Peito e Tríceps" oninput="salvarDadosTreino()">
+                <input type="text" id="inputTreinoTer" class="user-input-field" placeholder="Terça: Ex: Costas e Bíceps" oninput="salvarDadosTreino()">
+                <input type="text" id="inputTreinoQua" class="user-input-field" placeholder="Quarta: Ex: Pernas" oninput="salvarDadosTreino()">
             </div>
         </div>
 
-        <!-- 4. FINANÇAS (Baseado no print de finanças) -->
+        <!-- 4. FINANÇAS (100% USUAL / EDITÁVEL) -->
         <div id="win-financas" class="system-window" style="display: none;">
             <div class="window-header"><span class="window-title"><i class="fa-solid fa-wallet"></i> FINANÇAS</span></div>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px;">
-                <div class="dash-card" style="margin-bottom:0; text-align:center;"><span style="font-size:0.65rem; color:#10b981;">ENTRADAS</span><div style="font-size:0.95rem; font-weight:bold; color:#fff;">R$ 3.000</div></div>
-                <div class="dash-card" style="margin-bottom:0; text-align:center;"><span style="font-size:0.65rem; color:var(--system-red);">SAÍDAS</span><div style="font-size:0.95rem; font-weight:bold; color:#fff;">R$ 1.300</div></div>
+                <div class="dash-card" style="margin-bottom:0; text-align:center;">
+                    <span style="font-size:0.65rem; color:#10b981;">ENTRADAS (R$)</span>
+                    <input type="text" id="inputFinEntrada" class="user-input-field" placeholder="0.00" oninput="salvarDadosFinancas()">
+                </div>
+                <div class="dash-card" style="margin-bottom:0; text-align:center;">
+                    <span style="font-size:0.65rem; color:var(--system-red);">SAÍDAS (R$)</span>
+                    <input type="text" id="inputFinSaida" class="user-input-field" placeholder="0.00" oninput="salvarDadosFinancas()">
+                </div>
             </div>
             <div class="dash-card" style="text-align: center;">
                 <span style="font-size: 0.65rem; color: var(--god-gold);">SALDO LÍQUIDO EM CAIXA</span>
-                <div style="font-size: 1.4rem; font-weight: bold; color: var(--god-gold);">R$ 1.700</div>
+                <div id="displaySaldoLiquido" style="font-size: 1.3rem; font-weight: bold; color: var(--god-gold); margin-top: 4px;">R$ 0,00</div>
             </div>
         </div>
 
-        <!-- 5. CHEFÕES (Baseado no print de chefões) -->
+        <!-- 5. CHEFÕES -->
         <div id="win-chefao" class="system-window" style="display: none;">
             <div class="window-header"><span class="window-title"><i class="fa-solid fa-skull"></i> BATALHA DE CHEFÕES</span></div>
             <div class="dash-card" style="text-align: center; border-color: var(--system-red);">
                 <h3 style="color: var(--system-red); font-family: monospace; font-size: 1rem;">MORTH'ZUL</h3>
                 <p style="font-size: 0.68rem; color: var(--text-sub);">O Devorador de Vícios</p>
-                <div style="margin: 10px 0; font-size: 0.72rem; font-family: monospace;">Recompensa: <span style="color: var(--god-gold);">+1500 XP</span> | Punição: <span style="color: var(--system-red);">-500 XP</span></div>
-                <div style="font-size: 0.68rem; text-align: left; margin-bottom: 4px;">Vida do Boss: 100%</div>
-                <div class="macro-bar-outer"><div class="macro-bar-inner" style="width: 100%; background: var(--system-red);"></div></div>
-                <button onclick="alert('Batalha iniciada contra Morth\'zul!')" class="btn-system-action" style="background: var(--system-red); color: #fff; margin-top: 10px; border:none; padding:10px; width:100%; font-weight:bold; cursor:pointer;">ENTRAR EM BATALHA</button>
+                <div style="margin: 10px 0; font-size: 0.72rem; font-family: monospace;">Recompensa: <span style="color: var(--god-gold);">+1500 XP</span></div>
+                <button onclick="alert('Batalha iniciada contra Morth\'zul!')" style="background: var(--system-red); color: #fff; border:none; padding:10px; width:100%; font-weight:bold; cursor:pointer; font-family:monospace;">ATACAR BOSS</button>
             </div>
         </div>
 
-        <!-- 6. MISSÕES DIÁRIAS (Baseado no print de missões) -->
+        <!-- 6. MISSÕES -->
         <div id="win-missoes" class="system-window" style="display: none;">
             <div class="window-header"><span class="window-title"><i class="fa-solid fa-scroll"></i> QUADRO DE MISSÕES</span></div>
-            <div class="difficulty-row" style="border-left: 4px solid var(--system-red);"><span>🔴 INSANA (Hábitos críticos)</span><span>1 / 1</span></div>
-            <div class="difficulty-row" style="border-left: 4px solid #ff8800;"><span>🟠 DIFÍCIL (Resistência mental)</span><span>1 / 2</span></div>
-            <div class="difficulty-row" style="border-left: 4px solid var(--god-gold);"><span>🟡 MÉDIA (Esforço cognitivo)</span><span>2 / 4</span></div>
-            <div class="difficulty-row" style="border-left: 4px solid #10b981;"><span>🟢 FÁCIL (Constância diária)</span><span>3 / 6</span></div>
+            <div class="difficulty-row" style="border-left: 4px solid var(--system-red);"><span>🔴 INSANA</span><span>1 / 1</span></div>
+            <div class="difficulty-row" style="border-left: 4px solid #ff8800;"><span>🟠 DIFÍCIL</span><span>1 / 2</span></div>
+            <div class="difficulty-row" style="border-left: 4px solid var(--god-gold);"><span>🟡 MÉDIA</span><span>2 / 4</span></div>
+            <div class="difficulty-row" style="border-left: 4px solid #10b981;"><span>🟢 FÁCIL</span><span>3 / 6</span></div>
         </div>
 
-        <!-- 7. BANCO DE QUESTÕES & TORRE MÁGICA -->
+        <!-- 7. ESTUDOS & TORRE MÁGICA -->
         <div id="win-banco" class="system-window" style="display: none;">
-            <div class="window-header"><span class="window-title"><i class="fa-solid fa-book"></i> QUESTÕES & TORRE</span></div>
+            <div class="window-header"><span class="window-title"><i class="fa-solid fa-book"></i> BANCO DE QUESTÕES (35 POR MATÉRIA)</span></div>
             <nav class="nav-tabs">
                 <button class="tab-btn active" onclick="switchTab('portugues', event)">Português</button>
                 <button class="tab-btn" onclick="switchTab('racioc_logico', event)">Raciocínio</button>
                 <button class="tab-btn" onclick="switchTab('constitucional', event)">Constitucional</button>
                 <button class="tab-btn" onclick="switchTab('direitos_humanos', event)">Humanos</button>
+                <button class="tab-btn" onclick="switchTab('historia', event)">História</button>
+                <button class="tab-btn" onclick="switchTab('informatica', event)">Informática</button>
             </nav>
             <button class="btn-abrir-pop" onclick="abrirModalQuestao('normal')">⚔️ ESTUDAR QUESTÕES</button>
-            <button class="btn-abrir-pop" onclick="abrirModalQuestao('torre')" style="background: linear-gradient(135deg, var(--god-gold), #ff8800); color:#000; margin-top:6px;">🏰 TORRE MÁGICA (100 ANDARES)</button>
+            <button class="btn-abrir-pop" onclick="abrirModalQuestao('torre')" style="background: linear-gradient(135deg, var(--god-gold), #ff8800); color:#000; margin-top:6px;">🏰 TORRE MÁGICA (100 ANDARES MISTURADOS)</button>
         </div>
 
-        <!-- 8. CHAT -->
+        <!-- 8. CHAT GLOBAL & PRIVADO CORRIGIDO -->
         <div id="win-chat" class="system-window" style="display: none;">
-            <div class="window-header"><span class="window-title"><i class="fa-solid fa-comments"></i> CHAT SEGURO</span></div>
-            <div id="chat-messages-list" class="chat-messages-container"></div>
-            <div class="task-input-box" style="display:flex; gap:6px;">
-                <input type="text" id="chatInputMessage" placeholder="Mensagem..." style="flex:1; background:#030a16; border:1px solid var(--system-cyan); color:#fff; padding:8px;">
-                <button onclick="enviarMensagemChat()" style="background:var(--system-cyan); color:#000; border:none; padding:0 10px; font-weight:bold; cursor:pointer;">ENVIAR</button>
+            <div class="window-header"><span class="window-title"><i class="fa-solid fa-comments"></i> COMUNICAÇÃO DA GUILDA</span></div>
+            <div class="chat-subtabs">
+                <button id="btn-sub-global" class="chat-subtab-btn active" onclick="switchChatSub('global')">🌐 GLOBAL</button>
+                <button id="btn-sub-amigos" class="chat-subtab-btn" onclick="switchChatSub('amigos')">👥 PRIVADO / ANÔNIMO</button>
+            </div>
+
+            <div id="chat-sec-global">
+                <div id="chat-messages-list" class="chat-messages-container"></div>
+                <div style="display:flex; gap:6px;">
+                    <input type="text" id="chatInputMessage" placeholder="Mensagem global..." style="flex:1; background:#030a16; border:1px solid var(--system-cyan); color:#fff; padding:8px; font-size:0.78rem;">
+                    <button onclick="enviarMensagemChat()" style="background:var(--system-cyan); color:#000; border:none; padding:0 10px; font-weight:bold; cursor:pointer;">ENVIAR</button>
+                </div>
+            </div>
+
+            <div id="chat-sec-amigos" style="display: none;">
+                <div style="margin-bottom:6px; display:flex; gap:4px;">
+                    <input type="text" id="inputAmigoCodinome" placeholder="Codinome do Amigo..." style="flex:1; padding:6px; background:#030a16; border:1px solid var(--system-cyan); color:#fff; font-size:0.7rem; outline:none;">
+                    <button onclick="adicionarAmigo()" style="background:var(--system-cyan); color:#000; border:none; padding:0 8px; font-weight:bold; font-size:0.65rem; cursor:pointer;">+ ADD</button>
+                </div>
+                <div id="lista-amigos-chips" style="display:flex; flex-wrap:wrap; gap:4px; margin-bottom:6px;"></div>
+                <div id="chat-privado-box" style="display:none;">
+                    <div id="chat-privado-titulo" style="font-size:0.68rem; color:var(--god-gold); font-family:monospace; margin-bottom:3px;">CHAT PRIVADO COM: -</div>
+                    <div id="chat-privado-msgs" class="chat-messages-container" style="height:120px;"></div>
+                    <div style="display:flex; gap:6px;">
+                        <input type="text" id="chatInputPrivado" placeholder="Mensagem privada..." style="flex:1; background:#030a16; border:1px solid var(--god-gold); color:#fff; padding:6px; font-size:0.75rem;">
+                        <button onclick="enviarMensagemPrivada()" style="background:var(--god-gold); color:#000; border:none; padding:0 10px; font-weight:bold; cursor:pointer; font-size:0.75rem;">ENVIAR</button>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -560,7 +597,7 @@
             }
         }
 
-        let dadosCacadorRPG = { nome: 'GOD', xp: 0, nivel: 1, pontosDisponiveis: 5, ent: 10, ofe: 10, def: 10, vel: 10, tec: 10, avatarType: 'icon', avatarVal: 'fa-skull-crossbones', charClass: 'MONARCA DAS SOMBRAS' };
+        let dadosCacadorRPG = { nome: 'GOD', xp: 0, nivel: 1, pontosDisponiveis: 5, ent: 10, ofe: 10, def: 10, vel: 10, tec: 10, avatarType: 'icon', avatarVal: 'fa-skull-crossbones', charClass: 'MONARCA DAS SOMBRAS', amigos: [], conversasAmigos: {} };
 
         function autenticarUsuario() {
             let u = document.getElementById('input-login-user').value.trim().toUpperCase();
@@ -618,9 +655,9 @@
                 imgEl.style.display = 'block';
                 imgEl.src = dadosCacadorRPG.avatarVal;
             } else {
-                imgEl.style.display = 'none';
-                iconEl.style.display = 'block';
+                imgEl.style.display = 'block';
                 iconEl.className = `fa-solid ${dadosCacadorRPG.avatarVal} avatar-circle-icon`;
+                imgEl.style.display = 'none';
             }
         }
 
@@ -631,7 +668,198 @@
                 if(win) win.style.display = (j === nomeJanela) ? 'block' : 'none';
                 if(btn) btn.classList.toggle('active', j === nomeJanela);
             });
-            if(nomeJanela === 'chat') renderizarChatMessages();
+            if(nomeJanela === 'chat') { renderizarChatMessages(); renderizarListaAmigos(); }
+        }
+
+        function switchChatSub(sub) {
+            document.getElementById('btn-sub-global').classList.remove('active');
+            document.getElementById('btn-sub-amigos').classList.remove('active');
+            document.getElementById('chat-sec-global').style.display = 'none';
+            document.getElementById('chat-sec-amigos').style.display = 'none';
+            if(sub === 'global') {
+                document.getElementById('btn-sub-global').classList.add('active');
+                document.getElementById('chat-sec-global').style.display = 'block';
+                renderizarChatMessages();
+            } else {
+                document.getElementById('btn-sub-amigos').classList.add('active');
+                document.getElementById('chat-sec-amigos').style.display = 'block';
+                renderizarListaAmigos();
+            }
+        }
+
+        function adicionarAmigo() {
+            const nomeAmigo = document.getElementById('inputAmigoCodinome').value.trim().toUpperCase();
+            if(!nomeAmigo) return;
+            if(!dadosCacadorRPG.amigos) dadosCacadorRPG.amigos = [];
+            if(!dadosCacadorRPG.amigos.includes(nomeAmigo)) dadosCacadorRPG.amigos.push(nomeAmigo);
+            document.getElementById('inputAmigoCodinome').value = '';
+            renderizarListaAmigos();
+        }
+
+        function renderizarListaAmigos() {
+            const container = document.getElementById('lista-amigos-chips');
+            if(!container) return;
+            container.innerHTML = '';
+            if(!dadosCacadorRPG.amigos || dadosCacadorRPG.amigos.length === 0) {
+                container.innerHTML = '<span style="font-size:0.68rem; color:var(--text-sub);">Nenhum amigo.</span>';
+                return;
+            }
+            dadosCacadorRPG.amigos.forEach(amigo => {
+                const btn = document.createElement('button');
+                btn.style.cssText = "background:rgba(0,240,255,0.1); border:1px solid var(--system-cyan); color:#fff; padding:3px 6px; font-size:0.68rem; font-family:monospace; cursor:pointer;";
+                btn.innerText = amigo;
+                btn.onclick = () => abrirConversaPrivada(amigo);
+                container.appendChild(btn);
+            });
+        }
+
+        let amigoAtivoChat = null;
+        function abrirConversaPrivada(amigo) {
+            amigoAtivoChat = amigo;
+            document.getElementById('chat-privado-box').style.display = 'block';
+            document.getElementById('chat-privado-titulo').innerText = `CHAT COM: ${amigo}`;
+            renderizarMsgsPrivadas();
+        }
+
+        function renderizarMsgsPrivadas() {
+            const container = document.getElementById('chat-privado-msgs');
+            if(!container || !amigoAtivoChat) return;
+            container.innerHTML = '';
+            if(!dadosCacadorRPG.conversasAmigos) dadosCacadorRPG.conversasAmigos = {};
+            const hist = dadosCacadorRPG.conversasAmigos[amigoAtivoChat] || [];
+            hist.forEach(m => {
+                container.innerHTML += `<div class="chat-msg-item"><strong>[${m.remetente}]</strong>: ${m.texto}</div>`;
+            });
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function enviarMensagemPrivada() {
+            const txt = document.getElementById('chatInputPrivado').value.trim();
+            if(!txt || !amigoAtivoChat) return;
+            if(!dadosCacadorRPG.conversasAmigos[amigoAtivoChat]) dadosCacadorRPG.conversasAmigos[amigoAtivoChat] = [];
+            dadosCacadorRPG.conversasAmigos[amigoAtivoChat].push({ remetente: dadosCacadorRPG.nome, texto: txt });
+            document.getElementById('chatInputPrivado').value = '';
+            renderizarMsgsPrivadas();
+        }
+
+        /* DADOS USUAIS DE DIETA, TREINO E FINANÇAS SALVOS */
+        function salvarDadosDieta() {
+            setSafeStorage('user_kcal', document.getElementById('inputKcal').value);
+            setSafeStorage('user_carbo', document.getElementById('inputCarbo').value);
+            setSafeStorage('user_prot', document.getElementById('inputProt').value);
+            setSafeStorage('user_gord', document.getElementById('inputGord').value);
+        }
+
+        function salvarDadosTreino() {
+            setSafeStorage('treino_seg', document.getElementById('inputTreinoSeg').value);
+            setSafeStorage('treino_ter', document.getElementById('inputTreinoTer').value);
+            setSafeStorage('treino_qua', document.getElementById('inputTreinoQua').value);
+        }
+
+        function salvarDadosFinancas() {
+            let ent = parseFloat(document.getElementById('inputFinEntrada').value) || 0;
+            let saida = parseFloat(document.getElementById('inputFinSaida').value) || 0;
+            let saldo = ent - saida;
+            document.getElementById('displaySaldoLiquido').innerText = `R$ ${saldo.toFixed(2)}`;
+            setSafeStorage('fin_ent', ent);
+            setSafeStorage('fin_saida', saida);
+        }
+
+        /* BANCO DE QUESTÕES (35 POR MATÉRIA, RESPOSTAS EMBARALHADAS) */
+        const bancoQuestoes = { portugues: [], racioc_logico: [], constitucional: [], direitos_humanos: [], historia: [], informatica: [] };
+        const materiasList = ['portugues', 'racioc_logico', 'constitucional', 'direitos_humanos', 'historia', 'informatica'];
+
+        function embaralharArray(array) {
+            let arr = [...array];
+            for (let i = arr.length - 1; i > 0; i--) {
+                let j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        materiasList.forEach(mat => {
+            for(let i = 1; i <= 35; i++) {
+                let opcoesBrutas = [
+                    { texto: `A) Resposta correta e fundamentada para a questão #${i} de ${mat}.`, correta: true },
+                    { texto: `B) Incorreto. Falha conceitual na premissa.`, correta: false },
+                    { texto: `C) Incorreto. Diverge da jurisprudência atual.`, correta: false },
+                    { texto: `D) Incorreto. Sem amparo normativo.`, correta: false }
+                ];
+                let opcoesEmbaralhadas = embaralharArray(opcoesBrutas);
+                let idxCorreta = opcoesEmbaralhadas.findIndex(o => o.correta);
+
+                bancoQuestoes[mat].push({
+                    pergunta: `[${mat.toUpperCase()}] Questão #${i}: Analise o enunciado técnico e assinale a alternativa correta:`,
+                    opcoes: opcoesEmbaralhadas.map(o => o.texto),
+                    correta: idxCorreta,
+                    explicacao: `A alternativa correta estava na posição aleatória gerada pelo Sistema.`
+                });
+            }
+        });
+
+        /* TORRE MÁGICA 100 ANDARES MISTURADAS */
+        let torre100Andares = [];
+        for(let andar = 1; andar <= 100; andar++) {
+            let matRand = materiasList[Math.floor(Math.random() * materiasList.length)];
+            let qBase = bancoQuestoes[matRand][Math.floor(Math.random() * 35)];
+            torre100Andares.push({
+                andar: andar,
+                materia: matRand.toUpperCase(),
+                pergunta: `[ANDAR ${andar}/100 - ${matRand.toUpperCase()}] Desafio Superior:`,
+                opcoes: qBase.opcoes,
+                correta: qBase.correta,
+                explicacao: qBase.explicacao
+            });
+        }
+
+        let abaAtual = 'portugues', questaoIndexAtual = 0, modoJogoQuestao = 'normal';
+        function switchTab(mat, evt) {
+            abaAtual = mat;
+            questaoIndexAtual = 0;
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            if(evt) evt.target.classList.add('active');
+        }
+
+        function abrirModalQuestao(modo) {
+            modoJogoQuestao = modo;
+            questaoIndexAtual = 0;
+            document.getElementById('game-quest-overlay').style.display = 'flex';
+            renderizarBalaoQuestao();
+        }
+        function fecharModalQuestao() { document.getElementById('game-quest-overlay').style.display = 'none'; }
+
+        function renderizarBalaoQuestao() {
+            let lista = (modoJogoQuestao === 'torre') ? torre100Andares : (bancoQuestoes[abaAtual] || []);
+            if(questaoIndexAtual >= lista.length) questaoIndexAtual = 0;
+            const q = lista[questaoIndexAtual];
+
+            document.getElementById('pop-materia-titulo').innerText = modoJogoQuestao === 'torre' ? `TORRE MÁGICA - ANDAR ${q.andar}` : `${abaAtual.toUpperCase()} - Q#${questaoIndexAtual+1}`;
+            document.getElementById('pop-pergunta-texto').innerText = q.pergunta;
+            
+            const container = document.getElementById('pop-opcoes-container');
+            container.innerHTML = '';
+            document.getElementById('pop-explicacao-container').style.display = 'none';
+
+            q.opcoes.forEach((op, idx) => {
+                const btn = document.createElement('button');
+                btn.innerText = op;
+                btn.onclick = () => {
+                    if(idx === q.correta) {
+                        dadosCacadorRPG.xp += 30;
+                        renderizarHUDRPG();
+                        document.getElementById('pop-explicacao-container').style.display = 'block';
+                        document.getElementById('pop-explicacao-container').innerHTML = `✅ Correto! +30 XP`;
+                        setTimeout(() => {
+                            questaoIndexAtual++;
+                            renderizarBalaoQuestao();
+                        }, 900);
+                    } else {
+                        alert("Incorreto! Tente novamente.");
+                    }
+                };
+                container.appendChild(btn);
+            });
         }
 
         let cronometroSegundos = 0, cronometroInterval = null;
@@ -666,66 +894,6 @@
             renderizarChatMessages();
         }
 
-        const bancoQuestoes = { portugues: [], racioc_logico: [], constitucional: [], direitos_humanos: [] };
-        ['portugues', 'racioc_logico', 'constitucional', 'direitos_humanos'].forEach(mat => {
-            for(let i = 1; i <= 25; i++) {
-                bancoQuestoes[mat].push({
-                    pergunta: `[${mat.toUpperCase()}] Questão #${i}: Analise o enunciado e escolha a alternativa correta:`,
-                    opcoes: [`A) Alternativa correta #${i}.`, `B) Incorreto.`, `C) Incorreto.`, `D) Incorreto.`],
-                    correta: 0,
-                    explicacao: `A alternativa A está correta por fundamentação técnica.`
-                });
-            }
-        });
-
-        let abaAtual = 'portugues', questaoIndexAtual = 0, modoJogoQuestao = 'normal';
-        function switchTab(mat, evt) {
-            abaAtual = mat;
-            questaoIndexAtual = 0;
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            if(evt) evt.target.classList.add('active');
-        }
-
-        function abrirModalQuestao(modo) {
-            modoJogoQuestao = modo;
-            questaoIndexAtual = 0;
-            document.getElementById('game-quest-overlay').style.display = 'flex';
-            renderizarBalaoQuestao();
-        }
-        function fecharModalQuestao() { document.getElementById('game-quest-overlay').style.display = 'none'; }
-
-        function renderizarBalaoQuestao() {
-            let lista = bancoQuestoes[abaAtual] || [];
-            const q = lista[questaoIndexAtual];
-            document.getElementById('pop-materia-titulo').innerText = abaAtual.toUpperCase();
-            document.getElementById('pop-pergunta-texto').innerText = q.pergunta;
-            
-            const container = document.getElementById('pop-opcoes-container');
-            container.innerHTML = '';
-            document.getElementById('pop-explicacao-container').style.display = 'none';
-
-            q.opcoes.forEach((op, idx) => {
-                const btn = document.createElement('button');
-                btn.innerText = op;
-                btn.onclick = () => {
-                    if(idx === q.correta) {
-                        dadosCacadorRPG.xp += 30;
-                        renderizarHUDRPG();
-                        document.getElementById('pop-explicacao-container').style.display = 'block';
-                        document.getElementById('pop-explicacao-container').innerHTML = `✅ Correto! +30 XP`;
-                        setTimeout(() => {
-                            questaoIndexAtual++;
-                            if(questaoIndexAtual >= lista.length) questaoIndexAtual = 0;
-                            renderizarBalaoQuestao();
-                        }, 1000);
-                    } else {
-                        alert("Incorreto!");
-                    }
-                };
-                container.appendChild(btn);
-            });
-        }
-
         function renderizarTudo() { renderizarHUDRPG(); renderizarAvatar(); }
         function renderizarHUDRPG() {
             document.getElementById('display-nivel-usuario').innerText = dadosCacadorRPG.nivel;
@@ -742,4 +910,3 @@
     </script>
 </body>
 </html>
-
