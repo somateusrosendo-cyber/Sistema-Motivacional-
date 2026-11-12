@@ -1003,3 +1003,1575 @@
     </script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>PMPE: O Despertar do Guerreiro | Webtoon de Estudos</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- PDF.js CDN para leitura real de PDFs enviados pelo usuário -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <!-- Google Fonts: Bangers (Onomatopeias), Orbitron (Sistema/UI) e Plus Jakarta Sans (Diálogos) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Orbitron:wght@600;800;900&family=Plus+Jakarta+Sans:ital,wght@0,500;0,700;0,800;1,700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        system: ['"Orbitron"', 'sans-serif'],
+                        comic: ['"Bangers"', 'cursive'],
+                    },
+                    colors: {
+                        abyss: '#060913',
+                        panel: '#0c1222',
+                        neonBlue: '#00f0ff',
+                        electricBlue: '#2563eb',
+                        systemGold: '#fbbf24',
+                        dangerRed: '#ff2a5f',
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 3s ease-in-out infinite',
+                        'aura': 'auraGlow 2.5s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-6px)' },
+                        },
+                        auraGlow: {
+                            '0%': { boxShadow: '0 0 12px rgba(0, 240, 255, 0.35), inset 0 0 10px rgba(0, 240, 255, 0.2)' },
+                            '100%': { boxShadow: '0 0 28px rgba(0, 240, 255, 0.75), inset 0 0 18px rgba(0, 240, 255, 0.45)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #05070e;
+            color: #f8fafc;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .bg-tactical-grid {
+            background-image: 
+                linear-gradient(to right, rgba(0, 240, 255, 0.04) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 240, 255, 0.04) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+
+        .sfx-cyan {
+            font-family: 'Bangers', cursive;
+            letter-spacing: 0.08em;
+            color: #00f0ff;
+            text-shadow: 3px 3px 0px #020617, -1px -1px 0px #020617, 0 0 20px rgba(0, 240, 255, 0.8);
+        }
+        .sfx-red {
+            font-family: 'Bangers', cursive;
+            letter-spacing: 0.08em;
+            color: #ff2a5f;
+            text-shadow: 3px 3px 0px #020617, -1px -1px 0px #020617, 0 0 20px rgba(255, 42, 95, 0.85);
+        }
+        .sfx-gold {
+            font-family: 'Bangers', cursive;
+            letter-spacing: 0.08em;
+            color: #fbbf24;
+            text-shadow: 3px 3px 0px #020617, -1px -1px 0px #020617, 0 0 20px rgba(251, 191, 36, 0.8);
+        }
+
+        .speech-bubble {
+            position: relative;
+            background: #ffffff;
+            color: #090d16;
+            border: 3px solid #090d16;
+            box-shadow: 4px 4px 0px #00f0ff;
+        }
+        .speech-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -14px;
+            left: 28px;
+            border-width: 14px 12px 0;
+            border-style: solid;
+            border-color: #ffffff transparent;
+            display: block;
+            width: 0;
+        }
+
+        .speech-bubble-right {
+            position: relative;
+            background: #ffffff;
+            color: #090d16;
+            border: 3px solid #090d16;
+            box-shadow: -4px 4px 0px #fbbf24;
+        }
+        .speech-bubble-right::after {
+            content: '';
+            position: absolute;
+            bottom: -14px;
+            right: 28px;
+            border-width: 14px 12px 0;
+            border-style: solid;
+            border-color: #ffffff transparent;
+            display: block;
+            width: 0;
+        }
+
+        .speech-shout {
+            background: #fff1f2;
+            color: #881337;
+            border: 3px solid #ff2a5f;
+            box-shadow: 0 0 18px rgba(255, 42, 95, 0.5);
+            clip-path: polygon(2% 6%, 98% 0%, 100% 94%, 0% 100%);
+        }
+
+        .system-window {
+            background: linear-gradient(180deg, rgba(10, 22, 48, 0.96) 0%, rgba(5, 10, 24, 0.98) 100%);
+            border: 1.5px solid rgba(0, 240, 255, 0.7);
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.25), inset 0 0 20px rgba(0, 240, 255, 0.12);
+            position: relative;
+        }
+        .system-window::before {
+            content: '';
+            position: absolute;
+            top: -1px; left: 10%; right: 10%; height: 2px;
+            background: linear-gradient(90deg, transparent, #00f0ff, transparent);
+        }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #05070e; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 999px; }
+        ::-webkit-scrollbar-thumb:hover { background: #00f0ff; }
+    </style>
+</head>
+<body class="bg-tactical-grid min-h-screen flex flex-col items-center selection:bg-neonBlue selection:text-abyss">
+
+    <!-- BARRA SUPERIOR FIXA: SISTEMA DO CAÇADOR + PROGRESSO DE XP -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-abyss/95 backdrop-blur-md border-b border-neonBlue/30">
+        <!-- Barra de Progresso de Leitura (XP) -->
+        <div class="w-full h-1.5 bg-slate-900 overflow-hidden">
+            <div id="xp-progress-bar" class="h-full bg-gradient-to-r from-electricBlue via-neonBlue to-systemGold transition-all duration-150" style="width: 5%"></div>
+        </div>
+
+        <div class="max-w-2xl mx-auto px-3 py-2 flex items-center justify-between gap-2">
+            <!-- Identidade do Jogador / Recruta -->
+            <div class="flex items-center gap-2.5">
+                <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-neonBlue/20 to-electricBlue/30 border border-neonBlue flex items-center justify-center shadow-[0_0_12px_rgba(0,240,255,0.4)]">
+                    <span class="font-system font-black text-neonBlue text-xs">PMPE</span>
+                </div>
+                <div>
+                    <div class="flex items-center gap-1.5">
+                        <span class="font-system text-[11px] font-bold tracking-wider text-neonBlue uppercase">NÍVEL <span id="player-level">01</span></span>
+                        <span class="text-[10px] px-1.5 py-0.2 rounded bg-systemGold/20 text-systemGold border border-systemGold/40 font-bold" id="player-rank">RECRUTA</span>
+                    </div>
+                    <p class="text-xs font-extrabold text-white truncate max-w-[140px] sm:max-w-[200px]" id="header-chapter-title">Cap. 1: Missão Constitucional</p>
+                </div>
+            </div>
+
+            <!-- Botões de Ação Rápida: Upload PDF + XP -->
+            <div class="flex items-center gap-2">
+                <div class="hidden sm:flex flex-col items-end mr-1">
+                    <span class="text-[10px] font-system text-slate-400">XP DE ESTUDO</span>
+                    <span class="text-xs font-system font-bold text-systemGold"><span id="xp-counter">0</span> XP</span>
+                </div>
+
+                <!-- Botão Importar PDF -->
+                <button onclick="openPdfModal()" class="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-gradient-to-r from-electricBlue to-cyan-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold text-xs shadow-[0_0_15px_rgba(0,240,255,0.35)] active:scale-95 transition cursor-pointer border border-neonBlue/50">
+                    <svg class="w-4 h-4 text-neonBlue" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+                    </svg>
+                    <span>PDF → Manhua</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Seletor Horizontal Rápido de Capítulos -->
+        <div class="max-w-2xl mx-auto px-3 pb-2 flex flex-col gap-1.5">
+            <!-- Filtro por Matéria + Salto Rápido (1 a 230) -->
+            <div class="flex items-center justify-between gap-1.5 overflow-x-auto no-scrollbar">
+                <div class="flex items-center gap-1 shrink-0" id="subject-filters">
+                    <button onclick="setSubjectFilter('ALL')" data-subj="ALL" class="subj-btn px-2 py-1 rounded text-[10px] font-system font-bold bg-neonBlue text-abyss cursor-pointer">TODOS (230)</button>
+                    <button onclick="setSubjectFilter('CONST')" data-subj="CONST" class="subj-btn px-2 py-1 rounded text-[10px] font-system font-bold bg-slate-900 text-slate-300 border border-slate-700 cursor-pointer">CONST.</button>
+                    <button onclick="setSubjectFilter('PENAL')" data-subj="PENAL" class="subj-btn px-2 py-1 rounded text-[10px] font-system font-bold bg-slate-900 text-slate-300 border border-slate-700 cursor-pointer">PENAL</button>
+                    <button onclick="setSubjectFilter('PORT')" data-subj="PORT" class="subj-btn px-2 py-1 rounded text-[10px] font-system font-bold bg-slate-900 text-slate-300 border border-slate-700 cursor-pointer">PORT.</button>
+                    <button onclick="setSubjectFilter('RLM')" data-subj="RLM" class="subj-btn px-2 py-1 rounded text-[10px] font-system font-bold bg-slate-900 text-slate-300 border border-slate-700 cursor-pointer">LÓGICA</button>
+                    <button onclick="setSubjectFilter('HISTPE')" data-subj="HISTPE" class="subj-btn px-2 py-1 rounded text-[10px] font-system font-bold bg-slate-900 text-slate-300 border border-slate-700 cursor-pointer">HIST/GEO PE</button>
+                </div>
+                <select id="chapter-jump-select" onchange="goToChapter(parseInt(this.value, 10))" class="bg-slate-900 border border-neonBlue/40 text-neonBlue text-[10px] font-system font-bold rounded px-2 py-1 outline-none cursor-pointer">
+                </select>
+            </div>
+            <nav id="chapter-nav" class="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+            </nav>
+        </div>
+    </header>
+
+    <!-- ÁREA PRINCIPAL DO WEBTOON -->
+    <main id="webtoon-container" class="w-full max-w-xl mx-auto pt-32 pb-28 px-2 sm:px-4 space-y-6">
+    </main>
+
+    <!-- BOTÃO FLUTUANTE DE PRÓXIMO CAPÍTULO NO RODAPÉ -->
+    <div class="fixed bottom-4 left-0 right-0 z-40 pointer-events-none px-4">
+        <div class="max-w-xl mx-auto flex justify-between items-center">
+            <button id="btn-prev-cap" onclick="changeChapter(-1)" class="pointer-events-auto px-3.5 py-2.5 rounded-xl bg-panel/95 backdrop-blur border border-slate-700 text-slate-300 text-xs font-bold shadow-lg hover:border-neonBlue hover:text-white active:scale-95 transition flex items-center gap-1 cursor-pointer">
+                <span>◀ Anterior</span>
+            </button>
+
+            <div class="pointer-events-auto px-3 py-1.5 rounded-full bg-abyss/90 border border-neonBlue/40 text-[11px] font-system text-neonBlue shadow-lg">
+                <span id="scroll-percent">0%</span> LIDO
+            </div>
+
+            <button id="btn-next-cap" onclick="changeChapter(1)" class="pointer-events-auto px-4 py-2.5 rounded-xl bg-gradient-to-r from-neonBlue to-electricBlue text-abyss font-extrabold text-xs shadow-[0_0_20px_rgba(0,240,255,0.5)] hover:brightness-110 active:scale-95 transition flex items-center gap-1 cursor-pointer">
+                <span>Próximo Cap. ▶</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- MODAL DE UPLOAD DE PDF -->
+    <div id="pdf-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+        <div class="system-window w-full max-w-md rounded-2xl p-5 text-white animate-float">
+            <div class="flex items-center justify-between border-b border-neonBlue/30 pb-3 mb-4">
+                <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-neonBlue animate-ping"></span>
+                    <h3 class="font-system font-extrabold text-sm text-neonBlue tracking-wider">SISTEMA: CONVERSOR DE PDF</h3>
+                </div>
+                <button onclick="closePdfModal()" class="text-slate-400 hover:text-white p-1 text-lg leading-none cursor-pointer">&times;</button>
+            </div>
+
+            <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                Carregue qualquer apostila ou simulado em <strong class="text-neonBlue">PDF do concurso PMPE</strong>. O Sistema irá filtrar os cabeçalhos, separar cada questão e gerar um novo capítulo ilustrado!
+            </p>
+
+            <label for="pdf-file-input" class="flex flex-col items-center justify-center w-full h-36 border-2 border-dashed border-neonBlue/60 rounded-xl bg-neonBlue/5 hover:bg-neonBlue/10 transition cursor-pointer p-4 text-center">
+                <svg class="w-10 h-10 text-neonBlue mb-2" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                </svg>
+                <span class="text-sm font-bold text-white" id="pdf-file-label">Toque para selecionar seu PDF</span>
+                <span class="text-[11px] text-slate-400 mt-1">Processamento 100% local e instantâneo</span>
+                <input id="pdf-file-input" type="file" accept="application/pdf" class="hidden" onchange="handlePdfUpload(event)">
+            </label>
+
+            <div id="pdf-status-box" class="hidden mt-4 p-3 rounded-lg bg-slate-900/90 border border-systemGold/40 text-xs text-systemGold flex items-center gap-2">
+                <svg class="w-4 h-4 animate-spin shrink-0" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+                </svg>
+                <span id="pdf-status-text">Extraindo runas de conhecimento do PDF...</span>
+            </div>
+
+            <div class="mt-4 flex justify-end gap-2">
+                <button onclick="closePdfModal()" class="px-4 py-2 rounded-lg bg-slate-800 text-slate-300 text-xs font-bold hover:bg-slate-700 cursor-pointer">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- NOTIFICAÇÃO TOAST DO SISTEMA -->
+    <div id="system-toast" class="fixed top-28 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 transition-all duration-300 transform -translate-y-4">
+        <div class="px-4 py-2.5 rounded-xl bg-abyss/95 border border-systemGold shadow-[0_0_20px_rgba(251,191,36,0.45)] flex items-center gap-2">
+            <span class="text-systemGold font-system font-black text-xs">⚡ SISTEMA:</span>
+            <span id="toast-message" class="text-xs font-bold text-white">+50 XP Adquiridos!</span>
+        </div>
+    </div>
+
+    <script>
+        if (window.pdfjsLib) {
+            pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+        }
+
+        // =========================================================================
+        // ARTES VETORIAIS CUSTOMIZADAS (ESTILO MANHUA / SOLO LEVELING)
+        // =========================================================================
+        const ARTWORKS = {
+            heroAwakening: `
+                <svg viewBox="0 0 400 230" class="w-full h-52 sm:h-60 rounded-xl bg-gradient-to-b from-slate-950 via-blue-950 to-abyss border border-neonBlue/40">
+                    <defs>
+                        <radialGradient id="aura1" cx="50%" cy="55%" r="50%">
+                            <stop offset="0%" stop-color="#00f0ff" stop-opacity="0.55"/>
+                            <stop offset="65%" stop-color="#2563eb" stop-opacity="0.18"/>
+                            <stop offset="100%" stop-color="#060913" stop-opacity="0"/>
+                        </radialGradient>
+                    </defs>
+                    <circle cx="200" cy="125" r="110" fill="url(#aura1)"/>
+                    <!-- Raios de energia -->
+                    <path d="M90 210 L140 130 L120 120 L170 50" stroke="#00f0ff" stroke-width="2.5" fill="none" opacity="0.7"/>
+                    <path d="M310 210 L260 130 L280 120 L230 50" stroke="#00f0ff" stroke-width="2.5" fill="none" opacity="0.7"/>
+                    <!-- Silhueta Guerreiro PMPE -->
+                    <path d="M135 230 L152 138 L200 122 L248 138 L265 230 Z" fill="#090d16" stroke="#00f0ff" stroke-width="2"/>
+                    <circle cx="200" cy="86" r="30" fill="#090d16" stroke="#00f0ff" stroke-width="2"/>
+                    <!-- Quepe Tático -->
+                    <path d="M166 74 L200 54 L234 74 L226 83 L174 83 Z" fill="#0f172a" stroke="#fbbf24" stroke-width="2"/>
+                    <polygon points="200,61 203,68 210,68 204,72 206,79 200,75 194,79 196,72 190,68 197,68" fill="#fbbf24"/>
+                    <!-- Olhos Brilhantes Estilo Solo Leveling -->
+                    <ellipse cx="189" cy="91" rx="5" ry="2.2" fill="#00f0ff"/>
+                    <ellipse cx="211" cy="91" rx="5" ry="2.2" fill="#00f0ff"/>
+                    <path d="M165 91 L189 91 M211 91 L235 91" stroke="#00f0ff" stroke-width="1.5" opacity="0.85"/>
+                </svg>
+            `,
+            constitutionalShield: `
+                <svg viewBox="0 0 400 230" class="w-full h-52 sm:h-60 rounded-xl bg-gradient-to-tr from-abyss via-slate-900 to-cyan-950 border border-systemGold/40">
+                    <circle cx="200" cy="115" r="88" fill="none" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="8 6" opacity="0.6"/>
+                    <circle cx="200" cy="115" r="68" fill="none" stroke="#00f0ff" stroke-width="2" opacity="0.8"/>
+                    <!-- Escudo da Constituição -->
+                    <path d="M200 42 L262 68 L262 122 C262 162 232 188 200 202 C168 188 138 162 138 122 L138 68 Z" fill="#0b1326" stroke="#fbbf24" stroke-width="3"/>
+                    <path d="M200 56 L248 77 L248 120 C248 152 224 173 200 185 C176 173 152 152 152 120 L152 77 Z" fill="none" stroke="#00f0ff" stroke-width="1.5"/>
+                    <text x="200" y="114" text-anchor="middle" fill="#fbbf24" font-family="Orbitron, sans-serif" font-weight="900" font-size="18">CF / 88</text>
+                    <text x="200" y="136" text-anchor="middle" fill="#00f0ff" font-family="Orbitron, sans-serif" font-weight="700" font-size="11">GARANTIA</text>
+                </svg>
+            `,
+            airportSuitcase: `
+                <svg viewBox="0 0 400 230" class="w-full h-52 sm:h-60 rounded-xl bg-gradient-to-b from-rose-950/70 via-slate-950 to-abyss border border-dangerRed/40">
+                    <!-- Balança / Espada da Lei -->
+                    <line x1="200" y1="35" x2="200" y2="195" stroke="#ff2a5f" stroke-width="3"/>
+                    <line x1="115" y1="75" x2="285" y2="75" stroke="#fbbf24" stroke-width="3"/>
+                    <polygon points="115,75 95,125 135,125" fill="none" stroke="#00f0ff" stroke-width="2"/>
+                    <polygon points="285,75 265,125 305,125" fill="none" stroke="#00f0ff" stroke-width="2"/>
+                    <rect x="145" y="155" width="110" height="36" rx="8" fill="#0f172a" stroke="#ff2a5f" stroke-width="2"/>
+                    <text x="200" y="178" text-anchor="middle" fill="#ffffff" font-family="Orbitron, sans-serif" font-weight="800" font-size="12">CÓDIGO PENAL</text>
+                </svg>
+            `,
+            grammarBoss: `
+                <svg viewBox="0 0 400 230" class="w-full h-52 sm:h-60 rounded-xl bg-gradient-to-br from-indigo-950 via-slate-950 to-abyss border border-neonBlue/40">
+                    <rect x="65" y="45" width="270" height="140" rx="14" fill="#090d16" stroke="#00f0ff" stroke-width="2"/>
+                    <text x="200" y="102" text-anchor="middle" fill="#00f0ff" font-family="Bangers, cursive" font-size="36" letter-spacing="3">NORMA CULTA</text>
+                    <line x1="105" y1="120" x2="295" y2="120" stroke="#fbbf24" stroke-width="2"/>
+                    <text x="200" y="150" text-anchor="middle" fill="#f8fafc" font-family="Orbitron, sans-serif" font-weight="700" font-size="13">SINTAXE &amp; SEMÂNTICA</text>
+                </svg>
+            `,
+            logicMatrix: `
+                <svg viewBox="0 0 400 230" class="w-full h-52 sm:h-60 rounded-xl bg-gradient-to-b from-cyan-950/60 via-slate-950 to-abyss border border-neonBlue/50">
+                    <rect x="55" y="42" width="120" height="65" rx="10" fill="#0c1222" stroke="#00f0ff" stroke-width="2"/>
+                    <text x="115" y="81" text-anchor="middle" fill="#00f0ff" font-family="Orbitron, sans-serif" font-weight="900" font-size="20">P → Q</text>
+                    <path d="M182 75 L218 75" stroke="#fbbf24" stroke-width="3"/>
+                    <polygon points="218,69 230,75 218,81" fill="#fbbf24"/>
+                    <rect x="232" y="42" width="120" height="65" rx="10" fill="#0c1222" stroke="#ff2a5f" stroke-width="2"/>
+                    <text x="292" y="81" text-anchor="middle" fill="#ff2a5f" font-family="Orbitron, sans-serif" font-weight="900" font-size="18">P ∧ ~Q</text>
+                    <text x="200" y="160" text-anchor="middle" fill="#fbbf24" font-family="Orbitron, sans-serif" font-weight="800" font-size="14">TABELA-VERDADE ATIVA</text>
+                </svg>
+            `,
+            customPdfArt: `
+                <svg viewBox="0 0 400 230" class="w-full h-52 sm:h-60 rounded-xl bg-gradient-to-tr from-slate-950 via-blue-950 to-cyan-950 border border-systemGold/50">
+                    <rect x="130" y="34" width="140" height="162" rx="12" fill="#090d16" stroke="#fbbf24" stroke-width="2.5"/>
+                    <line x1="152" y1="68" x2="248" y2="68" stroke="#00f0ff" stroke-width="3"/>
+                    <line x1="152" y1="94" x2="248" y2="94" stroke="#94a3b8" stroke-width="2"/>
+                    <line x1="152" y1="116" x2="232" y2="116" stroke="#94a3b8" stroke-width="2"/>
+                    <line x1="152" y1="138" x2="242" y2="138" stroke="#94a3b8" stroke-width="2"/>
+                    <rect x="152" y="156" width="96" height="24" rx="6" fill="#fbbf24"/>
+                    <text x="200" y="172" text-anchor="middle" fill="#060913" font-family="Orbitron, sans-serif" font-weight="900" font-size="11">PDF EXTRAÍDO</text>
+                </svg>
+            `
+        };
+
+        // =========================================================================
+        // BANCO COMPLETO DE MATRIZES DO EDITAL PMPE PARA GERAR 230 CAPÍTULOS
+        // =========================================================================
+        const PMPE_TOPICS_BANK = [
+            {
+                subj: "CONST",
+                subjName: "DIREITO CONSTITUCIONAL",
+                shortPrefix: "Const.",
+                artwork: "heroAwakening",
+                sfx: "ART. 144!",
+                sfxClass: "sfx-cyan",
+                title: "Missão Constitucional da PMPE e Segurança Pública",
+                subtitle: "Policiamento ostensivo vs. Polícia judiciária na CF/88",
+                narration: "Patrulhamento noturno na Boa Vista, Recife. O Sistema exibe a fronteira exata entre as atribuições da Polícia Militar e da Polícia Civil.",
+                speakerLeft: "COMANDANTE DE COMPANHIA",
+                dialogueLeft: "A PMPE exerce policiamento ostensivo e preservação da ordem pública. Quem apura infrações penais comuns?",
+                speakerRight: "SISTEMA CONSTITUCIONAL",
+                dialogueRight: "A Polícia Civil (e a Polícia Federal no âmbito da União)! À PM cabe o policiamento ostensivo e os crimes militares!",
+                cards: [
+                    "Art. 144, § 5º CF/88: Às polícias militares cabem a polícia ostensiva e a preservação da ordem pública.",
+                    "Subordinação: Polícias Militares e Corpos de Bombeiros Militares subordinam-se aos Governadores dos Estados e do DF.",
+                    "Pegadinha de Prova: A PM NÃO possui função de polícia judiciária para crimes comuns."
+                ],
+                questions: [
+                    {
+                        q: "Nos termos do Art. 144 da Constituição Federal de 1988, incumbe às Polícias Militares:",
+                        opts: [
+                            "Exercer as funções de polícia judiciária e a apuração de infrações penais comuns.",
+                            "A polícia ostensiva e a preservação da ordem pública.",
+                            "O patrulhamento ostensivo exclusivo das rodovias federais.",
+                            "A segurança dos estabelecimentos penais federais."
+                        ],
+                        ans: 1,
+                        exp: "Art. 144, § 5º da CF/88: Polícia ostensiva e preservação da ordem pública."
+                    },
+                    {
+                        q: "Em relação à subordinação constitucional das Polícias Militares estaduais, assinale a alternativa correta:",
+                        opts: [
+                            "Subordinam-se diretamente ao Ministro da Justiça e Segurança Pública.",
+                            "São órgãos autônomos vinculados ao Poder Judiciário Estadual.",
+                            "Subordinam-se aos Governadores dos Estados, do Distrito Federal e dos Territórios.",
+                            "Subordinam-se exclusivamente ao Comando do Exército em tempos de paz."
+                        ],
+                        ans: 2,
+                        exp: "Art. 144, § 6º da CF/88: Subordinam-se aos Governadores dos Estados, do DF e dos Territórios."
+                    }
+                ]
+            },
+            {
+                subj: "CONST",
+                subjName: "DIREITO CONSTITUCIONAL",
+                shortPrefix: "Const.",
+                artwork: "constitutionalShield",
+                sfx: "INVIOLÁVEL!",
+                sfxClass: "sfx-gold",
+                title: "Inviolabilidade de Domicílio (Art. 5º, XI)",
+                subtitle: "Quando a guarnição pode entrar na casa sem mandado judicial",
+                narration: "Chamado de emergência via CIODS: gritos de socorro vindos de uma residência às 03h00 da manhã.",
+                speakerLeft: "SOLDADO PMPE",
+                dialogueLeft: "É madrugada e não temos mandado judicial! Podemos ingressar na residência?",
+                speakerRight: "SISTEMA CONSTITUCIONAL",
+                dialogueRight: "AFIRMATIVO! Em caso de FLAGRANTE DELITO, DESASTRE ou para PRESTAR SOCORRO, o ingresso é permitido a QUALQUER HORA (dia ou noite)!",
+                cards: [
+                    "Regra Geral: A casa é asilo inviolável do indivíduo, ninguém nela podendo penetrar sem consentimento do morador.",
+                    "Exceções a QUALQUER HORA (Dia ou Noite): Flagrante delito, desastre ou para prestar socorro.",
+                    "Exceção SOMENTE DURANTE O DIA: Por determinação judicial (mandado)."
+                ],
+                questions: [
+                    {
+                        q: "Segundo o Art. 5º, inciso XI da CF/88, a entrada em domicílio sem consentimento do morador durante o período NOTURNO é constitucionalmente admitida apenas em caso de:",
+                        opts: [
+                            "Determinação judicial expressa de juiz criminal.",
+                            "Flagrante delito, desastre ou para prestar socorro.",
+                            "Suspeita fundada levantada por denúncia anônima.",
+                            "Ordem escrita do Delegado de Polícia Titular."
+                        ],
+                        ans: 1,
+                        exp: "Mandado judicial só pode ser cumprido durante o DIA. À noite, apenas flagrante delito, desastre ou socorro."
+                    },
+                    {
+                        q: "Para fins de proteção constitucional do Art. 5º, XI, o conceito jurídico de 'casa' abrange:",
+                        opts: [
+                            "Apenas a residência fixa onde o indivíduo possui escritura pública.",
+                            "Qualquer compartimento habitado, aposento ocupado de habitação coletiva e compartimento privado não aberto ao público.",
+                            "Exclusivamente imóveis urbanos com muro e portão trancado.",
+                            "Apenas o quarto de dormir, excluindo escritórios profissionais."
+                        ],
+                        ans: 1,
+                        exp: "O STF e o Art. 150, § 4º do CP definem casa de forma ampla, incluindo quarto de hotel ocupado e escritório privado."
+                    }
+                ]
+            },
+            {
+                subj: "CONST",
+                subjName: "DIREITO CONSTITUCIONAL",
+                shortPrefix: "Const.",
+                artwork: "constitutionalShield",
+                sfx: "REMÉDIOS!",
+                sfxClass: "sfx-cyan",
+                title: "Remédios Constitucionais: HC, MS, HD e MI",
+                subtitle: "As armas processuais de defesa dos direitos fundamentais",
+                narration: "No tribunal superior, cada garantia constitucional ativa uma barreira específica contra ilegalidades.",
+                speakerLeft: "RECRUTA PMPE",
+                dialogueLeft: "Qual remédio constitucional serve para conhecer ou retificar dados pessoais em bancos governamentais?",
+                speakerRight: "ORÁCULO DO DIREITO",
+                dialogueRight: "HABEAS DATA! E lembre-se: tanto o Habeas Corpus quanto o Habeas Data são GRATUITOS!",
+                cards: [
+                    "Habeas Corpus (HC): Protege a liberdade de locomoção (ir e vir). Gratuito e dispensa advogado.",
+                    "Habeas Data (HD): Acesso ou retificação de informações pessoais em registros públicos. Gratuito (exige negativa prévia administrativa).",
+                    "Mandado de Segurança (MS): Direito líquido e certo não amparado por HC ou HD. Prazo decadencial de 120 dias."
+                ],
+                questions: [
+                    {
+                        q: "Conceder-se-á Mandado de Segurança para proteger direito líquido e certo não amparado por:",
+                        opts: [
+                            "Ação Popular ou Ação Civil Pública.",
+                            "Habeas Corpus ou Habeas Data.",
+                            "Mandado de Injunção ou Reclamação Constitucional.",
+                            "Recurso Extraordinário ou Habeas Data."
+                        ],
+                        ans: 1,
+                        exp: "Art. 5º, LXIX da CF/88: O MS tem caráter residual (quando não couber HC nem HD)."
+                    },
+                    {
+                        q: "São ações constitucionais expressamente GRATUITAS segundo o inciso LXXVII do Art. 5º da CF/88:",
+                        opts: [
+                            "Mandado de Segurança e Mandado de Injunção.",
+                            "Habeas Corpus e Habeas Data.",
+                            "Ação Popular e Mandado de Segurança Coletivo.",
+                            "Habeas Corpus e Ação Direta de Inconstitucionalidade."
+                        ],
+                        ans: 1,
+                        exp: "Art. 5º, LXXVII: São gratuitas as ações de habeas corpus e habeas data."
+                    }
+                ]
+            },
+            {
+                subj: "CONST",
+                subjName: "DIREITO CONSTITUCIONAL",
+                shortPrefix: "Const.",
+                artwork: "heroAwakening",
+                sfx: "CARGOS NATOS!",
+                sfxClass: "sfx-gold",
+                title: "Nacionalidade e Cargos Privativos de Brasileiro Nato",
+                subtitle: "O mnemônico MP3.COM para nunca errar na prova",
+                narration: "A Constituição protege a soberania nacional reservando postos estratégicos apenas a brasileiros natos.",
+                speakerLeft: "INSTRUTOR PMPE",
+                dialogueLeft: "Atenção ao mnemônico MP3.COM! Se a banca colocar 'Senador' ou 'Governador' como cargo privativo de nato, é PEGADINHA!",
+                speakerRight: "RECRUTA DESPERTO",
+                dialogueRight: "Anotado! Apenas Presidente da Câmara e Presidente do Senado precisam ser natos — qualquer deputado ou senador comum pode ser naturalizado!",
+                cards: [
+                    "MP3.COM: Ministro do STF; Presidente e Vice da República; Presidente da Câmara; Presidente do Senado; Carreira Diplomática; Oficial das Forças Armadas; Ministro de Estado da Defesa.",
+                    "Extradição: Brasileiro NATO nunca será extraditado. Naturalizado só por crime comum praticado ANTES da naturalização ou tráfico ilícito de drogas a qualquer tempo."
+                ],
+                questions: [
+                    {
+                        q: "De acordo com o Art. 12, § 3º da CF/88, assinale o único cargo que NÃO é privativo de brasileiro nato:",
+                        opts: [
+                            "Ministro de Estado da Defesa.",
+                            "Oficial das Forças Armadas.",
+                            "Governador de Estado.",
+                            "Ministro do Supremo Tribunal Federal."
+                        ],
+                        ans: 2,
+                        exp: "Governador, Prefeito, Senador e Deputado podem ser brasileiros naturalizados. Apenas os presidentes da Câmara e do Senado exigem condição de nato."
+                    }
+                ]
+            },
+            {
+                subj: "PENAL",
+                subjName: "DIREITO PENAL",
+                shortPrefix: "Penal",
+                artwork: "airportSuitcase",
+                sfx: "EXCLUDENTE!",
+                sfxClass: "sfx-red",
+                title: "Excludentes de Ilicitude e Legítima Defesa",
+                subtitle: "Art. 23 e Art. 25 do Código Penal na atuação policial",
+                narration: "Um agressor armado aponta uma pistola contra a guarnição durante abordagem. O policial reage proporcionalmente para cessar a ameaça.",
+                speakerLeft: "CORREGEDORIA",
+                dialogueLeft: "O agente usou moderadamente os meios necessários para repelir injusta agressão atual. Qual a natureza jurídica dessa conduta?",
+                speakerRight: "SISTEMA PENAL",
+                dialogueRight: "LEGÍTIMA DEFESA (Art. 25 CP)! O fato é típico, mas NÃO é ilícito — logo, NÃO há crime!",
+                cards: [
+                    "Excludentes de Ilicitude (Art. 23 CP): Estado de Necessidade, Legítima Defesa, Estrito Cumprimento do Dever Legal e Exercício Regular de Direito.",
+                    "Excesso Punível: O agente responde pelo excesso doloso ou culposo em qualquer das excludentes.",
+                    "Legítima Defesa (Art. 25): Repele injusta agressão, atual ou iminente, a direito seu ou de outrem."
+                ],
+                questions: [
+                    {
+                        q: "Considera-se em legítima defesa quem, usando moderadamente dos meios necessários, repele injusta agressão:",
+                        opts: [
+                            "Passada ou futura, exclusivamente contra direito próprio.",
+                            "Atual ou iminente, a direito seu ou de outrem.",
+                            "Apenas atual, desde que haja prévia autorização judicial.",
+                            "Provocada pelo próprio agente para justificar o revide."
+                        ],
+                        ans: 1,
+                        exp: "Art. 25 do CP: Injusta agressão, atual ou iminente, a direito seu ou de outrem."
+                    },
+                    {
+                        q: "No Direito Penal brasileiro, o agente que atua amparado pelo estrito cumprimento de dever legal pratica:",
+                        opts: [
+                            "Fato atípico por ausência de dolo.",
+                            "Fato típico, porém lícito (excludente de ilicitude).",
+                            "Crime com pena reduzida de um a dois terços.",
+                            "Conduta culpável, mas isenta de pena por perdão judicial."
+                        ],
+                        ans: 1,
+                        exp: "As excludentes do Art. 23 eliminam a ilicitude (antijuridicidade), impedindo a configuração do crime."
+                    }
+                ]
+            },
+            {
+                subj: "PENAL",
+                subjName: "DIREITO PENAL",
+                shortPrefix: "Penal",
+                artwork: "airportSuitcase",
+                sfx: "FLAGRANTE!",
+                sfxClass: "sfx-cyan",
+                title: "Prisão em Flagrante (Art. 301 e 302 do CPP)",
+                subtitle: "Flagrante obrigatório da polícia vs. Flagrante facultativo do povo",
+                narration: "A viatura avista um indivíduo saindo correndo de uma loja arrombada carregando caixas registradoras.",
+                speakerLeft: "CHEFE DE OPERAÇÕES",
+                dialogueLeft: "Ele acabou de cometer a infração e está sendo perseguido logo após! Qual espécie de flagrante se configura?",
+                speakerRight: "SISTEMA PROCESSUAL",
+                dialogueRight: "FLAGRANTE IMPRÓPRIO (ou Quase-Flagrante — Art. 302, III do CPP)! E para as autoridades policiais, prender em flagrante é DEVER obrigatório!",
+                cards: [
+                    "Art. 301 CPP: Qualquer do povo PODE (facultativo) e as autoridades policiais e seus agentes DEVEM (obrigatório) prender quem quer que seja encontrado em flagrante delito.",
+                    "Flagrante Próprio (I e II): Está cometendo a infração ou acaba de cometê-la.",
+                    "Flagrante Impróprio (III): É perseguido, logo após, em situação que faça presumir ser autor.",
+                    "Flagrante Presumido (IV): É encontrado, logo depois, com instrumentos, armas ou objetos."
+                ],
+                questions: [
+                    {
+                        q: "Segundo o Art. 301 do Código de Processo Penal, prender quem quer que seja encontrado em flagrante delito é:",
+                        opts: [
+                            "Facultativo para a Polícia Militar e obrigatório para o Ministério Público.",
+                            "Obrigatório para qualquer do povo e facultativo para os agentes policiais.",
+                            "Facultativo para qualquer do povo e obrigatório para as autoridades policiais e seus agentes.",
+                            "Permitido somente durante o horário comercial."
+                        ],
+                        ans: 2,
+                        exp: "Art. 301 CPP: Qualquer do povo PODE; autoridades policiais e seus agentes DEVEM."
+                    }
+                ]
+            },
+            {
+                subj: "PENAL",
+                subjName: "LEGISLAÇÃO EXTRAVAGANTE",
+                shortPrefix: "Penal",
+                artwork: "constitutionalShield",
+                sfx: "LEI 13.869!",
+                sfxClass: "sfx-red",
+                title: "Lei de Abuso de Autoridade (Lei nº 13.869/2019)",
+                subtitle: "A exigência do dolo específico e o crime de divergência interpretativa",
+                narration: "O Sistema alerta: a Lei de Abuso de Autoridade exige finalidade específica para punir o agente público.",
+                speakerLeft: "RECRUTA PMPE",
+                dialogueLeft: "Se um policial interpreta uma lei de forma razoável e diverge do juiz, há crime de abuso de autoridade?",
+                speakerRight: "SISTEMA JURÍDICO",
+                dialogueRight: "NÃO! A divergência na interpretação de lei ou na avaliação de fatos e provas NÃO configura abuso de autoridade (Art. 1º, § 2º)!",
+                cards: [
+                    "Elemento Subjetivo (Art. 1º, § 1º): Exige finalidade específica de prejudicar outrem, beneficiar a si mesmo ou a terceiro, ou por mero capricho ou satisfação pessoal.",
+                    "Não existe Abuso de Autoridade na modalidade CULPOSA.",
+                    "Algemas (Súmula Vinculante 11 + Lei 13.869): Uso ilícito de algemas quando não há resistência, receio de fuga ou perigo à integridade."
+                ],
+                questions: [
+                    {
+                        q: "Conforme a Lei nº 13.869/2019 (Abuso de Autoridade), para a configuração dos crimes nela previstos exige-se:",
+                        opts: [
+                            "Apenas culpa grave ou negligência funcional do agente.",
+                            "Dolo específico: finalidade de prejudicar outrem, beneficiar a si/terceiro, ou agir por capricho ou satisfação pessoal.",
+                            "Responsabilidade objetiva do Estado e do servidor.",
+                            "Condenação prévia na esfera administrativa disciplinar."
+                        ],
+                        ans: 1,
+                        exp: "Art. 1º, § 1º da Lei 13.869/2019: Exige-se o especial fim de agir (dolo específico), não havendo forma culposa."
+                    }
+                ]
+            },
+            {
+                subj: "PENAL",
+                subjName: "LEGISLAÇÃO PENAL",
+                shortPrefix: "Penal",
+                artwork: "airportSuitcase",
+                sfx: "HEDIONDOS!",
+                sfxClass: "sfx-gold",
+                title: "Crimes Hediondos e Equiparados (Lei 8.072/90)",
+                subtitle: "O mnemônico 3T + H e as vedações constitucionais",
+                narration: "A Constituição traça uma linha vermelha intransponível para os crimes mais graves contra a sociedade.",
+                speakerLeft: "INSTRUTOR PENAL",
+                dialogueLeft: "Lembre-se do '3T + H': Tortura, Tráfico de drogas, Terrorismo e Hediondos! Todos são inafiançáveis e insuscetíveis de graça ou anistia!",
+                speakerRight: "RECRUTA PMPE",
+                dialogueRight: "E atenção na pegadinha: crimes hediondos SÃO prescritíveis! Os únicos imprescritíveis na CF/88 são RACISMO e AÇÃO DE GRUPOS ARMADOS contra a ordem constitucional!",
+                cards: [
+                    "3T + H (Tortura, Tráfico, Terrorismo e Hediondos): Inafiançáveis e insuscetíveis de graça, indulto ou anistia.",
+                    "Imprescritíveis na CF/88 (RA-GA): Racismo e Ação de grupos armados contra a ordem constitucional e o Estado Democrático.",
+                    "Homicídio qualificado e homicídio praticado em atividade típica de grupo de extermínio são hediondos."
+                ],
+                questions: [
+                    {
+                        q: "Assinale a alternativa que apresenta corretamente os dois crimes IMPRESCRITÍVEIS previstos expressamente no Art. 5º da CF/88:",
+                        opts: [
+                            "Tráfico ilícito de entorpecentes e tortura.",
+                            "Racismo e ação de grupos armados contra a ordem constitucional e o Estado Democrático.",
+                            "Homicídio qualificado e terrorismo.",
+                            "Peculato e corrupção passiva."
+                        ],
+                        ans: 1,
+                        exp: "Art. 5º, XLII e XLIV: Racismo e Ação de Grupos Armados são imprescritíveis e inafiançáveis."
+                    }
+                ]
+            },
+            {
+                subj: "PORT",
+                subjName: "LÍNGUA PORTUGUESA",
+                shortPrefix: "Port.",
+                artwork: "grammarBoss",
+                sfx: "CRASE!!",
+                sfxClass: "sfx-cyan",
+                title: "O Domínio Absoluto da Crase",
+                subtitle: "Os casos proibidos que as bancas mais cobram",
+                narration: "O Monstro da Sintaxe lança crases diante de verbos e palavras masculinas para derrubar os desatentos.",
+                speakerLeft: "CANDIDATO DESPERTO",
+                dialogueLeft: "Diante de VERBO, palavra MASCULINA e pronomes em geral, crase passa mal! 'Estou disposto a estudar' NUNCA leva crase!",
+                speakerRight: "SISTEMA GRAMATICAL",
+                dialogueRight: "Golpe crítico! E lembre-se do macete das cidades: 'Vou A, volto DA = crase HÁ! Vou A, volto DE = crase PRA QUÊ?' (Vou à Bahia / Vou a Recife)!",
+                cards: [
+                    "Proibido Crase: Antes de verbo ('começou a chover'), antes de palavra masculina ('andar a pé', 'venda a prazo'), antes de pronomes pessoais/indefinidos ('referiu-se a ela', 'a cada dia').",
+                    "Crase Facultativa: Antes de pronome possessivo feminino singular ('à sua viatura'), antes de nome próprio feminino ('à Maria') e após a preposição 'até' ('até à praça')."
+                ],
+                questions: [
+                    {
+                        q: "Assinale a alternativa em que o uso do acento indicativo de crase está CORRETAMENTE empregado:",
+                        opts: [
+                            "Os policiais começaram à patrulhar o bairro ainda de madrugada.",
+                            "O comando entregou os equipamentos à cada integrante da tropa.",
+                            "A guarnição dirigiu-se à delegacia de plantão para apresentar a ocorrência.",
+                            "O suspeito fugiu à pé pelas vielas do centro."
+                        ],
+                        ans: 2,
+                        exp: "'Dirigiu-se a + a delegacia' = à delegacia. Nos demais casos há verbo ('patrulhar'), pronome indefinido ('cada') e palavra masculina ('pé')."
+                    }
+                ]
+            },
+            {
+                subj: "PORT",
+                subjName: "LÍNGUA PORTUGUESA",
+                shortPrefix: "Port.",
+                artwork: "grammarBoss",
+                sfx: "CONCORDÂNCIA!",
+                sfxClass: "sfx-gold",
+                title: "Concordância Verbal e Sujeito Indeterminado",
+                subtitle: "Partícula Apassivadora (SE) vs. Índice de Indeterminação (SE)",
+                narration: "Uma única partícula 'SE' muda toda a flexão do verbo na redação e nas questões objetivas.",
+                speakerLeft: "BANCA EXAMINADORA",
+                dialogueLeft: "'Aluga-se casas' ou 'Alugam-se casas'? 'Precisa-se de soldados' ou 'Precisam-se de soldados'?",
+                speakerRight: "CANDIDATO DESPERTO",
+                dialogueRight: "Verbo Transitivo Direto + SE = Partícula Apassivadora ('Casas são alugadas' → ALUGAM-SE casas)! Verbo Transitivo Indireto + SE = Sujeito Indeterminado, fica no SINGULAR ('PRECISA-SE de soldados')!",
+                cards: [
+                    "VTD + SE (sem preposição): O termo seguinte é SUJEITO PACIENTE e o verbo concorda com ele ('Vendem-se viaturas', 'Cumpriram-se os mandados').",
+                    "VTI / VI / VL + SE (com preposição): Índice de Indeterminação do Sujeito — verbo OBRIGATORIAMENTE na 3ª pessoa do SINGULAR ('Precisa-se de policiais', 'Obedece-se às leis')."
+                ],
+                questions: [
+                    {
+                        q: "Assinale a opção em que a concordância verbal obedece rigorosamente à norma padrão da Língua Portuguesa:",
+                        opts: [
+                            "Necessitam-se de novos recrutas para o policiamento ostensivo.",
+                            "Cumpriram-se todos os protocolos de segurança durante a abordagem.",
+                            "Aluga-se apartamentos próximos ao quartel do Derby.",
+                            "Obedecem-se aos regulamentos militares com rigor."
+                        ],
+                        ans: 1,
+                        exp: "'Todos os protocolos foram cumpridos' (sujeito paciente no plural → 'Cumpriram-se'). Nos demais, há preposição ('de', 'aos') exigindo singular, ou sujeito plural ('apartamentos') exigindo plural."
+                    }
+                ]
+            },
+            {
+                subj: "PORT",
+                subjName: "LÍNGUA PORTUGUESA",
+                shortPrefix: "Port.",
+                artwork: "grammarBoss",
+                sfx: "PONTUAÇÃO!",
+                sfxClass: "sfx-red",
+                title: "Uso da Vírgula e Orações Subordinadas Adjetivas",
+                subtitle: "Explicativa (com vírgulas) vs. Restritiva (sem vírgulas)",
+                narration: "Adicionar ou retirar duas vírgulas altera completamente o sentido jurídico e textual da frase.",
+                speakerLeft: "TEXTO DA PROVA",
+                dialogueLeft: "Compare: (1) 'Os policiais, que são treinados, agiram rápido.' vs (2) 'Os policiais que são treinados agiram rápido.'",
+                speakerRight: "SISTEMA LINGUÍSTICO",
+                dialogueRight: "Com vírgulas (EXPLICATIVA): TODOS os policiais são treinados! Sem vírgulas (RESTRITIVA): APENAS OS TREINADOS agiram rápido (nem todos são)! Regra de ouro: NUNCA separe sujeito de verbo com vírgula!",
+                cards: [
+                    "Proibição Absoluta: Nunca se coloca vírgula entre o Sujeito e o Verbo, nem entre o Verbo e seu Complemento.",
+                    "Adjetiva Explicativa (COM vírgulas): Generaliza a característica para todo o grupo.",
+                    "Adjetiva Restritiva (SEM vírgulas): Limita a característica a apenas uma parte do grupo."
+                ],
+                questions: [
+                    {
+                        q: "A retirada das vírgulas no período 'Os candidatos, que estudaram o edital, lograram êxito' provoca alteração de sentido porque:",
+                        opts: [
+                            "Transforma uma oração explicativa (todos estudaram) em restritiva (apenas os que estudaram lograram êxito).",
+                            "Torna o sujeito da oração principal indeterminado.",
+                            "Gera erro grave de regência verbal.",
+                            "Transforma o período composto em período simples."
+                        ],
+                        ans: 0,
+                        exp: "Com vírgulas, afirma-se que todos os candidatos estudaram. Sem vírgulas, restringe-se o êxito apenas àqueles que estudaram."
+                    }
+                ]
+            },
+            {
+                subj: "RLM",
+                subjName: "RACIOCÍNIO LÓGICO",
+                shortPrefix: "Lógica",
+                artwork: "logicMatrix",
+                sfx: "NEGAÇÃO!!",
+                sfxClass: "sfx-red",
+                title: "Leis de De Morgan: Negação do 'E' e do 'OU'",
+                subtitle: "Como negar proposições compostas sem cair na armadilha",
+                narration: "Os portões lógicos exigem a senha exata da negação para liberar o próximo nível.",
+                speakerLeft: "GUARDIÃO LÓGICO",
+                dialogueLeft: "Negue a frase: 'O suspeito correu E deixou a arma.' Atenção: NÃO basta negar apenas uma parte!",
+                speakerRight: "RECRUTA PMPE",
+                dialogueRight: "Leis de De Morgan! Nega tudo e troca o conectivo: 'O suspeito NÃO correu OU NÃO deixou a arma' (~(P ^ Q) ≡ ~P v ~Q)!",
+                cards: [
+                    "Negação do E (P ^ Q): Nega ambas e troca E por OU → ~P v ~Q.",
+                    "Negação do OU (P v Q): Nega ambas e troca OU por E → ~P ^ ~Q.",
+                    "Negação do SE... ENTÃO (P → Q): Regra do MANÉ (Mantém a primeira E Nega a segunda) → P ^ ~Q (NUNCA use 'Se... então' para negar um 'Se... então'!)."
+                ],
+                questions: [
+                    {
+                        q: "A negação lógica da proposição 'Se o alarme disparou, então a viatura chegou ao local' é:",
+                        opts: [
+                            "Se o alarme não disparou, então a viatura não chegou ao local.",
+                            "O alarme disparou e a viatura não chegou ao local.",
+                            "O alarme não disparou ou a viatura chegou ao local.",
+                            "Se a viatura não chegou ao local, então o alarme não disparou."
+                        ],
+                        ans: 1,
+                        exp: "Negação de P → Q é a regra do MANÉ (Mantém P E Nega Q): 'O alarme disparou E a viatura não chegou ao local'."
+                    },
+                    {
+                        q: "Segundo as Leis de De Morgan, a negação da afirmação 'João é soldado ou Maria é cabo' é:",
+                        opts: [
+                            "João não é soldado ou Maria não é cabo.",
+                            "João não é soldado e Maria não é cabo.",
+                            "Se João não é soldado, então Maria é cabo.",
+                            "João é cabo e Maria é soldado."
+                        ],
+                        ans: 1,
+                        exp: "Para negar o 'OU' (P v Q), negamos ambas as proposições e trocamos 'OU' por 'E' (~P ^ ~Q)."
+                    }
+                ]
+            },
+            {
+                subj: "RLM",
+                subjName: "RACIOCÍNIO LÓGICO",
+                shortPrefix: "Lógica",
+                artwork: "logicMatrix",
+                sfx: "QUANTIFICADORES!",
+                sfxClass: "sfx-cyan",
+                title: "Negação de Quantificadores: TODO, ALGUM e NENHUM",
+                subtitle: "O macete do PEA + NÃO para destruir silogismos",
+                narration: "As runas aristotélicas giram no painel holográfico. Negar 'TODO' nunca é 'NENHUM'!",
+                speakerLeft: "BANCA EXAMINADORA",
+                dialogueLeft: "Qual é a negação lógica de: 'Todo policial militar de Pernambuco é corajoso'?",
+                speakerRight: "RECRUTA DESPERTO",
+                dialogueRight: "Basta existir UM contraexemplo! PEA + NÃO (Pelo menos um / Existe / Algum + NÃO): 'Algum policial militar de Pernambuco NÃO é corajoso'!",
+                cards: [
+                    "Negação de TODO A é B: 'Algum A não é B' (ou 'Pelo menos um A não é B' / 'Existe A que não é B').",
+                    "Negação de NENHUM A é B: 'Algum A é B' (ou 'Pelo menos um A é B').",
+                    "Atenção: 'Todo A é B' NÃO equivale a 'Todo B é A'!"
+                ],
+                questions: [
+                    {
+                        q: "A negação lógica da proposição 'Todos os aprovados no concurso realizaram o exame físico' é:",
+                        opts: [
+                            "Nenhum aprovado no concurso realizou o exame físico.",
+                            "Todos os reprovados no concurso não realizaram o exame físico.",
+                            "Pelo menos um aprovado no concurso não realizou o exame físico.",
+                            "Algum candidato que realizou o exame físico foi reprovado."
+                        ],
+                        ans: 2,
+                        exp: "A negação de 'Todo A é B' é 'Pelo menos um (ou Algum) A não é B'."
+                    }
+                ]
+            },
+            {
+                subj: "HISTPE",
+                subjName: "HISTÓRIA DE PERNAMBUCO",
+                shortPrefix: "Hist. PE",
+                artwork: "heroAwakening",
+                sfx: "1817!!",
+                sfxClass: "sfx-gold",
+                title: "Revolução Pernambucana de 1817",
+                subtitle: "A única revolução do período colonial que chegou ao poder",
+                narration: "Bandeira branca, azul, arco-íris, estrela e cruz brilham no céu do Recife: o legado histórico da bravura pernambucana.",
+                speakerLeft: "HISTORIADOR MILITAR",
+                dialogueLeft: "Por que a Revolução Pernambucana de 1817 é considerada única no período colonial brasileiro?",
+                speakerRight: "RECRUTA PMPE",
+                dialogueRight: "Porque ultrapassou a fase de conspiração! Os revolucionários tomaram o poder, instalaram um Governo Provisório republicano por 75 dias e criaram a nossa atual bandeira de Pernambuco!",
+                cards: [
+                    "Data e Contexto: 6 de março de 1817, contra os altos impostos da Corte Portuguesa no Rio de Janeiro, a seca de 1816 e a crise do açúcar.",
+                    "Conquista: Instalou uma República Provisória em Pernambuco por mais de dois meses (Frei Caneca, Domingos José Martins).",
+                    "Legado: A atual bandeira do Estado de Pernambuco foi criada para a Revolução de 1817."
+                ],
+                questions: [
+                    {
+                        q: "Sobre a Revolução Pernambucana de 1817, assinale a afirmação historicamente correta:",
+                        opts: [
+                            "Foi um movimento monarquista que defendia o retorno de D. João VI a Lisboa.",
+                            "Diferenciou-se de outras revoltas coloniais por ter tomado efetivamente o poder e instaurado um Governo Provisório republicano.",
+                            "Teve como objetivo exclusivo abolir a escravidão em todo o território nacional.",
+                            "Ocorreu após a Proclamação da República em 1889."
+                        ],
+                        ans: 1,
+                        exp: "A Revolução de 1817 instalou um Governo Provisório republicano em Pernambuco por cerca de 75 dias."
+                    }
+                ]
+            },
+            {
+                subj: "HISTPE",
+                subjName: "GEOGRAFIA DE PERNAMBUCO",
+                shortPrefix: "Geo. PE",
+                artwork: "constitutionalShield",
+                sfx: "MESORREGIÕES!",
+                sfxClass: "sfx-cyan",
+                title: "As 5 Mesorregiões Geográficas de Pernambuco",
+                subtitle: "Do Litoral ao Sertão do São Francisco no mapa operacional",
+                narration: "O mapa tático do Estado de Pernambuco divide-se em cinco grandes regiões estratégicas de policiamento.",
+                speakerLeft: "CENTRO DE INTELIGÊNCIA",
+                dialogueLeft: "Quais são as 5 mesorregiões oficiais de Pernambuco do leste para o oeste?",
+                speakerRight: "RECRUTA PMPE",
+                dialogueRight: "1. Metropolitana do Recife; 2. Mata Pernambucana; 3. Agreste Pernambucano; 4. Sertão Pernambucano; 5. São Francisco Pernambucano!",
+                cards: [
+                    "5 Mesorregiões de PE: Metropolitana do Recife, Zona da Mata, Agreste, Sertão Pernambucano e Sertão do São Francisco.",
+                    "Clima Predominante: Tropical úmido no litoral/Mata e Semiárido no Agreste e Sertão.",
+                    "Polos Estratégicos: Recife/Jaboatão (RMR), Caruaru/Garanhuns (Agreste), Petrolina (São Francisco)."
+                ],
+                questions: [
+                    {
+                        q: "O território do Estado de Pernambuco é oficialmente dividido em cinco mesorregiões geográficas, que são:",
+                        opts: [
+                            "Litoral Norte, Litoral Sul, Zona da Mata, Brejo e Caatinga.",
+                            "Metropolitana do Recife, Mata Pernambucana, Agreste Pernambucano, Sertão Pernambucano e São Francisco Pernambucano.",
+                            "Recife, Olinda, Caruaru, Serra Talhada e Petrolina.",
+                            "Zona Urbana, Zona Rural, Zona Costeira, Planalto da Borborema e Chapada do Araripe."
+                        ],
+                        ans: 1,
+                        exp: "As 5 mesorregiões são: Metropolitana do Recife, Mata, Agreste, Sertão Pernambucano e São Francisco Pernambucano."
+                    }
+                ]
+            }
+        ];
+
+        // =========================================================================
+        // GERAÇÃO PROCEDURAL DOS 230 CAPÍTULOS COMPLETOS
+        // =========================================================================
+        function build230Chapters() {
+            const totalTarget = 230;
+            const generated = [];
+
+            const rankTiers = [
+                { max: 45, rank: "RECRUTA • MÓDULO BÁSICO", diff: "FUNDAMENTOS DO EDITAL" },
+                { max: 95, rank: "SOLDADO • MÓDULO TÁTICO", diff: "PEGADINHAS DE BANCA" },
+                { max: 145, rank: "CABO • OPERAÇÕES ESPECIAIS", diff: "JURISPRUDÊNCIA E CASOS" },
+                { max: 190, rank: "SARGENTO • ALTA PERFORMANCE", diff: "SIMULADO INTENSIVO" },
+                { max: 230, rank: "OFICIAL • ELITE PMPE", diff: "DESAFIO FINAL DE APROVAÇÃO" }
+            ];
+
+            for (let i = 0; i < totalTarget; i++) {
+                const capNum = i + 1;
+                const template = PMPE_TOPICS_BANK[i % PMPE_TOPICS_BANK.length];
+                const cycle = Math.floor(i / PMPE_TOPICS_BANK.length) + 1;
+                const tier = rankTiers.find(t => capNum <= t.max) || rankTiers[rankTiers.length - 1];
+                const qTemplate = template.questions[i % template.questions.length];
+
+                const epFormatted = String(capNum).padStart(3, '0');
+                const cycleLabel = cycle > 1 ? ` (Treino Avançado ${cycle})` : "";
+
+                generated.push({
+                    id: i,
+                    subjectCode: template.subj,
+                    shortTitle: `Cap. ${capNum} • ${template.shortPrefix}`,
+                    episodeBadge: `EPISÓDIO ${epFormatted}/230 // ${template.subjName}`,
+                    title: `${template.title}${cycleLabel}`,
+                    subtitle: `${tier.diff} • ${template.subtitle}`,
+                    panels: [
+                        {
+                            type: "action-hero",
+                            sfx: template.sfx,
+                            sfxClass: template.sfxClass,
+                            artwork: ARTWORKS[template.artwork],
+                            narration: `[Missão #${epFormatted} — ${tier.rank}] ${template.narration}`,
+                            speaker: template.speakerLeft,
+                            dialogue: template.dialogueLeft,
+                            bubbleType: "left"
+                        },
+                        {
+                            type: "dialogue-clash",
+                            sfx: "SISTEMA ATIVO!",
+                            sfxClass: "sfx-cyan",
+                            speakerLeft: template.speakerLeft,
+                            dialogueLeft: template.dialogueLeft,
+                            speakerRight: template.speakerRight,
+                            dialogueRight: template.dialogueRight
+                        },
+                        {
+                            type: "system-card",
+                            title: `GRIMÓRIO PMPE #${epFormatted}: PONTOS DECISIVOS DE PROVA`,
+                            badge: `NÍVEL ${cycle}`,
+                            points: template.cards
+                        }
+                    ],
+                    quiz: {
+                        question: `[Questão #${epFormatted} - ${template.subjName}] ${qTemplate.q}`,
+                        options: qTemplate.opts,
+                        correctIndex: qTemplate.ans,
+                        explanation: qTemplate.exp
+                    }
+                });
+            }
+            return generated;
+        }
+
+        let CHAPTERS = build230Chapters();
+
+        // =========================================================================
+        // ESTADO DO JOGADOR / LEITOR
+        // =========================================================================
+        let state = {
+            currentChapterIndex: 0,
+            subjectFilter: 'ALL',
+            xp: 0,
+            completedQuizzes: new Set(),
+            selectedAnswers: {}
+        };
+
+        // =========================================================================
+        // FUNÇÕES DE XP, TOAST E CONTROLE DE PROGRESSO
+        // =========================================================================
+        function addXp(amount, message) {
+            state.xp += amount;
+            document.getElementById('xp-counter').textContent = state.xp;
+            const level = Math.floor(state.xp / 250) + 1;
+            document.getElementById('player-level').textContent = String(level).padStart(2, '0');
+
+            const ranks = ["RECRUTA", "SOLDADO", "CABO", "SARGENTO", "SUBTENENTE", "TENENTE", "CAPITÃO", "MAJOR", "CORONEL"];
+            document.getElementById('player-rank').textContent = ranks[Math.min(level - 1, ranks.length - 1)];
+
+            const toast = document.getElementById('system-toast');
+            document.getElementById('toast-message').textContent = `+${amount} XP • ${message}`;
+            toast.classList.remove('opacity-0', '-translate-y-4');
+            toast.classList.add('opacity-100', 'translate-y-0');
+            setTimeout(() => {
+                toast.classList.remove('opacity-100', 'translate-y-0');
+                toast.classList.add('opacity-0', '-translate-y-4');
+            }, 2600);
+        }
+
+        function updateScrollProgress() {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const pct = docHeight > 0 ? Math.min(100, Math.max(0, Math.round((scrollTop / docHeight) * 100))) : 100;
+            const bar = document.getElementById('xp-progress-bar');
+            const label = document.getElementById('scroll-percent');
+            if (bar) bar.style.width = `${Math.max(5, pct)}%`;
+            if (label) label.textContent = `${pct}%`;
+        }
+
+        window.addEventListener('scroll', updateScrollProgress, { passive: true });
+
+        // =========================================================================
+        // NAVEGAÇÃO ENTRE OS 230 CAPÍTULOS E FILTROS
+        // =========================================================================
+        function goToChapter(index) {
+            if (index < 0 || index >= CHAPTERS.length) return;
+            state.currentChapterIndex = index;
+            renderChapter(index);
+        }
+
+        function changeChapter(delta) {
+            const filtered = CHAPTERS.filter(c => state.subjectFilter === 'ALL' || c.subjectCode === state.subjectFilter);
+            const currentPos = filtered.findIndex(c => c.id === state.currentChapterIndex);
+            if (currentPos !== -1 && filtered[currentPos + delta]) {
+                goToChapter(filtered[currentPos + delta].id);
+            } else {
+                goToChapter(state.currentChapterIndex + delta);
+            }
+        }
+
+        function setSubjectFilter(subj) {
+            state.subjectFilter = subj;
+            document.querySelectorAll('.subj-btn').forEach(btn => {
+                const active = btn.dataset.subj === subj;
+                btn.className = active
+                    ? 'subj-btn px-2 py-1 rounded text-[10px] font-system font-bold bg-neonBlue text-abyss cursor-pointer'
+                    : 'subj-btn px-2 py-1 rounded text-[10px] font-system font-bold bg-slate-900 text-slate-300 border border-slate-700 cursor-pointer';
+            });
+            const firstMatch = CHAPTERS.findIndex(c => subj === 'ALL' || c.subjectCode === subj);
+            if (firstMatch !== -1) {
+                goToChapter(firstMatch);
+            } else {
+                renderChapterNav();
+            }
+        }
+
+        function renderChapterNav() {
+            const filtered = CHAPTERS.filter(c => state.subjectFilter === 'ALL' || c.subjectCode === state.subjectFilter);
+
+            const jumpSelect = document.getElementById('chapter-jump-select');
+            if (jumpSelect) {
+                jumpSelect.innerHTML = filtered.map(chap => {
+                    const doneMark = state.completedQuizzes.has(chap.id) ? ' ★' : '';
+                    return `<option value="${chap.id}" ${chap.id === state.currentChapterIndex ? 'selected' : ''}>${chap.shortTitle}${doneMark}</option>`;
+                }).join('');
+            }
+
+            const posInFiltered = filtered.findIndex(c => c.id === state.currentChapterIndex);
+            const start = Math.max(0, posInFiltered - 4);
+            const end = Math.min(filtered.length, start + 14);
+            const visibleSlice = filtered.slice(start, end);
+
+            const nav = document.getElementById('chapter-nav');
+            nav.innerHTML = visibleSlice.map((chap) => {
+                const isActive = chap.id === state.currentChapterIndex;
+                const isDone = state.completedQuizzes.has(chap.id);
+                return `
+                    <button onclick="goToChapter(${chap.id})" 
+                        class="shrink-0 px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 border cursor-pointer
+                        ${isActive 
+                            ? 'bg-neonBlue/20 border-neonBlue text-neonBlue shadow-[0_0_12px_rgba(0,240,255,0.3)]' 
+                            : 'bg-panel/80 border-slate-800 text-slate-400 hover:text-white hover:border-slate-600'}">
+                        <span>${chap.shortTitle}</span>
+                        ${isDone ? '<span class="text-systemGold">★</span>' : ''}
+                    </button>
+                `;
+            }).join('');
+        }
+
+        function submitQuizAnswer(chapterId, optionIndex) {
+            if (state.selectedAnswers[chapterId] !== undefined) return;
+            state.selectedAnswers[chapterId] = optionIndex;
+
+            const chap = CHAPTERS.find(c => c.id === chapterId);
+            if (chap && optionIndex === chap.quiz.correctIndex) {
+                if (!state.completedQuizzes.has(chapterId)) {
+                    state.completedQuizzes.add(chapterId);
+                    addXp(100, "Questão gabaritada!");
+                }
+            }
+            renderChapter(state.currentChapterIndex);
+            setTimeout(() => {
+                const box = document.getElementById(`quest-box-${chapterId}`);
+                if (box) box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 60);
+        }
+
+        function renderChapter(index) {
+            const chap = CHAPTERS[index];
+            if (!chap) return;
+
+            document.getElementById('header-chapter-title').textContent = chap.title;
+            renderChapterNav();
+
+            document.getElementById('btn-prev-cap').disabled = index === 0;
+            document.getElementById('btn-prev-cap').classList.toggle('opacity-40', index === 0);
+            document.getElementById('btn-next-cap').disabled = index === CHAPTERS.length - 1;
+            document.getElementById('btn-next-cap').classList.toggle('opacity-40', index === CHAPTERS.length - 1);
+
+            const container = document.getElementById('webtoon-container');
+            let html = `
+                <section class="relative rounded-2xl overflow-hidden bg-gradient-to-b from-slate-900 via-panel to-abyss border border-neonBlue/40 p-5 sm:p-7 shadow-[0_0_30px_rgba(0,240,255,0.15)]">
+                    <div class="inline-block px-3 py-1 rounded-full bg-neonBlue/15 border border-neonBlue/50 text-neonBlue font-system text-[10px] sm:text-xs font-extrabold tracking-widest mb-3">
+                        ${chap.episodeBadge}
+                    </div>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-white leading-tight tracking-tight mb-2">
+                        ${chap.title}
+                    </h1>
+                    <p class="text-xs sm:text-sm text-slate-300 font-medium">
+                        ${chap.subtitle}
+                    </p>
+                    <div class="mt-4 flex items-center gap-2 text-[11px] text-systemGold font-system">
+                        <span>▼ ROLE PARA BAIXO PARA LER O MANHUA</span>
+                    </div>
+                </section>
+            `;
+
+            chap.panels.forEach((panel) => {
+                if (panel.type === 'action-hero' || panel.type === 'art-panel') {
+                    const isRight = panel.bubbleType === 'right';
+                    html += `
+                        <article class="relative bg-panel border-2 border-slate-800/90 rounded-2xl p-3 sm:p-4 shadow-2xl overflow-hidden">
+                            ${panel.narration ? `
+                                <div class="mb-3 px-3.5 py-2.5 bg-slate-950/90 border-l-4 border-systemGold rounded-r-lg text-xs sm:text-sm text-slate-200 italic leading-relaxed shadow">
+                                    ${panel.narration}
+                                </div>
+                            ` : ''}
+                            <div class="relative my-2">
+                                ${panel.artwork}
+                                ${panel.sfx ? `
+                                    <div class="absolute -top-3 ${isRight ? 'left-3 -rotate-6' : 'right-3 rotate-6'} text-3xl sm:text-4xl pointer-events-none select-none ${panel.sfxClass}">
+                                        ${panel.sfx}
+                                    </div>
+                                ` : ''}
+                            </div>
+                            <div class="mt-4 ${isRight ? 'ml-auto' : 'mr-auto'} max-w-[92%]">
+                                <div class="text-[10px] font-system font-extrabold tracking-wider uppercase mb-1 ${isRight ? 'text-right text-systemGold' : 'text-left text-neonBlue'}">
+                                    ${panel.speaker}
+                                </div>
+                                <div class="${isRight ? 'speech-bubble-right' : 'speech-bubble'} rounded-2xl px-4 py-3 text-xs sm:text-sm font-bold leading-snug">
+                                    "${panel.dialogue}"
+                                </div>
+                            </div>
+                        </article>
+                    `;
+                } else if (panel.type === 'system-card') {
+                    html += `
+                        <article class="system-window rounded-2xl p-4 sm:p-5 my-4">
+                            <div class="flex items-center justify-between gap-2 mb-3 pb-2 border-b border-neonBlue/25">
+                                <div class="flex items-center gap-2">
+                                    <span class="text-neonBlue text-base">💠</span>
+                                    <h3 class="font-system font-extrabold text-xs sm:text-sm text-neonBlue tracking-wide">
+                                        ${panel.title}
+                                    </h3>
+                                </div>
+                                <span class="shrink-0 px-2 py-0.5 rounded bg-dangerRed/20 border border-dangerRed text-dangerRed font-system text-[10px] font-black">
+                                    ${panel.badge}
+                                </span>
+                            </div>
+                            <ul class="space-y-2.5">
+                                ${panel.points.map(pt => `
+                                    <li class="flex items-start gap-2.5 text-xs sm:text-sm text-slate-100 leading-relaxed bg-slate-900/60 p-2.5 rounded-xl border border-slate-800">
+                                        <span class="text-systemGold font-bold mt-0.5">▸</span>
+                                        <span>${pt}</span>
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        </article>
+                    `;
+                } else if (panel.type === 'dialogue-clash') {
+                    html += `
+                        <article class="relative bg-gradient-to-br from-slate-900 via-panel to-slate-950 border-2 border-neonBlue/30 rounded-2xl p-4 sm:p-5 shadow-xl">
+                            ${panel.sfx ? `
+                                <div class="text-center mb-3">
+                                    <span class="text-3xl sm:text-4xl ${panel.sfxClass} tracking-widest">${panel.sfx}</span>
+                                </div>
+                            ` : ''}
+                            <div class="mb-5 mr-auto max-w-[90%]">
+                                <div class="text-[10px] font-system font-extrabold text-neonBlue mb-1 uppercase">${panel.speakerLeft}</div>
+                                <div class="speech-bubble rounded-2xl px-4 py-3 text-xs sm:text-sm font-bold leading-snug">
+                                    "${panel.dialogueLeft}"
+                                </div>
+                            </div>
+                            <div class="ml-auto max-w-[90%]">
+                                <div class="text-[10px] font-system font-extrabold text-dangerRed text-right mb-1 uppercase">${panel.speakerRight}</div>
+                                <div class="speech-shout rounded-2xl px-4 py-3.5 text-xs sm:text-sm font-extrabold leading-snug">
+                                    "${panel.dialogueRight}"
+                                </div>
+                            </div>
+                        </article>
+                    `;
+                }
+            });
+
+            const answeredIdx = state.selectedAnswers[chap.id];
+            const isAlreadyAnswered = answeredIdx !== undefined;
+
+            html += `
+                <section id="quest-box-${chap.id}" class="system-window rounded-2xl p-5 sm:p-6 mt-8 border-2 border-systemGold/80 shadow-[0_0_30px_rgba(251,191,36,0.2)]">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="px-2.5 py-1 rounded bg-systemGold/20 border border-systemGold text-systemGold font-system text-[11px] font-black tracking-wider">
+                            ⚔️ MISSÃO DE DESPERTAR DO SISTEMA
+                        </span>
+                        <span class="font-system text-xs font-bold text-neonBlue">+100 XP</span>
+                    </div>
+
+                    <h3 class="text-sm sm:text-base font-extrabold text-white leading-snug mb-4">
+                        ${chap.quiz.question}
+                    </h3>
+
+                    <div class="space-y-2.5">
+                        ${chap.quiz.options.map((opt, optIdx) => {
+                            let btnStyle = "bg-slate-900/90 border-slate-700 text-slate-200 hover:border-neonBlue";
+                            if (isAlreadyAnswered) {
+                                if (optIdx === chap.quiz.correctIndex) {
+                                    btnStyle = "bg-emerald-950/90 border-emerald-400 text-emerald-200 shadow-[0_0_15px_rgba(52,211,153,0.3)]";
+                                } else if (optIdx === answeredIdx) {
+                                    btnStyle = "bg-rose-950/90 border-dangerRed text-rose-200";
+                                } else {
+                                    btnStyle = "bg-slate-900/40 border-slate-800 text-slate-500";
+                                }
+                            }
+                            return `
+                                <button onclick="submitQuizAnswer(${chap.id}, ${optIdx})" 
+                                    ${isAlreadyAnswered ? 'disabled' : ''}
+                                    class="w-full text-left p-3.5 rounded-xl border-2 text-xs sm:text-sm font-bold transition flex items-start gap-3 cursor-pointer ${btnStyle}">
+                                    <span class="font-system font-black text-neonBlue shrink-0">${String.fromCharCode(65 + optIdx)})</span>
+                                    <span>${opt}</span>
+                                </button>
+                            `;
+                        }).join('')}
+                    </div>
+
+                    ${isAlreadyAnswered ? `
+                        <div class="mt-4 p-3.5 rounded-xl ${answeredIdx === chap.quiz.correctIndex ? 'bg-emerald-950/70 border border-emerald-500/50 text-emerald-200' : 'bg-rose-950/70 border border-dangerRed/50 text-rose-200'} text-xs leading-relaxed">
+                            <strong class="font-system block mb-1">${answeredIdx === chap.quiz.correctIndex ? '✅ MISSÃO CONCLUÍDA! ALVO NEUTRALIZADO!' : '⚠️ DANO CRÍTICO! REVISE A REGRA:'}</strong>
+                            ${chap.quiz.explanation}
+                        </div>
+                    ` : ''}
+                </section>
+            `;
+
+            if (chap.allPdfQuestions && chap.allPdfQuestions.length > 1) {
+                html += `
+                    <section class="system-window rounded-2xl p-4 sm:p-5 mt-4 border border-neonBlue/50">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="font-system text-xs font-extrabold text-neonBlue">📋 TODAS AS QUESTÕES EXTRAÍDAS (${chap.allPdfQuestions.length})</span>
+                            <span class="text-[11px] text-slate-400">Toque para trocar o desafio acima</span>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            ${chap.allPdfQuestions.map((qItem, qIdx) => `
+                                <button onclick="switchPdfQuestion(${chap.id}, ${qIdx})"
+                                    class="px-3 py-1.5 rounded-lg text-xs font-system font-bold border transition cursor-pointer
+                                    ${chap.activePdfQuestionIdx === qIdx 
+                                        ? 'bg-neonBlue text-abyss border-neonBlue shadow-[0_0_10px_rgba(0,240,255,0.4)]' 
+                                        : 'bg-slate-900 text-slate-300 border-slate-700 hover:border-neonBlue'}">
+                                    Questão ${qItem.number || String(qIdx + 1).padStart(2, '0')}
+                                </button>
+                            `).join('')}
+                        </div>
+                    </section>
+                `;
+            }
+
+            container.innerHTML = html;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            updateScrollProgress();
+        }
+
+        function switchPdfQuestion(chapterId, qIdx) {
+            const chap = CHAPTERS.find(c => c.id === chapterId);
+            if (!chap || !chap.allPdfQuestions || !chap.allPdfQuestions[qIdx]) return;
+            chap.activePdfQuestionIdx = qIdx;
+            chap.quiz = chap.allPdfQuestions[qIdx];
+            delete state.selectedAnswers[chapterId];
+            renderChapter(state.currentChapterIndex);
+            setTimeout(() => {
+                const box = document.getElementById(`quest-box-${chapterId}`);
+                if (box) box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 80);
+        }
+
+        // =========================================================================
+        // MODAL E LEITURA LIMPA DE PDF (SEM CABEÇALHOS E COM SEPARAÇÃO DE QUESTÕES)
+        // =========================================================================
+        function openPdfModal() {
+            const modal = document.getElementById('pdf-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closePdfModal() {
+            const modal = document.getElementById('pdf-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function isHeaderOrNoise(line) {
+            const clean = line.trim();
+            if (clean.length < 12) return true;
+            const noisePatterns = [
+                /^(p[áa]gina|pag\.?|fls\.?)\s*\d+/i,
+                /^\d+\s*(\/|de)\s*\d+$/i,
+                /^(concurso\s+p[úu]blico|processo\s+seletivo|pol[íi]cia\s+militar\s+de\s+pernambuco)/i,
+                /^(caderno\s+de\s+provas?|tipo\s+[a-z0-9]|boa\s+prova|instru[çc][õo]es)/i,
+                /^(nome\s+do\s+candidato|inscri[çc][ãa]o|assinatura|cpf|data\s*:)/i,
+                /^(banca|organizadora|instituto\s+aocp|fgv|cebraspe|upenet|iaupe)/i,
+                /^(direitos\s+reservados|proibida\s+a\s+reprodu[çc][ãa]o|www\.|http)/i,
+                /^[\-_=•\.\s\d]+$/
+            ];
+            return noisePatterns.some(rx => rx.test(clean));
+        }
+
+        function extractAnswerKey(rawText) {
+            const answerMap = {};
+            const keyRegex = /\b0?(\d{1,3})\s*[\-\.\:\)\s]\s*([A-E])\b/g;
+            let match;
+            while ((match = keyRegex.exec(rawText)) !== null) {
+                const qNum = parseInt(match[1], 10);
+                const letter = match[2].toUpperCase();
+                answerMap[qNum] = letter.charCodeAt(0) - 65;
+            }
+            return answerMap;
+        }
+
+        function extractQuestionsFromText(rawText) {
+            const extracted = [];
+            const answerKey = extractAnswerKey(rawText);
+            const lines = rawText.split('\n');
+            const blocks = [];
+            let currentBlock = null;
+
+            for (const line of lines) {
+                const qStartMatch = line.match(/^(?:QUEST[ÃA]O\s*0?(\d{1,3})|0?(\d{1,3})[\.\)\-])\s*(.*)/i);
+                if (qStartMatch) {
+                    if (currentBlock) blocks.push(currentBlock);
+                    const num = parseInt(qStartMatch[1] || qStartMatch[2], 10);
+                    currentBlock = {
+                        number: num,
+                        lines: qStartMatch[3] ? [qStartMatch[3].trim()] : []
+                    };
+                } else if (currentBlock) {
+                    currentBlock.lines.push(line.trim());
+                }
+            }
+            if (currentBlock) blocks.push(currentBlock);
+
+            for (const blk of blocks) {
+                const fullBlock = blk.lines.join(' ').replace(/\s+/g, ' ').trim();
+                if (fullBlock.length < 40) continue;
+
+                const altRegex = /(?:^|\s)([A-E])[\)\.\-]\s+(.+?)(?=(?:\s+[A-E][\)\.\-]\s+)|$)/g;
+                const matches = [...fullBlock.matchAll(altRegex)];
+
+                if (matches.length >= 3) {
+                    const firstAltPos = fullBlock.indexOf(matches[0][0]);
+                    const cleanStem = fullBlock.slice(0, firstAltPos).trim();
+                    const options = matches.slice(0, 5).map(m => m[2].trim());
+
+                    if (cleanStem.length >= 20 && !isHeaderOrNoise(cleanStem)) {
+                        const detectedCorrect = answerKey[blk.number] !== undefined && answerKey[blk.number] < options.length
+                            ? answerKey[blk.number]
+                            : 0;
+
+                        extracted.push({
+                            number: blk.number,
+                            question: `[Questão ${String(blk.number).padStart(2, '0')}] ${cleanStem}`,
+                            options: options,
+                            correctIndex: detectedCorrect,
+                            explanation: answerKey[blk.number] !== undefined
+                                ? `Gabarito identificado no documento: Alternativa ${String.fromCharCode(65 + detectedCorrect)}).`
+                                : `Questão ${String(blk.number).padStart(2, '0')} extraída fielmente do PDF. Confira o gabarito oficial ao final do caderno.`
+                        });
+                    }
+                }
+            }
+            return extracted;
+        }
+
+        async function handlePdfUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const statusBox = document.getElementById('pdf-status-box');
+            const statusText = document.getElementById('pdf-status-text');
+            document.getElementById('pdf-file-label').textContent = file.name;
+            statusBox.classList.remove('hidden');
+            statusText.textContent = "Filtrando cabeçalhos e organizando questões...";
+
+            try {
+                const arrayBuffer = await file.arrayBuffer();
+                const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+                const maxPages = Math.min(pdf.numPages, 15);
+                let pageLines = [];
+
+                for (let pageNum = 1; pageNum <= maxPages; pageNum++) {
+                    statusText.textContent = `Lendo página ${pageNum} de ${maxPages}...`;
+                    const page = await pdf.getPage(pageNum);
+                    const textContent = await page.getTextContent();
+
+                    const viewport = page.getViewport({ scale: 1.0 });
+                    const pageHeight = viewport.height;
+
+                    const filteredItems = textContent.items.filter(item => {
+                        const y = item.transform[5];
+                        return y < (pageHeight * 0.92) && y > (pageHeight * 0.07);
+                    });
+
+                    let currentLine = "";
+                    let lastY = null;
+                    for (const item of filteredItems) {
+                        const y = Math.round(item.transform[5]);
+                        if (lastY !== null && Math.abs(y - lastY) > 6) {
+                            if (currentLine.trim() && !isHeaderOrNoise(currentLine)) {
+                                pageLines.push(currentLine.trim());
+                            }
+                            currentLine = item.str;
+                        } else {
+                            currentLine += (currentLine ? " " : "") + item.str;
+                        }
+                        lastY = y;
+                    }
+                    if (currentLine.trim() && !isHeaderOrNoise(currentLine)) {
+                        pageLines.push(currentLine.trim());
+                    }
+                }
+
+                const cleanFullText = pageLines.join('\n');
+                const detectedQuestions = extractQuestionsFromText(cleanFullText);
+
+                const cleanParagraphs = cleanFullText
+                    .replace(/\n+/g, ' ')
+                    .split(/(?<=[.!?])\s+/)
+                    .map(s => s.trim())
+                    .filter(s => s.length >= 50 && s.length <= 320 && !isHeaderOrNoise(s));
+
+                if (detectedQuestions.length === 0 && cleanParagraphs.length < 2) {
+                    throw new Error("O PDF não possui texto selecionável suficiente.");
+                }
+
+                const cleanName = file.name.replace(/\.pdf$/i, '').slice(0, 26);
+                const newId = CHAPTERS.length;
+                const dynamicPanels = [];
+
+                if (detectedQuestions.length > 0) {
+                    dynamicPanels.push({
+                        type: "action-hero",
+                        sfx: `${detectedQuestions.length} QUESTÕES!`,
+                        sfxClass: "sfx-gold",
+                        artwork: ARTWORKS.customPdfArt,
+                        narration: `Cabeçalhos eliminados! ${detectedQuestions.length} questão(ões) organizada(s) fielmente de "${file.name}".`,
+                        speaker: "SISTEMA DE PROVAS PMPE",
+                        dialogue: detectedQuestions[0].question,
+                        bubbleType: "left"
+                    });
+
+                    detectedQuestions.slice(0, 6).forEach((q) => {
+                        dynamicPanels.push({
+                            type: "system-card",
+                            title: `QUESTÃO ${String(q.number).padStart(2, '0')} — ENUNCIADO E ALTERNATIVAS`,
+                            badge: "QUESTÃO REAL",
+                            points: [
+                                q.question,
+                                ...q.options.map((opt, i) => `${String.fromCharCode(65 + i)}) ${opt}`)
+                            ]
+                        });
+                    });
+                } else {
+                    dynamicPanels.push({
+                        type: "action-hero",
+                        sfx: "APOSTILA LIMPA!",
+                        sfxClass: "sfx-cyan",
+                        artwork: ARTWORKS.customPdfArt,
+                        narration: `Resumo teórico extraído sem cabeçalhos de "${file.name}".`,
+                        speaker: "RECRUTA PMPE",
+                        dialogue: cleanParagraphs[0],
+                        bubbleType: "left"
+                    });
+
+                    dynamicPanels.push({
+                        type: "system-card",
+                        title: "PONTOS-CHAVE DA APOSTILA",
+                        badge: "LEITURA DIRETA",
+                        points: cleanParagraphs.slice(1, 6)
+                    });
+                }
+
+                const mainQuiz = detectedQuestions.length > 0
+                    ? detectedQuestions[0]
+                    : {
+                        question: `Julgue a afirmação extraída diretamente do material "${cleanName}": "${cleanParagraphs[0]}"`,
+                        options: [
+                            "VERDADEIRO — A afirmação corresponde exatamente ao conteúdo apresentado no material.",
+                            "FALSO — O documento afirma o oposto dessa regra."
+                        ],
+                        correctIndex: 0,
+                        explanation: `Correto! A citação foi extraída literalmente do documento "${file.name}".`
+                    };
+
+                const newChapter = {
+                    id: newId,
+                    subjectCode: "ALL",
+                    shortTitle: `Cap. ${newId + 1} • PDF`,
+                    episodeBadge: `EPISÓDIO EXTRA // ${detectedQuestions.length > 0 ? detectedQuestions.length + ' QUESTÕES ORGANIZADAS' : 'RESUMO TEÓRICO'}`,
+                    title: `${cleanName}`,
+                    subtitle: detectedQuestions.length > 0
+                        ? `${detectedQuestions.length} questões extraídas com enunciados separados`
+                        : `Pontos principais extraídos de ${pdf.numPages} página(s)`,
+                    panels: dynamicPanels,
+                    quiz: mainQuiz,
+                    allPdfQuestions: detectedQuestions.length > 0 ? detectedQuestions : null,
+                    activePdfQuestionIdx: 0
+                };
+
+                CHAPTERS.push(newChapter);
+                statusBox.classList.add('hidden');
+                closePdfModal();
+                setSubjectFilter('ALL');
+                goToChapter(newId);
+                addXp(75, detectedQuestions.length > 0 ? `${detectedQuestions.length} questões organizadas!` : "Resumo limpo gerado!");
+
+            } catch (err) {
+                statusText.textContent = "Erro: " + (err.message || "Falha ao ler PDF.");
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderChapter(0);
+        });
+    </script>
+</body>
+</html>
