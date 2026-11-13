@@ -2575,3 +2575,367 @@
     </script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema PMPE - Interface Limpa</title>
+  <style>
+    :root {
+      --bg-dark: #070d14;
+      --bg-card: #0c1622;
+      --neon-cyan: #00e5ff;
+      --neon-cyan-dim: rgba(0, 229, 255, 0.15);
+      --border-color: #162b40;
+      --text-main: #e2e8f0;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      padding-bottom: 80px; /* Espaço para a barra inferior no mobile */
+    }
+
+    /* 1. CABEÇALHO SUPERIOR LIMPO */
+    .top-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7, 13, 20, 0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0; /* Permite truncar texto */
+    }
+
+    .badge-pmpe {
+      border: 1px solid var(--neon-cyan);
+      color: var(--neon-cyan);
+      padding: 6px 8px;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+
+    .user-details {
+      min-width: 0;
+    }
+
+    .level-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      color: var(--neon-cyan);
+      font-weight: 700;
+    }
+
+    .rank-tag {
+      background: rgba(245, 158, 11, 0.2);
+      color: #fbbf24;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 0.65rem;
+    }
+
+    .current-topic {
+      font-size: 0.85rem;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-top: 2px;
+    }
+
+    .btn-action {
+      background: linear-gradient(135deg, #00b4d8, #0077b6);
+      color: #fff;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* 2. ÁREA DE CONTEÚDO PRINCIPAL */
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* 3. FILTROS ORGANIZADOS (Apenas na seção de Estudos) */
+    .filters-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .filter-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .scroll-row {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      scrollbar-width: none; /* Oculta scrollbar no Firefox */
+    }
+    .scroll-row::-webkit-scrollbar {
+      display: none; /* Oculta scrollbar no Chrome/Safari */
+    }
+
+    .chip {
+      background: #111e2e;
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+
+    .chip.active {
+      background: var(--neon-cyan);
+      color: #000;
+      border-color: var(--neon-cyan);
+    }
+
+    .cap-select {
+      width: 100%;
+      background: #111e2e;
+      color: var(--text-main);
+      border: 1px solid var(--neon-cyan);
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      outline: none;
+    }
+
+    /* 4. CARDS DE CONTEÚDO (Ex: Dieta e Episódio) */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--neon-cyan);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 0 15px rgba(0, 229, 255, 0.05);
+    }
+
+    .card-title {
+      color: var(--neon-cyan);
+      font-size: 1rem;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .input-group {
+      margin-bottom: 14px;
+    }
+
+    .input-group label {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .input-group input {
+      width: 100%;
+      background: #070d14;
+      border: 1px solid var(--border-color);
+      color: #fff;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+    }
+
+    .input-group input:focus {
+      outline: none;
+      border-color: var(--neon-cyan);
+    }
+
+    /* 5. NAVEGAÇÃO INFERIOR (Substitui a 4ª barra do topo) */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(12, 22, 34, 0.95);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid var(--border-color);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      padding: 8px 0;
+      z-index: 100;
+    }
+
+    .nav-item {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .nav-item.active {
+      color: var(--neon-cyan);
+    }
+
+    /* Controle de Abas */
+    .tab-section { display: none; }
+    .tab-section.active { display: flex; flex-direction: column; gap: 16px; }
+  </style>
+</head>
+<body>
+
+  <!-- TOPO LIMPO: Apenas Identidade + Ação Principal -->
+  <header class="top-header">
+    <div class="user-info">
+      <div class="badge-pmpe">PMPE</div>
+      <div class="user-details">
+        <div class="level-row">
+          <span>NÍVEL 01</span>
+          <span class="rank-tag">RECRUTA</span>
+        </div>
+        <div class="current-topic">Inviolabilidade de Domicílio</div>
+      </div>
+    </div>
+    <button class="btn-action">+ PDF → Manhua</button>
+  </header>
+
+  <main class="container">
+
+    <!-- ABA 1: ESTUDOS (Os filtros ficam AQUI, não no topo global) -->
+    <section id="tab-estudos" class="tab-section active">
+      <div class="filters-box">
+        <div class="filter-header">
+          <span>MATÉRIAS (230)</span>
+          <span>Deslize →</span>
+        </div>
+        <div class="scroll-row">
+          <button class="chip active">TODOS</button>
+          <button class="chip">CONST.</button>
+          <button class="chip">PENAL</button>
+          <button class="chip">PORT.</button>
+          <button class="chip">LÓGICA</button>
+          <button class="chip">HISTÓRIA</button>
+        </div>
+
+        <!-- Dropdown substitui a barra horizontal de capítulos -->
+        <select class="cap-select">
+          <option value="1">⭐ Cap. 1 • Constitucional</option>
+          <option value="2" selected>📖 Cap. 2 • Constitucional (Atual)</option>
+          <option value="3">🔒 Cap. 3 • Constitucional</option>
+        </select>
+      </div>
+
+      <!-- Card do Episódio -->
+      <div class="card">
+        <div style="font-size: 0.75rem; color: var(--neon-cyan); margin-bottom: 6px;">
+          EPISÓDIO 002/230 // DIREITO CONSTITUCIONAL
+        </div>
+        <h2 style="font-size: 1.3rem;">Inviolabilidade de Domicílio</h2>
+      </div>
+    </section>
+
+    <!-- ABA 2: MISSÕES / DIETA (Fica isolada, sem poluição dos filtros de estudo) -->
+    <section id="tab-missoes" class="tab-section">
+      <div class="card">
+        <h2 class="card-title">🍎 SUA DIETA (CÁLCULO AUTOMÁTICO)</h2>
+        <div class="input-group">
+          <label>INSIRA SUA META CALÓRICA DIÁRIA (KCAL):</label>
+          <input type="number" placeholder="Ex: 2500">
+        </div>
+        <div class="input-group">
+          <label>INSIRA CALORIAS CONSUMIDAS HOJE:</label>
+          <input type="number" placeholder="Ex: 1800">
+        </div>
+      </div>
+    </section>
+
+    <!-- ABAS 3 e 4 (Placeholders) -->
+    <section id="tab-dungeon" class="tab-section">
+      <div class="card"><h2 class="card-title">💀 DUNGEON (SIMULADOS)</h2></div>
+    </section>
+    <section id="tab-chat" class="tab-section">
+      <div class="card"><h2 class="card-title">💬 CHAT / TUTOR IA</h2></div>
+    </section>
+
+  </main>
+
+  <!-- NAVEGAÇÃO INFERIOR FIXA -->
+  <nav class="bottom-nav">
+    <button class="nav-item" onclick="switchTab('dungeon', this)">
+      <span>💀</span><span>DUNGEON</span>
+    </button>
+    <button class="nav-item" onclick="switchTab('missoes', this)">
+      <span>📜</span><span>MISSÕES</span>
+    </button>
+    <button class="nav-item active" onclick="switchTab('estudos', this)">
+      <span>📖</span><span>ESTUDOS</span>
+    </button>
+    <button class="nav-item" onclick="switchTab('chat', this)">
+      <span>💬</span><span>CHAT</span>
+    </button>
+  </nav>
+
+  <script>
+    function switchTab(tabName, btnElement) {
+      // Esconde todas as seções
+      document.querySelectorAll('.tab-section').forEach(sec => sec.classList.remove('active'));
+      // Remove classe ativa dos botões
+      document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
+      
+      // Mostra a seção clicada
+      document.getElementById('tab-' + tabName).classList.add('active');
+      btnElement.classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
